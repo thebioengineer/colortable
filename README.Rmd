@@ -44,11 +44,10 @@ Normally, when I have seen this the color is hard-coded in an ifelse statement w
 
 Not only is hardcoding a bad practice, but then the outputs are not flexible.
 
-```{r example}
-suppressPackageStartupMessages({
+```{r example, eval = FALSE}
   library(tidyverse)
   library(colortable)
-  library(knitr)})
+  library(knitr)
 
 ## Super Great analysis of mtcars!
 
@@ -68,6 +67,8 @@ tbl_anova <- as_tibble(a_lm_fit)%>%
 kable(tbl_anova, escape = FALSE)
 
 ```
+
+![html_table_example](inst/media/html_table_example.PNG)
 
 There are many more use-cases and code surrounding this package, but I feel like this would be the most common use-case. 
 Let me know if you come up with more!

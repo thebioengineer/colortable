@@ -44,10 +44,9 @@ Not only is hardcoding a bad practice, but then the outputs are not
 flexible.
 
 ``` r
-suppressPackageStartupMessages({
   library(tidyverse)
   library(colortable)
-  library(knitr)})
+  library(knitr)
 
 ## Super Great analysis of mtcars!
 
@@ -67,19 +66,7 @@ tbl_anova <- as_tibble(a_lm_fit)%>%
 kable(tbl_anova, escape = FALSE)
 ```
 
-| Coef      | Df |      Sum Sq |     Mean Sq |                                                            F value |                                                                      Pr(\>F) |
-| :-------- | -: | ----------: | ----------: | -----------------------------------------------------------------: | ---------------------------------------------------------------------------: |
-| cyl       |  1 | 817.7129524 | 817.7129524 |                                     <span style="">116.4245</span> | <span style="text-decoration:underline;background:green;">5.03445e-10</span> |
-| disp      |  1 |  37.5939529 |  37.5939529 |                                     <span style="">5.352562</span> |  <span style="text-decoration:underline;background:green;">0.03091083</span> |
-| hp        |  1 |   9.3709293 |   9.3709293 |                                     <span style="">1.334217</span> |                                               <span style="">0.261031</span> |
-| drat      |  1 |  16.4674349 |  16.4674349 |                                     <span style="">2.344605</span> |                                              <span style="">0.1406438</span> |
-| wt        |  1 |  77.4757948 |  77.4757948 |                                     <span style="">11.03087</span> | <span style="text-decoration:underline;background:green;">0.003244492</span> |
-| qsec      |  1 |   3.9493082 |   3.9493082 |                                    <span style="">0.5622956</span> |                                              <span style="">0.4616557</span> |
-| vs        |  1 |   0.1297687 |   0.1297687 |                                   <span style="">0.01847624</span> |                                              <span style="">0.8931733</span> |
-| am        |  1 |  14.4742372 |  14.4742372 |                                     <span style="">2.060817</span> |                                              <span style="">0.1658577</span> |
-| gear      |  1 |   0.9717105 |   0.9717105 |                                    <span style="">0.1383504</span> |                                              <span style="">0.7136533</span> |
-| carb      |  1 |   0.4066688 |   0.4066688 |                                   <span style="">0.05790079</span> |                                              <span style="">0.8121787</span> |
-| Residuals | 21 | 147.4944300 |   7.0235443 | <span style="text-decoration:line-through;color:silver;">NA</span> |           <span style="text-decoration:line-through;color:silver;">NA</span> |
+![html\_table\_example](inst/media/html_table_example.PNG)
 
 There are many more use-cases and code surrounding this package, but I
 feel like this would be the most common use-case. Let me know if you
