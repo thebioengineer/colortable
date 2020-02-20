@@ -19,7 +19,7 @@ set_styling.default <- function(x, idx = rep(TRUE, length(x)), text_color = NA, 
 }
 
 #' @export
-set_styling.color_vect <- function(x, idx = rep(TRUE, length(x)), text_color = NA, background = NA, style = NA){
+set_styling.color_vctr <- function(x, idx = rep(TRUE, length(x)), text_color = NA, background = NA, style = NA){
 
   #if is logical, it must be the sample length as x
   if (is.logical(idx)) {

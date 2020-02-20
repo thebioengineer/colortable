@@ -79,7 +79,7 @@ color_vctr.color_vctr <- function(x,...){
 #'
 as_color_vctr <- function(...,text_color = NA, background = NA, style = NA){
 
-  new_vect <- unlist(...)
+  new_vect <- unlist(c(...))
 
   stopifnot(length(text_color) == 1 | length(text_color) == length(new_vect))
   stopifnot(length(background) == 1 | length(background) == length(new_vect))
