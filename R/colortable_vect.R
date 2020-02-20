@@ -1,10 +1,12 @@
 
-#' @exportClass colortable_vect
-new_colortable_vect <- function(vect, text_color = NA, background = NA, style = NA ){
+#' @exportClass c_vctr
+new_c_vctr <- function(vect, text_color = NA, background = NA, style = NA ){
 
   stopifnot(length(text_color) == 1 | length(text_color) == length(vect))
   stopifnot(length(background) == 1 | length(background) == length(vect))
   stopifnot(length(style) == 1 | length(style) == length(vect))
+
+  stopifnot(is.vector(vect, mode = "any"))
 
   if(length(text_color) == 1)
     text_color <- rep(text_color,length(vect))
@@ -19,29 +21,29 @@ new_colortable_vect <- function(vect, text_color = NA, background = NA, style = 
       ".text_color" = text_color,
       ".background" = background,
       ".style" = style,
-      class = "colortable_vect"
+      class = "color_vctr"
     )
   )
 }
 
 
 #' @title vector of colortable_cells
-#' @description `c` destroys the attributes of the contents, colortable_vect preserves them
+#' @description `c` destroys the attributes of the contents, c_vctr preserves them
 #' @param ... colortable_cells
 #' @return a vector of colortable_cells
 #' @export
 
-colortable_vect <- function(x,...,text_color = NA, background = NA, style = NA){
-  UseMethod("colortable_vect",x)
+c_vctr <- function(x,...,text_color = NA, background = NA, style = NA){
+  UseMethod("c_vctr",x)
 }
 
 #' @export
-colortable_vect.default <- function(x,...,text_color = NA, background = NA, style = NA) {
-  as_colortable_vect(list(x,...),text_color = NA, background = NA, style = NA)
+c_vctr.default <- function(x,...,text_color = NA, background = NA, style = NA) {
+  as_c_vctr(c(x,list(...)),text_color =text_color, background = background, style = style)
 }
 
 #' @export
-colortable_vect.list <- function(x,...){
+c_vctr.list <- function(x,...){
 
   vect <- sapply(x,`[`,1)
   text_color <- sapply(x,attr,".text_color")
@@ -49,7 +51,7 @@ colortable_vect.list <- function(x,...){
   style <- sapply(x,attr,".style")
 
   return(
-    new_colortable_vect(
+    new_c_vctr(
     vect,
     text_color = text_color,
     background = background,
@@ -57,22 +59,7 @@ colortable_vect.list <- function(x,...){
 }
 
 #' @export
-colortable_vect.colortable_cell <- function(x,...){
-
-  vect <- sapply(list(x,...),'c')
-  text_color <- sapply(list(x,...),".text_color")
-  background <- sapply(list(x,...),attr,".background")
-  style <- sapply(list(x,...),attr,".style")
-
-  return(new_colortable_vect(
-    vect,
-    text_color = text_color,
-    background = background,
-    style = style))
-}
-
-#' @export
-colortable_vect.colortable_vect <- function(x,...){
+c_vctr.color_vctr <- function(x,...){
 
   coltable_nect_list <- list(x,...)
 
@@ -81,7 +68,7 @@ colortable_vect.colortable_vect <- function(x,...){
   background <- do.call('c',lapply(coltable_nect_list,attr,".background"))
   style <- do.call('c',lapply(coltable_nect_list,attr,".style"))
 
-  return(new_colortable_vect(
+  return(new_c_vctr(
     vect,
     text_color = text_color,
     background = background,
@@ -90,70 +77,49 @@ colortable_vect.colortable_vect <- function(x,...){
 
 #' @export
 #'
-as_colortable_vect <- function(...,text_color = NA, background = NA, style = NA){
+as_c_vctr <- function(...,text_color = NA, background = NA, style = NA){
 
-  new_cells <- as.list(...)
+  new_vect <- unlist(...)
 
-  stopifnot(length(text_color) == 1 | length(text_color) == length(new_cells))
-  stopifnot(length(background) == 1 | length(background) == length(new_cells))
-  stopifnot(length(style) == 1 | length(style) == length(new_cells))
+  stopifnot(length(text_color) == 1 | length(text_color) == length(new_vect))
+  stopifnot(length(background) == 1 | length(background) == length(new_vect))
+  stopifnot(length(style) == 1 | length(style) == length(new_vect))
 
-
-  cell_list <- lapply(seq_along(new_cells),function(idx, new_cells, text_color, background, style){
-
-    text_color = ifelse(length(text_color)==1,text_color, style[idx])
-    background = ifelse(length(background)==1,background, background[idx])
-    style      = ifelse(length(style)==1,style, style[idx])
-
-    new_cell(new_cells[[idx]],
+  new_c_vctr(new_vect,
              text_color = text_color,
              background = background,
              style = style)
-  },new_cells, text_color, background, style)
-
-  colortable_vect(cell_list)
 }
 
 
 
-#' @title Is a colortable_vect
+#' @title Is a c_vctr
 #' @description detect if object is a colortable vector
 #' @export
-is_colortable_vect <- function(x){
-  inherits(x,"colortable_vect")
+is_c_vctr <- function(x){
+  inherits(x,"color_vctr")
 }
 
 #' @export
-`[.colortable_vect`<-function(x,i){
+`[.c_vctr`<-function(x,i){
 
-  vect <- lapply(i,function(idx,vec){
+  value <- .subset(x,i)
+  style <- attr(x,".style")[i]
+  text_color <- attr(x,".text_color")[i]
+  background <- attr(x,".background")[i]
 
-    if (idx <= length(vec)) {
-      value <- .subset(vec,idx)
-      style <- attr(vec,".style")[idx]
-      text_color <- attr(vec,".text_color")[idx]
-      background <- attr(vec,".background")[idx]
-
-    }else{
-      value <- style <- text_color <- background <- NA
-    }
-
-    as_colortable_cell(
+  new_c_vctr(
       value,
       style = style,
       text_color = text_color,
       background = background)
-
-  },x)
-
-  do.call('colortable_vect',vect)
 }
 
 
 #' @export
-`[<-.colortable_vect` <- function(x, i, value){
+`[<-.color_vctr` <- function(x, i, value){
 
-  if (is_colortable_vect(value)) {
+  if (is_c_vctr(value)) {
 
     if (!(length(i) == length(value) | length(value) == 1)){
       warning("number of items to replace is not a multiple of replacement length")
@@ -165,17 +131,17 @@ is_colortable_vect <- function(x){
       idx_val <- idx
       if (length(value) == 1)
         idx_val <-  1
-      x <- append_colortable_cell(x,idx_i,value[idx_val])
+      x <- append_colortable_vect(x,idx_i,value[idx_val])
     }
 
   } else {
-    value <- as_colortable_vect(value)
+    value <- as_c_vctr(value)
     x[i] <- value
   }
   x
 }
 
-append_colortable_cell <- function(x,i,value){
+append_colortable_vect <- function(x,i,value){
 
   vect <- .subset(x,seq_along(x))
   text_color <- attr(x,".text_color")
@@ -188,7 +154,7 @@ append_colortable_cell <- function(x,i,value){
   style[i] <- attr(value,".style")
 
   return(
-    new_colortable_vect(
+    new_c_vctr(
       vect,
       text_color = text_color,
       background = background,
@@ -197,14 +163,13 @@ append_colortable_cell <- function(x,i,value){
 }
 
 #' @export
-as.list.colortable_vect <- function(x,...){
+as.list.color_vctr <- function(x,...){
   lapply(seq_along(x),function(idx,vect){vect[idx]},x)
 }
 
 #' @export
-as.data.frame.colortable_vect <- function (
-  x, row.names = NULL, optional = FALSE, ..., nm = paste(deparse(substitute(x), width.cutoff = 500L), collapse = " "))
-{
+as.data.frame.color_vctr <- function (
+  x, row.names = NULL, optional = FALSE, ..., nm = paste(deparse(substitute(x), width.cutoff = 500L), collapse = " ")){
 
   text_color <- attr(x,".text_color")
   background <- attr(x,".background")
@@ -216,6 +181,6 @@ as.data.frame.colortable_vect <- function (
   attr(df, ".text_color") <- text_color
   attr(df, ".background") <- background
   attr(df, ".style") <- style
-  class(df) <- c("colortable","data.frame")
+  class(df) <- c("color_table","data.frame")
   return(df)
 }
