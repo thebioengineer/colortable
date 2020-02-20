@@ -4,7 +4,7 @@
 \alias{style2ansi}
 \title{Create function to append ansi coloring}
 \usage{
-style2ansi(x, style = NA, text_color = NA, background = NA, ...)
+style2ansi(x, style = NA, text_color = NA, background = NA, ..., quote = TRUE)
 }
 \arguments{
 \item{color}{the color wanted. must be onen of the colors in the color_codes list}

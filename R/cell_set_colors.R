@@ -15,17 +15,18 @@ set_styling<- function(x, idx = rep(TRUE, length(x)), text_color = NA, backgroun
 #' @export
 #'
 set_styling.default <- function(x, idx = rep(TRUE, length(x)), text_color = NA, background = NA, style = NA){
-  set_styling(as_colortable_vect(x), idx, text_color, background, style)
+  set_styling(color_vctr(x), idx, text_color, background, style)
 }
 
 #' @export
-set_styling.colortable_vect <- function(x, idx = rep(TRUE, length(x)), text_color = NA, background = NA, style = NA){
+set_styling.color_vect <- function(x, idx = rep(TRUE, length(x)), text_color = NA, background = NA, style = NA){
 
   #if is logical, it must be the sample length as x
   if (is.logical(idx)) {
      if (length(idx) != length(x)) {
         stop("Length of index must be same as input vector.")
      }
+    idx <- which(idx)
   } else if (is.numeric(idx)) {
     if (any(duplicated(idx))){
       warning("Duplicated indexes provided.")
@@ -39,17 +40,7 @@ set_styling.colortable_vect <- function(x, idx = rep(TRUE, length(x)), text_colo
   }
 
   # if is numeric, no duplicates
-  old_text_color <- attr(x,".text_color")
-  old_background <- attr(x,".background")
-  old_style <- attr(x,".style")
-
-  old_text_color[idx] <- text_color
-  old_background[idx] <- background
-  old_style[idx] <- style
-
-  attr(x,".text_color") <- old_text_color
-  attr(x,".background") <- old_background
-  attr(x,".style") <- old_style
+  x[idx] <- color_vctr(unclass(x)[idx], text_color = text_color, background = background, style = style)
 
   return(x)
 }

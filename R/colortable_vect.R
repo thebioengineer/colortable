@@ -1,6 +1,6 @@
 
-#' @exportClass c_vctr
-new_c_vctr <- function(vect, text_color = NA, background = NA, style = NA ){
+#' @exportClass color_vctr
+new_color_vctr <- function(vect, text_color = NA, background = NA, style = NA ){
 
   stopifnot(length(text_color) == 1 | length(text_color) == length(vect))
   stopifnot(length(background) == 1 | length(background) == length(vect))
@@ -28,22 +28,22 @@ new_c_vctr <- function(vect, text_color = NA, background = NA, style = NA ){
 
 
 #' @title vector of colortable_cells
-#' @description `c` destroys the attributes of the contents, c_vctr preserves them
+#' @description `c` destroys the attributes of the contents, color_vctr preserves them
 #' @param ... colortable_cells
 #' @return a vector of colortable_cells
 #' @export
 
-c_vctr <- function(x,...,text_color = NA, background = NA, style = NA){
-  UseMethod("c_vctr",x)
+color_vctr <- function(x,...,text_color = NA, background = NA, style = NA){
+  UseMethod("color_vctr",x)
 }
 
 #' @export
-c_vctr.default <- function(x,...,text_color = NA, background = NA, style = NA) {
-  as_c_vctr(c(x,list(...)),text_color =text_color, background = background, style = style)
+color_vctr.default <- function(x,...,text_color = NA, background = NA, style = NA) {
+  as_color_vctr(c(x,list(...)),text_color =text_color, background = background, style = style)
 }
 
 #' @export
-c_vctr.list <- function(x,...){
+color_vctr.list <- function(x,...){
 
   vect <- sapply(x,`[`,1)
   text_color <- sapply(x,attr,".text_color")
@@ -51,7 +51,7 @@ c_vctr.list <- function(x,...){
   style <- sapply(x,attr,".style")
 
   return(
-    new_c_vctr(
+    new_color_vctr(
     vect,
     text_color = text_color,
     background = background,
@@ -59,7 +59,7 @@ c_vctr.list <- function(x,...){
 }
 
 #' @export
-c_vctr.color_vctr <- function(x,...){
+color_vctr.color_vctr <- function(x,...){
 
   coltable_nect_list <- list(x,...)
 
@@ -68,7 +68,7 @@ c_vctr.color_vctr <- function(x,...){
   background <- do.call('c',lapply(coltable_nect_list,attr,".background"))
   style <- do.call('c',lapply(coltable_nect_list,attr,".style"))
 
-  return(new_c_vctr(
+  return(new_color_vctr(
     vect,
     text_color = text_color,
     background = background,
@@ -77,7 +77,7 @@ c_vctr.color_vctr <- function(x,...){
 
 #' @export
 #'
-as_c_vctr <- function(...,text_color = NA, background = NA, style = NA){
+as_color_vctr <- function(...,text_color = NA, background = NA, style = NA){
 
   new_vect <- unlist(...)
 
@@ -85,7 +85,7 @@ as_c_vctr <- function(...,text_color = NA, background = NA, style = NA){
   stopifnot(length(background) == 1 | length(background) == length(new_vect))
   stopifnot(length(style) == 1 | length(style) == length(new_vect))
 
-  new_c_vctr(new_vect,
+  new_color_vctr(new_vect,
              text_color = text_color,
              background = background,
              style = style)
@@ -93,22 +93,22 @@ as_c_vctr <- function(...,text_color = NA, background = NA, style = NA){
 
 
 
-#' @title Is a c_vctr
+#' @title Is a color_vctr
 #' @description detect if object is a colortable vector
 #' @export
-is_c_vctr <- function(x){
+is_color_vctr <- function(x){
   inherits(x,"color_vctr")
 }
 
 #' @export
-`[.c_vctr`<-function(x,i){
+`[.color_vctr`<-function(x,i){
 
-  value <- .subset(x,i)
+  value <- unclass(x)[i]
   style <- attr(x,".style")[i]
   text_color <- attr(x,".text_color")[i]
   background <- attr(x,".background")[i]
 
-  new_c_vctr(
+  as_color_vctr(
       value,
       style = style,
       text_color = text_color,
@@ -119,7 +119,7 @@ is_c_vctr <- function(x){
 #' @export
 `[<-.color_vctr` <- function(x, i, value){
 
-  if (is_c_vctr(value)) {
+  if (is_color_vctr(value)) {
 
     if (!(length(i) == length(value) | length(value) == 1)){
       warning("number of items to replace is not a multiple of replacement length")
@@ -135,7 +135,7 @@ is_c_vctr <- function(x){
     }
 
   } else {
-    value <- as_c_vctr(value)
+    value <- as_color_vctr(value)
     x[i] <- value
   }
   x
@@ -154,7 +154,7 @@ append_colortable_vect <- function(x,i,value){
   style[i] <- attr(value,".style")
 
   return(
-    new_c_vctr(
+    new_color_vctr(
       vect,
       text_color = text_color,
       background = background,

@@ -1,0 +1,31 @@
+---
+title: "Colortable Example"
+author: "Ellis Hughes"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, messages = FALSE}
+suppressPackageStartupMessages({
+  library(tidyverse)
+  library(colortable)
+  library(knitr)})
+
+## Super Great analysis of mtcars!
+
+lm_fit <- lm(mpg ~ ., mtcars)
+
+a_lm_fit <- anova(lm_fit)
+
+tbl_anova <- as_tibble(a_lm_fit) %>% 
+  mutate(
+    Coef     = rownames(a_lm_fit),
+    `Pr(>F)` = set_styling(`Pr(>F)`, `Pr(>F)` < 0.05, background = "green", style = "underline")
+  ) %>% 
+  select(Coef, everything())
+
+kable(tbl_anova, escape = FALSE)
+
+```
+

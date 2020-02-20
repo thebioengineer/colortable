@@ -5,7 +5,7 @@
 #' colored_text <- colortable:::style2ansi(24, text_color = "red" )
 #' cat(colored_text)
 #'
-style2ansi <- function(x, style = NA, text_color = NA, background = NA, ...){
+style2ansi <- function(x, style = NA, text_color = NA, background = NA, ..., quote = TRUE){
   if(is.null(x)){
     return(NA)
   }
@@ -14,7 +14,13 @@ style2ansi <- function(x, style = NA, text_color = NA, background = NA, ...){
   text_background <- style_wrapper_ansi(background, type = "background")
   class(x)<- setdiff(class(x),"colortable_cell")
 
-  text_background(text_color(text_style(format(x,...))))
+  text_color(
+    text_background(
+      text_style(
+        paste_quote(
+          format(x,...),
+          quote = quote & is.character(x)
+          ))))
 }
 
 style2html <- function(x, style = NA, text_color = NA, background = NA, ...){
@@ -46,6 +52,14 @@ style2tex <- function(x, style = NA, text_color = NA, background = NA, ...){
   text_background(text_style(text_color(format(x,...))))
 }
 
+
+paste_quote <- function(x, quote = TRUE){
+  if(quote){
+    paste0("\"",gsub("\"","\\\\\"",x),"\"")
+  }else{
+    x
+  }
+}
 
 ## Copied from the crayon package
 ansi_style_codes <- list(

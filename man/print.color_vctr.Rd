@@ -4,7 +4,7 @@
 \alias{print.color_vctr}
 \title{print method for color_vctr}
 \usage{
-\method{print}{color_vctr}(x, ..., method = print_method())
+\method{print}{color_vctr}(x, ..., quote = TRUE, method = print_method())
 }
 \arguments{
 \item{x}{object of colortable vector}

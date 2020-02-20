@@ -1,0 +1,100 @@
+---
+title: "Colortable"
+author: "Ellis Hughes"
+date: "2/16/2020"
+output:
+  html_document:
+    df_print: paged
+  pdf_document:
+    keep_tex: yes
+---
+
+## {{colortable}}
+
+Examples of {{colortable}} in action!
+
+```{r, results='hide', message=FALSE}
+library(colortable)
+library(tidyverse)
+library(knitr)
+```
+
+```{r, results = 'asis'}
+
+cell_sample  <- colortable_cell(24, text_color = "red", background = "blue")
+cell_sample2 <- colortable_cell(42, background = "yellow")
+cell_sample3 <- colortable_cell(68, text_color = "magenta", style = "strikethrough")
+cell_sample4 <- colortable_cell(70, text_color = "green")
+
+cell_sample
+cell_sample2
+cell_sample3
+cell_sample4
+
+vect_sample <- colortable_vect(cell_sample, cell_sample2, cell_sample3, cell_sample4)
+vect_sample
+
+vect_sample2 <- vect_sample
+vect_sample2[5] <- 422
+vect_sample2[20] <- colortable_cell(98119, text_color = "yellow", background = "blue", style = "underline")
+vect_sample2[6:7] <- c(21,23)
+vect_sample2[10:12] <- colortable_vect(cell_sample, cell_sample2, cell_sample3)
+
+vect_sample2
+
+data.frame(idx = 1:5, z = vect_sample[1:5])
+
+color_tibble <- tibble(idx = 1:5, z = vect_sample[1:5]) 
+
+color_tibble
+
+color_tibble %>% 
+  kable(escape = FALSE)
+
+```
+
+## Use Cases
+
+The ability to update coloring within the table allows for visualizing the results before printing and rendering.
+
+One use case could be trying to print out p-values and drawing attention to the significant pvalues.
+
+Normally, the course of action would be to manually add either the latex or html required to tag the outputs.
+This requires both knowing how to tag the significant pvalues with the correct latex/html code and also hard codes those results into your code.
+
+```{r There_must_be_a_better_way}
+
+## Super Great analysis of mtcars!
+
+lm_fit <- lm(mpg ~ ., mtcars)
+
+a_lm_fit <- anova(lm_fit)
+
+df_anova <- data.frame(a_lm_fit)
+
+# if the output is pdf
+df_anova$Pr..F. <- ifelse(
+  df_anova$Pr..F. < .05,
+  paste0("\\textcolor{green}{",df_anova$Pr..F.,"}"),
+  df_anova$Pr..F.
+)
+
+kable(df_anova)
+
+```
+
+{{colortable}} can resolve this and make your code much easier to understand, and you can add additional styling just as easily.
+There is also the added benefit that even though we have styling on the cells, the underlying object type still exists and can be modified and edited as needed. 
+
+```{r there_is}
+
+tbl_anova <- as_tibble(a_lm_fit)
+
+color_anova <- tbl_anova %>% 
+  mutate(
+    `Pr(>F)` = set_styling(`Pr(>F)`, `Pr(>F)` < 0.05, text_color = "green", style = "underline")
+  )
+
+kable(color_anova, escape=FALSE)
+
+```
