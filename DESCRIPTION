@@ -13,3 +13,5 @@ RoxygenNote: 7.0.2
 Imports: 
     knitr,
     rmarkdown,
+Suggests: 
+    testthat (>= 2.1.0)

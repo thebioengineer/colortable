@@ -1,6 +1,15 @@
-#' @title print data.frame
-#' @description
-#'     custom print method for data.frames that contain color_vectors
+#' wrapper to print data.frame colors
+#'
+#' custom print method for data.frames that contain color_vctr's. Uses the
+#' base print.data.frame otherwise
+#'
+#' @param x a data.frame
+#' @param ... optional arguments to print or plot methods.
+#' @param digits the minimum number of significant digits to be used: see print.default.
+#' @param quote logical, indicating whether or not entries should be printed with surrounding quotes.
+#' @param right logical, indicating whether or not strings should be right-aligned. The default is right-alignment.
+#' @param row.names logical (or character vector), indicating whether (or what) row names should be printed.
+#' @param max numeric or NULL, specifying the maximal number of entries to be printed. By default, when NULL, getOption("max.print") used.
 #'
 #' @export
 print.data.frame <- function(x, ..., digits = NULL, quote = FALSE, right = TRUE,
@@ -17,6 +26,7 @@ print.data.frame <- function(x, ..., digits = NULL, quote = FALSE, right = TRUE,
 
 
 #' @importFrom cli cat_line
+#' @importFrom pillar squeeze colonnade
 print.data.frame.color_vector <- function (x, ..., digits = NULL, quote = FALSE, right = TRUE,
           row.names = TRUE, max = NULL)
 {
@@ -35,11 +45,8 @@ print.data.frame.color_vector <- function (x, ..., digits = NULL, quote = FALSE,
     if (!is.finite(max))
       stop("invalid 'max' / getOption(\"max.print\"): ",
            max)
-    omit <- (n0 <- max%/%length(x)) < n
 
-    m <- as.matrix(format.data.frame(if (omit)
-      x[seq_len(n0), , drop = FALSE]
-      else x, digits = digits, na.encode = FALSE))
+    omit <- (n0 <- max%/%length(x)) < n
 
     if (!isTRUE(row.names)){
       dimnames(m)[[1L]] <- if (isFALSE(row.names)) {
@@ -47,12 +54,80 @@ print.data.frame.color_vector <- function (x, ..., digits = NULL, quote = FALSE,
       } else { row.names }
     }
 
-    cat_line(format(m), ..., quote = quote, right = right, max = max)
+    cat_line(format_colortable(x, max = max, digits = digits))
 
-    if (omit)
-      cat(" [ reached 'max' / getOption(\"max.print\") -- omitted",
-          n - n0, "rows ]\n")
   }
   invisible(x)
 }
 
+
+format_colortable <- function(x, max = getOption("max.print", 99999L), digits = NULL){
+
+  omit <- (n0 <- max%/%length(x)) < n
+
+  m <- format.data.frame(if (omit)
+    x[seq_len(n0), , drop = FALSE]
+    else x, digits = digits, na.encode = FALSE)
+
+  col_widths <-
+    sapply(colnames(x), function(x, df){
+      max(
+        sapply(lapply(df[[x]],format.info),`[`,1),
+        format.info(x)[1]
+      ) + 1
+    },if (omit)
+      x[seq_len(n0), , drop = FALSE]
+    else x)
+
+  rownames_width <- format.info(rownames(x))
+
+  header <-
+    paste0(c(
+      pad("", rownames_width),
+      pad(colnames(x), col_widths)),
+      collapse = "")
+
+  body <- sapply(1:nrow(m),function(row, m_print, x, row_names){
+
+    row_out <- pad(row_names[row], rownames_width)
+
+    content_pad <-
+      col_widths - sapply(lapply(x[row, , drop = TRUE], format.info), `[`, 1)
+    content <-
+      to_pad(as.character(m_print[row, , drop = TRUE]), content_pad)
+
+    paste0(c(row_out, content), collapse = "")
+  },m, x, rownames(x))
+
+  if(omit){
+    body <- c(
+      body,
+      paste0(
+        c(" [ reached 'max' / getOption(\"max.print\") -- omitted",
+          n - n0, "rows ]"), collapse="")
+    )
+  }
+
+  c(header, body)
+
+}
+
+pad <- function(x, padding = 0) {
+  sapply(seq_along(x), function(idx, x, padding) {
+    formatC(x[idx], width = if (length(padding) == 1)
+      padding
+      else
+        padding[idx])
+  }, x, padding)
+}
+
+to_pad <- function(x, padding = 0) {
+  sapply(seq_along(x), function(idx, x, padding) {
+    paste0(c(rep(" ", if (length(padding) == 1)
+      padding
+      else
+        padding[idx]),
+      x[idx]),
+      collapse = "")
+  }, x, padding)
+}

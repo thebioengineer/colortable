@@ -1,33 +1,43 @@
-#' @title Create function to append ansi coloring
-#' @param color the color wanted. must be onen of the colors in the color_codes list
-#' @return function to append colors
-#' @examples
-#' colored_text <- colortable:::style2ansi(24, text_color = "red" )
-#' cat(colored_text)
+#' Append Coloring/Styling
 #'
-style2ansi <- function(x, style = NA, text_color = NA, background = NA, ..., quote = TRUE){
-  if(is.null(x)){
-    return(NA)
-  }
-  text_style <- style_wrapper_ansi(style, type = "style")
-  text_color <- style_wrapper_ansi(text_color, type = "text")
-  text_background <- style_wrapper_ansi(background, type = "background")
+#' Based on inputs, determines correct strings to append to the input to style
+#' for any type of output (console, html, pdf, ...)
+#'
+#' @param x a vector of length one
+#' @param style styling to append to `x`
+#' @param text_color text color to set `x`
+#' @param background background color to set `x`
+#' @param ... arguments to pass to `format()`
+#'
+#' @return a character vector with styling appended
+#' @examples
+#' console_text <- colortable:::style2console(24, text_color = "red" )
+#' html_text <- colortable:::style2html(24, text_color = "red" )
+#' tex_text <- colortable:::style2tex(24, text_color = "red" )
+#'
+#' cat(console_text)
+#'
+#' @usage
+#' style2console
+#' style2html
+#' style2tex
+NULL
+
+style2console <- function(x, style = NA, text_color = NA, background = NA, ...){
+
+  text_style <- style_wrapper_console(style, type = "style")
+  text_color <- style_wrapper_console(text_color, type = "text")
+  text_background <- style_wrapper_console(background, type = "background")
   class(x)<- setdiff(class(x),"colortable_cell")
 
   text_color(
     text_background(
       text_style(
-        paste_quote(
-          format(x,...),
-          quote = quote & is.character(x)
-          ))))
+       format(x,...)
+       )))
 }
 
 style2html <- function(x, style = NA, text_color = NA, background = NA, ...){
-
-  if(is.null(x)){
-    return(NA)
-  }
 
   text_style <- style_wrapper_html(style, type = "style")
   text_color <- style_wrapper_html(text_color, type = "text")
@@ -39,10 +49,6 @@ style2html <- function(x, style = NA, text_color = NA, background = NA, ...){
 }
 
 style2tex <- function(x, style = NA, text_color = NA, background = NA, ...){
-
-  if(is.null(x)){
-    return(NA)
-  }
 
   text_style <- style_wrapper_tex(style, type = "style")
   text_color <- style_wrapper_tex(text_color, type = "text")
@@ -61,8 +67,8 @@ paste_quote <- function(x, quote = TRUE){
   }
 }
 
-## Copied from the crayon package
-ansi_style_codes <- list(
+## Copied from the crayon package.
+console_style_codes <- list(
 
   style.bold = list(1, 22), # 21 isn't widely supported and 22 does the same thing
   style.italic = list(3, 23),
@@ -91,7 +97,7 @@ ansi_style_codes <- list(
   bg.white = list(47, 49)
 )
 
-style_wrapper_ansi <- function(styling, type = c("text","style","background")){
+style_wrapper_console <- function(styling, type = c("text","style","background")){
   if(is.na(styling)){
     function(x){x}
   }else{
@@ -103,12 +109,21 @@ style_wrapper_ansi <- function(styling, type = c("text","style","background")){
                     "background" = paste0("bg.",styling))
 
     if(!styling2 %in% names(latex_style_codes)){
-      warning(switch(type, text = "Text coloring", style = "Text styling", background = "Background coloring"),"output by '",styling,"' has not been implemented for console output.",call. = FALSE)
+      warning(switch(
+        type,
+        text = "Text coloring",
+        style = "Text styling",
+        background = "Background coloring"
+      ),
+      " output by '",
+      styling,
+      "' has not been implemented for console output.",
+      call. = FALSE)
       function(x){x}
     }else{
 
-      stopifnot(styling2 %in% names(ansi_style_codes))
-      codes <- ansi_style_codes[[styling2]]
+      stopifnot(styling2 %in% names(console_style_codes))
+      codes <- console_style_codes[[styling2]]
 
       function(x){
         paste0(paste0('\u001b[', codes[[1]], 'm', collapse=""),
@@ -162,7 +177,16 @@ style_wrapper_html <- function(styling, type = c("text","style","background")){
                       "background" = paste0("bg.",styling))
 
     if(!styling2 %in% names(latex_style_codes)){
-      warning(switch(type, text = "Text coloring", style = "Text styling", background = "Background coloring"),"output by '",styling,"' has not been implemented for console output.",call. = FALSE)
+      warning(switch(
+        type,
+        text = "Text coloring",
+        style = "Text styling",
+        background = "Background coloring"
+      ),
+      " output by '",
+      styling,
+      "' has not been implemented for console output.",
+      call. = FALSE)
       ""
     }else{
       stopifnot(styling2 %in% names(html_style_codes))
@@ -214,7 +238,18 @@ style_wrapper_tex <- function(styling, type = c("text","style","background")){
                       "background" = paste0("bg.",styling))
 
     if(!styling2 %in% names(latex_style_codes)){
-      warning(switch(type, text = "Text coloring", style = "Text styling", background = "Background coloring"),"output by '",styling,"' has not been implemented for console output.",call. = FALSE)
+
+      warning(switch(
+        type,
+        text = "Text coloring",
+        style = "Text styling",
+        background = "Background coloring"
+      ),
+      " output by '",
+      styling,
+      "' has not been implemented for console output.",
+      call. = FALSE)
+
       function(x){x}
     }else{
 
