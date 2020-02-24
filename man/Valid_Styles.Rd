@@ -4,9 +4,9 @@
 \alias{Valid_Styles}
 \title{Valid Coloring/Styling Options for {{Colortable}}}
 \usage{
-valid_text_color()
-valid_background()
-valid_style()
+valid_text_color
+valid_background
+valid_style
 }
 \arguments{
 \item{method}{The output method type. One of "latex","html", or "console"}

@@ -1,13 +1,12 @@
 #' @title Valid Coloring/Styling Options for {{Colortable}}
-#' @param method The output method type. One of "latex","html", or "console"
 #' @return vector of valid settings
+#' @param method The output method type. One of "latex","html", or "console"
 #' @name Valid_Styles
 #' @usage
-#' valid_text_color()
-#' valid_background()
-#' valid_style()
+#' valid_text_color
+#' valid_background
+#' valid_style
 NULL
-
 
 #' @export
 valid_text_color <- function(method = c("latex","html","console")){
