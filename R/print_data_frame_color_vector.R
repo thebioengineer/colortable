@@ -63,17 +63,17 @@ print.data.frame.color_vector <- function (x, ..., digits = NULL, quote = FALSE,
 
 format_colortable <- function(x, max = getOption("max.print", 99999L), digits = NULL){
 
-  omit <- (n0 <- max%/%length(x)) < n
+  omit <- (n0 <- max %/% nrow(x)) < nrow(x)
 
   m <- format.data.frame(if (omit)
     x[seq_len(n0), , drop = FALSE]
     else x, digits = digits, na.encode = FALSE)
 
   col_widths <-
-    sapply(colnames(x), function(x, df){
-      max(
-        sapply(lapply(df[[x]],format.info),`[`,1),
-        format.info(x)[1]
+    sapply(1:ncol(x), function(idx, df){
+      max(c(
+        sapply(lapply(df[[idx]],get_format_info),`[`,1),
+        format.info(colnames(df)[[idx]])[1])
       ) + 1
     },if (omit)
       x[seq_len(n0), , drop = FALSE]
@@ -87,17 +87,18 @@ format_colortable <- function(x, max = getOption("max.print", 99999L), digits = 
       pad(colnames(x), col_widths)),
       collapse = "")
 
-  body <- sapply(1:nrow(m),function(row, m_print, x, row_names){
+  body <- sapply(1:nrow(m),function(row, m, x, row_names, col_widths){
 
     row_out <- pad(row_names[row], rownames_width)
 
     content_pad <-
-      col_widths - sapply(lapply(x[row, , drop = TRUE], format.info), `[`, 1)
+      col_widths - sapply(lapply(x[row, , drop=TRUE], get_format_info), `[`, 1)
+
     content <-
-      to_pad(as.character(m_print[row, , drop = TRUE]), content_pad)
+      to_pad(format(m[row, , drop = TRUE]), content_pad)
 
     paste0(c(row_out, content), collapse = "")
-  },m, x, rownames(x))
+  },m, x, rownames(x), col_widths)
 
   if(omit){
     body <- c(
@@ -130,4 +131,14 @@ to_pad <- function(x, padding = 0) {
       x[idx]),
       collapse = "")
   }, x, padding)
+}
+
+get_format_info <- function(x){
+  if (is.factor(x) & !is.na(x)){
+    format.info(as.character(x))
+  }else if (is.na(x)) {
+    2
+  }else {
+    format.info(x)
+  }
 }

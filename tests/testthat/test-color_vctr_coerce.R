@@ -9,15 +9,15 @@ test_that("as.data.frame", {
     inherits(try(color_df <- as.data.frame(sample_vect)),"try-error")
   )
   expect_equal(
-    attr(color_df,".text_color"),
+    attr(color_df$sample_vect,".text_color"),
     attr(sample_vect,".text_color")
     )
   expect_equal(
-    attr(color_df,".background"),
+    attr(color_df$sample_vect,".background"),
     attr(sample_vect,".background")
   )
   expect_equal(
-    attr(color_df,".style"),
+    attr(color_df$sample_vect,".style"),
     attr(sample_vect,".style")
   )
 
