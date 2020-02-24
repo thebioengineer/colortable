@@ -2,6 +2,7 @@
 #' @return vector of valid settings
 #' @param method The output method type. One of "latex","html", or "console"
 #' @name Valid_Styles
+#' @aliases valid_text_color valid_background valid_style
 #' @usage
 #' valid_text_color
 #' valid_background
