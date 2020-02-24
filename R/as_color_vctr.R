@@ -1,3 +1,18 @@
+#' Coerce object to a color_vctr
+#'
+#' Coersion function for generation of a color_vctr from an existing vector
+#'
+#' @param x object to coerce
+#' @param text_color A vector of length 1 or same length as vect. Details the
+#'     color the text should be. Valid values can be found from the
+#'     `valid_text_color()` function.NA means no text color.
+#' @param background A vector of length 1 or same length as vect. Details the
+#'     background color of the text. Valid values can be found from the
+#'     `valid_background()` function. NA means no background color.
+#' @param style A vector of length 1 or same length as vect. Details the
+#'     style of the text Valid values can be found from the
+#'     `valid_style()` function. NA means no styling.
+#'
 #' @export
 as_color_vctr <- function(x, text_color = NA, background = NA, style = NA){
   UseMethod("as_color_vctr",x)

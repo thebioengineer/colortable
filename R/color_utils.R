@@ -1,4 +1,4 @@
-#' Append Coloring/Styling
+#' Append Coloring or Styling
 #'
 #' Based on inputs, determines correct strings to append to the input to style
 #' for any type of output (console, html, pdf, ...)

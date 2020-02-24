@@ -10,8 +10,11 @@ print.color_vctr <- function(x, ..., method = print_method()){
 
 #' @title  format method for color_vctror
 #' @param x object of colortable cell
+#' @param ... format options to be passed on
+#' @param method The output type to print to. Defaults to one of: "console","latex","html".
+#'
 #' @export
-format.color_vctr <- function(x, ..., quote = TRUE, method = print_method()){
+format.color_vctr <- function(x, ..., method = print_method()){
   format_method <- switch(method,
          "console" = format.color_vctr.console,
          "latex" = format.color_vctr.latex,
@@ -20,7 +23,7 @@ format.color_vctr <- function(x, ..., quote = TRUE, method = print_method()){
          stop("Method for ", print_method()," not implemented yet.")
   )
 
-  format_method(x, ..., quote = TRUE, method = method)
+  format_method(x, ..., method = method)
 }
 
 format.color_vctr.console <- function(x,...){
@@ -58,5 +61,3 @@ format.color_vctr.latex <- function(x,...){
   class(x) <- c("color_vctr_output","character")
   x
 }
-
-print.color_vctr_output <- cat

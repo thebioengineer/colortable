@@ -26,7 +26,6 @@ print.data.frame <- function(x, ..., digits = NULL, quote = FALSE, right = TRUE,
 
 
 #' @importFrom cli cat_line
-#' @importFrom pillar squeeze colonnade
 print.data.frame.color_vector <- function (x, ..., digits = NULL, quote = FALSE, right = TRUE,
           row.names = TRUE, max = NULL)
 {
@@ -63,6 +62,7 @@ print.data.frame.color_vector <- function (x, ..., digits = NULL, quote = FALSE,
 
 format_colortable <- function(x, max = getOption("max.print", 99999L), digits = NULL){
 
+  n <- nrow(x)
   omit <- (n0 <- max %/% nrow(x)) < nrow(x)
 
   m <- format.data.frame(if (omit)

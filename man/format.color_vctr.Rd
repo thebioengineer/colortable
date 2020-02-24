@@ -4,10 +4,14 @@
 \alias{format.color_vctr}
 \title{format method for color_vctror}
 \usage{
-\method{format}{color_vctr}(x, ..., quote = TRUE, method = print_method())
+\method{format}{color_vctr}(x, ..., method = print_method())
 }
 \arguments{
 \item{x}{object of colortable cell}
+
+\item{...}{format options to be passed on}
+
+\item{method}{The output type to print to. Defaults to one of: "console","latex","html".}
 }
 \description{
 format method for color_vctror

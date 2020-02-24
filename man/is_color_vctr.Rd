@@ -2,10 +2,15 @@
 % Please edit documentation in R/color_vctr_utils.R
 \name{is_color_vctr}
 \alias{is_color_vctr}
-\title{Is a color_vctr}
+\title{Is the object a color_vctr?
+Detect if object is a colortable vector}
 \usage{
 is_color_vctr(x)
 }
+\arguments{
+\item{x}{object to be checked if is a color_vctr}
+}
 \description{
-detect if object is a colortable vector
+Is the object a color_vctr?
+Detect if object is a colortable vector
 }
