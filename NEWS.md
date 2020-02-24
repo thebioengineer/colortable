@@ -1,4 +1,4 @@
-# colortable (development version)
+# colortable 0.1.1
 
 # colortable 0.1.0
 
