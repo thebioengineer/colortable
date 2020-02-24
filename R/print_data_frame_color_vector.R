@@ -66,7 +66,7 @@ format_colortable <- function(x, max = getOption("max.print", 99999L), digits = 
   omit <- (n0 <- max %/% nrow(x)) < nrow(x)
 
   m <- format.data.frame(if (omit)
-    x[seq_len(n0), , drop = FALSE]
+    x[seq_len(max), , drop = FALSE]
     else x, digits = digits, na.encode = FALSE)
 
   col_widths <-
@@ -76,7 +76,7 @@ format_colortable <- function(x, max = getOption("max.print", 99999L), digits = 
         format.info(colnames(df)[[idx]])[1])
       ) + 1
     },if (omit)
-      x[seq_len(n0), , drop = FALSE]
+      x[seq_len(max), , drop = FALSE]
     else x)
 
   rownames_width <- format.info(rownames(x))
