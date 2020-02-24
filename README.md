@@ -7,6 +7,8 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![R build
+status](https://github.com/thebioengineer/colortable/workflows/R-CMD-check/badge.svg)](https://github.com/thebioengineer/colortable/actions)
 <!-- badges: end -->
 
 The goal of colortable is to make it easier to color and style your
@@ -38,10 +40,11 @@ remotes::install_github("thebioengineer/colortable")
 
 A common case I have seen for coloring values is from analysis coloring
 p-values. Normally, when I have seen this the color is hard-coded in an
-ifelse statement with a paste0.
+ifelse statement with a paste0. However, this liits the output to a
+single type.
 
-Not only is hardcoding a bad practice, but then the outputs are not
-flexible.
+The benefit of {{colortable}} is that the same code can be used across
+outputs and even in the console\!
 
 ``` r
   library(tidyverse)
@@ -54,7 +57,8 @@ lm_fit <- lm(mpg ~ ., mtcars)
 
 a_lm_fit <- anova(lm_fit)
 
-tbl_anova <- as_tibble(a_lm_fit)%>% 
+tbl_anova <- a_lm_fit %>% 
+  as_tibble()%>% 
   mutate(
     Coef     = rownames(a_lm_fit),
     `Pr(>F)` = set_styling(`Pr(>F)`, `Pr(>F)` < 0.05, background = "green", style = "underline"),
@@ -66,11 +70,45 @@ tbl_anova <- as_tibble(a_lm_fit)%>%
 kable(tbl_anova, escape = FALSE)
 ```
 
-![html\_table\_example](inst/media/html_table_example.PNG)
+![examples](inst/media/output_gifs.gif)
 
-There are many more use-cases and code surrounding this package, but I
-feel like this would be the most common use-case. Let me know if you
-come up with more\!
+## Output types
+
+In order to simply generate a color\_vctr, which is the lowest object
+type, use the `color_vctr` function. It can convert any atomic (numeric,
+integer, complex, character, logical, raw) into a color\_vctr where text
+and background colors, and styles can be set.
+
+To see the available styles and colors, use the `valid_*` family of
+functions: `valid_text_color()`, `valid_background()`, and
+`valid_style()`. To check whether the styling is a valid type for the
+output, set the method to be “latex” for pdf outputs, or “html” for html
+outputs.
+
+Below is a random sampling of output types to the console:
+
+``` r
+
+data.frame(
+  text_color = sample(c(NA, valid_text_color()),10, replace = TRUE),
+  background = sample(c(NA, valid_background()),10, replace = TRUE),
+  style      = sample(c(NA, valid_style()),10, replace = TRUE),
+  stringsAsFactors = FALSE
+  ) %>% 
+  mutate(
+    background = ifelse(text_color == background, 
+                  sample(c(NA, valid_background()),10, replace = TRUE),
+                  background)
+  ) %>% 
+  mutate(
+  example = color_vctr(runif(10),
+                       text_color = text_color,
+                       background = background,
+                       style = style)
+  )
+```
+
+![examples](inst/media/multiple_output_types.gif)
 
 ## The Nuts and Bolts
 
