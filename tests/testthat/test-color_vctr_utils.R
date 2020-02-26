@@ -28,16 +28,11 @@ test_that("Subsetting outside the range of the vector results NA's", {
     text_color = "blue"
   )
 
-  subset_color_vctr <- example_color_vctr[1:3]
-
-  expect_equal(
-    subset_color_vctr,
-    color_vctr(
-      c(1,NA,NA),
-      style = c("underline", NA, NA),
-      text_color = c("blue", NA, NA)
-    )
+  expect_error(
+    example_color_vctr[1:3],
+    "The vector has length 1 and you've tried to subset element 2."
   )
+
 })
 
 test_that("Assignment of a color_vctr preserves the styling", {
@@ -116,7 +111,7 @@ test_that("If assignment of a color_vctr is larger then vector being added, it w
 
   expect_warning({
     example_color_vctr[2] <- color_vctr(
-      2,3,
+      c(2,3),
       style = "strikethrough",
       text_color = "magenta"
     )},

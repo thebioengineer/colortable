@@ -1,18 +1,11 @@
-#' @title  print method for color_vctr
-#' @param x object of colortable vector
-#' @param ... print options to be passed on
-#' @param method The output type to print to. Defaults to one of: "console","latex","html".
-#' @export
-print.color_vctr <- function(x, ..., method = print_method()){
-  cat_line(format(x, ..., method = method))
-  invisible(x)
-}
 
 #' @title  format method for color_vctror
 #' @param x object of colortable cell
 #' @param ... format options to be passed on
 #' @param method The output type to print to. Defaults to one of: "console","latex","html".
-#'
+#' @aliases format.color_vctr.console format.color_vctr.html format.color_vctr.latex
+#' @usage format.color_vctr.console format.color_vctr.html format.color_vctr.latex
+#' @name format.color_vctr
 #' @export
 format.color_vctr <- function(x, ..., method = print_method()){
   format_method <- switch(method,
@@ -29,38 +22,53 @@ format.color_vctr <- function(x, ..., method = print_method()){
   }
 }
 
+#' format color_vctr for printing to console
+#' @rdname format.color_vctr
+#' @importFrom vctrs field
+#' @param x color_vctr to be printed
+#' @param ... additional settings to be passed to format
 format.color_vctr.console <- function(x,...){
-  x <- do.call('c',lapply(seq_along(x),function(idx){
-    style2console(
-      .subset(x,idx),
-      attr(x,".style")[idx],
-      attr(x,".text_color")[idx],
-      attr(x,".background")[idx],
-      ...)}))
-  class(x) <- c("color_vctr_output","character")
+  x <- style2consoleV(
+    field(x, "vctr"),
+    field(x, ".style"),
+    field(x, ".text_color"),
+    field(x, ".background"),
+    ...
+  )
+  class(x) <- c("color_vctr_output", "character")
   x
 }
 
+#' format color_vctr for printing to html
+#' @rdname format.color_vctr
+#' @importFrom vctrs field
+#' @param x color_vctr to be printed
+#' @param ... additional settings to be passed to format
 format.color_vctr.html <- function(x,...){
-  x <- do.call('c',lapply(seq_along(x),function(idx){
-    style2html(
-      .subset(x,idx),
-      attr(x,".style")[idx],
-      attr(x,".text_color")[idx],
-      attr(x,".background")[idx],
-      ...)}))
-  class(x) <- c("color_vctr_output","character")
+  x <- style2htmlV(
+    vctrs::field(x, "vctr"),
+    vctrs::field(x, ".style"),
+    vctrs::field(x, ".text_color"),
+    vctrs::field(x, ".background"),
+    ...
+  )
+  class(x) <- c("color_vctr_output", "character")
   x
 }
 
+#' format color_vctr for printing to latex
+#' @rdname format.color_vctr
+#' @importFrom vctrs field
+#' @param x color_vctr to be printed
+#' @param ... additional settings to be passed to format
 format.color_vctr.latex <- function(x,...){
-  x <- do.call('c',lapply(seq_along(x),function(idx){
-    style2tex(
-      .subset(x,idx),
-      attr(x,".style")[idx],
-      attr(x,".text_color")[idx],
-      attr(x,".background")[idx],
-      ...)}))
+  x <- style2texV(
+    vctrs::field(x, "vctr"),
+    vctrs::field(x, ".style"),
+    vctrs::field(x, ".text_color"),
+    vctrs::field(x, ".background"),
+    ...
+  )
   class(x) <- c("color_vctr_output","character")
   x
 }
