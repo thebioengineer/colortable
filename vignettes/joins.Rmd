@@ -1,0 +1,58 @@
+---
+title: "Joins"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{joins}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(tidyverse)
+library(colortable)
+library(knitr)
+```
+
+## Joins
+
+A common practice in data science is to be handed two datasets with some set or variables that act as a key between them.
+The way to combine these two datasets since they likely contain useful information required is through the use of a `join`. 
+
+{dplyr} luckily comes with several joins that can help you take care of these combinations. 
+However, each of the types of joins can have unintended side effects that you don't expect.
+
+For example, an full join will keep ID's from both data.frames!
+
+```{r multi-join}
+
+# From dplyr::join documentation
+band_members %>% full_join(band_instruments)
+
+```
+
+In this toy example, we can clearly see that we ended up with 4 rows, not the three you might have expected.
+
+## Colortable to the rescue!
+
+With colortable, we can color the one of the output fields that we expect to remain unique and easily see if something is not as we expect.
+
+After the merge, we can see that keith is new!
+
+```{r color-join}
+
+band_members$name <- color_vctr(band_members$name,text_color = "blue")
+
+band_members %>% full_join(band_instruments, on = "name")
+
+```
+
+### Additional Joins
+
+
+
+

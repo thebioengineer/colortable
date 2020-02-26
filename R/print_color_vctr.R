@@ -22,8 +22,11 @@ format.color_vctr <- function(x, ..., method = print_method()){
          "gfm" = format.color_vctr.html,
          stop("Method for ", print_method()," not implemented yet.")
   )
-
-  format_method(x, ..., method = method)
+  if (length(x) > 0) {
+    format_method(x, ..., method = method)
+  } else{
+    "<color_vctr[0]>"
+  }
 }
 
 format.color_vctr.console <- function(x,...){

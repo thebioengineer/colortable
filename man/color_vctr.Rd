@@ -4,7 +4,7 @@
 \alias{color_vctr}
 \title{Create a color_vctr}
 \usage{
-color_vctr(x, ..., text_color = NA, background = NA, style = NA)
+color_vctr(x = double(), ..., text_color = NA, background = NA, style = NA)
 }
 \arguments{
 \item{x}{data source determining method dispatch}
