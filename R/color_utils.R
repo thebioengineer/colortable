@@ -1,6 +1,6 @@
-#' Append Coloring or Styling
+#' @title Append Coloring or Styling
 #'
-#' Based on inputs, determines correct strings to append to the input to style
+#' @description Based on inputs, determines correct strings to append to the input to style
 #' for any type of output (console, html, pdf, ...)
 #'
 #' @param x a vector of length one

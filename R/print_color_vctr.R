@@ -1,3 +1,13 @@
+#' @title  print method for color_vctr
+#' @param x object of colortable vector
+#' @param ... print options to be passed on
+#' @param method The output type to print to. Defaults to one of: "console","latex","html".
+#' @export
+print.color_vctr <- function(x, ..., method = print_method()){
+  cat_line(format(x, ..., method = method))
+  invisible(x)
+}
+
 
 #' @title  format method for color_vctror
 #' @param x object of colortable cell
@@ -28,15 +38,13 @@ format.color_vctr <- function(x, ..., method = print_method()){
 #' @param x color_vctr to be printed
 #' @param ... additional settings to be passed to format
 format.color_vctr.console <- function(x,...){
-  x <- style2consoleV(
+  style2consoleV(
     field(x, "vctr"),
     field(x, ".style"),
     field(x, ".text_color"),
     field(x, ".background"),
     ...
   )
-  class(x) <- c("color_vctr_output", "character")
-  x
 }
 
 #' format color_vctr for printing to html
@@ -45,15 +53,13 @@ format.color_vctr.console <- function(x,...){
 #' @param x color_vctr to be printed
 #' @param ... additional settings to be passed to format
 format.color_vctr.html <- function(x,...){
-  x <- style2htmlV(
+  style2htmlV(
     vctrs::field(x, "vctr"),
     vctrs::field(x, ".style"),
     vctrs::field(x, ".text_color"),
     vctrs::field(x, ".background"),
     ...
   )
-  class(x) <- c("color_vctr_output", "character")
-  x
 }
 
 #' format color_vctr for printing to latex
@@ -62,13 +68,11 @@ format.color_vctr.html <- function(x,...){
 #' @param x color_vctr to be printed
 #' @param ... additional settings to be passed to format
 format.color_vctr.latex <- function(x,...){
-  x <- style2texV(
+  style2texV(
     vctrs::field(x, "vctr"),
     vctrs::field(x, ".style"),
     vctrs::field(x, ".text_color"),
     vctrs::field(x, ".background"),
     ...
   )
-  class(x) <- c("color_vctr_output","character")
-  x
 }
