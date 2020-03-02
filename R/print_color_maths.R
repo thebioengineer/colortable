@@ -34,7 +34,6 @@ new_color_vctr <- function(vect = double(), text_color = NA, background = NA, st
   class = "color_vctr")
 }
 
-#' @importFrom vctrs vec_assert
 vec_assert_style <- function(x, size){
   arg <- match.call()$x
   if (all(is.na(x))) {
@@ -84,7 +83,7 @@ atomic <- function(x){
 #' @export
 
 color_vctr <- function(x = double(), text_color = NA, background = NA, style = NA) {
-    new_color_vctr(x, text_color, background, style)
+  new_color_vctr(x, text_color, background, style)
 }
 
 #' @importFrom vctrs field
