@@ -14,7 +14,7 @@
 #'     `valid_style()` function. NA means no styling.
 #'
 #' @exportClass color_vctr
-#' @importFrom vctrs new_rcrd
+#' @import vctrs
 new_color_vctr <- function(vect = double(), text_color = NA, background = NA, style = NA){
 
   # assert vect is an atomic
@@ -87,8 +87,8 @@ color_vctr <- function(x = double(), text_color = NA, background = NA, style = N
     new_color_vctr(x, text_color, background, style)
 }
 
-#' @importFrom vctrs field
-color_vctr_class <- function(x) class(field(x,"vctr"))
+#' @importFrom vctrs field vec_ptype_abbr
+color_vctr_class <- function(x) vec_ptype_abbr(field(x,"vctr"))
 
 #' Is the object a color_vctr?
 #'s

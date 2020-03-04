@@ -6,6 +6,7 @@
 \alias{format.color_vctr.console}
 \alias{format.color_vctr.html}
 \alias{format.color_vctr.latex}
+\alias{format_console_vctr_print}
 \alias{get_format_info}
 \title{format method for color_vctror}
 \usage{
@@ -17,6 +18,8 @@ format.color_vctr.console format.color_vctr.html format.color_vctr.latex
 
 \method{format}{color_vctr.latex}(x, ...)
 
+format_console_vctr_print(x, formatted_x, ...)
+
 get_format_info(x)
 }
 \arguments{
@@ -25,6 +28,8 @@ get_format_info(x)
 \item{...}{additional settings to be passed to format}
 
 \item{method}{The output type to print to. Defaults to one of: "console","latex","html".}
+
+\item{formatted_x}{formatted color_vctr for printing}
 }
 \description{
 format method for color_vctror
@@ -34,6 +39,8 @@ format color_vctr for printing to console
 format color_vctr for printing to html
 
 format color_vctr for printing to latex
+
+format coolor_vctr vector printing to console
 
 get format.info for printing to console
 }

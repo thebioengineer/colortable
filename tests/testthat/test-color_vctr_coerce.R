@@ -35,10 +35,10 @@ test_that("as.list",{
     inherits(try(color_list <- as.list(sample_vect)),"try-error")
   )
 
-#   expect_equal(
-#     color_list,
-#     as.list(LETTERS)
-#   )
+  expect_equal(
+    lapply(color_list,vctrs::field,"vctr"),
+    as.list(LETTERS)
+  )
 
   expect_equal(
     sapply(color_list, vctrs::field, ".text_color"),

@@ -28,10 +28,11 @@ test_that("Subsetting outside the range of the vector results NA's", {
     text_color = "blue"
   )
 
+  suppressWarnings(
   expect_error(
     example_color_vctr[1:3],
-    "The vector has length 1 and you've tried to subset element 2."
-  )
+    "Can't subset elements that don't exist"
+  ))
 
 })
 

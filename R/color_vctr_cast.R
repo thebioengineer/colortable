@@ -61,4 +61,4 @@ vec_cast.data.frame.color_vctr <- function(x, to, ...) as_tibble(x)
 
 #' @export
 #' @method vec_cast.color_vctr logical
-vec_cast.list.color_vctr <- function(x, to, ...) apply(seq_along(x),function(idx,x){x[idx]},x)
+vec_cast.list.color_vctr <- function(x, to, ...) lapply(seq_along(x),function(idx,x){x[idx]},x)
