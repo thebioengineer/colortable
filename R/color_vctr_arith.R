@@ -59,13 +59,37 @@ vec_arith.color_vctr.numeric <- function(op, x, y, ...) {
 #' @method vec_arith.numeric color_vctr
 #' @importFrom vctrs field vec_arith.numeric
 vec_arith.numeric.color_vctr <- function(op, x, y, ...) {
-  if (as.character(op) %in% c("+", "-", "/", "*", "^", "%%", "%/%", "!", "&", "|")) {
+  if (as.character(op) %in% c("+", "-", "/", "*", "^", "%%", "%/%", "&", "|")) {
     return(vec_arith.color_vctr.color_vctr.op(op, color_vctr(x), y))
   } else{
     stop_incompatible_op(op, x, y)
   }
 }
 
+
+#' @export vec_arith.color_vctr.logical
+#' @export
+#' @method vec_arith.color_vctr logical
+#' @importFrom vctrs field
+vec_arith.color_vctr.logical <- function(op, x, y, ...) {
+  if (as.character(op) %in% c("+", "-", "/", "*", "^", "%%", "%/%", "!", "&", "|")) {
+    return(vec_arith.color_vctr.color_vctr.op(op, x, color_vctr(y)))
+  } else{
+    stop_incompatible_op(op, x, y)
+  }
+}
+
+#' @export vec_arith.logical.color_vctr
+#' @export
+#' @method vec_arith.logical color_vctr
+#' @importFrom vctrs field vec_arith.logical
+vec_arith.logical.color_vctr <- function(op, x, y, ...) {
+  if (as.character(op) %in% c("+", "-", "/", "*", "^", "%%", "%/%", "&", "|")) {
+    return(vec_arith.color_vctr.color_vctr.op(op, color_vctr(x), y))
+  } else{
+    stop_incompatible_op(op, x, y)
+  }
+}
 
 #' @export vec_arith.color_vctr.MISSING
 #' @export
@@ -81,17 +105,24 @@ vec_arith.color_vctr.MISSING <- function(op, x, y, ...) {
       field(x, ".style")
     ),
     `+` = x,
+    `!` = new_color_vctr(
+      !field(x, "vctr"),
+      field(x, ".text_color"),
+      field(x, ".background"),
+      field(x, ".style")
+    ),
     stop_incompatible_op(op, x, y)
   )
 }
+
 
 
 vec_arith.color_vctr.color_vctr.op <- function(op, x, y ) {
 
   op <- getFunction(as.character(op))
 
-  res_value <- op(vec_recycle(field(x, "vctr"), size = max(c(length(x), length(y)))),
-                  vec_recycle(field(y, "vctr"), size = max(c(length(x), length(y)))))
+  res_value <- op(vec_cast(field(x, "vctr"), field(x, "vctr")),
+                  vec_cast(field(y, "vctr"), field(y, "vctr")))
   res_styling <- merge_styling( x, y)
 
   new_color_vctr(
@@ -135,9 +166,6 @@ merge_styling.dir <- function(x,y){
   names(styling) <- setdiff(fields(x),"vctr")
   styling
 }
-
-
-
 
 merge_styling.mixed <- function(x,y){
 

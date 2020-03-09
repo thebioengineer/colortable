@@ -43,11 +43,13 @@ With colortable, we can color the one of the output fields that we expect to rem
 
 After the merge, we can see that keith is new!
 
-```{r color-join}
+```{r color-join, eval = FALSE}
 
-band_members$name <- color_vctr(band_members$name,text_color = "blue")
-
-band_members %>% full_join(band_instruments, on = "name")
+band_members %>% 
+  mutate(
+    name = color_vctr(name, text_color = "blue")
+    ) %>% 
+  full_join(band_instruments, on = "name")
 
 ```
 
