@@ -18,10 +18,14 @@ NULL
 #' @export
 valid_text_color <- function(method = c("latex","html","console")){
   method <- match.arg(method)
-  styles <- eval(parse(text = paste0("names(",method,"_style_codes)")))
-
-  pattern <- "^text[.]"
-  gsub(pattern,"",grep(pattern,styles,value = TRUE))
+  if(method %in% c("latex","html")){
+   styles <- eval(parse(text = paste0("names(",method,"_style_codes)")))
+   pattern <- "^text[.]"
+   styles <- gsub(pattern,"",grep(pattern,styles,value = TRUE))
+  }else{
+   styles <- color_key[["Name"]]
+  }
+  styles
 }
 
 #' Return vector of valid background color options
@@ -29,10 +33,14 @@ valid_text_color <- function(method = c("latex","html","console")){
 #' @export
 valid_background <- function(method = c("latex","html","console")){
   method <- match.arg(method)
-  styles <- eval(parse(text = paste0("names(",method,"_style_codes)")))
-
-  pattern <- "^bg[.]"
-  gsub(pattern,"",grep(pattern,styles,value = TRUE))
+  if(method %in% c("latex","html")){
+    styles <- eval(parse(text = paste0("names(",method,"_style_codes)")))
+    pattern <- "^bg[.]"
+    styles <- gsub(pattern,"",grep(pattern,styles,value = TRUE))
+  }else{
+    styles <- color_key[["Name"]]
+  }
+  styles
 }
 
 #' Return vector of valid text styling options

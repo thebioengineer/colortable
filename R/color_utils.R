@@ -58,7 +58,6 @@ style2tex <- function(x, style = NA, text_color = NA, background = NA, ...){
   text_background(text_style(text_color(format(x,...))))
 }
 
-
 paste_quote <- function(x, quote = TRUE){
   if(quote){
     paste0("\"",gsub("\"","\\\\\"",x),"\"")
@@ -69,72 +68,85 @@ paste_quote <- function(x, quote = TRUE){
 
 ## Copied from the crayon package.
 console_style_codes <- list(
-
-  style.bold = list(1, 22), # 21 isn't widely supported and 22 does the same thing
-  style.italic = list(3, 23),
-  style.underline = list(4, 24),
-  style.inverse = list(7, 27),
-  style.hidden = list(8, 28),
-  style.strikethrough = list(9, 29),
-
-  text.black = list(30, 39),
-  text.red = list(31, 39),
-  text.green = list(32, 39),
-  text.yellow = list(33, 39),
-  text.blue = list(34, 39),
-  text.magenta = list(35, 39),
-  text.cyan = list(36, 39),
-  text.white = list(37, 39),
-  text.silver = list(90, 39),
-
-  bg.black = list(40, 49),
-  bg.red = list(41, 49),
-  bg.green = list(42, 49),
-  bg.yellow = list(43, 49),
-  bg.blue = list(44, 49),
-  bg.magenta = list(45, 49),
-  bg.cyan = list(46, 49),
-  bg.white = list(47, 49)
+  bold = list(1, 22), # 21 isn't widely supported and 22 does the same thing
+  italic = list(3, 23),
+  underline = list(4, 24),
+  inverse = list(7, 27),
+  hidden = list(8, 28),
+  strikethrough = list(9, 29)
 )
 
-style_wrapper_console <- function(styling, type = c("text","style","background")){
-  if(is.na(styling)){
+style_wrapper_console <-function(styling, type = c("text", "style", "background")) {
+    if (is.na(styling)) {
+      function(x) {
+        x
+      }
+    } else{
+      type <- match.arg(type)
+      switch(
+        type,
+        "text" = console_text_styling(styling),
+        "style" = console_decoration_styling(styling),
+        "background" = console_background_styling(styling)
+      )
+    }
+  }
+
+console_decoration_styling <- function(styling){
+  if (!styling %in% names(latex_style_codes)) {
+    warning("Text decoration",
+    " output by '",
+    styling,
+    "' has not been implemented for console output.",
+    call. = FALSE)
     function(x){x}
   }else{
-    type <- match.arg(type)
-
-    styling2 <- switch(type,
-                    "text" = paste0("text.",styling),
-                    "style" = paste0("style.",styling),
-                    "background" = paste0("bg.",styling))
-
-    if(!styling2 %in% names(latex_style_codes)){
-      warning(switch(
-        type,
-        text = "Text coloring",
-        style = "Text styling",
-        background = "Background coloring"
-      ),
-      " output by '",
-      styling,
-      "' has not been implemented for console output.",
-      call. = FALSE)
-      function(x){x}
-    }else{
-
-      stopifnot(styling2 %in% names(console_style_codes))
-      codes <- console_style_codes[[styling2]]
-
-      function(x){
-        paste0(paste0('\u001b[', codes[[1]], 'm', collapse=""),
-               x,
-               paste0('\u001b[', codes[[2]][1], 'm', collapse=""))
-      }
+    codes <- console_style_codes[[styling]]
+    function(x){
+      paste0(paste0('\u001b[', codes[[1]], 'm', collapse=""),
+             x,
+             paste0('\u001b[', codes[[2]][1], 'm', collapse=""))
     }
   }
 }
 
+console_text_styling <- function(color){
+  color <- tolower(color)
+  if (!color %in% color_key$Name) {
+    warning("Text Color",
+            " output by '",
+            color,
+            "' has not been implemented for console output.",
+            call. = FALSE)
+    function(x){x}
+  }else{
+    codes <- color_key$`Xterm Number`[color_key$Name == color]
+    function(x){
+      paste0(paste0('\033[38;5;', codes, 'm', collapse = ""),
+             x,
+             "\033[0m")
+    }
+  }
+}
 
+console_background_styling <- function(color){
+  color <- tolower(color)
+  if (!color %in% color_key$Name) {
+    warning("Background Color",
+            " output by '",
+            color,
+            "' has not been implemented for console output.",
+            call. = FALSE)
+    function(x){x}
+  }else{
+    codes <- color_key$`Xterm Number`[color_key$Name == color]
+    function(x){
+      paste0(paste0('\033[48;5;', codes, 'm', collapse = ""),
+             x,
+             "\033[0m")
+    }
+  }
+}
 ## based on crayon package
 html_style_codes <- list(
 

@@ -16,19 +16,31 @@
 #' @exportClass color_vctr
 new_color_vctr <- function(vect, text_color = NA, background = NA, style = NA ){
 
+  force(text_color)
+  force(background)
+
   stopifnot(is.atomic(vect))
   stopifnot(length(text_color) == 1 | length(text_color) == length(vect))
   stopifnot(length(background) == 1 | length(background) == length(vect))
   stopifnot(length(style) == 1 | length(style) == length(vect))
 
 
-  if(length(text_color) == 1)
-    text_color <- rep(text_color,length(vect))
-  if(length(background) == 1)
-    background <- rep(background,length(vect))
-  if(length(style) == 1)
-    style <- rep(style,length(vect))
-
+  if (length(text_color) == 1) {
+    if (is.function(text_color)) {
+      text_color <- text_color(vect)
+    } else{
+      text_color <- rep(text_color, length(vect))
+    }
+  }
+  if (length(background) == 1) {
+    if (is.function(text_color)) {
+      text_color <- text_color(vect)
+    } else{
+      background <- rep(background, length(vect))
+    }
+  }
+  if (length(style) == 1)
+    style <- rep(style, length(vect))
   return(
     structure(
       vect,
