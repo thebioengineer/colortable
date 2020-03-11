@@ -9,16 +9,16 @@ test_that("as.data.frame", {
     inherits(try(color_df <- as.data.frame(sample_vect)),"try-error")
   )
   expect_equal(
-    attr(color_df$sample_vect,".text_color"),
-    attr(sample_vect,".text_color")
+    vctrs::field(color_df$sample_vect,".text_color"),
+    vctrs::field(sample_vect,".text_color")
     )
   expect_equal(
-    attr(color_df$sample_vect,".background"),
-    attr(sample_vect,".background")
+    vctrs::field(color_df$sample_vect,".background"),
+    vctrs::field(sample_vect,".background")
   )
   expect_equal(
-    attr(color_df$sample_vect,".style"),
-    attr(sample_vect,".style")
+    vctrs::field(color_df$sample_vect,".style"),
+    vctrs::field(sample_vect,".style")
   )
 
 })
@@ -34,17 +34,23 @@ test_that("as.list",{
   expect_false(
     inherits(try(color_list <- as.list(sample_vect)),"try-error")
   )
+
   expect_equal(
-    sapply(color_list, attr, ".text_color"),
-    attr(sample_vect,".text_color")
+    lapply(color_list,vctrs::field,"vctr"),
+    as.list(LETTERS)
+  )
+
+  expect_equal(
+    sapply(color_list, vctrs::field, ".text_color"),
+    vctrs::field(sample_vect,".text_color")
   )
   expect_equal(
-    sapply(color_list, attr, ".background"),
-    attr(sample_vect,".background")
+    sapply(color_list, vctrs::field, ".background"),
+    vctrs::field(sample_vect,".background")
   )
   expect_equal(
-    sapply(color_list, attr, ".style"),
-    attr(sample_vect,".style")
+    sapply(color_list, vctrs::field, ".style"),
+    vctrs::field(sample_vect,".style")
   )
 
 })

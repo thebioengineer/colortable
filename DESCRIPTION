@@ -1,11 +1,12 @@
 Package: colortable
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Style Your Table Elements
 Version: 0.1.1
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Ellis Hughes
+Maintainer: Ellis Hughes <ellishughes@live.com>
+Description: Provide access to the "color_vctr" object that allows for coloring
+    of the elements of your vectors. The styling will appear when you print to 
+    console, and also apply to the printing in knited tables.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -13,8 +14,10 @@ RoxygenNote: 7.0.2
 Imports: 
     knitr,
     rmarkdown,
-    cli
+    cli,
+    vctrs
 Suggests: 
     testthat (>= 2.1.0)
 URL: https://github.com/thebioengineer/colortable
 BugReports: https://github.com/thebioengineer/colortable/issues
+VignetteBuilder: knitr

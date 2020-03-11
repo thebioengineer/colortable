@@ -48,7 +48,7 @@ print.data.frame.color_vector <- function (x, ..., digits = NULL, quote = FALSE,
     omit <- (n0 <- max%/%length(x)) < n
 
     if (!isTRUE(row.names)){
-      dimnames(m)[[1L]] <- if (isFALSE(row.names)) {
+      dimnames(x)[[1L]] <- if (isFALSE(row.names)) {
         rep.int("", if (omit){ n0 } else { n })
       } else { row.names }
     }
@@ -133,7 +133,17 @@ to_pad <- function(x, padding = 0) {
   }, x, padding)
 }
 
+
+#' get format.info for printing to console
+#' @rdname format.color_vctr
+#' @importFrom vctrs field
+#' @param x color_vctr to be printed
+#' @param ... additional settings to be passed to format
 get_format_info <- function(x){
+  UseMethod("get_format_info")
+}
+
+get_format_info.default <- function(x){
   if (is.factor(x) & !is.na(x)){
     format.info(as.character(x))
   }else if (is.na(x)) {
@@ -142,3 +152,9 @@ get_format_info <- function(x){
     format.info(x)
   }
 }
+
+get_format_info.color_vctr <- function(x){
+  get_format_info(field(x,"vctr"))
+}
+
+

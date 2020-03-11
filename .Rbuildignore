@@ -4,3 +4,4 @@
 ^CODE_OF_CONDUCT\.md$
 ^README\.Rmd$
 ^\.github/workflows/R-CMD-check\.yaml$
+^\.github/workflows/pr-commands\.yaml$

@@ -1,11 +1,15 @@
 test_that("format appends ansi styling based on console output", {
 
-  c_vctr <- color_vctr(1, text_color = "blue", background = "yellow", style = "underline")
+  c_vctr <-
+    color_vctr(1,
+               text_color = "blue",
+               background = "yellow",
+               style = "underline")
   console_output <- format(c_vctr, method = "console")
 
   expect_equal(
     class(console_output),
-    c("color_vctr_output","character")
+    "character"
   )
   expect_equal(
     as.character(console_output),
@@ -21,7 +25,7 @@ test_that("format appends html styling based on html output", {
 
   expect_equal(
     class(html_output),
-    c("color_vctr_output", "character")
+    "character"
   )
 
   expect_equal(
@@ -37,7 +41,7 @@ test_that("format appends tex styling based on latex output", {
 
   expect_equal(
     class(tex_output),
-    c("color_vctr_output","character")
+    "character"
   )
   expect_equal(
     as.character(tex_output),
