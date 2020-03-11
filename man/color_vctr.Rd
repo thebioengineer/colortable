@@ -4,20 +4,22 @@
 \alias{color_vctr}
 \title{Create a color_vctr}
 \usage{
-color_vctr(x = double(), text_color = NA, background = NA, style = NA)
+color_vctr(x, ..., text_color = NA, background = NA, style = NA)
 }
 \arguments{
-\item{x}{vector to make into a color_vctr}
+\item{x}{data source determining method dispatch}
 
-\item{text_color}{A vector of length 1 or same length as x. Details the
+\item{...}{additional elements to generate the color_vctr}
+
+\item{text_color}{A vector of length 1 or same length as vect. Details the
 color the text should be. Valid values can be found from the
-`valid_text_color()` function. NA means no text color.}
+`valid_text_color()` function.NA means no text color.}
 
-\item{background}{A vector of length 1 or same length as x. Details the
+\item{background}{A vector of length 1 or same length as vect. Details the
 background color of the text. Valid values can be found from the
 `valid_background()` function. NA means no background color.}
 
-\item{style}{A vector of length 1 or same length as x. Details the
+\item{style}{A vector of length 1 or same length as vect. Details the
 style of the text Valid values can be found from the
 `valid_style()` function. NA means no styling.}
 }
