@@ -8,9 +8,21 @@
 #' @importFrom scales col_numeric col_factor
 #' @importFrom grDevices palette
 
-scale_color <- function(palette){
-  function(x){
-    color_scaler <- scales::col_factor(palette,levels = levels(factor(x)))
+scale_color <- function(palette, na.color = "#808080") {
+  function(x) {
+    color_scaler <- switch(
+      scale_col_type(x),
+      continuous = scales::col_numeric(
+        palette,
+        domain = c(min(x, na.rm = TRUE),
+                   max(x, na.rm = TRUE)),
+        na.color = na.color
+      ),
+      binned = scales::col_factor(
+        palette,
+        levels = levels(factor(x)),
+        na.color = na.color)
+    )
     colors <- color_scaler(x)
     name_colors(colors)
   }
@@ -33,4 +45,13 @@ name_colors <- function(hex_colors){
 }
 
 
+
+
+scale_col_type <- function(x) {
+  ifelse(
+    inherits(x,c("numeric","integer","Date", "POSIXt")),
+    "continuous",
+    "binned"
+    )
+}
 

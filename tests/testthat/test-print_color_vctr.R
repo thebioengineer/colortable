@@ -13,7 +13,7 @@ test_that("format appends ansi styling based on console output", {
   )
   expect_equal(
     as.character(console_output),
-    "\033[34m\033[43m\033[4m1\033[24m\033[49m\033[39m"
+    "\033[38;5;12m\033[48;5;11m\033[4m1\033[24m\033[0m\033[0m"
   )
 
 })

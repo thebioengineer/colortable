@@ -3,9 +3,10 @@
 #' @param ... print options to be passed on
 #' @param method The output type to print to. Defaults to one of: "console","latex","html".
 #' @export
+#' @importFrom cli cat_line
 print.color_vctr <- function(x, ..., method = print_method()){
   formatted_x <- format(x, ..., method = method)
-  cat_line(format_console_vctr_print(x, formatted_x, ...))
+  cli::cat_line(format_console_vctr_print(x, formatted_x, ...))
   invisible(x)
 }
 
@@ -102,6 +103,41 @@ format_console_vctr_print <- function(x,formatted_x,...){
       idx_end <- length(x2)
     }
     output_vect[i] <- paste(c(prefix[i],formatted_x[idx_start:idx_end]),collapse = " ")
+  }
+
+  if(class(x2) == "factor"){
+
+    maxl <-  TRUE
+
+    lev <- encodeString(levels(x2), quote = "")
+    n <- length(lev)
+    colsep <- " "
+    T0 <- "Levels: "
+    maxl <- {
+      width <- options()$width - (nchar(T0, "w") + 3L + 1L + 3L)
+      lenl <- cumsum(nchar(lev, "w") + nchar(colsep, "w"))
+      if (n <= 1L || lenl[n] <= width)
+        n
+      else max(1L, which.max(lenl > width) - 1L)
+    }
+
+    drop <- n > maxl
+
+    factor_init <- if(drop){
+      paste(paste(format(n), ""), T0)
+    }else{
+      T0
+    }
+
+    factor_levels <- if(drop){
+      c(lev[1L:max(1, maxl - 1)],"...", ifelse(maxl > 1,lev[n],NULL))
+    }else{
+      lev
+    }
+
+    output_vect <- c(output_vect,
+                     paste(c(factor_init, factor_levels), collapse = colsep))
+
   }
 
   output_vect

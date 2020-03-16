@@ -4,7 +4,7 @@
 \alias{scale_color}
 \title{scale color vector colors based on contents}
 \usage{
-scale_color(palette)
+scale_color(palette, na.color = "#808080")
 }
 \arguments{
 \item{palette}{pallete to use. A vector of colors to use}

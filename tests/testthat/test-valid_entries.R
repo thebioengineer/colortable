@@ -2,7 +2,7 @@ test_that("`valid_text_color()` returns the list of valid text coloring", {
 
   expect_equal(
     valid_text_color(method = "console"),
-    c("black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "silver")
+    color_key$Name
   )
   expect_equal(
     valid_text_color(method = "html"),
@@ -19,7 +19,7 @@ test_that("`valid_background()` returns the list of valid background coloring", 
 
   expect_equal(
     valid_background(method = "console"),
-    c("black", "red", "green", "yellow", "blue", "magenta", "cyan", "white")
+    color_key$Name
   )
   expect_equal(
     valid_background(method = "html"),
