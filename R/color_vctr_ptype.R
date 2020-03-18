@@ -53,3 +53,10 @@ vec_ptype2.color_vctr.logical    <- function(x, y, ...) color_vctr()
 #' @importFrom vctrs vec_ptype2.logical
 vec_ptype2.logical.color_vctr    <- function(x, y, ...) color_vctr()
 
+#' @export
+#' @method vec_ptype2.color_vctr list
+vec_ptype2.color_vctr.list    <- function(x, y, ...) list()
+#' @export
+#' @method vec_ptype2.list color_vctr
+#' @importFrom vctrs vec_ptype2.list
+vec_ptype2.list.color_vctr    <- function(x, y, ...) list()

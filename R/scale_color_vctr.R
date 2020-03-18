@@ -1,24 +1,22 @@
 #' scale color vector colors based on contents
 #'
-#' color vector contents based on contents. only to be used within
-#' color_vctr with numeric values
-#'
 #' @param palette pallete to use. A vector of colors to use
+#' @param na.color color to set NA values
 #'
 #' @importFrom scales col_numeric col_factor
 #' @importFrom grDevices palette
-
-scale_color <- function(palette, na.color = "#808080") {
+#' @export
+color_scale <- function(palette, na.color = "#808080") {
   function(x) {
     color_scaler <- switch(
       scale_col_type(x),
-      continuous = scales::col_numeric(
+      continuous = col_numeric(
         palette,
         domain = c(min(x, na.rm = TRUE),
                    max(x, na.rm = TRUE)),
         na.color = na.color
       ),
-      binned = scales::col_factor(
+      binned = col_factor(
         palette,
         levels = levels(factor(x)),
         na.color = na.color)
@@ -28,22 +26,22 @@ scale_color <- function(palette, na.color = "#808080") {
   }
 }
 
-name_colors <- function(hex_colors){
+
+name_colors <- function(hex_colors) {
   u_hc <- unique(hex_colors)
   output_colors <- vector("character", length(hex_colors))
   rgb_mat <- col2rgb(u_hc)
-  rgb_key <- do.call(rbind,color_key$RGB)
-  for(hex_code in 1:length(u_hc)){
-    input_rgb <- rgb_mat[,hex_code, drop = TRUE]
+  rgb_key <- do.call(rbind, color_key$RGB)
+  for (hex_code in 1:length(u_hc)) {
+    input_rgb <- rgb_mat[, hex_code, drop = TRUE]
     output_colors[hex_colors == u_hc[hex_code]] <-
-      color_key$Name[which.min(sqrt((rgb_key[,1] - input_rgb[[1]]) ^ 2 +
-                                      (rgb_key[,2] - input_rgb[[2]]) ^ 2 +
-                                      (rgb_key[,3] - input_rgb[[3]]) ^ 2
+      color_key$Name[which.min(sqrt((rgb_key[, 1] - input_rgb[[1]]) ^ 2 +
+                                      (rgb_key[, 2] - input_rgb[[2]]) ^ 2 +
+                                      (rgb_key[, 3] - input_rgb[[3]]) ^ 2
       ))]
   }
   output_colors
 }
-
 
 
 

@@ -85,8 +85,8 @@ format.color_vctr.latex <- function(x,...){
 #' @param x color_vctr to be prinited
 #' @param formatted_x formatted color_vctr for printing
 format_console_vctr_print <- function(x,formatted_x,...){
-
   x2 <- field(x,"vctr")
+  if(length(x) > 0){
   length_x2 <- length(x2)
   length_x2 <- ifelse(length_x2 > 1000, 1000, length_x2)
   format_info <- format.info(x2,...)
@@ -104,8 +104,10 @@ format_console_vctr_print <- function(x,formatted_x,...){
     }
     output_vect[i] <- paste(c(prefix[i],formatted_x[idx_start:idx_end]),collapse = " ")
   }
-
-  if(class(x2) == "factor"){
+  }else{
+    output_vect <- paste0(vec_ptype_abbr(x),"(0)")
+  }
+  if (class(x2) == "factor") {
 
     maxl <-  TRUE
 

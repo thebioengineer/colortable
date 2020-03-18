@@ -21,7 +21,7 @@ a_lm_fit <- anova(lm_fit)
 tbl_anova <- as_tibble(a_lm_fit) %>% 
   mutate(
     Coef     = rownames(a_lm_fit),
-    `Pr(>F)` = set_styling(`Pr(>F)`, `Pr(>F)` < 0.05, background = "green", style = "underline")
+    `Pr(>F)` = color_vctr(`Pr(>F)`, background = color_scale("Greens"), style = "underline")
   ) %>% 
   select(Coef, everything())
 
