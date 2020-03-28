@@ -21,28 +21,9 @@ color_scale <- function(palette, na.color = "#808080") {
         levels = levels(factor(x)),
         na.color = na.color)
     )
-    colors <- color_scaler(x)
-    name_colors(colors)
+    color_scaler(x)
   }
 }
-
-
-name_colors <- function(hex_colors) {
-  u_hc <- unique(hex_colors)
-  output_colors <- vector("character", length(hex_colors))
-  rgb_mat <- col2rgb(u_hc)
-  rgb_key <- do.call(rbind, color_key$RGB)
-  for (hex_code in 1:length(u_hc)) {
-    input_rgb <- rgb_mat[, hex_code, drop = TRUE]
-    output_colors[hex_colors == u_hc[hex_code]] <-
-      color_key$Name[which.min(sqrt((rgb_key[, 1] - input_rgb[[1]]) ^ 2 +
-                                      (rgb_key[, 2] - input_rgb[[2]]) ^ 2 +
-                                      (rgb_key[, 3] - input_rgb[[3]]) ^ 2
-      ))]
-  }
-  output_colors
-}
-
 
 
 scale_col_type <- function(x) {

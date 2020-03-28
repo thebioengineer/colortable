@@ -50,13 +50,13 @@ test_that("format appends tex styling based on latex output", {
 
 })
 
-test_that("Invalid styling return warnings", {
+test_that("Invalid styling return original value", {
 
   c_vctr <- color_vctr(1, text_color = "invalid", background = "invalid", style = "invalid")
 
-  expect_warning(
+  expect_equal(
     format(c_vctr, method = "console"),
-    "has not been implemented"
+    "1"
   )
 
   expect_warning(

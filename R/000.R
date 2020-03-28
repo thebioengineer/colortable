@@ -1,5 +1,6 @@
 .onLoad <- function(libname, pkgname) {
   options("colortable.precidence" = "left")
+  options("colortable.color_approx.method" = "euclidian")
 }
 
 
