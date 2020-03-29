@@ -85,25 +85,28 @@ format.color_vctr.latex <- function(x,...){
 #' @param x color_vctr to be prinited
 #' @param formatted_x formatted color_vctr for printing
 format_console_vctr_print <- function(x,formatted_x,...){
+
   x2 <- field(x,"vctr")
   if(length(x) > 0){
-  length_x2 <- length(x2)
-  length_x2 <- ifelse(length_x2 > 1000, 1000, length_x2)
-  format_info <- format.info(x2,...)
-  n_per_row <- floor( (options()$width - 5) / format_info[1] + 1 ) - 2
-  n_row <- ceiling(length_x2/n_per_row)
+    length_x2 <- length(x2)
+    length_x2 <- ifelse(length_x2 > 1000, 1000, length_x2)
+    format_info <- format.info(x2, ...)
+    n_per_row <-
+      floor((options()$width - 5) / (format_info[1] + 1 ))
+    n_row <- ceiling(length_x2 / n_per_row)
 
-  output_vect <- vector("character", length = n_row)
-  idx <- seq(1,length(x2),by = n_per_row)
-  prefix <- formatC(paste0("[",idx,"]"),width = max(nchar(idx))+2 )
-  for (i in seq_along(idx)) {
-    idx_start <- idx[i]
-    idx_end <- idx_start + n_per_row -1
-    if(idx_end > length(x2)) {
-      idx_end <- length(x2)
+    output_vect <- vector("character", length = n_row)
+    idx <- seq(1, length(x2), by = n_per_row)
+    prefix <- formatC(paste0("[", idx, "]"), width = max(nchar(idx)) + 2)
+    for (i in seq_along(idx)) {
+      idx_start <- idx[i]
+      idx_end <- idx_start + n_per_row - 1
+      if (idx_end > length(x2)) {
+        idx_end <- length(x2)
+      }
+      output_vect[i] <-
+        paste(c(prefix[i], formatted_x[idx_start:idx_end]), collapse = " ")
     }
-    output_vect[i] <- paste(c(prefix[i],formatted_x[idx_start:idx_end]),collapse = " ")
-  }
   }else{
     output_vect <- paste0(vec_ptype_abbr(x),"(0)")
   }
