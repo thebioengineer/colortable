@@ -9,7 +9,7 @@ test_that("format appends ansi styling based on console output", {
   )
   expect_equal(
     as.character(console_output),
-    "\033[34m\033[43m\033[4m1\033[24m\033[49m\033[39m"
+    "\033[38;5;12m\033[48;5;11m\033[4m1\033[24m\033[0m\033[0m"
   )
 
 })
@@ -46,23 +46,23 @@ test_that("format appends tex styling based on latex output", {
 
 })
 
-test_that("Invalid styling return warnings", {
+test_that("Invalid styling silently returns the values", {
 
   c_vctr <- color_vctr(1, text_color = "invalid", background = "invalid", style = "invalid")
 
-  expect_warning(
+  expect_equivalent(
     format(c_vctr, method = "console"),
-    "has not been implemented"
+    structure("1",class = c("color_vctr_output", "character"))
   )
 
-  expect_warning(
+  expect_equivalent(
     format(c_vctr, method = "html"),
-    "has not been implemented"
+    structure("<span style=''>1</span>",class = c("color_vctr_output", "character"))
   )
 
-  expect_warning(
+  expect_equivalent(
     format(c_vctr, method = "latex"),
-    "has not been implemented"
+    structure("1",class = c("color_vctr_output", "character"))
   )
 
 })
