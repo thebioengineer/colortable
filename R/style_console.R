@@ -1,13 +1,4 @@
 
-console_style_codes <- list(
-  bold = list(1, 22), # 21 isn't widely supported and 22 does the same thing
-  italic = list(3, 23),
-  underline = list(4, 24),
-  inverse = list(7, 27),
-  hidden = list(8, 28),
-  strikethrough = list(9, 29)
-)
-
 style_wrapper_console <-function(styling, type = c("text", "style", "background")) {
   if (is.na(styling)) {
     function(x) {
@@ -15,11 +6,12 @@ style_wrapper_console <-function(styling, type = c("text", "style", "background"
     }
   } else{
     type <- match.arg(type)
+    styling <- tolower(styling)
     switch(
       type,
-      "text" = console_text_styling(styling),
+      "text" = console_text_styling(unify_colors(styling, type = "console")),
       "style" = console_decoration_styling(styling),
-      "background" = console_background_styling(styling)
+      "background" = console_background_styling(unify_colors(styling, type = "console"))
     )
   }
 }
@@ -86,36 +78,15 @@ find_acsii_codes <- function(input){
     output_codes
 }
 
-# Based on https://stackoverflow.com/questions/1847092/given-an-rgb-value-what-would-be-the-best-way-to-find-the-closest-match-in-the-dhttps://stackoverflow.com/questions/1847092/given-an-rgb-value-what-would-be-the-best-way-to-find-the-closest-match-in-the-d
-which_closest_color <- function(to_match, rgb_vect){
-  method <- tolower(getOption("colortable.color_approx.method",default = "euclidian"))
-  func <- switch(method,
-         euclidian = which_closest_color.euclidian,
-         weighted = which_closest_color.weighted
-  )
-  func(to_match, rgb_vect)
-}
 
-which_closest_color.euclidian <- function(to_match, rgb_vect){
-  which.min(sqrt(
-    ((rgb_vect[, 1] - to_match[[1]])) ^ 2 + # red
-    ((rgb_vect[, 2] - to_match[[2]])) ^ 2 + # green
-    ((rgb_vect[, 3] - to_match[[3]])) ^ 2   # blue
-  ))
-}
-
-# https://www.compuphase.com/cmetric.htm
-which_closest_color.weighted <- function(to_match, rgb_vect){
-  r_bar <- rgb_vect[, 1] + to_match[[1]] / 2
-
-  delta_c <- sqrt(
-     ((2 + (r_bar/256)) * ((rgb_vect[, 1] - to_match[[1]]) ^ 2)) + # red
-     (4 * ((rgb_vect[, 2] - to_match[[2]]) ^ 2)) + # green
-     ((2 + (255 - r_bar)/256) * ((rgb_vect[,3] - to_match[[3]]) ^ 2)) # blue
-  )
-  which.min(delta_c)
-}
-
+console_style_codes <- list(
+  bold = list(1, 22), # 21 isn't widely supported and 22 does the same thing
+  italic = list(3, 23),
+  underline = list(4, 24),
+  inverse = list(7, 27),
+  hidden = list(8, 28),
+  strikethrough = list(9, 29)
+)
 
 #' return the tibble of color keys
 #'

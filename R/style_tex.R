@@ -1,19 +1,23 @@
 #' @importFrom rmarkdown latex_dependency
 #' @importFrom knitr knit_meta_add
-style_wrapper_tex <- function(styling, type = c("text","style","background")){
-  if(is.na(styling)){
-    function(x){x}
-  }else{
-    type <- match.arg(type)
-    styling <- tolower(styling)
-    switch(
-      type,
-      "text" = tex_text_styling(styling),
-      "style" = tex_decoration_styling(styling),
-      "background" = tex_background_styling(styling)
-    )
+style_wrapper_tex <-
+  function(styling,
+           type = c("text", "style", "background")) {
+    if (is.na(styling)) {
+      function(x) {
+        x
+      }
+    } else{
+      type <- match.arg(type)
+      styling <- tolower(styling)
+      switch(
+        type,
+        "text" = tex_text_styling(unify_colors(styling, type = "latex")),
+        "style" = tex_decoration_styling(styling),
+        "background" = tex_background_styling(unify_colors(styling, type = "latex"))
+      )
+    }
   }
-}
 
 
 tex_decoration_styling <- function(styling){
@@ -21,10 +25,6 @@ tex_decoration_styling <- function(styling){
     function(x){x}
   }else{
     codes <- latex_style_codes[[styling]]
-
-    if (styling == "strikethrough") {
-      knitr::knit_meta_add(list(rmarkdown::latex_dependency("ulem")))
-    }
     wrapper <- paste0(codes ,"{")
     function(x){
       paste0(wrapper,x,"}")
@@ -39,7 +39,6 @@ tex_text_styling <- function(color){
       x
     }
   } else{
-    knitr::knit_meta_add(list(rmarkdown::latex_dependency(name = "xcolor",extra_lines = codes$code)))
     wrapper <- paste0("\\textcolor{",codes$Name,"}{")
     function(x) {
         paste0(wrapper,x,"}")
@@ -54,7 +53,6 @@ tex_background_styling <- function(color){
       x
     }
   } else{
-    knitr::knit_meta_add(list(rmarkdown::latex_dependency(name = "xcolor",extra_lines = codes$code)))
     wrapper <- paste0("\\colorbox{",codes$Name,"}{")
     function(x) {
       paste0(wrapper,x,"}")
@@ -64,9 +62,9 @@ tex_background_styling <- function(color){
 
 tex_code_idx <- function(color) {
   if (grepl("^#", color) & grepl("^#[0-9A-F]{6}$", color, perl = TRUE)) {
-    valid <- which(color_key_tex$hex %in% color)
+    valid <- which(color_key_latex$hex %in% color)
   } else {
-    valid <- which(color_key_tex$Name %in% color)
+    valid <- which(color_key_latex$Name %in% color)
   }
   if (length(valid) > 1) {
     valid <- min(valid)
@@ -74,16 +72,18 @@ tex_code_idx <- function(color) {
   return(valid)
 }
 
+
+#' @importFrom grDevices col2rgb
 find_tex_codes <- function(input){
   idx <- tex_code_idx(input)
   if (identical(idx,integer())) {
 
     rgb_mat <- col2rgb(input)[,1, drop = TRUE]
-    rgb_key <- do.call('rbind',color_key_tex$RGB)
+    rgb_key <- do.call('rbind',color_key_latex$RGB)
     idx <- which_closest_color(rgb_mat, rgb_key)
   }
 
-  c(color_key_tex[idx,c("Name","code")])
+  c(color_key_latex[idx,c("Name","code")])
 }
 
 latex_style_codes <- list(
@@ -99,7 +99,7 @@ latex_style_codes <- list(
 #'
 #' @importFrom tibble tribble
 #'
-color_key_tex <- tibble::tribble(
+color_key_latex <- tibble::tribble(
   ~Name,     ~hex,          ~code,                                             ~RGB,
   'airforceblue','#5D8AA8','\\definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66}',c(red = 93, blue = 138, green = 168),
   'aliceblue','#F0F8FF','\\definecolor{aliceblue}{rgb}{0.94, 0.97, 1.0}',c(red = 240, blue = 248, green = 255),
@@ -219,10 +219,10 @@ color_key_tex <- tibble::tribble(
   'chamoisee','#A0785A','\\definecolor{chamoisee}{rgb}{0.63, 0.47, 0.35}',c(red = 160, blue = 120, green = 90),
   'champagne','#F7E7CE','\\definecolor{champagne}{rgb}{0.97, 0.91, 0.81}',c(red = 247, blue = 231, green = 206),
   'charcoal','#36454F','\\definecolor{charcoal}{rgb}{0.21, 0.27, 0.31}',c(red = 54, blue = 69, green = 79),
-  'chartreuse','#DFFF00','\\definecolor{chartreuse(traditional)}{rgb}{0.87, 1.0, 0.0}',c(red = 223, blue = 255, green = 0),
+  'chartreuse','#DFFF00','\\definecolor{chartreuse}{rgb}{0.87, 1.0, 0.0}',c(red = 223, blue = 255, green = 0),
   'cherryblossompink','#FFB7C5','\\definecolor{cherryblossompink}{rgb}{1.0, 0.72, 0.77}',c(red = 255, blue = 183, green = 197),
   'chestnut','#CD5C5C','\\definecolor{chestnut}{rgb}{0.8, 0.36, 0.36}',c(red = 205, blue = 92, green = 92),
-  'chocolate','#7B3F00','\\definecolor{chocolate(traditional)}{rgb}{0.48, 0.25, 0.0}',c(red = 123, blue = 63, green = 0),
+  'chocolate','#7B3F00','\\definecolor{chocolate}{rgb}{0.48, 0.25, 0.0}',c(red = 123, blue = 63, green = 0),
   'chromeyellow','#FFA700','\\definecolor{chromeyellow}{rgb}{1.0, 0.65, 0.0}',c(red = 255, blue = 167, green = 0),
   'cinereous','#98817B','\\definecolor{cinereous}{rgb}{0.6, 0.51, 0.48}',c(red = 152, blue = 129, green = 123),
   'cinnabar','#E34234','\\definecolor{cinnabar}{rgb}{0.89, 0.26, 0.2}',c(red = 227, blue = 66, green = 52),

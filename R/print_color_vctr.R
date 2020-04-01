@@ -51,6 +51,9 @@ format.color_vctr.html <- function(x,...){
 }
 
 format.color_vctr.latex <- function(x,...){
+
+  add_colortable_latex_meta()
+
   x <- do.call('c',lapply(seq_along(x),function(idx){
     style2tex(
       .subset(x,idx),
@@ -60,4 +63,16 @@ format.color_vctr.latex <- function(x,...){
       ...)}))
   class(x) <- c("color_vctr_output","character")
   x
+}
+
+
+add_colortable_latex_meta <- function(){
+  id <- do.call('c',lapply(knitr::knit_meta(),`[[`,"names"))
+  cat(id)
+  if(!"colortable.ULEM" %in% id){
+  knitr::knit_meta_add(list(rmarkdown::latex_dependency(name = "ulem")))
+  }
+  if(!"colortable.XCOLOR" %in% id){
+  knitr::knit_meta_add(list(rmarkdown::latex_dependency(name = "xcolor", extra_lines = color_key_latex$code)))
+  }
 }

@@ -2,18 +2,14 @@
 % Please edit documentation in R/valid_entries.R
 \name{Valid}
 \alias{Valid}
-\alias{valid_text_color}
-\alias{valid_background}
+\alias{valid_colors}
 \alias{valid_style}
-\title{Valid Coloring/Styling Options for {{Colortable}}}
+\title{Valid Colors/Styling Options for {{Colortable}}}
 \usage{
 valid_text_color
-valid_background
 valid_style
 
-valid_text_color(method = c("latex", "html", "console"))
-
-valid_background(method = c("latex", "html", "console"))
+valid_colors(method = c("latex", "html", "console"))
 
 valid_style(method = c("latex", "html", "console"))
 }
@@ -24,11 +20,9 @@ valid_style(method = c("latex", "html", "console"))
 vector of valid settings
 }
 \description{
-Valid Coloring/Styling Options for {{Colortable}}
+Valid Colors/Styling Options for {{Colortable}}
 
 Return vector of valid text color options
-
-Return vector of valid background color options
 
 Return vector of valid text styling options
 }

@@ -1,0 +1,56 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r messages = FALSE, warning = FALSE}
+
+suppressMessages({
+  library(tidyverse)
+  library(colortable)
+  library(knitr)
+})
+
+possible_colors <- valid_colors(method = "html")
+
+possible_colors$`Color Name` <-
+  color_vctr(
+    possible_colors$`Color Name`,
+    text_color = possible_colors$`Color Name`
+  )
+
+possible_colors$`Hex Code` <-
+  color_vctr(
+    possible_colors$`Hex Code`,
+    background = possible_colors$`Hex Code`
+  )
+
+possible_colors %>% 
+  data.frame() %>% 
+  format() %>% 
+  knitr::kable()
+
+```
+
+```{r pdf colors}
+possible_colors <- valid_colors(method = "latex")
+
+possible_colors$`Color Name` <-
+  color_vctr(
+    possible_colors$`Color Name`,
+    text_color = possible_colors$`Color Name`
+  )
+
+possible_colors$`Hex Code` <-
+  color_vctr(
+    possible_colors$`Hex Code`,
+    background = possible_colors$`Hex Code`
+  )
+
+possible_colors %>% 
+  data.frame() %>% 
+  format() %>% 
+  knitr::kable()
+
+```

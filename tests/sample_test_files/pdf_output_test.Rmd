@@ -1,0 +1,68 @@
+---
+title: "{colortable} to PDF"
+output: 
+  pdf_document:
+    keep_tex: true
+---
+
+# Valid PDF Colors
+```{r messages = FALSE, warning = FALSE}
+
+suppressMessages({
+  library(tidyverse)
+  library(colortable)
+  library(knitr)
+})
+
+possible_colors <- valid_colors(method = "latex")
+
+possible_colors %>% 
+  mutate(
+    `Color Name` =
+  color_vctr(
+    possible_colors$`Color Name`,
+    text_color = possible_colors$`Color Name`
+  ),
+`Hex Code` =
+  color_vctr(
+    paste0("\\",possible_colors$`Hex Code`),
+    background = possible_colors$`Hex Code`
+  )) %>% 
+  data.frame() %>% 
+  format() %>% 
+  kable(escape = FALSE)
+
+```
+
+# Valid HTML Colors
+
+```{r messages = FALSE, warning = FALSE}
+
+possible_colors <- valid_colors(method = "html")
+
+possible_colors %>% 
+  mutate(
+    `Color Name` =
+  color_vctr(
+    possible_colors$`Color Name`,
+    text_color = possible_colors$`Color Name`
+  ),
+`Hex Code` =
+  color_vctr(
+    paste0("\\",possible_colors$`Hex Code`),
+    background = possible_colors$`Hex Code`
+  )) %>% 
+  data.frame() %>% 
+  format() %>% 
+  kable(escape = FALSE)
+
+```
+
+# Color Scales
+
+```{r results = 'asis'}
+
+color_vctr(1:10, text_color = color_scale("Blues"))
+color_vctr(1:20, text_color = color_scale(palette = colorRamp(c("blue","yellow","red"))))
+
+```

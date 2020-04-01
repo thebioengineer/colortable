@@ -5,10 +5,10 @@
 #' @param vect The input vector to convert to a color_vctr. Must be an atomic.
 #' @param text_color A vector of length 1 or same length as vect. Details the
 #'     color the text should be. Valid values can be found from the
-#'     `valid_text_color()` function.NA means no text color.
+#'     `valid_colors()` function.NA means no text color.
 #' @param background A vector of length 1 or same length as vect. Details the
 #'     background color of the text. Valid values can be found from the
-#'     `valid_background()` function. NA means no background color.
+#'     `valid_colors()` function. NA means no background color.
 #' @param style A vector of length 1 or same length as vect. Details the
 #'     style of the text Valid values can be found from the
 #'     `valid_style()` function. NA means no styling.
@@ -21,13 +21,17 @@ new_color_vctr <- function(vect, text_color = NA, background = NA, style = NA ){
   stopifnot(length(background) == 1 | length(background) == length(vect))
   stopifnot(length(style) == 1 | length(style) == length(vect))
 
+  if (is.function(text_color))
+    text_color <- text_color(vect)
+  if (is.function(background))
+    background <- background(vect)
 
-  if(length(text_color) == 1)
-    text_color <- rep(text_color,length(vect))
-  if(length(background) == 1)
-    background <- rep(background,length(vect))
-  if(length(style) == 1)
-    style <- rep(style,length(vect))
+  if (length(text_color) == 1)
+    text_color <- rep(text_color, length(vect))
+  if (length(background) == 1)
+    background <- rep(background, length(vect))
+  if (length(style) == 1)
+    style <- rep(style, length(vect))
 
   return(
     structure(

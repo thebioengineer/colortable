@@ -1,24 +1,16 @@
-html_style_codes <- list(
-  bold = list("font-weight" = "bold"),
-  italic = list("font-style" = "italic"),
-  underline = list("text-decoration" = "underline"),
-  inverse = list("-webkit-filter" = "invert(100%)",
-                       "filter" = "invert(100%)"),
-  hidden = list("visibility" = "hidden"),
-  strikethrough = list("text-decoration" = "line-through")
-)
+
 
 style_wrapper_html <- function(styling, type = c("text","style","background")){
   if (is.na(styling)){
     ""
   }else{
     type <- match.arg(type)
-
+    styling <- tolower(styling)
     switch(
       type,
-      "text" = html_text_styling(styling),
+      "text" = html_text_styling(unify_colors(styling, type = "html")),
       "style" = html_decoration_styling(styling),
-      "background" = html_background_styling(styling)
+      "background" = html_background_styling(unify_colors(styling, type = "html"))
     )
   }
 }
@@ -81,6 +73,16 @@ find_html_codes <- function(input){
   }
 }
 
+html_style_codes <- list(
+  bold = list("font-weight" = "bold"),
+  italic = list("font-style" = "italic"),
+  underline = list("text-decoration" = "underline"),
+  inverse = list("-webkit-filter" = "invert(100%)",
+                 "filter" = "invert(100%)"),
+  hidden = list("visibility" = "hidden"),
+  strikethrough = list("text-decoration" = "line-through")
+)
+
 #' return the tibble of valid web colors
 #'
 #' Source is from https://www.w3schools.com/colors/color_tryit.asp
@@ -124,7 +126,7 @@ color_key_html  <- tibble::tribble(
                "darkred", "#8B0000",     c(red = 139, green = 0, blue = 0),
             "darksalmon", "#E9967A", c(red = 233, green = 150, blue = 122),
           "darkseagreen", "#8FBC8F", c(red = 143, green = 188, blue = 143),
-         "darkSlateBlue", "#483D8B",   c(red = 72, green = 61, blue = 139),
+         "darkslateblue", "#483D8B",   c(red = 72, green = 61, blue = 139),
          "darkslategray", "#2F4F4F",    c(red = 47, green = 79, blue = 79),
          "darkslategrey", "#2F4F4F",    c(red = 47, green = 79, blue = 79),
          "darkturquoise", "#00CED1",   c(red = 0, green = 206, blue = 209),
@@ -214,18 +216,18 @@ color_key_html  <- tibble::tribble(
              "royalblue", "#4169E1",  c(red = 65, green = 105, blue = 225),
            "saddlebrown", "#8B4513",   c(red = 139, green = 69, blue = 19),
                 "salmon", "#FA8072", c(red = 250, green = 128, blue = 114),
-            "sandyBrown", "#F4A460",  c(red = 244, green = 164, blue = 96),
-              "seaGreen", "#2E8B57",   c(red = 46, green = 139, blue = 87),
-              "seaShell", "#FFF5EE", c(red = 255, green = 245, blue = 238),
+            "sandybrown", "#F4A460",  c(red = 244, green = 164, blue = 96),
+              "seagreen", "#2E8B57",   c(red = 46, green = 139, blue = 87),
+              "seashell", "#FFF5EE", c(red = 255, green = 245, blue = 238),
                 "sienna", "#A0522D",   c(red = 160, green = 82, blue = 45),
                 "silver", "#C0C0C0", c(red = 192, green = 192, blue = 192),
-               "skyBlue", "#87CEEB", c(red = 135, green = 206, blue = 235),
-             "slateBlue", "#6A5ACD",  c(red = 106, green = 90, blue = 205),
-             "slateGray", "#708090", c(red = 112, green = 128, blue = 144),
-             "slateGrey", "#708090", c(red = 112, green = 128, blue = 144),
+               "skyblue", "#87CEEB", c(red = 135, green = 206, blue = 235),
+             "slateblue", "#6A5ACD",  c(red = 106, green = 90, blue = 205),
+             "slategray", "#708090", c(red = 112, green = 128, blue = 144),
+             "slategrey", "#708090", c(red = 112, green = 128, blue = 144),
                   "snow", "#FFFAFA", c(red = 255, green = 250, blue = 250),
-           "springGreen", "#00FF7F",   c(red = 0, green = 255, blue = 127),
-             "steelBlue", "#4682B4",  c(red = 70, green = 130, blue = 180),
+           "springgreen", "#00FF7F",   c(red = 0, green = 255, blue = 127),
+             "steelblue", "#4682B4",  c(red = 70, green = 130, blue = 180),
                    "tan", "#D2B48C", c(red = 210, green = 180, blue = 140),
                   "teal", "#008080",   c(red = 0, green = 128, blue = 128),
                "thistle", "#D8BFD8", c(red = 216, green = 191, blue = 216),

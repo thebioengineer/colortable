@@ -1,74 +1,62 @@
-#' Append Coloring or Styling
-#'
-#' Based on inputs, determines correct strings to append to the input to style
-#' for any type of output (console, html, pdf, ...)
-#'
-#' @param x a vector of length one
-#' @param style styling to append to `x`
-#' @param text_color text color to set `x`
-#' @param background background color to set `x`
-#' @param ... arguments to pass to `format()`
-#'
-#' @return a character vector with styling appended
-#' @examples
-#' console_text <- colortable:::style2console(24, text_color = "red" )
-#' html_text <- colortable:::style2html(24, text_color = "red" )
-#' tex_text <- colortable:::style2tex(24, text_color = "red" )
-#'
-#' cat(console_text)
-#'
-#' @usage
-#' style2console
-#' style2html
-#' style2tex
-NULL
 
-style2console <- function(x, style = NA, text_color = NA, background = NA, ...){
-  if (is.na(x)) {
-    return(NA)
-  }else{
-  text_style <- style_wrapper_console(style, type = "style")
-  text_color <- style_wrapper_console(text_color, type = "text")
-  text_background <- style_wrapper_console(background, type = "background")
 
-  text_color(text_background(text_style(format(x,...))))
-  }
-}
-
-style2consoleV <-
-  Vectorize(
-    style2console,
-    vectorize.args = c("x", "style", "text_color", "background"),
-    SIMPLIFY = TRUE
+# Based on https://stackoverflow.com/questions/1847092/given-an-rgb-value-what-would-be-the-best-way-to-find-the-closest-match-in-the-dhttps://stackoverflow.com/questions/1847092/given-an-rgb-value-what-would-be-the-best-way-to-find-the-closest-match-in-the-d
+which_closest_color <- function(to_match, rgb_vect){
+  method <- tolower(getOption("colortable.color_approx.method",default = "euclidian"))
+  func <- switch(method,
+                 euclidian = which_closest_color.euclidian,
+                 weighted = which_closest_color.weighted
   )
-
-style2html <- function(x, style = NA, text_color = NA, background = NA, ...){
-  if (is.na(x)) {
-    return(NA)
-  }else{
-    text_style <- style_wrapper_html(style, type = "style")
-    text_color <- style_wrapper_html(text_color, type = "text")
-    text_background <- style_wrapper_html(background, type = "background")
-
-    style = paste(c(text_style, text_color, text_background), collapse =
-                    "")
-    paste0("<span style='",style,"'>",format(x,...),"</span>")
-  }
+  func(to_match, rgb_vect)
 }
 
-style2htmlV <- Vectorize(style2html,vectorize.args = c("x","style","text_color","background"),SIMPLIFY = TRUE)
-
-style2tex <- function(x, style = NA, text_color = NA, background = NA, ...){
-  if (is.na(x)) {
-    return(NA)
-  }else{
-    text_style <- style_wrapper_tex(style, type = "style")
-    text_color <- style_wrapper_tex(text_color, type = "text")
-    text_background <- style_wrapper_tex(background, type = "background")
-
-    text_background(text_style(text_color(format(x, ...))))
-  }
+which_closest_color.euclidian <- function(to_match, rgb_vect){
+  which.min(sqrt(
+    ((rgb_vect[, 1] - to_match[[1]])) ^ 2 + # red
+      ((rgb_vect[, 2] - to_match[[2]])) ^ 2 + # green
+      ((rgb_vect[, 3] - to_match[[3]])) ^ 2   # blue
+  ))
 }
 
-style2texV <- Vectorize(style2tex,vectorize.args = c("x","style","text_color","background"),SIMPLIFY = TRUE)
+# https://www.compuphase.com/cmetric.htm
+which_closest_color.weighted <- function(to_match, rgb_vect){
+  r_bar <- rgb_vect[, 1] + to_match[[1]] / 2
 
+  delta_c <- sqrt(
+    ((2 + (r_bar/256)) * ((rgb_vect[, 1] - to_match[[1]]) ^ 2)) + # red
+      (4 * ((rgb_vect[, 2] - to_match[[2]]) ^ 2)) + # green
+      ((2 + (255 - r_bar)/256) * ((rgb_vect[,3] - to_match[[3]]) ^ 2)) # blue
+  )
+  which.min(delta_c)
+}
+
+
+unify_colors <- function(x, type = print_method()) {
+  if (grepl("^#", x) &
+      grepl("^#[0-9A-Fa-f]{6}$", x, perl = TRUE)) {
+    return(toupper(x))
+  } else {
+    type <- match.arg(type, c("latex", "html", "console"))
+    method_colors <- valid_colors(type)$`Color Name`
+
+    if (!x %in% method_colors) {
+      other_colors <-
+        do.call('rbind', lapply(setdiff(c("latex", "html", "console"), type),
+                                  valid_colors))
+      idx <- which(x %in% other_colors$`Color Name`)
+      if (length(idx) > 0) {
+        return(other_colors$`Hex Code`[min(idx)])
+      } else {
+        stop(
+          paste(
+            "Invalid Color Name being used. check for valid color names using `valid_colors( type =",
+            type,
+            " )`"
+          )
+        )
+      }
+    } else{
+      return(x)
+    }
+  }
+}

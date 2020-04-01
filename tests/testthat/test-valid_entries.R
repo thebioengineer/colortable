@@ -1,35 +1,21 @@
-test_that("`valid_text_color()` returns the list of valid text coloring", {
+test_that("`valid_colors()` returns the list of valid text coloring", {
 
   expect_equal(
-    valid_text_color(method = "console"),
-    c("black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "silver")
+    valid_colors(method = "console"),
+    setNames(color_key_console[c("Name","hex")],c("Color Name","Hex Code"))
+  )
+
+  expect_equal(
+    valid_colors(method = "html"),
+    setNames(color_key_html[c("Name","hex")],c("Color Name","Hex Code"))
   )
   expect_equal(
-    valid_text_color(method = "html"),
-    c("black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "silver")
-  )
-  expect_equal(
-    valid_text_color(method = "latex"),
-    c("black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "silver")
+    valid_colors(method = "latex"),
+    setNames(color_key_latex[c("Name","hex")],c("Color Name","Hex Code"))
   )
 
 })
 
-test_that("`valid_background()` returns the list of valid background coloring", {
-
-  expect_equal(
-    valid_background(method = "console"),
-    c("black", "red", "green", "yellow", "blue", "magenta", "cyan", "white")
-  )
-  expect_equal(
-    valid_background(method = "html"),
-    c("black", "red", "green", "yellow", "blue", "magenta", "cyan", "white")
-  )
-  expect_equal(
-    valid_background(method = "latex"),
-    c("black", "red", "green", "yellow", "blue", "magenta", "cyan", "white")
-  )
-})
 
 test_that("`valid_style()` returns the list of valid styling options", {
 
