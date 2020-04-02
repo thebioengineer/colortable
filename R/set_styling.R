@@ -15,7 +15,16 @@ set_styling<- function(x, idx = rep(TRUE, length(x)), text_color = NA, backgroun
 #' @export
 #'
 set_styling.default <- function(x, idx = rep(TRUE, length(x)), text_color = NA, background = NA, style = NA){
-  set_styling(color_vctr(x), idx, text_color, background, style)
+
+  new_color <- rep(NA, length(x))
+  new_background <- rep(NA, length(x))
+  new_style <- rep(NA, length(x))
+
+  new_color[idx] <- text_color
+  new_background[idx] <- background
+  new_style[idx] <- style
+
+  color_vctr(x, text_color = new_color,background = new_background, style = new_style)
 }
 
 #' @export
