@@ -16,9 +16,17 @@ NULL
 #' @rdname Valid
 #' @export
 valid_colors <- function(method = c("latex","html","console")){
-  method <- match.arg(method)
-  styles <- eval(parse(text = paste0("color_key_",method)))[,c("Name","hex")]
-  colnames(styles) <- c("Color Name","Hex Code")
+  method <- match.arg(method,several.ok = TRUE)
+  styles <- do.call(rbind, lapply(method, function(x) {
+    styles <-
+      eval(parse(text = paste0("color_key_", x)))[, c("Name", "hex")]
+    colnames(styles) <- c("Color Name", "Hex Code")
+    styles$source <- x
+    return(styles)
+  }))
+  if(length(method) == 1){
+    styles$source <- NULL
+  }
   styles
 }
 

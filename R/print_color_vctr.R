@@ -34,7 +34,6 @@ format.color_vctr.console <- function(x,...){
       attr(x,".text_color")[idx],
       attr(x,".background")[idx],
       ...)}))
-  class(x) <- c("color_vctr_output","character")
   x
 }
 
@@ -46,7 +45,6 @@ format.color_vctr.html <- function(x,...){
       attr(x,".text_color")[idx],
       attr(x,".background")[idx],
       ...)}))
-  class(x) <- c("color_vctr_output","character")
   x
 }
 
@@ -61,7 +59,6 @@ format.color_vctr.latex <- function(x,...){
       attr(x,".text_color")[idx],
       attr(x,".background")[idx],
       ...)}))
-  class(x) <- c("color_vctr_output","character")
   x
 }
 

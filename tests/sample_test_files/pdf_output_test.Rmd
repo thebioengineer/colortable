@@ -22,8 +22,7 @@ possible_styles <- valid_style(method = "latex")
 
 data.frame(Styles = possible_styles,
            Example = color_vctr(rep("Lorem Ipsum",length(possible_styles)), style = possible_styles)) %>%
-  format() %>%
-  kable(escape = FALSE)
+  kable()
 
 ```
 

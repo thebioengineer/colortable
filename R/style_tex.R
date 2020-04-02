@@ -97,7 +97,7 @@ latex_style_codes <- list(
   outline = list(code = "\\contour{black}", package = "contour", options = "pdftex,outline")
 )
 
-add_tex_package <- function(package, options = null, extra_lines = NULL){
+add_tex_package <- function(package, options = NULL, extra_lines = NULL){
   id <- do.call('c',lapply(knitr::knit_meta(clean = FALSE),`[[`,"name"))
   if(!package %in% id){
     knitr::knit_meta_add(list(
