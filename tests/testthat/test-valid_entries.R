@@ -25,10 +25,10 @@ test_that("`valid_style()` returns the list of valid styling options", {
   )
   expect_equal(
     valid_style(method = "html"),
-    c("bold", "italic", "underline", "inverse", "hidden", "strikethrough")
+    c("bold", "italic", "underline", "inverse", "hidden", "strikethrough","outline")
   )
   expect_equal(
     valid_style(method = "latex"),
-    c("bold", "italic", "underline", "strikethrough")
+    c("bold", "italic", "underline", "strikethrough","outline")
   )
 })

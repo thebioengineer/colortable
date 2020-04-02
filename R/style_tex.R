@@ -21,11 +21,14 @@ style_wrapper_tex <-
 
 
 tex_decoration_styling <- function(styling){
-  if (!styling %in% names(console_style_codes)) {
+  if (!styling %in% names(latex_style_codes)) {
     function(x){x}
   }else{
     codes <- latex_style_codes[[styling]]
-    wrapper <- paste0(codes ,"{")
+    if (!is.null(codes[["package"]])) {
+      add_tex_package(codes[["package"]], codes[["options"]], codes[["extra_lines"]])
+    }
+    wrapper <- paste0(codes$code ,"{")
     function(x){
       paste0(wrapper,x,"}")
     }
@@ -87,11 +90,23 @@ find_tex_codes <- function(input){
 }
 
 latex_style_codes <- list(
-  bold = "\\textbf",
-  italic = "\\textit",
-  underline = "\\underline",
-  strikethrough = "\\sout"
+  bold = list(code = "\\textbf"),
+  italic = list(code = "\\textit"),
+  underline = list(code = "\\underline"),
+  strikethrough = list(code = "\\sout", package = "ulem"),
+  outline = list(code = "\\contour{black}", package = "contour", options = "pdftex,outline")
 )
+
+add_tex_package <- function(package, options = null, extra_lines = NULL){
+  id <- do.call('c',lapply(knitr::knit_meta(clean = FALSE),`[[`,"name"))
+  if(!package %in% id){
+    knitr::knit_meta_add(list(
+      rmarkdown::latex_dependency(
+        name = package,
+        options = options,
+        extra_lines = extra_lines)))
+  }
+}
 
 #' return the tibble of valid web colors
 #'

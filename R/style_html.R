@@ -80,7 +80,9 @@ html_style_codes <- list(
   inverse = list("-webkit-filter" = "invert(100%)",
                  "filter" = "invert(100%)"),
   hidden = list("visibility" = "hidden"),
-  strikethrough = list("text-decoration" = "line-through")
+  strikethrough = list("text-decoration" = "line-through"),
+  outline = list("-webkit-text-stroke" = "1px black",
+                       "text-shadow" = "0px 0px 0px #000")
 )
 
 #' return the tibble of valid web colors

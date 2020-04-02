@@ -67,12 +67,12 @@ format.color_vctr.latex <- function(x,...){
 
 
 add_colortable_latex_meta <- function(){
-  id <- do.call('c',lapply(knitr::knit_meta(),`[[`,"names"))
-  cat(id)
-  if(!"colortable.ULEM" %in% id){
-  knitr::knit_meta_add(list(rmarkdown::latex_dependency(name = "ulem")))
-  }
-  if(!"colortable.XCOLOR" %in% id){
-  knitr::knit_meta_add(list(rmarkdown::latex_dependency(name = "xcolor", extra_lines = color_key_latex$code)))
+  meta <- knitr::knit_meta(clean = FALSE)
+  id <- do.call('c',lapply(meta,`[[`,"name"))
+  extra_lines <- lapply(meta,`[[`,"extra_lines")
+  if( !"xcolor" %in% id | !any(sapply(extra_lines,identical,color_key_latex$code))){
+    invisible(
+      knitr::knit_meta_add(list(rmarkdown::latex_dependency(name = "xcolor", extra_lines = color_key_latex$code)))
+    )
   }
 }

@@ -43,7 +43,7 @@ unify_colors <- function(x, type = print_method()) {
       other_colors <-
         do.call('rbind', lapply(setdiff(c("latex", "html", "console"), type),
                                   valid_colors))
-      idx <- which(x %in% other_colors$`Color Name`)
+      idx <- which(other_colors$`Color Name` %in% x)
       if (length(idx) > 0) {
         return(other_colors$`Hex Code`[min(idx)])
       } else {

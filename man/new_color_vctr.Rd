@@ -11,11 +11,11 @@ new_color_vctr(vect, text_color = NA, background = NA, style = NA)
 
 \item{text_color}{A vector of length 1 or same length as vect. Details the
 color the text should be. Valid values can be found from the
-`valid_text_color()` function.NA means no text color.}
+`valid_colors()` function.NA means no text color.}
 
 \item{background}{A vector of length 1 or same length as vect. Details the
 background color of the text. Valid values can be found from the
-`valid_background()` function. NA means no background color.}
+`valid_colors()` function. NA means no background color.}
 
 \item{style}{A vector of length 1 or same length as vect. Details the
 style of the text Valid values can be found from the
