@@ -28,12 +28,12 @@ LazyData: true
 RoxygenNote: 7.0.2
 Imports: 
     knitr (>= 1.28),
-    rmarkdown (>= 2.1),
-    cli (>= 2.0.2),
-    scales (>= 1.0.0),
-    tibble (>= 2.1.3)
+    rmarkdown,
+    cli,
+    scales,
+    tibble
 Suggests: 
-    testthat (>= 2.1.0),
+    testthat,
     covr
 URL: https://github.com/thebioengineer/colortable
 BugReports: https://github.com/thebioengineer/colortable/issues
