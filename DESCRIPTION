@@ -1,11 +1,28 @@
 Package: colortable
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Provide Color and Styling to Table Elements
 Version: 0.2.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Authors@R: 
+    c(
+      person(
+        given = "Ellis", 
+        family = "Hughes", 
+        email = "ellishughes@live.com", 
+        role = c("aut", "cre")
+      ))
+Maintainer: Ellis Hughes <ellishsquared@gmail.com>
+Description: The goal of colortable is to make it easier to color and style your table elements, and
+    view your changes in real time. 
+    Current styling technologies make you go to your final printing status before you can see the 
+    coloring and styling applied. This adds overhead and iterating on outputs and sometimes require
+    compiling entire reports to check minute changes.
+    Alternatively, a technique that is common is to hard-code the styling to elements into the table
+    using `paste()`. The downside is that this requires complete changes to data types in the tables
+    to characters or generation of fields demarked for the final table printing. Checking that the
+    syntax is correct requires compiling.
+    {colortable} solves this conundrum by allowing the user to keep the types of the contents, and
+    applies the style updates on printing. Styling can be previewed in the console at a low level
+    prior to the report needing to be compiled, saving iteration time.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
