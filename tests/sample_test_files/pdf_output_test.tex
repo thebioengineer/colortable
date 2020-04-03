@@ -1,0 +1,2677 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={\{colortable\} to latex},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{xcolor}
+\definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66}
+\definecolor{aliceblue}{rgb}{0.94, 0.97, 1.0}
+\definecolor{alizarin}{rgb}{0.82, 0.1, 0.26}
+\definecolor{almond}{rgb}{0.94, 0.87, 0.8}
+\definecolor{amaranth}{rgb}{0.9, 0.17, 0.31}
+\definecolor{amber}{rgb}{1.0, 0.75, 0.0}
+\definecolor{americanrose}{rgb}{1.0, 0.01, 0.24}
+\definecolor{amethyst}{rgb}{0.6, 0.4, 0.8}
+\definecolor{anti-flashwhite}{rgb}{0.95, 0.95, 0.96}
+\definecolor{antiquebrass}{rgb}{0.8, 0.58, 0.46}
+\definecolor{antiquefuchsia}{rgb}{0.57, 0.36, 0.51}
+\definecolor{antiquewhite}{rgb}{0.98, 0.92, 0.84}
+\definecolor{ao}{rgb}{0.0, 0.0, 1.0}
+\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
+\definecolor{apricot}{rgb}{0.98, 0.81, 0.69}
+\definecolor{aqua}{rgb}{0.0, 1.0, 1.0}
+\definecolor{aquamarine}{rgb}{0.5, 1.0, 0.83}
+\definecolor{armygreen}{rgb}{0.29, 0.33, 0.13}
+\definecolor{arsenic}{rgb}{0.23, 0.27, 0.29}
+\definecolor{arylideyellow}{rgb}{0.91, 0.84, 0.42}
+\definecolor{ashgrey}{rgb}{0.7, 0.75, 0.71}
+\definecolor{asparagus}{rgb}{0.53, 0.66, 0.42}
+\definecolor{atomictangerine}{rgb}{1.0, 0.6, 0.4}
+\definecolor{auburn}{rgb}{0.43, 0.21, 0.1}
+\definecolor{aureolin}{rgb}{0.99, 0.93, 0.0}
+\definecolor{aurometalsaurus}{rgb}{0.43, 0.5, 0.5}
+\definecolor{awesome}{rgb}{1.0, 0.13, 0.32}
+\definecolor{azure}{rgb}{0.0, 0.5, 1.0}
+\definecolor{babyblue}{rgb}{0.54, 0.81, 0.94}
+\definecolor{babyblueeyes}{rgb}{0.63, 0.79, 0.95}
+\definecolor{babypink}{rgb}{0.96, 0.76, 0.76}
+\definecolor{ballblue}{rgb}{0.13, 0.67, 0.8}
+\definecolor{bananamania}{rgb}{0.98, 0.91, 0.71}
+\definecolor{bananayellow}{rgb}{1.0, 0.88, 0.21}
+\definecolor{battleshipgrey}{rgb}{0.52, 0.52, 0.51}
+\definecolor{bazaar}{rgb}{0.6, 0.47, 0.48}
+\definecolor{beaublue}{rgb}{0.74, 0.83, 0.9}
+\definecolor{beaver}{rgb}{0.62, 0.51, 0.44}
+\definecolor{beige}{rgb}{0.96, 0.96, 0.86}
+\definecolor{bisque}{rgb}{1.0, 0.89, 0.77}
+\definecolor{bistre}{rgb}{0.24, 0.17, 0.12}
+\definecolor{bittersweet}{rgb}{1.0, 0.44, 0.37}
+\definecolor{black}{rgb}{0.0, 0.0, 0.0}
+\definecolor{blanchedalmond}{rgb}{1.0, 0.92, 0.8}
+\definecolor{bleudefrance}{rgb}{0.19, 0.55, 0.91}
+\definecolor{blizzardblue}{rgb}{0.67, 0.9, 0.93}
+\definecolor{blond}{rgb}{0.98, 0.94, 0.75}
+\definecolor{blue}{rgb}{0.0, 0.0, 1.0}
+\definecolor{bluebell}{rgb}{0.64, 0.64, 0.82}
+\definecolor{bluegray}{rgb}{0.4, 0.6, 0.8}
+\definecolor{blue-green}{rgb}{0.0, 0.87, 0.87}
+\definecolor{blue-violet}{rgb}{0.54, 0.17, 0.89}
+\definecolor{blush}{rgb}{0.87, 0.36, 0.51}
+\definecolor{bole}{rgb}{0.47, 0.27, 0.23}
+\definecolor{bondiblue}{rgb}{0.0, 0.58, 0.71}
+\definecolor{bostonuniversityred}{rgb}{0.8, 0.0, 0.0}
+\definecolor{brandeisblue}{rgb}{0.0, 0.44, 1.0}
+\definecolor{brass}{rgb}{0.71, 0.65, 0.26}
+\definecolor{brickred}{rgb}{0.8, 0.25, 0.33}
+\definecolor{brightcerulean}{rgb}{0.11, 0.67, 0.84}
+\definecolor{brightgreen}{rgb}{0.4, 1.0, 0.0}
+\definecolor{brightlavender}{rgb}{0.75, 0.58, 0.89}
+\definecolor{brightmaroon}{rgb}{0.76, 0.13, 0.28}
+\definecolor{brightpink}{rgb}{1.0, 0.0, 0.5}
+\definecolor{brightturquoise}{rgb}{0.03, 0.91, 0.87}
+\definecolor{brightube}{rgb}{0.82, 0.62, 0.91}
+\definecolor{brilliantlavender}{rgb}{0.96, 0.73, 1.0}
+\definecolor{brilliantrose}{rgb}{1.0, 0.33, 0.64}
+\definecolor{brinkpink}{rgb}{0.98, 0.38, 0.5}
+\definecolor{britishracinggreen}{rgb}{0.0, 0.26, 0.15}
+\definecolor{bronze}{rgb}{0.8, 0.5, 0.2}
+\definecolor{brown}{rgb}{0.59, 0.29, 0.0}
+\definecolor{bubblegum}{rgb}{0.99, 0.76, 0.8}
+\definecolor{bubbles}{rgb}{0.91, 1.0, 1.0}
+\definecolor{buff}{rgb}{0.94, 0.86, 0.51}
+\definecolor{bulgarianrose}{rgb}{0.28, 0.02, 0.03}
+\definecolor{burgundy}{rgb}{0.5, 0.0, 0.13}
+\definecolor{burlywood}{rgb}{0.87, 0.72, 0.53}
+\definecolor{burntorange}{rgb}{0.8, 0.33, 0.0}
+\definecolor{burntsienna}{rgb}{0.91, 0.45, 0.32}
+\definecolor{burntumber}{rgb}{0.54, 0.2, 0.14}
+\definecolor{byzantine}{rgb}{0.74, 0.2, 0.64}
+\definecolor{byzantium}{rgb}{0.44, 0.16, 0.39}
+\definecolor{cadet}{rgb}{0.33, 0.41, 0.47}
+\definecolor{cadetblue}{rgb}{0.37, 0.62, 0.63}
+\definecolor{cadetgrey}{rgb}{0.57, 0.64, 0.69}
+\definecolor{cadmiumgreen}{rgb}{0.0, 0.42, 0.24}
+\definecolor{cadmiumorange}{rgb}{0.93, 0.53, 0.18}
+\definecolor{cadmiumred}{rgb}{0.89, 0.0, 0.13}
+\definecolor{cadmiumyellow}{rgb}{1.0, 0.96, 0.0}
+\definecolor{calpolypomonagreen}{rgb}{0.12, 0.3, 0.17}
+\definecolor{cambridgeblue}{rgb}{0.64, 0.76, 0.68}
+\definecolor{camel}{rgb}{0.76, 0.6, 0.42}
+\definecolor{camouflagegreen}{rgb}{0.47, 0.53, 0.42}
+\definecolor{canaryyellow}{rgb}{1.0, 0.94, 0.0}
+\definecolor{candyapplered}{rgb}{1.0, 0.03, 0.0}
+\definecolor{candypink}{rgb}{0.89, 0.44, 0.48}
+\definecolor{capri}{rgb}{0.0, 0.75, 1.0}
+\definecolor{caputmortuum}{rgb}{0.35, 0.15, 0.13}
+\definecolor{cardinal}{rgb}{0.77, 0.12, 0.23}
+\definecolor{caribbeangreen}{rgb}{0.0, 0.8, 0.6}
+\definecolor{carmine}{rgb}{0.59, 0.0, 0.09}
+\definecolor{carminepink}{rgb}{0.92, 0.3, 0.26}
+\definecolor{carminered}{rgb}{1.0, 0.0, 0.22}
+\definecolor{carnationpink}{rgb}{1.0, 0.65, 0.79}
+\definecolor{carnelian}{rgb}{0.7, 0.11, 0.11}
+\definecolor{carolinablue}{rgb}{0.6, 0.73, 0.89}
+\definecolor{carrotorange}{rgb}{0.93, 0.57, 0.13}
+\definecolor{ceil}{rgb}{0.57, 0.63, 0.81}
+\definecolor{celadon}{rgb}{0.67, 0.88, 0.69}
+\definecolor{celestialblue}{rgb}{0.29, 0.59, 0.82}
+\definecolor{cerise}{rgb}{0.87, 0.19, 0.39}
+\definecolor{cerisepink}{rgb}{0.93, 0.23, 0.51}
+\definecolor{cerulean}{rgb}{0.0, 0.48, 0.65}
+\definecolor{ceruleanblue}{rgb}{0.16, 0.32, 0.75}
+\definecolor{chamoisee}{rgb}{0.63, 0.47, 0.35}
+\definecolor{champagne}{rgb}{0.97, 0.91, 0.81}
+\definecolor{charcoal}{rgb}{0.21, 0.27, 0.31}
+\definecolor{chartreuse}{rgb}{0.87, 1.0, 0.0}
+\definecolor{cherryblossompink}{rgb}{1.0, 0.72, 0.77}
+\definecolor{chestnut}{rgb}{0.8, 0.36, 0.36}
+\definecolor{chocolate}{rgb}{0.48, 0.25, 0.0}
+\definecolor{chromeyellow}{rgb}{1.0, 0.65, 0.0}
+\definecolor{cinereous}{rgb}{0.6, 0.51, 0.48}
+\definecolor{cinnabar}{rgb}{0.89, 0.26, 0.2}
+\definecolor{cinnamon}{rgb}{0.82, 0.41, 0.12}
+\definecolor{citrine}{rgb}{0.89, 0.82, 0.04}
+\definecolor{classicrose}{rgb}{0.98, 0.8, 0.91}
+\definecolor{cobalt}{rgb}{0.0, 0.28, 0.67}
+\definecolor{cocoabrown}{rgb}{0.82, 0.41, 0.12}
+\definecolor{columbiablue}{rgb}{0.61, 0.87, 1.0}
+\definecolor{coolblack}{rgb}{0.0, 0.18, 0.39}
+\definecolor{coolgrey}{rgb}{0.55, 0.57, 0.67}
+\definecolor{copper}{rgb}{0.72, 0.45, 0.2}
+\definecolor{copperrose}{rgb}{0.6, 0.4, 0.4}
+\definecolor{coquelicot}{rgb}{1.0, 0.22, 0.0}
+\definecolor{coral}{rgb}{1.0, 0.5, 0.31}
+\definecolor{coralpink}{rgb}{0.97, 0.51, 0.47}
+\definecolor{coralred}{rgb}{1.0, 0.25, 0.25}
+\definecolor{cordovan}{rgb}{0.54, 0.25, 0.27}
+\definecolor{corn}{rgb}{0.98, 0.93, 0.36}
+\definecolor{cornellred}{rgb}{0.7, 0.11, 0.11}
+\definecolor{cornflowerblue}{rgb}{0.39, 0.58, 0.93}
+\definecolor{cornsilk}{rgb}{1.0, 0.97, 0.86}
+\definecolor{cosmiclatte}{rgb}{1.0, 0.97, 0.91}
+\definecolor{cottoncandy}{rgb}{1.0, 0.74, 0.85}
+\definecolor{cream}{rgb}{1.0, 0.99, 0.82}
+\definecolor{crimson}{rgb}{0.86, 0.08, 0.24}
+\definecolor{crimsonglory}{rgb}{0.75, 0.0, 0.2}
+\definecolor{cyan}{rgb}{0.0, 1.0, 1.0}
+\definecolor{daffodil}{rgb}{1.0, 1.0, 0.19}
+\definecolor{dandelion}{rgb}{0.94, 0.88, 0.19}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+\definecolor{darkbrown}{rgb}{0.4, 0.26, 0.13}
+\definecolor{darkbyzantium}{rgb}{0.36, 0.22, 0.33}
+\definecolor{darkcandyapplered}{rgb}{0.64, 0.0, 0.0}
+\definecolor{darkcerulean}{rgb}{0.03, 0.27, 0.49}
+\definecolor{darkchampagne}{rgb}{0.76, 0.7, 0.5}
+\definecolor{darkchestnut}{rgb}{0.6, 0.41, 0.38}
+\definecolor{darkcoral}{rgb}{0.8, 0.36, 0.27}
+\definecolor{darkcyan}{rgb}{0.0, 0.55, 0.55}
+\definecolor{darkelectricblue}{rgb}{0.33, 0.41, 0.47}
+\definecolor{darkgoldenrod}{rgb}{0.72, 0.53, 0.04}
+\definecolor{darkgray}{rgb}{0.66, 0.66, 0.66}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{darkjunglegreen}{rgb}{0.1, 0.14, 0.13}
+\definecolor{darkkhaki}{rgb}{0.74, 0.72, 0.42}
+\definecolor{darklava}{rgb}{0.28, 0.24, 0.2}
+\definecolor{darklavender}{rgb}{0.45, 0.31, 0.59}
+\definecolor{darkmagenta}{rgb}{0.55, 0.0, 0.55}
+\definecolor{darkmidnightblue}{rgb}{0.0, 0.2, 0.4}
+\definecolor{darkolivegreen}{rgb}{0.33, 0.42, 0.18}
+\definecolor{darkorange}{rgb}{1.0, 0.55, 0.0}
+\definecolor{darkorchid}{rgb}{0.6, 0.2, 0.8}
+\definecolor{darkpastelblue}{rgb}{0.47, 0.62, 0.8}
+\definecolor{darkpastelgreen}{rgb}{0.01, 0.75, 0.24}
+\definecolor{darkpastelpurple}{rgb}{0.59, 0.44, 0.84}
+\definecolor{darkpastelred}{rgb}{0.76, 0.23, 0.13}
+\definecolor{darkpink}{rgb}{0.91, 0.33, 0.5}
+\definecolor{darkpowderblue}{rgb}{0.0, 0.2, 0.6}
+\definecolor{darkraspberry}{rgb}{0.53, 0.15, 0.34}
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{darksalmon}{rgb}{0.91, 0.59, 0.48}
+\definecolor{darkscarlet}{rgb}{0.34, 0.01, 0.1}
+\definecolor{darkseagreen}{rgb}{0.56, 0.74, 0.56}
+\definecolor{darksienna}{rgb}{0.24, 0.08, 0.08}
+\definecolor{darkslateblue}{rgb}{0.28, 0.24, 0.55}
+\definecolor{darkslategray}{rgb}{0.18, 0.31, 0.31}
+\definecolor{darkspringgreen}{rgb}{0.09, 0.45, 0.27}
+\definecolor{darktan}{rgb}{0.57, 0.51, 0.32}
+\definecolor{darktangerine}{rgb}{1.0, 0.66, 0.07}
+\definecolor{darktaupe}{rgb}{0.28, 0.24, 0.2}
+\definecolor{darkterracotta}{rgb}{0.8, 0.31, 0.36}
+\definecolor{darkturquoise}{rgb}{0.0, 0.81, 0.82}
+\definecolor{darkviolet}{rgb}{0.58, 0.0, 0.83}
+\definecolor{dartmouthgreen}{rgb}{0.05, 0.5, 0.06}
+\definecolor{davysgrey}{rgb}{0.33, 0.33, 0.33}
+\definecolor{debianred}{rgb}{0.84, 0.04, 0.33}
+\definecolor{deepcarmine}{rgb}{0.66, 0.13, 0.24}
+\definecolor{deepcarminepink}{rgb}{0.94, 0.19, 0.22}
+\definecolor{deepcarrotorange}{rgb}{0.91, 0.41, 0.17}
+\definecolor{deepcerise}{rgb}{0.85, 0.2, 0.53}
+\definecolor{deepchampagne}{rgb}{0.98, 0.84, 0.65}
+\definecolor{deepchestnut}{rgb}{0.73, 0.31, 0.28}
+\definecolor{deepfuchsia}{rgb}{0.76, 0.33, 0.76}
+\definecolor{deepjunglegreen}{rgb}{0.0, 0.29, 0.29}
+\definecolor{deeplilac}{rgb}{0.6, 0.33, 0.73}
+\definecolor{deepmagenta}{rgb}{0.8, 0.0, 0.8}
+\definecolor{deeppeach}{rgb}{1.0, 0.8, 0.64}
+\definecolor{deeppink}{rgb}{1.0, 0.08, 0.58}
+\definecolor{deepsaffron}{rgb}{1.0, 0.6, 0.2}
+\definecolor{deepskyblue}{rgb}{0.0, 0.75, 1.0}
+\definecolor{denim}{rgb}{0.08, 0.38, 0.74}
+\definecolor{desert}{rgb}{0.76, 0.6, 0.42}
+\definecolor{desertsand}{rgb}{0.93, 0.79, 0.69}
+\definecolor{dimgray}{rgb}{0.41, 0.41, 0.41}
+\definecolor{dodgerblue}{rgb}{0.12, 0.56, 1.0}
+\definecolor{dogwoodrose}{rgb}{0.84, 0.09, 0.41}
+\definecolor{dollarbill}{rgb}{0.52, 0.73, 0.4}
+\definecolor{drab}{rgb}{0.59, 0.44, 0.09}
+\definecolor{dukeblue}{rgb}{0.0, 0.0, 0.61}
+\definecolor{earthyellow}{rgb}{0.88, 0.66, 0.37}
+\definecolor{ecru}{rgb}{0.76, 0.7, 0.5}
+\definecolor{eggplant}{rgb}{0.38, 0.25, 0.32}
+\definecolor{eggshell}{rgb}{0.94, 0.92, 0.84}
+\definecolor{egyptianblue}{rgb}{0.06, 0.2, 0.65}
+\definecolor{electricblue}{rgb}{0.49, 0.98, 1.0}
+\definecolor{electriccrimson}{rgb}{1.0, 0.0, 0.25}
+\definecolor{electriccyan}{rgb}{0.0, 1.0, 1.0}
+\definecolor{electricgreen}{rgb}{0.0, 1.0, 0.0}
+\definecolor{electricindigo}{rgb}{0.44, 0.0, 1.0}
+\definecolor{electriclavender}{rgb}{0.96, 0.73, 1.0}
+\definecolor{electriclime}{rgb}{0.8, 1.0, 0.0}
+\definecolor{electricpurple}{rgb}{0.75, 0.0, 1.0}
+\definecolor{electricultramarine}{rgb}{0.25, 0.0, 1.0}
+\definecolor{electricviolet}{rgb}{0.56, 0.0, 1.0}
+\definecolor{electricyellow}{rgb}{1.0, 1.0, 0.0}
+\definecolor{emerald}{rgb}{0.31, 0.78, 0.47}
+\definecolor{etonblue}{rgb}{0.59, 0.78, 0.64}
+\definecolor{fallow}{rgb}{0.76, 0.6, 0.42}
+\definecolor{falured}{rgb}{0.5, 0.09, 0.09}
+\definecolor{fandango}{rgb}{0.71, 0.2, 0.54}
+\definecolor{fashionfuchsia}{rgb}{0.96, 0.0, 0.63}
+\definecolor{fawn}{rgb}{0.9, 0.67, 0.44}
+\definecolor{feldgrau}{rgb}{0.3, 0.36, 0.33}
+\definecolor{ferngreen}{rgb}{0.31, 0.47, 0.26}
+\definecolor{ferrarired}{rgb}{1.0, 0.11, 0.0}
+\definecolor{fielddrab}{rgb}{0.42, 0.33, 0.12}
+\definecolor{firebrick}{rgb}{0.7, 0.13, 0.13}
+\definecolor{fireenginered}{rgb}{0.81, 0.09, 0.13}
+\definecolor{flame}{rgb}{0.89, 0.35, 0.13}
+\definecolor{flamingopink}{rgb}{0.99, 0.56, 0.67}
+\definecolor{flavescent}{rgb}{0.97, 0.91, 0.56}
+\definecolor{flax}{rgb}{0.93, 0.86, 0.51}
+\definecolor{floralwhite}{rgb}{1.0, 0.98, 0.94}
+\definecolor{fluorescentorange}{rgb}{1.0, 0.75, 0.0}
+\definecolor{fluorescentpink}{rgb}{1.0, 0.08, 0.58}
+\definecolor{fluorescentyellow}{rgb}{0.8, 1.0, 0.0}
+\definecolor{folly}{rgb}{1.0, 0.0, 0.31}
+\definecolor{forestgreen}{rgb}{0.0, 0.27, 0.13}
+\definecolor{frenchbeige}{rgb}{0.65, 0.48, 0.36}
+\definecolor{frenchblue}{rgb}{0.0, 0.45, 0.73}
+\definecolor{frenchlilac}{rgb}{0.53, 0.38, 0.56}
+\definecolor{frenchrose}{rgb}{0.96, 0.29, 0.54}
+\definecolor{fuchsia}{rgb}{1.0, 0.0, 1.0}
+\definecolor{fuchsiapink}{rgb}{1.0, 0.47, 1.0}
+\definecolor{fulvous}{rgb}{0.86, 0.52, 0.0}
+\definecolor{fuzzywuzzy}{rgb}{0.8, 0.4, 0.4}
+\definecolor{gainsboro}{rgb}{0.86, 0.86, 0.86}
+\definecolor{gamboge}{rgb}{0.89, 0.61, 0.06}
+\definecolor{ghostwhite}{rgb}{0.97, 0.97, 1.0}
+\definecolor{ginger}{rgb}{0.69, 0.4, 0.0}
+\definecolor{glaucous}{rgb}{0.38, 0.51, 0.71}
+\definecolor{goldmetallic}{rgb}{0.83, 0.69, 0.22}
+\definecolor{gold}{rgb}{1.0, 0.84, 0.0}
+\definecolor{goldenbrown}{rgb}{0.6, 0.4, 0.08}
+\definecolor{goldenpoppy}{rgb}{0.99, 0.76, 0.0}
+\definecolor{goldenyellow}{rgb}{1.0, 0.87, 0.0}
+\definecolor{goldenrod}{rgb}{0.85, 0.65, 0.13}
+\definecolor{grannysmithapple}{rgb}{0.66, 0.89, 0.63}
+\definecolor{gray}{rgb}{0.5, 0.5, 0.5}
+\definecolor{gray-asparagus}{rgb}{0.27, 0.35, 0.27}
+\definecolor{green}{rgb}{0.0, 1.0, 0.0}
+\definecolor{green-yellow}{rgb}{0.68, 1.0, 0.18}
+\definecolor{grullo}{rgb}{0.66, 0.6, 0.53}
+\definecolor{guppiegreen}{rgb}{0.0, 1.0, 0.5}
+\definecolor{halayaube}{rgb}{0.4, 0.22, 0.33}
+\definecolor{hanblue}{rgb}{0.27, 0.42, 0.81}
+\definecolor{hanpurple}{rgb}{0.32, 0.09, 0.98}
+\definecolor{hansayellow}{rgb}{0.91, 0.84, 0.42}
+\definecolor{harlequin}{rgb}{0.25, 1.0, 0.0}
+\definecolor{harvardcrimson}{rgb}{0.79, 0.0, 0.09}
+\definecolor{harvestgold}{rgb}{0.85, 0.57, 0.0}
+\definecolor{heartgold}{rgb}{0.5, 0.5, 0.0}
+\definecolor{heliotrope}{rgb}{0.87, 0.45, 1.0}
+\definecolor{hollywoodcerise}{rgb}{0.96, 0.0, 0.63}
+\definecolor{honeydew}{rgb}{0.94, 1.0, 0.94}
+\definecolor{hookersgreen}{rgb}{0.0, 0.44, 0.0}
+\definecolor{hotmagenta}{rgb}{1.0, 0.11, 0.81}
+\definecolor{hotpink}{rgb}{1.0, 0.41, 0.71}
+\definecolor{huntergreen}{rgb}{0.21, 0.37, 0.23}
+\definecolor{iceberg}{rgb}{0.44, 0.65, 0.82}
+\definecolor{icterine}{rgb}{0.99, 0.97, 0.37}
+\definecolor{inchworm}{rgb}{0.7, 0.93, 0.36}
+\definecolor{indiagreen}{rgb}{0.07, 0.53, 0.03}
+\definecolor{indianred}{rgb}{0.8, 0.36, 0.36}
+\definecolor{indianyellow}{rgb}{0.89, 0.66, 0.34}
+\definecolor{indigodye}{rgb}{0.0, 0.25, 0.42}
+\definecolor{indigo}{rgb}{0.29, 0.0, 0.51}
+\definecolor{internationalkleinblue}{rgb}{0.0, 0.18, 0.65}
+\definecolor{internationalorange}{rgb}{1.0, 0.31, 0.0}
+\definecolor{iris}{rgb}{0.35, 0.31, 0.81}
+\definecolor{isabelline}{rgb}{0.96, 0.94, 0.93}
+\definecolor{islamicgreen}{rgb}{0.0, 0.56, 0.0}
+\definecolor{ivory}{rgb}{1.0, 1.0, 0.94}
+\definecolor{jade}{rgb}{0.0, 0.66, 0.42}
+\definecolor{jasper}{rgb}{0.84, 0.23, 0.24}
+\definecolor{jazzberryjam}{rgb}{0.65, 0.04, 0.37}
+\definecolor{jonquil}{rgb}{0.98, 0.85, 0.37}
+\definecolor{junebud}{rgb}{0.74, 0.85, 0.34}
+\definecolor{junglegreen}{rgb}{0.16, 0.67, 0.53}
+\definecolor{kellygreen}{rgb}{0.3, 0.73, 0.09}
+\definecolor{khaki}{rgb}{0.76, 0.69, 0.57}
+\definecolor{lightkhaki}{rgb}{0.94, 0.9, 0.55}
+\definecolor{lasallegreen}{rgb}{0.03, 0.47, 0.19}
+\definecolor{languidlavender}{rgb}{0.84, 0.79, 0.87}
+\definecolor{lapislazuli}{rgb}{0.15, 0.38, 0.61}
+\definecolor{laserlemon}{rgb}{1.0, 1.0, 0.13}
+\definecolor{lava}{rgb}{0.81, 0.06, 0.13}
+\definecolor{lavender}{rgb}{0.71, 0.49, 0.86}
+\definecolor{lightlavender}{rgb}{0.9, 0.9, 0.98}
+\definecolor{lavenderblue}{rgb}{0.8, 0.8, 1.0}
+\definecolor{lavenderblush}{rgb}{1.0, 0.94, 0.96}
+\definecolor{lavendergray}{rgb}{0.77, 0.76, 0.82}
+\definecolor{lavenderindigo}{rgb}{0.58, 0.34, 0.92}
+\definecolor{lavendermagenta}{rgb}{0.93, 0.51, 0.93}
+\definecolor{lavendermist}{rgb}{0.9, 0.9, 0.98}
+\definecolor{lavenderpink}{rgb}{0.98, 0.68, 0.82}
+\definecolor{lavenderpurple}{rgb}{0.59, 0.48, 0.71}
+\definecolor{lavenderrose}{rgb}{0.98, 0.63, 0.89}
+\definecolor{lawngreen}{rgb}{0.49, 0.99, 0.0}
+\definecolor{lemon}{rgb}{1.0, 0.97, 0.0}
+\definecolor{lemonchiffon}{rgb}{1.0, 0.98, 0.8}
+\definecolor{lightapricot}{rgb}{0.99, 0.84, 0.69}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{lightbrown}{rgb}{0.71, 0.4, 0.11}
+\definecolor{lightcarminepink}{rgb}{0.9, 0.4, 0.38}
+\definecolor{lightcoral}{rgb}{0.94, 0.5, 0.5}
+\definecolor{lightcornflowerblue}{rgb}{0.6, 0.81, 0.93}
+\definecolor{lightcyan}{rgb}{0.88, 1.0, 1.0}
+\definecolor{lightfuchsiapink}{rgb}{0.98, 0.52, 0.9}
+\definecolor{lightgoldenrodyellow}{rgb}{0.98, 0.98, 0.82}
+\definecolor{lightgray}{rgb}{0.83, 0.83, 0.83}
+\definecolor{lightgreen}{rgb}{0.56, 0.93, 0.56}
+\definecolor{lightkhaki}{rgb}{0.94, 0.9, 0.55}
+\definecolor{lightmauve}{rgb}{0.86, 0.82, 1.0}
+\definecolor{lightpastelpurple}{rgb}{0.69, 0.61, 0.85}
+\definecolor{lightpink}{rgb}{1.0, 0.71, 0.76}
+\definecolor{lightsalmon}{rgb}{1.0, 0.63, 0.48}
+\definecolor{lightsalmonpink}{rgb}{1.0, 0.6, 0.6}
+\definecolor{lightseagreen}{rgb}{0.13, 0.7, 0.67}
+\definecolor{lightskyblue}{rgb}{0.53, 0.81, 0.98}
+\definecolor{lightslategray}{rgb}{0.47, 0.53, 0.6}
+\definecolor{lighttaupe}{rgb}{0.7, 0.55, 0.43}
+\definecolor{lightthulianpink}{rgb}{0.9, 0.56, 0.67}
+\definecolor{lightyellow}{rgb}{1.0, 1.0, 0.88}
+\definecolor{lilac}{rgb}{0.78, 0.64, 0.78}
+\definecolor{lime}{rgb}{0.75, 1.0, 0.0}
+\definecolor{limegreen}{rgb}{0.2, 0.8, 0.2}
+\definecolor{lincolngreen}{rgb}{0.11, 0.35, 0.02}
+\definecolor{linen}{rgb}{0.98, 0.94, 0.9}
+\definecolor{liver}{rgb}{0.33, 0.29, 0.31}
+\definecolor{lust}{rgb}{0.9, 0.13, 0.13}
+\definecolor{macaroniandcheese}{rgb}{1.0, 0.74, 0.53}
+\definecolor{magenta}{rgb}{1.0, 0.0, 1.0}
+\definecolor{magicmint}{rgb}{0.67, 0.94, 0.82}
+\definecolor{magnolia}{rgb}{0.97, 0.96, 1.0}
+\definecolor{mahogany}{rgb}{0.75, 0.25, 0.0}
+\definecolor{maize}{rgb}{0.98, 0.93, 0.37}
+\definecolor{majorelleblue}{rgb}{0.38, 0.31, 0.86}
+\definecolor{malachite}{rgb}{0.04, 0.85, 0.32}
+\definecolor{manatee}{rgb}{0.59, 0.6, 0.67}
+\definecolor{mangotango}{rgb}{1.0, 0.51, 0.26}
+\definecolor{maroon}{rgb}{0.5, 0.0, 0.0}
+\definecolor{mauve}{rgb}{0.88, 0.69, 1.0}
+\definecolor{mauvetaupe}{rgb}{0.57, 0.37, 0.43}
+\definecolor{mauvelous}{rgb}{0.94, 0.6, 0.67}
+\definecolor{mayablue}{rgb}{0.45, 0.76, 0.98}
+\definecolor{meatbrown}{rgb}{0.9, 0.72, 0.23}
+\definecolor{mediumaquamarine}{rgb}{0.4, 0.8, 0.67}
+\definecolor{mediumblue}{rgb}{0.0, 0.0, 0.8}
+\definecolor{mediumcandyapplered}{rgb}{0.89, 0.02, 0.17}
+\definecolor{mediumcarmine}{rgb}{0.69, 0.25, 0.21}
+\definecolor{mediumchampagne}{rgb}{0.95, 0.9, 0.67}
+\definecolor{mediumelectricblue}{rgb}{0.01, 0.31, 0.59}
+\definecolor{mediumjunglegreen}{rgb}{0.11, 0.21, 0.18}
+\definecolor{mediumlavendermagenta}{rgb}{0.8, 0.6, 0.8}
+\definecolor{mediumorchid}{rgb}{0.73, 0.33, 0.83}
+\definecolor{mediumpersianblue}{rgb}{0.0, 0.4, 0.65}
+\definecolor{mediumpurple}{rgb}{0.58, 0.44, 0.86}
+\definecolor{mediumred-violet}{rgb}{0.73, 0.2, 0.52}
+\definecolor{mediumseagreen}{rgb}{0.24, 0.7, 0.44}
+\definecolor{mediumslateblue}{rgb}{0.48, 0.41, 0.93}
+\definecolor{mediumspringbud}{rgb}{0.79, 0.86, 0.54}
+\definecolor{mediumspringgreen}{rgb}{0.0, 0.98, 0.6}
+\definecolor{mediumtaupe}{rgb}{0.4, 0.3, 0.28}
+\definecolor{mediumtealblue}{rgb}{0.0, 0.33, 0.71}
+\definecolor{mediumturquoise}{rgb}{0.28, 0.82, 0.8}
+\definecolor{mediumviolet-red}{rgb}{0.78, 0.08, 0.52}
+\definecolor{melon}{rgb}{0.99, 0.74, 0.71}
+\definecolor{midnightblue}{rgb}{0.1, 0.1, 0.44}
+\definecolor{midnightgreen}{rgb}{0.0, 0.29, 0.33}
+\definecolor{mikadoyellow}{rgb}{1.0, 0.77, 0.05}
+\definecolor{mint}{rgb}{0.24, 0.71, 0.54}
+\definecolor{mintcream}{rgb}{0.96, 1.0, 0.98}
+\definecolor{mintgreen}{rgb}{0.6, 1.0, 0.6}
+\definecolor{mistyrose}{rgb}{1.0, 0.89, 0.88}
+\definecolor{moccasin}{rgb}{0.98, 0.92, 0.84}
+\definecolor{modebeige}{rgb}{0.59, 0.44, 0.09}
+\definecolor{moonstoneblue}{rgb}{0.45, 0.66, 0.76}
+\definecolor{mordantred19}{rgb}{0.68, 0.05, 0.0}
+\definecolor{mossgreen}{rgb}{0.68, 0.87, 0.68}
+\definecolor{mountainmeadow}{rgb}{0.19, 0.73, 0.56}
+\definecolor{mountbattenpink}{rgb}{0.6, 0.48, 0.55}
+\definecolor{mulberry}{rgb}{0.77, 0.29, 0.55}
+\definecolor{mustard}{rgb}{1.0, 0.86, 0.35}
+\definecolor{myrtle}{rgb}{0.13, 0.26, 0.12}
+\definecolor{msugreen}{rgb}{0.09, 0.27, 0.23}
+\definecolor{nadeshikopink}{rgb}{0.96, 0.68, 0.78}
+\definecolor{napiergreen}{rgb}{0.16, 0.5, 0.0}
+\definecolor{naplesyellow}{rgb}{0.98, 0.85, 0.37}
+\definecolor{navajowhite}{rgb}{1.0, 0.87, 0.68}
+\definecolor{navyblue}{rgb}{0.0, 0.0, 0.5}
+\definecolor{neoncarrot}{rgb}{1.0, 0.64, 0.26}
+\definecolor{neonfuchsia}{rgb}{1.0, 0.25, 0.39}
+\definecolor{neongreen}{rgb}{0.22, 0.88, 0.08}
+\definecolor{non-photoblue}{rgb}{0.64, 0.87, 0.93}
+\definecolor{oceanboatblue}{rgb}{0.0, 0.47, 0.75}
+\definecolor{ochre}{rgb}{0.8, 0.47, 0.13}
+\definecolor{officegreen}{rgb}{0.0, 0.5, 0.0}
+\definecolor{oldgold}{rgb}{0.81, 0.71, 0.23}
+\definecolor{oldlace}{rgb}{0.99, 0.96, 0.9}
+\definecolor{oldlavender}{rgb}{0.47, 0.41, 0.47}
+\definecolor{oldmauve}{rgb}{0.4, 0.19, 0.28}
+\definecolor{oldrose}{rgb}{0.75, 0.5, 0.51}
+\definecolor{olive}{rgb}{0.5, 0.5, 0.0}
+\definecolor{olivedrab}{rgb}{0.42, 0.56, 0.14}
+\definecolor{olivedrab7}{rgb}{0.24, 0.2, 0.12}
+\definecolor{olivine}{rgb}{0.6, 0.73, 0.45}
+\definecolor{onyx}{rgb}{0.06, 0.06, 0.06}
+\definecolor{operamauve}{rgb}{0.72, 0.52, 0.65}
+\definecolor{orange}{rgb}{1.0, 0.5, 0.0}
+\definecolor{orangepeel}{rgb}{1.0, 0.62, 0.0}
+\definecolor{orange-red}{rgb}{1.0, 0.27, 0.0}
+\definecolor{orchid}{rgb}{0.85, 0.44, 0.84}
+\definecolor{otterbrown}{rgb}{0.4, 0.26, 0.13}
+\definecolor{outerspace}{rgb}{0.25, 0.29, 0.3}
+\definecolor{outrageousorange}{rgb}{1.0, 0.43, 0.29}
+\definecolor{oxfordblue}{rgb}{0.0, 0.13, 0.28}
+\definecolor{oucrimsonred}{rgb}{0.6, 0.0, 0.0}
+\definecolor{pakistangreen}{rgb}{0.0, 0.4, 0.0}
+\definecolor{palatinateblue}{rgb}{0.15, 0.23, 0.89}
+\definecolor{palatinatepurple}{rgb}{0.41, 0.16, 0.38}
+\definecolor{paleaqua}{rgb}{0.74, 0.83, 0.9}
+\definecolor{paleblue}{rgb}{0.69, 0.93, 0.93}
+\definecolor{palebrown}{rgb}{0.6, 0.46, 0.33}
+\definecolor{palecarmine}{rgb}{0.69, 0.25, 0.21}
+\definecolor{palecerulean}{rgb}{0.61, 0.77, 0.89}
+\definecolor{palechestnut}{rgb}{0.87, 0.68, 0.69}
+\definecolor{palecopper}{rgb}{0.85, 0.54, 0.4}
+\definecolor{palecornflowerblue}{rgb}{0.67, 0.8, 0.94}
+\definecolor{palegold}{rgb}{0.9, 0.75, 0.54}
+\definecolor{palegoldenrod}{rgb}{0.93, 0.91, 0.67}
+\definecolor{palegreen}{rgb}{0.6, 0.98, 0.6}
+\definecolor{palemagenta}{rgb}{0.98, 0.52, 0.9}
+\definecolor{palepink}{rgb}{0.98, 0.85, 0.87}
+\definecolor{paleplum}{rgb}{0.8, 0.6, 0.8}
+\definecolor{palered-violet}{rgb}{0.86, 0.44, 0.58}
+\definecolor{palerobineggblue}{rgb}{0.59, 0.87, 0.82}
+\definecolor{palesilver}{rgb}{0.79, 0.75, 0.73}
+\definecolor{palespringbud}{rgb}{0.93, 0.92, 0.74}
+\definecolor{paletaupe}{rgb}{0.74, 0.6, 0.49}
+\definecolor{paleviolet-red}{rgb}{0.86, 0.44, 0.58}
+\definecolor{pansypurple}{rgb}{0.47, 0.09, 0.29}
+\definecolor{papayawhip}{rgb}{1.0, 0.94, 0.84}
+\definecolor{parisgreen}{rgb}{0.31, 0.78, 0.47}
+\definecolor{pastelblue}{rgb}{0.68, 0.78, 0.81}
+\definecolor{pastelbrown}{rgb}{0.51, 0.41, 0.33}
+\definecolor{pastelgray}{rgb}{0.81, 0.81, 0.77}
+\definecolor{pastelgreen}{rgb}{0.47, 0.87, 0.47}
+\definecolor{pastelmagenta}{rgb}{0.96, 0.6, 0.76}
+\definecolor{pastelorange}{rgb}{1.0, 0.7, 0.28}
+\definecolor{pastelpink}{rgb}{1.0, 0.82, 0.86}
+\definecolor{pastelpurple}{rgb}{0.7, 0.62, 0.71}
+\definecolor{pastelred}{rgb}{1.0, 0.41, 0.38}
+\definecolor{pastelviolet}{rgb}{0.8, 0.6, 0.79}
+\definecolor{pastelyellow}{rgb}{0.99, 0.99, 0.59}
+\definecolor{patriarch}{rgb}{0.5, 0.0, 0.5}
+\definecolor{paynesgrey}{rgb}{0.25, 0.25, 0.28}
+\definecolor{peach}{rgb}{1.0, 0.9, 0.71}
+\definecolor{peach-orange}{rgb}{1.0, 0.8, 0.6}
+\definecolor{peachpuff}{rgb}{1.0, 0.85, 0.73}
+\definecolor{peach-yellow}{rgb}{0.98, 0.87, 0.68}
+\definecolor{pear}{rgb}{0.82, 0.89, 0.19}
+\definecolor{pearl}{rgb}{0.94, 0.92, 0.84}
+\definecolor{peridot}{rgb}{0.9, 0.89, 0.0}
+\definecolor{periwinkle}{rgb}{0.8, 0.8, 1.0}
+\definecolor{persianblue}{rgb}{0.11, 0.22, 0.73}
+\definecolor{persiangreen}{rgb}{0.0, 0.65, 0.58}
+\definecolor{persianindigo}{rgb}{0.2, 0.07, 0.48}
+\definecolor{persianorange}{rgb}{0.85, 0.56, 0.35}
+\definecolor{peru}{rgb}{0.8, 0.52, 0.25}
+\definecolor{persianpink}{rgb}{0.97, 0.5, 0.75}
+\definecolor{persianplum}{rgb}{0.44, 0.11, 0.11}
+\definecolor{persianred}{rgb}{0.8, 0.2, 0.2}
+\definecolor{persianrose}{rgb}{1.0, 0.16, 0.64}
+\definecolor{persimmon}{rgb}{0.93, 0.35, 0.0}
+\definecolor{phlox}{rgb}{0.87, 0.0, 1.0}
+\definecolor{phthaloblue}{rgb}{0.0, 0.06, 0.54}
+\definecolor{phthalogreen}{rgb}{0.07, 0.21, 0.14}
+\definecolor{piggypink}{rgb}{0.99, 0.87, 0.9}
+\definecolor{pinegreen}{rgb}{0.0, 0.47, 0.44}
+\definecolor{pink}{rgb}{1.0, 0.75, 0.8}
+\definecolor{pink-orange}{rgb}{1.0, 0.6, 0.4}
+\definecolor{pinkpearl}{rgb}{0.91, 0.67, 0.81}
+\definecolor{pinksherbet}{rgb}{0.97, 0.56, 0.65}
+\definecolor{pistachio}{rgb}{0.58, 0.77, 0.45}
+\definecolor{platinum}{rgb}{0.9, 0.89, 0.89}
+\definecolor{plum}{rgb}{0.56, 0.27, 0.52}
+\definecolor{portlandorange}{rgb}{1.0, 0.35, 0.21}
+\definecolor{powderblue}{rgb}{0.69, 0.88, 0.9}
+\definecolor{princetonorange}{rgb}{1.0, 0.56, 0.0}
+\definecolor{prune}{rgb}{0.44, 0.11, 0.11}
+\definecolor{prussianblue}{rgb}{0.0, 0.19, 0.33}
+\definecolor{psychedelicpurple}{rgb}{0.87, 0.0, 1.0}
+\definecolor{puce}{rgb}{0.8, 0.53, 0.6}
+\definecolor{pumpkin}{rgb}{1.0, 0.46, 0.09}
+\definecolor{purple}{rgb}{0.5, 0.0, 0.5}
+\definecolor{purpleheart}{rgb}{0.41, 0.21, 0.61}
+\definecolor{purplemountainmajesty}{rgb}{0.59, 0.47, 0.71}
+\definecolor{purplepizzazz}{rgb}{1.0, 0.31, 0.85}
+\definecolor{purpletaupe}{rgb}{0.31, 0.25, 0.3}
+\definecolor{radicalred}{rgb}{1.0, 0.21, 0.37}
+\definecolor{raspberry}{rgb}{0.89, 0.04, 0.36}
+\definecolor{raspberryglace}{rgb}{0.57, 0.37, 0.43}
+\definecolor{raspberrypink}{rgb}{0.89, 0.31, 0.61}
+\definecolor{raspberryrose}{rgb}{0.7, 0.27, 0.42}
+\definecolor{rawumber}{rgb}{0.51, 0.4, 0.27}
+\definecolor{razzledazzlerose}{rgb}{1.0, 0.2, 0.8}
+\definecolor{razzmatazz}{rgb}{0.89, 0.15, 0.42}
+\definecolor{red}{rgb}{1.0, 0.0, 0.0}
+\definecolor{red-brown}{rgb}{0.65, 0.16, 0.16}
+\definecolor{red-violet}{rgb}{0.78, 0.08, 0.52}
+\definecolor{redwood}{rgb}{0.67, 0.31, 0.32}
+\definecolor{regalia}{rgb}{0.32, 0.18, 0.5}
+\definecolor{richblack}{rgb}{0.0, 0.25, 0.25}
+\definecolor{richbrilliantlavender}{rgb}{0.95, 0.65, 1.0}
+\definecolor{richcarmine}{rgb}{0.84, 0.0, 0.25}
+\definecolor{richelectricblue}{rgb}{0.03, 0.57, 0.82}
+\definecolor{richlavender}{rgb}{0.67, 0.38, 0.8}
+\definecolor{richlilac}{rgb}{0.71, 0.4, 0.82}
+\definecolor{richmaroon}{rgb}{0.69, 0.19, 0.38}
+\definecolor{riflegreen}{rgb}{0.25, 0.28, 0.2}
+\definecolor{robineggblue}{rgb}{0.0, 0.8, 0.8}
+\definecolor{rose}{rgb}{1.0, 0.0, 0.5}
+\definecolor{rosebonbon}{rgb}{0.98, 0.26, 0.62}
+\definecolor{roseebony}{rgb}{0.4, 0.3, 0.28}
+\definecolor{rosegold}{rgb}{0.72, 0.43, 0.47}
+\definecolor{rosemadder}{rgb}{0.89, 0.15, 0.21}
+\definecolor{rosepink}{rgb}{1.0, 0.4, 0.8}
+\definecolor{rosequartz}{rgb}{0.67, 0.6, 0.66}
+\definecolor{rosetaupe}{rgb}{0.56, 0.36, 0.36}
+\definecolor{rosevale}{rgb}{0.67, 0.31, 0.32}
+\definecolor{rosewood}{rgb}{0.4, 0.0, 0.04}
+\definecolor{rossocorsa}{rgb}{0.83, 0.0, 0.0}
+\definecolor{rosybrown}{rgb}{0.74, 0.56, 0.56}
+\definecolor{royalazure}{rgb}{0.0, 0.22, 0.66}
+\definecolor{royalblue}{rgb}{0.0, 0.14, 0.4}
+\definecolor{royalfuchsia}{rgb}{0.79, 0.17, 0.57}
+\definecolor{royalpurple}{rgb}{0.47, 0.32, 0.66}
+\definecolor{ruby}{rgb}{0.88, 0.07, 0.37}
+\definecolor{ruddy}{rgb}{1.0, 0.0, 0.16}
+\definecolor{ruddybrown}{rgb}{0.73, 0.4, 0.16}
+\definecolor{ruddypink}{rgb}{0.88, 0.56, 0.59}
+\definecolor{rufous}{rgb}{0.66, 0.11, 0.03}
+\definecolor{russet}{rgb}{0.5, 0.27, 0.11}
+\definecolor{rust}{rgb}{0.72, 0.25, 0.05}
+\definecolor{sacramentostategreen}{rgb}{0.0, 0.34, 0.25}
+\definecolor{saddlebrown}{rgb}{0.55, 0.27, 0.07}
+\definecolor{safetyorange}{rgb}{1.0, 0.4, 0.0}
+\definecolor{saffron}{rgb}{0.96, 0.77, 0.19}
+\definecolor{st.patricksblue}{rgb}{0.14, 0.16, 0.48}
+\definecolor{salmon}{rgb}{1.0, 0.55, 0.41}
+\definecolor{salmonpink}{rgb}{1.0, 0.57, 0.64}
+\definecolor{sand}{rgb}{0.76, 0.7, 0.5}
+\definecolor{sanddune}{rgb}{0.59, 0.44, 0.09}
+\definecolor{sandstorm}{rgb}{0.93, 0.84, 0.25}
+\definecolor{sandybrown}{rgb}{0.96, 0.64, 0.38}
+\definecolor{sandytaupe}{rgb}{0.59, 0.44, 0.09}
+\definecolor{sangria}{rgb}{0.57, 0.0, 0.04}
+\definecolor{sapgreen}{rgb}{0.31, 0.49, 0.16}
+\definecolor{sapphire}{rgb}{0.03, 0.15, 0.4}
+\definecolor{satinsheengold}{rgb}{0.8, 0.63, 0.21}
+\definecolor{scarlet}{rgb}{1.0, 0.13, 0.0}
+\definecolor{schoolbusyellow}{rgb}{1.0, 0.85, 0.0}
+\definecolor{screamingreen}{rgb}{0.46, 1.0, 0.44}
+\definecolor{seagreen}{rgb}{0.18, 0.55, 0.34}
+\definecolor{sealbrown}{rgb}{0.2, 0.08, 0.08}
+\definecolor{seashell}{rgb}{1.0, 0.96, 0.93}
+\definecolor{selectiveyellow}{rgb}{1.0, 0.73, 0.0}
+\definecolor{sepia}{rgb}{0.44, 0.26, 0.08}
+\definecolor{shadow}{rgb}{0.54, 0.47, 0.36}
+\definecolor{shamrockgreen}{rgb}{0.0, 0.62, 0.38}
+\definecolor{shockingpink}{rgb}{0.99, 0.06, 0.75}
+\definecolor{sienna}{rgb}{0.53, 0.18, 0.09}
+\definecolor{silver}{rgb}{0.75, 0.75, 0.75}
+\definecolor{sinopia}{rgb}{0.8, 0.25, 0.04}
+\definecolor{skobeloff}{rgb}{0.0, 0.48, 0.45}
+\definecolor{skyblue}{rgb}{0.53, 0.81, 0.92}
+\definecolor{skymagenta}{rgb}{0.81, 0.44, 0.69}
+\definecolor{slateblue}{rgb}{0.42, 0.35, 0.8}
+\definecolor{slategray}{rgb}{0.44, 0.5, 0.56}
+\definecolor{smalt}{rgb}{0.0, 0.2, 0.6}
+\definecolor{smokeytopaz}{rgb}{0.58, 0.25, 0.03}
+\definecolor{smokyblack}{rgb}{0.06, 0.05, 0.03}
+\definecolor{snow}{rgb}{1.0, 0.98, 0.98}
+\definecolor{spirodiscoball}{rgb}{0.06, 0.75, 0.99}
+\definecolor{splashedwhite}{rgb}{1.0, 0.99, 1.0}
+\definecolor{springbud}{rgb}{0.65, 0.99, 0.0}
+\definecolor{springgreen}{rgb}{0.0, 1.0, 0.5}
+\definecolor{steelblue}{rgb}{0.27, 0.51, 0.71}
+\definecolor{stildegrainyellow}{rgb}{0.98, 0.85, 0.37}
+\definecolor{straw}{rgb}{0.89, 0.85, 0.44}
+\definecolor{sunglow}{rgb}{1.0, 0.8, 0.2}
+\definecolor{sunset}{rgb}{0.98, 0.84, 0.65}
+\definecolor{tan}{rgb}{0.82, 0.71, 0.55}
+\definecolor{tangelo}{rgb}{0.98, 0.3, 0.0}
+\definecolor{tangerine}{rgb}{0.95, 0.52, 0.0}
+\definecolor{tangerineyellow}{rgb}{1.0, 0.8, 0.0}
+\definecolor{taupe}{rgb}{0.28, 0.24, 0.2}
+\definecolor{taupegray}{rgb}{0.55, 0.52, 0.54}
+\definecolor{teagreen}{rgb}{0.82, 0.94, 0.75}
+\definecolor{tearoseorange}{rgb}{0.97, 0.51, 0.47}
+\definecolor{tearoserose}{rgb}{0.96, 0.76, 0.76}
+\definecolor{teal}{rgb}{0.0, 0.5, 0.5}
+\definecolor{tealblue}{rgb}{0.21, 0.46, 0.53}
+\definecolor{tealgreen}{rgb}{0.0, 0.51, 0.5}
+\definecolor{tenne}{rgb}{0.8, 0.34, 0.0}
+\definecolor{terracotta}{rgb}{0.89, 0.45, 0.36}
+\definecolor{thistle}{rgb}{0.85, 0.75, 0.85}
+\definecolor{thulianpink}{rgb}{0.87, 0.44, 0.63}
+\definecolor{ticklemepink}{rgb}{0.99, 0.54, 0.67}
+\definecolor{tiffanyblue}{rgb}{0.04, 0.73, 0.71}
+\definecolor{tigerseye}{rgb}{0.88, 0.55, 0.24}
+\definecolor{timberwolf}{rgb}{0.86, 0.84, 0.82}
+\definecolor{titaniumyellow}{rgb}{0.93, 0.9, 0.0}
+\definecolor{tomato}{rgb}{1.0, 0.39, 0.28}
+\definecolor{toolbox}{rgb}{0.45, 0.42, 0.75}
+\definecolor{tractorred}{rgb}{0.99, 0.05, 0.21}
+\definecolor{trolleygrey}{rgb}{0.5, 0.5, 0.5}
+\definecolor{tropicalrainforest}{rgb}{0.0, 0.46, 0.37}
+\definecolor{trueblue}{rgb}{0.0, 0.45, 0.81}
+\definecolor{tuftsblue}{rgb}{0.28, 0.57, 0.81}
+\definecolor{tumbleweed}{rgb}{0.87, 0.67, 0.53}
+\definecolor{turkishrose}{rgb}{0.71, 0.45, 0.51}
+\definecolor{turquoise}{rgb}{0.19, 0.84, 0.78}
+\definecolor{turquoiseblue}{rgb}{0.0, 1.0, 0.94}
+\definecolor{turquoisegreen}{rgb}{0.63, 0.84, 0.71}
+\definecolor{tuscanred}{rgb}{0.51, 0.21, 0.21}
+\definecolor{twilightlavender}{rgb}{0.54, 0.29, 0.42}
+\definecolor{tyrianpurple}{rgb}{0.4, 0.01, 0.24}
+\definecolor{uablue}{rgb}{0.0, 0.2, 0.67}
+\definecolor{uared}{rgb}{0.85, 0.0, 0.3}
+\definecolor{ube}{rgb}{0.53, 0.47, 0.76}
+\definecolor{uclablue}{rgb}{0.33, 0.41, 0.58}
+\definecolor{uclagold}{rgb}{1.0, 0.7, 0.0}
+\definecolor{ufogreen}{rgb}{0.24, 0.82, 0.44}
+\definecolor{ultramarine}{rgb}{0.07, 0.04, 0.56}
+\definecolor{ultramarineblue}{rgb}{0.25, 0.4, 0.96}
+\definecolor{ultrapink}{rgb}{1.0, 0.44, 1.0}
+\definecolor{umber}{rgb}{0.39, 0.32, 0.28}
+\definecolor{unitednationsblue}{rgb}{0.36, 0.57, 0.9}
+\definecolor{unmellowyellow}{rgb}{1.0, 1.0, 0.4}
+\definecolor{upforestgreen}{rgb}{0.0, 0.27, 0.13}
+\definecolor{upmaroon}{rgb}{0.48, 0.07, 0.07}
+\definecolor{upsdellred}{rgb}{0.68, 0.09, 0.13}
+\definecolor{urobilin}{rgb}{0.88, 0.68, 0.13}
+\definecolor{usccardinal}{rgb}{0.6, 0.0, 0.0}
+\definecolor{uscgold}{rgb}{1.0, 0.8, 0.0}
+\definecolor{utahcrimson}{rgb}{0.83, 0.0, 0.25}
+\definecolor{vanilla}{rgb}{0.95, 0.9, 0.67}
+\definecolor{vegasgold}{rgb}{0.77, 0.7, 0.35}
+\definecolor{venetianred}{rgb}{0.78, 0.03, 0.08}
+\definecolor{verdigris}{rgb}{0.26, 0.7, 0.68}
+\definecolor{vermilion}{rgb}{0.89, 0.26, 0.2}
+\definecolor{veronica}{rgb}{0.63, 0.36, 0.94}
+\definecolor{violet}{rgb}{0.56, 0.0, 1.0}
+\definecolor{viridian}{rgb}{0.25, 0.51, 0.43}
+\definecolor{vividauburn}{rgb}{0.58, 0.15, 0.14}
+\definecolor{vividburgundy}{rgb}{0.62, 0.11, 0.21}
+\definecolor{vividcerise}{rgb}{0.85, 0.11, 0.51}
+\definecolor{vividtangerine}{rgb}{1.0, 0.63, 0.54}
+\definecolor{vividviolet}{rgb}{0.62, 0.0, 1.0}
+\definecolor{warmblack}{rgb}{0.0, 0.26, 0.26}
+\definecolor{wenge}{rgb}{0.39, 0.33, 0.32}
+\definecolor{wheat}{rgb}{0.96, 0.87, 0.7}
+\definecolor{white}{rgb}{1.0, 1.0, 1.0}
+\definecolor{whitesmoke}{rgb}{0.96, 0.96, 0.96}
+\definecolor{wildblueyonder}{rgb}{0.64, 0.68, 0.82}
+\definecolor{wildstrawberry}{rgb}{1.0, 0.26, 0.64}
+\definecolor{wildwatermelon}{rgb}{0.99, 0.42, 0.52}
+\definecolor{wisteria}{rgb}{0.79, 0.63, 0.86}
+\definecolor{xanadu}{rgb}{0.45, 0.53, 0.47}
+\definecolor{yaleblue}{rgb}{0.06, 0.3, 0.57}
+\definecolor{yellow}{rgb}{1.0, 1.0, 0.0}
+\definecolor{yellow-green}{rgb}{0.6, 0.8, 0.2}
+\definecolor{zaffre}{rgb}{0.0, 0.08, 0.66}
+\definecolor{zinnwalditebrown}{rgb}{0.17, 0.09, 0.03}
+\usepackage{ulem}
+\usepackage[pdftex,outline]{contour}
+
+\title{\{colortable\} to latex}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{suppressMessages}\NormalTok{(\{}
+  \KeywordTok{library}\NormalTok{(tidyverse)}
+  \KeywordTok{library}\NormalTok{(colortable)}
+  \KeywordTok{library}\NormalTok{(knitr)}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{valid-pdf-styles}{%
+\section{Valid PDF Styles}\label{valid-pdf-styles}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{possible_styles <-}\StringTok{ }\KeywordTok{valid_style}\NormalTok{(}\DataTypeTok{method =} \StringTok{"latex"}\NormalTok{)}
+
+\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{Styles =}\NormalTok{ possible_styles,}
+           \DataTypeTok{Example =} \KeywordTok{color_vctr}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"Lorem Ipsum"}\NormalTok{,}\KeywordTok{length}\NormalTok{(possible_styles)), }\DataTypeTok{style =}\NormalTok{ possible_styles)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{format}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{escape =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+Styles & Example\tabularnewline
+\midrule
+\endhead
+bold & \textbf{Lorem Ipsum}\tabularnewline
+italic & \textit{Lorem Ipsum}\tabularnewline
+underline & \underline{Lorem Ipsum}\tabularnewline
+strikethrough & \sout{Lorem Ipsum}\tabularnewline
+outline & \contour{black}{Lorem Ipsum}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{valid-pdf-colors}{%
+\section{Valid PDF Colors}\label{valid-pdf-colors}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{possible_colors <-}\StringTok{ }\KeywordTok{valid_colors}\NormalTok{(}\DataTypeTok{method =} \StringTok{"latex"}\NormalTok{)}
+
+\NormalTok{possible_colors }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
+    \StringTok{`}\DataTypeTok{Color}\StringTok{`}\NormalTok{ =}
+\StringTok{  }\KeywordTok{color_vctr}\NormalTok{(}
+\NormalTok{    possible_colors}\OperatorTok{$}\StringTok{`}\DataTypeTok{Color Name}\StringTok{`}\NormalTok{,}
+    \DataTypeTok{text_color =}\NormalTok{ possible_colors}\OperatorTok{$}\StringTok{`}\DataTypeTok{Color Name}\StringTok{`}
+\NormalTok{  ),}
+\StringTok{`}\DataTypeTok{Hex Code}\StringTok{`}\NormalTok{ =}
+\StringTok{  }\KeywordTok{color_vctr}\NormalTok{(}
+    \KeywordTok{paste0}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{"}\NormalTok{,possible_colors}\OperatorTok{$}\StringTok{`}\DataTypeTok{Hex Code}\StringTok{`}\NormalTok{),}
+    \DataTypeTok{background =}\NormalTok{ possible_colors}\OperatorTok{$}\StringTok{`}\DataTypeTok{Hex Code}\StringTok{`}
+\NormalTok{  )) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\StringTok{`}\DataTypeTok{Color Name}\StringTok{`}\NormalTok{, Color, }\StringTok{`}\DataTypeTok{Hex Code}\StringTok{`}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{data.frame}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{format}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{escape =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Color.Name & Color & Hex.Code\tabularnewline
+\midrule
+\endhead
+airforceblue & \textcolor{airforceblue}{airforceblue} &
+\colorbox{airforceblue}{\#5D8AA8}\tabularnewline
+aliceblue & \textcolor{aliceblue}{aliceblue} &
+\colorbox{aliceblue}{\#F0F8FF}\tabularnewline
+alizarin & \textcolor{alizarin}{alizarin} &
+\colorbox{alizarin}{\#E32636}\tabularnewline
+almond & \textcolor{almond}{almond} &
+\colorbox{almond}{\#EFDECD}\tabularnewline
+amaranth & \textcolor{amaranth}{amaranth} &
+\colorbox{amaranth}{\#E52B50}\tabularnewline
+amber & \textcolor{amber}{amber} &
+\colorbox{amber}{\#FFBF00}\tabularnewline
+americanrose & \textcolor{americanrose}{americanrose} &
+\colorbox{americanrose}{\#FF033E}\tabularnewline
+amethyst & \textcolor{amethyst}{amethyst} &
+\colorbox{amethyst}{\#9966CC}\tabularnewline
+anti-flashwhite & \textcolor{anti-flashwhite}{anti-flashwhite} &
+\colorbox{anti-flashwhite}{\#F2F3F4}\tabularnewline
+antiquebrass & \textcolor{antiquebrass}{antiquebrass} &
+\colorbox{antiquebrass}{\#CD9575}\tabularnewline
+antiquefuchsia & \textcolor{antiquefuchsia}{antiquefuchsia} &
+\colorbox{antiquefuchsia}{\#915C83}\tabularnewline
+antiquewhite & \textcolor{antiquewhite}{antiquewhite} &
+\colorbox{antiquewhite}{\#FAEBD7}\tabularnewline
+ao & \textcolor{ao}{ao} & \colorbox{ao}{\#0000FF}\tabularnewline
+applegreen & \textcolor{applegreen}{applegreen} &
+\colorbox{applegreen}{\#8DB600}\tabularnewline
+apricot & \textcolor{apricot}{apricot} &
+\colorbox{apricot}{\#FBCEB1}\tabularnewline
+aqua & \textcolor{aqua}{aqua} & \colorbox{aqua}{\#00FFFF}\tabularnewline
+aquamarine & \textcolor{aquamarine}{aquamarine} &
+\colorbox{aquamarine}{\#7FFFD0}\tabularnewline
+armygreen & \textcolor{armygreen}{armygreen} &
+\colorbox{armygreen}{\#4B5320}\tabularnewline
+arsenic & \textcolor{arsenic}{arsenic} &
+\colorbox{arsenic}{\#3B444B}\tabularnewline
+arylideyellow & \textcolor{arylideyellow}{arylideyellow} &
+\colorbox{arylideyellow}{\#E9D66B}\tabularnewline
+ashgrey & \textcolor{ashgrey}{ashgrey} &
+\colorbox{ashgrey}{\#B2BEB5}\tabularnewline
+asparagus & \textcolor{asparagus}{asparagus} &
+\colorbox{asparagus}{\#87A96B}\tabularnewline
+atomictangerine & \textcolor{atomictangerine}{atomictangerine} &
+\colorbox{atomictangerine}{\#FF9966}\tabularnewline
+auburn & \textcolor{auburn}{auburn} &
+\colorbox{auburn}{\#6D351A}\tabularnewline
+aureolin & \textcolor{aureolin}{aureolin} &
+\colorbox{aureolin}{\#FDEE00}\tabularnewline
+aurometalsaurus & \textcolor{aurometalsaurus}{aurometalsaurus} &
+\colorbox{aurometalsaurus}{\#6E7F80}\tabularnewline
+awesome & \textcolor{awesome}{awesome} &
+\colorbox{awesome}{\#FF2052}\tabularnewline
+azure & \textcolor{azure}{azure} &
+\colorbox{azure}{\#007FFF}\tabularnewline
+babyblue & \textcolor{babyblue}{babyblue} &
+\colorbox{babyblue}{\#89CFF0}\tabularnewline
+babyblueeyes & \textcolor{babyblueeyes}{babyblueeyes} &
+\colorbox{babyblueeyes}{\#A1CAF1}\tabularnewline
+babypink & \textcolor{babypink}{babypink} &
+\colorbox{babypink}{\#F4C2C2}\tabularnewline
+ballblue & \textcolor{ballblue}{ballblue} &
+\colorbox{ballblue}{\#21ABCD}\tabularnewline
+bananamania & \textcolor{bananamania}{bananamania} &
+\colorbox{bananamania}{\#FAE7B5}\tabularnewline
+bananayellow & \textcolor{bananayellow}{bananayellow} &
+\colorbox{bananayellow}{\#FFE135}\tabularnewline
+battleshipgrey & \textcolor{battleshipgrey}{battleshipgrey} &
+\colorbox{battleshipgrey}{\#848482}\tabularnewline
+bazaar & \textcolor{bazaar}{bazaar} &
+\colorbox{bazaar}{\#98777B}\tabularnewline
+beaublue & \textcolor{beaublue}{beaublue} &
+\colorbox{beaublue}{\#BCD4E6}\tabularnewline
+beaver & \textcolor{beaver}{beaver} &
+\colorbox{beaver}{\#9F8170}\tabularnewline
+beige & \textcolor{beige}{beige} &
+\colorbox{beige}{\#F5F5DC}\tabularnewline
+bisque & \textcolor{bisque}{bisque} &
+\colorbox{bisque}{\#FFE4C4}\tabularnewline
+bistre & \textcolor{bistre}{bistre} &
+\colorbox{bistre}{\#3D2B1F}\tabularnewline
+bittersweet & \textcolor{bittersweet}{bittersweet} &
+\colorbox{bittersweet}{\#FE6F5E}\tabularnewline
+black & \textcolor{black}{black} &
+\colorbox{black}{\#000000}\tabularnewline
+blanchedalmond & \textcolor{blanchedalmond}{blanchedalmond} &
+\colorbox{blanchedalmond}{\#FFEBCD}\tabularnewline
+bleudefrance & \textcolor{bleudefrance}{bleudefrance} &
+\colorbox{bleudefrance}{\#318CE7}\tabularnewline
+blizzardblue & \textcolor{blizzardblue}{blizzardblue} &
+\colorbox{blizzardblue}{\#ACE5EE}\tabularnewline
+blond & \textcolor{blond}{blond} &
+\colorbox{blond}{\#FAF0BE}\tabularnewline
+blue & \textcolor{blue}{blue} & \colorbox{ao}{\#0000FF}\tabularnewline
+bluebell & \textcolor{bluebell}{bluebell} &
+\colorbox{bluebell}{\#A2A2D0}\tabularnewline
+bluegray & \textcolor{bluegray}{bluegray} &
+\colorbox{bluegray}{\#6699CC}\tabularnewline
+blue-green & \textcolor{blue-green}{blue-green} &
+\colorbox{blue-green}{\#00DDDD}\tabularnewline
+blue-violet & \textcolor{blue-violet}{blue-violet} &
+\colorbox{blue-violet}{\#8A2BE2}\tabularnewline
+blush & \textcolor{blush}{blush} &
+\colorbox{blush}{\#DE5D83}\tabularnewline
+bole & \textcolor{bole}{bole} & \colorbox{bole}{\#79443B}\tabularnewline
+bondiblue & \textcolor{bondiblue}{bondiblue} &
+\colorbox{bondiblue}{\#0095B6}\tabularnewline
+bostonuniversityred &
+\textcolor{bostonuniversityred}{bostonuniversityred} &
+\colorbox{bostonuniversityred}{\#CC0000}\tabularnewline
+brandeisblue & \textcolor{brandeisblue}{brandeisblue} &
+\colorbox{brandeisblue}{\#0070FF}\tabularnewline
+brass & \textcolor{brass}{brass} &
+\colorbox{brass}{\#B5A642}\tabularnewline
+brickred & \textcolor{brickred}{brickred} &
+\colorbox{brickred}{\#CB4154}\tabularnewline
+brightcerulean & \textcolor{brightcerulean}{brightcerulean} &
+\colorbox{brightcerulean}{\#1DACD6}\tabularnewline
+brightgreen & \textcolor{brightgreen}{brightgreen} &
+\colorbox{brightgreen}{\#66FF00}\tabularnewline
+brightlavender & \textcolor{brightlavender}{brightlavender} &
+\colorbox{brightlavender}{\#BF94E4}\tabularnewline
+brightmaroon & \textcolor{brightmaroon}{brightmaroon} &
+\colorbox{brightmaroon}{\#C32148}\tabularnewline
+brightpink & \textcolor{brightpink}{brightpink} &
+\colorbox{brightpink}{\#FF007F}\tabularnewline
+brightturquoise & \textcolor{brightturquoise}{brightturquoise} &
+\colorbox{brightturquoise}{\#08E8DE}\tabularnewline
+brightube & \textcolor{brightube}{brightube} &
+\colorbox{brightube}{\#D19FE8}\tabularnewline
+brilliantlavender & \textcolor{brilliantlavender}{brilliantlavender} &
+\colorbox{brilliantlavender}{\#F4BBFF}\tabularnewline
+brilliantrose & \textcolor{brilliantrose}{brilliantrose} &
+\colorbox{brilliantrose}{\#FF55A3}\tabularnewline
+brinkpink & \textcolor{brinkpink}{brinkpink} &
+\colorbox{brinkpink}{\#FB607F}\tabularnewline
+britishracinggreen & \textcolor{britishracinggreen}{britishracinggreen}
+& \colorbox{britishracinggreen}{\#004225}\tabularnewline
+bronze & \textcolor{bronze}{bronze} &
+\colorbox{bronze}{\#CD7F32}\tabularnewline
+brown & \textcolor{brown}{brown} &
+\colorbox{brown}{\#964B00}\tabularnewline
+bubblegum & \textcolor{bubblegum}{bubblegum} &
+\colorbox{bubblegum}{\#FFC1CC}\tabularnewline
+bubbles & \textcolor{bubbles}{bubbles} &
+\colorbox{bubbles}{\#E7FEFF}\tabularnewline
+buff & \textcolor{buff}{buff} & \colorbox{buff}{\#F0DC82}\tabularnewline
+bulgarianrose & \textcolor{bulgarianrose}{bulgarianrose} &
+\colorbox{bulgarianrose}{\#480607}\tabularnewline
+burgundy & \textcolor{burgundy}{burgundy} &
+\colorbox{burgundy}{\#800020}\tabularnewline
+burlywood & \textcolor{burlywood}{burlywood} &
+\colorbox{burlywood}{\#DEB887}\tabularnewline
+burntorange & \textcolor{burntorange}{burntorange} &
+\colorbox{burntorange}{\#CC5500}\tabularnewline
+burntsienna & \textcolor{burntsienna}{burntsienna} &
+\colorbox{burntsienna}{\#E97451}\tabularnewline
+burntumber & \textcolor{burntumber}{burntumber} &
+\colorbox{burntumber}{\#8A3324}\tabularnewline
+byzantine & \textcolor{byzantine}{byzantine} &
+\colorbox{byzantine}{\#BD33A4}\tabularnewline
+byzantium & \textcolor{byzantium}{byzantium} &
+\colorbox{byzantium}{\#702963}\tabularnewline
+cadet & \textcolor{cadet}{cadet} &
+\colorbox{cadet}{\#536872}\tabularnewline
+cadetblue & \textcolor{cadetblue}{cadetblue} &
+\colorbox{cadetblue}{\#5F9EA0}\tabularnewline
+cadetgrey & \textcolor{cadetgrey}{cadetgrey} &
+\colorbox{cadetgrey}{\#91A3B0}\tabularnewline
+cadmiumgreen & \textcolor{cadmiumgreen}{cadmiumgreen} &
+\colorbox{cadmiumgreen}{\#006B3C}\tabularnewline
+cadmiumorange & \textcolor{cadmiumorange}{cadmiumorange} &
+\colorbox{cadmiumorange}{\#ED872D}\tabularnewline
+cadmiumred & \textcolor{cadmiumred}{cadmiumred} &
+\colorbox{cadmiumred}{\#E30022}\tabularnewline
+cadmiumyellow & \textcolor{cadmiumyellow}{cadmiumyellow} &
+\colorbox{cadmiumyellow}{\#FFF600}\tabularnewline
+calpolypomonagreen & \textcolor{calpolypomonagreen}{calpolypomonagreen}
+& \colorbox{calpolypomonagreen}{\#1E4D2B}\tabularnewline
+cambridgeblue & \textcolor{cambridgeblue}{cambridgeblue} &
+\colorbox{cambridgeblue}{\#A3C1AD}\tabularnewline
+camel & \textcolor{camel}{camel} &
+\colorbox{camel}{\#C19A6B}\tabularnewline
+camouflagegreen & \textcolor{camouflagegreen}{camouflagegreen} &
+\colorbox{camouflagegreen}{\#78866B}\tabularnewline
+canaryyellow & \textcolor{canaryyellow}{canaryyellow} &
+\colorbox{canaryyellow}{\#FFEF00}\tabularnewline
+candyapplered & \textcolor{candyapplered}{candyapplered} &
+\colorbox{candyapplered}{\#FF0800}\tabularnewline
+candypink & \textcolor{candypink}{candypink} &
+\colorbox{candypink}{\#E4717A}\tabularnewline
+capri & \textcolor{capri}{capri} &
+\colorbox{capri}{\#00BFFF}\tabularnewline
+caputmortuum & \textcolor{caputmortuum}{caputmortuum} &
+\colorbox{caputmortuum}{\#592720}\tabularnewline
+cardinal & \textcolor{cardinal}{cardinal} &
+\colorbox{cardinal}{\#C41E3A}\tabularnewline
+caribbeangreen & \textcolor{caribbeangreen}{caribbeangreen} &
+\colorbox{caribbeangreen}{\#00CC99}\tabularnewline
+carmine & \textcolor{carmine}{carmine} &
+\colorbox{carmine}{\#960018}\tabularnewline
+carminepink & \textcolor{carminepink}{carminepink} &
+\colorbox{carminepink}{\#EB4C42}\tabularnewline
+carminered & \textcolor{carminered}{carminered} &
+\colorbox{carminered}{\#FF0038}\tabularnewline
+carnationpink & \textcolor{carnationpink}{carnationpink} &
+\colorbox{carnationpink}{\#FFA6C9}\tabularnewline
+carnelian & \textcolor{carnelian}{carnelian} &
+\colorbox{carnelian}{\#B31B1B}\tabularnewline
+carolinablue & \textcolor{carolinablue}{carolinablue} &
+\colorbox{carolinablue}{\#99BADD}\tabularnewline
+carrotorange & \textcolor{carrotorange}{carrotorange} &
+\colorbox{carrotorange}{\#ED9121}\tabularnewline
+ceil & \textcolor{ceil}{ceil} & \colorbox{ceil}{\#92A1CF}\tabularnewline
+celadon & \textcolor{celadon}{celadon} &
+\colorbox{celadon}{\#ACE1AF}\tabularnewline
+celestialblue & \textcolor{celestialblue}{celestialblue} &
+\colorbox{celestialblue}{\#4997D0}\tabularnewline
+cerise & \textcolor{cerise}{cerise} &
+\colorbox{cerise}{\#DE3163}\tabularnewline
+cerisepink & \textcolor{cerisepink}{cerisepink} &
+\colorbox{cerisepink}{\#EC3B83}\tabularnewline
+cerulean & \textcolor{cerulean}{cerulean} &
+\colorbox{cerulean}{\#007BA7}\tabularnewline
+ceruleanblue & \textcolor{ceruleanblue}{ceruleanblue} &
+\colorbox{ceruleanblue}{\#2A52BE}\tabularnewline
+chamoisee & \textcolor{chamoisee}{chamoisee} &
+\colorbox{chamoisee}{\#A0785A}\tabularnewline
+champagne & \textcolor{champagne}{champagne} &
+\colorbox{champagne}{\#F7E7CE}\tabularnewline
+charcoal & \textcolor{charcoal}{charcoal} &
+\colorbox{charcoal}{\#36454F}\tabularnewline
+chartreuse & \textcolor{chartreuse}{chartreuse} &
+\colorbox{chartreuse}{\#DFFF00}\tabularnewline
+cherryblossompink & \textcolor{cherryblossompink}{cherryblossompink} &
+\colorbox{cherryblossompink}{\#FFB7C5}\tabularnewline
+chestnut & \textcolor{chestnut}{chestnut} &
+\colorbox{chestnut}{\#CD5C5C}\tabularnewline
+chocolate & \textcolor{chocolate}{chocolate} &
+\colorbox{chocolate}{\#7B3F00}\tabularnewline
+chromeyellow & \textcolor{chromeyellow}{chromeyellow} &
+\colorbox{chromeyellow}{\#FFA700}\tabularnewline
+cinereous & \textcolor{cinereous}{cinereous} &
+\colorbox{cinereous}{\#98817B}\tabularnewline
+cinnabar & \textcolor{cinnabar}{cinnabar} &
+\colorbox{cinnabar}{\#E34234}\tabularnewline
+cinnamon & \textcolor{cinnamon}{cinnamon} &
+\colorbox{cinnamon}{\#D2691E}\tabularnewline
+citrine & \textcolor{citrine}{citrine} &
+\colorbox{citrine}{\#E4D00A}\tabularnewline
+classicrose & \textcolor{classicrose}{classicrose} &
+\colorbox{classicrose}{\#FBCCE7}\tabularnewline
+cobalt & \textcolor{cobalt}{cobalt} &
+\colorbox{cobalt}{\#0047AB}\tabularnewline
+cocoabrown & \textcolor{cocoabrown}{cocoabrown} &
+\colorbox{cinnamon}{\#D2691E}\tabularnewline
+columbiablue & \textcolor{columbiablue}{columbiablue} &
+\colorbox{columbiablue}{\#9BDDFF}\tabularnewline
+coolblack & \textcolor{coolblack}{coolblack} &
+\colorbox{coolblack}{\#002E63}\tabularnewline
+coolgrey & \textcolor{coolgrey}{coolgrey} &
+\colorbox{coolgrey}{\#8C92AC}\tabularnewline
+copper & \textcolor{copper}{copper} &
+\colorbox{copper}{\#B87333}\tabularnewline
+copperrose & \textcolor{copperrose}{copperrose} &
+\colorbox{copperrose}{\#996666}\tabularnewline
+coquelicot & \textcolor{coquelicot}{coquelicot} &
+\colorbox{coquelicot}{\#FF3800}\tabularnewline
+coral & \textcolor{coral}{coral} &
+\colorbox{coral}{\#FF7F50}\tabularnewline
+coralpink & \textcolor{coralpink}{coralpink} &
+\colorbox{coralpink}{\#F88379}\tabularnewline
+coralred & \textcolor{coralred}{coralred} &
+\colorbox{coralred}{\#FF4040}\tabularnewline
+cordovan & \textcolor{cordovan}{cordovan} &
+\colorbox{cordovan}{\#893F45}\tabularnewline
+corn & \textcolor{corn}{corn} & \colorbox{corn}{\#FBEC5D}\tabularnewline
+cornellred & \textcolor{cornellred}{cornellred} &
+\colorbox{carnelian}{\#B31B1B}\tabularnewline
+cornflowerblue & \textcolor{cornflowerblue}{cornflowerblue} &
+\colorbox{cornflowerblue}{\#6495ED}\tabularnewline
+cornsilk & \textcolor{cornsilk}{cornsilk} &
+\colorbox{cornsilk}{\#FFF8DC}\tabularnewline
+cosmiclatte & \textcolor{cosmiclatte}{cosmiclatte} &
+\colorbox{cosmiclatte}{\#FFF8E7}\tabularnewline
+cottoncandy & \textcolor{cottoncandy}{cottoncandy} &
+\colorbox{cottoncandy}{\#FFBCD9}\tabularnewline
+cream & \textcolor{cream}{cream} &
+\colorbox{cream}{\#FFFDD0}\tabularnewline
+crimson & \textcolor{crimson}{crimson} &
+\colorbox{crimson}{\#DC143C}\tabularnewline
+crimsonglory & \textcolor{crimsonglory}{crimsonglory} &
+\colorbox{crimsonglory}{\#BE0032}\tabularnewline
+cyan & \textcolor{cyan}{cyan} & \colorbox{aqua}{\#00FFFF}\tabularnewline
+daffodil & \textcolor{daffodil}{daffodil} &
+\colorbox{daffodil}{\#FFFF31}\tabularnewline
+dandelion & \textcolor{dandelion}{dandelion} &
+\colorbox{dandelion}{\#F0E130}\tabularnewline
+darkblue & \textcolor{darkblue}{darkblue} &
+\colorbox{darkblue}{\#00008B}\tabularnewline
+darkbrown & \textcolor{darkbrown}{darkbrown} &
+\colorbox{darkbrown}{\#654321}\tabularnewline
+darkbyzantium & \textcolor{darkbyzantium}{darkbyzantium} &
+\colorbox{darkbyzantium}{\#5D3954}\tabularnewline
+darkcandyapplered & \textcolor{darkcandyapplered}{darkcandyapplered} &
+\colorbox{darkcandyapplered}{\#A40000}\tabularnewline
+darkcerulean & \textcolor{darkcerulean}{darkcerulean} &
+\colorbox{darkcerulean}{\#08457E}\tabularnewline
+darkchampagne & \textcolor{darkchampagne}{darkchampagne} &
+\colorbox{darkchampagne}{\#C2B280}\tabularnewline
+darkchestnut & \textcolor{darkchestnut}{darkchestnut} &
+\colorbox{darkchestnut}{\#986960}\tabularnewline
+darkcoral & \textcolor{darkcoral}{darkcoral} &
+\colorbox{darkcoral}{\#CD5B45}\tabularnewline
+darkcyan & \textcolor{darkcyan}{darkcyan} &
+\colorbox{darkcyan}{\#008B8B}\tabularnewline
+darkelectricblue & \textcolor{darkelectricblue}{darkelectricblue} &
+\colorbox{darkelectricblue}{\#536878}\tabularnewline
+darkgoldenrod & \textcolor{darkgoldenrod}{darkgoldenrod} &
+\colorbox{darkgoldenrod}{\#B8860B}\tabularnewline
+darkgray & \textcolor{darkgray}{darkgray} &
+\colorbox{darkgray}{\#A9A9A9}\tabularnewline
+darkgreen & \textcolor{darkgreen}{darkgreen} &
+\colorbox{darkgreen}{\#013220}\tabularnewline
+darkjunglegreen & \textcolor{darkjunglegreen}{darkjunglegreen} &
+\colorbox{darkjunglegreen}{\#1A2421}\tabularnewline
+darkkhaki & \textcolor{darkkhaki}{darkkhaki} &
+\colorbox{darkkhaki}{\#BDB76B}\tabularnewline
+darklava & \textcolor{darklava}{darklava} &
+\colorbox{darklava}{\#483C32}\tabularnewline
+darklavender & \textcolor{darklavender}{darklavender} &
+\colorbox{darklavender}{\#734F96}\tabularnewline
+darkmagenta & \textcolor{darkmagenta}{darkmagenta} &
+\colorbox{darkmagenta}{\#8B008B}\tabularnewline
+darkmidnightblue & \textcolor{darkmidnightblue}{darkmidnightblue} &
+\colorbox{darkmidnightblue}{\#003366}\tabularnewline
+darkolivegreen & \textcolor{darkolivegreen}{darkolivegreen} &
+\colorbox{darkolivegreen}{\#556B2F}\tabularnewline
+darkorange & \textcolor{darkorange}{darkorange} &
+\colorbox{darkorange}{\#FF8C00}\tabularnewline
+darkorchid & \textcolor{darkorchid}{darkorchid} &
+\colorbox{darkorchid}{\#9932CC}\tabularnewline
+darkpastelblue & \textcolor{darkpastelblue}{darkpastelblue} &
+\colorbox{darkpastelblue}{\#779ECB}\tabularnewline
+darkpastelgreen & \textcolor{darkpastelgreen}{darkpastelgreen} &
+\colorbox{darkpastelgreen}{\#03C03C}\tabularnewline
+darkpastelpurple & \textcolor{darkpastelpurple}{darkpastelpurple} &
+\colorbox{darkpastelpurple}{\#966FD6}\tabularnewline
+darkpastelred & \textcolor{darkpastelred}{darkpastelred} &
+\colorbox{darkpastelred}{\#C23B22}\tabularnewline
+darkpink & \textcolor{darkpink}{darkpink} &
+\colorbox{darkpink}{\#E75480}\tabularnewline
+darkpowderblue & \textcolor{darkpowderblue}{darkpowderblue} &
+\colorbox{darkpowderblue}{\#003399}\tabularnewline
+darkraspberry & \textcolor{darkraspberry}{darkraspberry} &
+\colorbox{darkraspberry}{\#872657}\tabularnewline
+darkred & \textcolor{darkred}{darkred} &
+\colorbox{darkred}{\#8B0000}\tabularnewline
+darksalmon & \textcolor{darksalmon}{darksalmon} &
+\colorbox{darksalmon}{\#E9967A}\tabularnewline
+darkscarlet & \textcolor{darkscarlet}{darkscarlet} &
+\colorbox{darkscarlet}{\#560319}\tabularnewline
+darkseagreen & \textcolor{darkseagreen}{darkseagreen} &
+\colorbox{darkseagreen}{\#8FBC8F}\tabularnewline
+darksienna & \textcolor{darksienna}{darksienna} &
+\colorbox{darksienna}{\#3C1414}\tabularnewline
+darkslateblue & \textcolor{darkslateblue}{darkslateblue} &
+\colorbox{darkslateblue}{\#483D8B}\tabularnewline
+darkslategray & \textcolor{darkslategray}{darkslategray} &
+\colorbox{darkslategray}{\#2F4F4F}\tabularnewline
+darkspringgreen & \textcolor{darkspringgreen}{darkspringgreen} &
+\colorbox{darkspringgreen}{\#177245}\tabularnewline
+darktan & \textcolor{darktan}{darktan} &
+\colorbox{darktan}{\#918151}\tabularnewline
+darktangerine & \textcolor{darktangerine}{darktangerine} &
+\colorbox{darktangerine}{\#FFA812}\tabularnewline
+darktaupe & \textcolor{darktaupe}{darktaupe} &
+\colorbox{darklava}{\#483C32}\tabularnewline
+darkterracotta & \textcolor{darkterracotta}{darkterracotta} &
+\colorbox{darkterracotta}{\#CC4E5C}\tabularnewline
+darkturquoise & \textcolor{darkturquoise}{darkturquoise} &
+\colorbox{darkturquoise}{\#00CED1}\tabularnewline
+darkviolet & \textcolor{darkviolet}{darkviolet} &
+\colorbox{darkviolet}{\#9400D3}\tabularnewline
+dartmouthgreen & \textcolor{dartmouthgreen}{dartmouthgreen} &
+\colorbox{dartmouthgreen}{\#00693E}\tabularnewline
+davysgrey & \textcolor{davysgrey}{davysgrey} &
+\colorbox{davysgrey}{\#555555}\tabularnewline
+debianred & \textcolor{debianred}{debianred} &
+\colorbox{debianred}{\#D70A53}\tabularnewline
+deepcarmine & \textcolor{deepcarmine}{deepcarmine} &
+\colorbox{deepcarmine}{\#A9203E}\tabularnewline
+deepcarminepink & \textcolor{deepcarminepink}{deepcarminepink} &
+\colorbox{deepcarminepink}{\#EF3038}\tabularnewline
+deepcarrotorange & \textcolor{deepcarrotorange}{deepcarrotorange} &
+\colorbox{deepcarrotorange}{\#E9692C}\tabularnewline
+deepcerise & \textcolor{deepcerise}{deepcerise} &
+\colorbox{deepcerise}{\#DA3287}\tabularnewline
+deepchampagne & \textcolor{deepchampagne}{deepchampagne} &
+\colorbox{deepchampagne}{\#FAD6A5}\tabularnewline
+deepchestnut & \textcolor{deepchestnut}{deepchestnut} &
+\colorbox{deepchestnut}{\#B94E48}\tabularnewline
+deepfuchsia & \textcolor{deepfuchsia}{deepfuchsia} &
+\colorbox{deepfuchsia}{\#C154C1}\tabularnewline
+deepjunglegreen & \textcolor{deepjunglegreen}{deepjunglegreen} &
+\colorbox{deepjunglegreen}{\#004B49}\tabularnewline
+deeplilac & \textcolor{deeplilac}{deeplilac} &
+\colorbox{deeplilac}{\#9955BB}\tabularnewline
+deepmagenta & \textcolor{deepmagenta}{deepmagenta} &
+\colorbox{deepmagenta}{\#CC00CC}\tabularnewline
+deeppeach & \textcolor{deeppeach}{deeppeach} &
+\colorbox{deeppeach}{\#FFCBA4}\tabularnewline
+deeppink & \textcolor{deeppink}{deeppink} &
+\colorbox{deeppink}{\#FF1493}\tabularnewline
+deepsaffron & \textcolor{deepsaffron}{deepsaffron} &
+\colorbox{deepsaffron}{\#FF9933}\tabularnewline
+deepskyblue & \textcolor{deepskyblue}{deepskyblue} &
+\colorbox{capri}{\#00BFFF}\tabularnewline
+denim & \textcolor{denim}{denim} &
+\colorbox{denim}{\#1560BD}\tabularnewline
+desert & \textcolor{desert}{desert} &
+\colorbox{camel}{\#C19A6B}\tabularnewline
+desertsand & \textcolor{desertsand}{desertsand} &
+\colorbox{desertsand}{\#EDC9AF}\tabularnewline
+dimgray & \textcolor{dimgray}{dimgray} &
+\colorbox{dimgray}{\#696969}\tabularnewline
+dodgerblue & \textcolor{dodgerblue}{dodgerblue} &
+\colorbox{dodgerblue}{\#1E90FF}\tabularnewline
+dogwoodrose & \textcolor{dogwoodrose}{dogwoodrose} &
+\colorbox{dogwoodrose}{\#D71868}\tabularnewline
+dollarbill & \textcolor{dollarbill}{dollarbill} &
+\colorbox{dollarbill}{\#85BB65}\tabularnewline
+drab & \textcolor{drab}{drab} & \colorbox{drab}{\#967117}\tabularnewline
+dukeblue & \textcolor{dukeblue}{dukeblue} &
+\colorbox{dukeblue}{\#00009C}\tabularnewline
+earthyellow & \textcolor{earthyellow}{earthyellow} &
+\colorbox{earthyellow}{\#E1A95F}\tabularnewline
+ecru & \textcolor{ecru}{ecru} &
+\colorbox{darkchampagne}{\#C2B280}\tabularnewline
+eggplant & \textcolor{eggplant}{eggplant} &
+\colorbox{eggplant}{\#614051}\tabularnewline
+eggshell & \textcolor{eggshell}{eggshell} &
+\colorbox{eggshell}{\#F0EAD6}\tabularnewline
+egyptianblue & \textcolor{egyptianblue}{egyptianblue} &
+\colorbox{egyptianblue}{\#1034A6}\tabularnewline
+electricblue & \textcolor{electricblue}{electricblue} &
+\colorbox{electricblue}{\#7DF9FF}\tabularnewline
+electriccrimson & \textcolor{electriccrimson}{electriccrimson} &
+\colorbox{electriccrimson}{\#FF003F}\tabularnewline
+electriccyan & \textcolor{electriccyan}{electriccyan} &
+\colorbox{aqua}{\#00FFFF}\tabularnewline
+electricgreen & \textcolor{electricgreen}{electricgreen} &
+\colorbox{electricgreen}{\#00FF00}\tabularnewline
+electricindigo & \textcolor{electricindigo}{electricindigo} &
+\colorbox{electricindigo}{\#6F00FF}\tabularnewline
+electriclavender & \textcolor{electriclavender}{electriclavender} &
+\colorbox{brilliantlavender}{\#F4BBFF}\tabularnewline
+electriclime & \textcolor{electriclime}{electriclime} &
+\colorbox{electriclime}{\#CCFF00}\tabularnewline
+electricpurple & \textcolor{electricpurple}{electricpurple} &
+\colorbox{electricpurple}{\#BF00FF}\tabularnewline
+electricultramarine &
+\textcolor{electricultramarine}{electricultramarine} &
+\colorbox{electricultramarine}{\#3F00FF}\tabularnewline
+electricviolet & \textcolor{electricviolet}{electricviolet} &
+\colorbox{electricviolet}{\#8F00FF}\tabularnewline
+electricyellow & \textcolor{electricyellow}{electricyellow} &
+\colorbox{electricyellow}{\#FFFF00}\tabularnewline
+emerald & \textcolor{emerald}{emerald} &
+\colorbox{emerald}{\#50C878}\tabularnewline
+etonblue & \textcolor{etonblue}{etonblue} &
+\colorbox{etonblue}{\#96C8A2}\tabularnewline
+fallow & \textcolor{fallow}{fallow} &
+\colorbox{camel}{\#C19A6B}\tabularnewline
+falured & \textcolor{falured}{falured} &
+\colorbox{falured}{\#801818}\tabularnewline
+fandango & \textcolor{fandango}{fandango} &
+\colorbox{fandango}{\#B53389}\tabularnewline
+fashionfuchsia & \textcolor{fashionfuchsia}{fashionfuchsia} &
+\colorbox{fashionfuchsia}{\#F400A1}\tabularnewline
+fawn & \textcolor{fawn}{fawn} & \colorbox{fawn}{\#E5AA70}\tabularnewline
+feldgrau & \textcolor{feldgrau}{feldgrau} &
+\colorbox{feldgrau}{\#4D5D53}\tabularnewline
+ferngreen & \textcolor{ferngreen}{ferngreen} &
+\colorbox{ferngreen}{\#4F7942}\tabularnewline
+ferrarired & \textcolor{ferrarired}{ferrarired} &
+\colorbox{ferrarired}{\#FF2800}\tabularnewline
+fielddrab & \textcolor{fielddrab}{fielddrab} &
+\colorbox{fielddrab}{\#6C541E}\tabularnewline
+firebrick & \textcolor{firebrick}{firebrick} &
+\colorbox{firebrick}{\#B22222}\tabularnewline
+fireenginered & \textcolor{fireenginered}{fireenginered} &
+\colorbox{fireenginered}{\#CE2029}\tabularnewline
+flame & \textcolor{flame}{flame} &
+\colorbox{flame}{\#E25822}\tabularnewline
+flamingopink & \textcolor{flamingopink}{flamingopink} &
+\colorbox{flamingopink}{\#FC8EAC}\tabularnewline
+flavescent & \textcolor{flavescent}{flavescent} &
+\colorbox{flavescent}{\#F7E98E}\tabularnewline
+flax & \textcolor{flax}{flax} & \colorbox{flax}{\#EEDC82}\tabularnewline
+floralwhite & \textcolor{floralwhite}{floralwhite} &
+\colorbox{floralwhite}{\#FFFAF0}\tabularnewline
+fluorescentorange & \textcolor{fluorescentorange}{fluorescentorange} &
+\colorbox{amber}{\#FFBF00}\tabularnewline
+fluorescentpink & \textcolor{fluorescentpink}{fluorescentpink} &
+\colorbox{deeppink}{\#FF1493}\tabularnewline
+fluorescentyellow & \textcolor{fluorescentyellow}{fluorescentyellow} &
+\colorbox{electriclime}{\#CCFF00}\tabularnewline
+folly & \textcolor{folly}{folly} &
+\colorbox{folly}{\#FF004F}\tabularnewline
+forestgreen & \textcolor{forestgreen}{forestgreen} &
+\colorbox{forestgreen}{\#014421}\tabularnewline
+frenchbeige & \textcolor{frenchbeige}{frenchbeige} &
+\colorbox{frenchbeige}{\#A67B5B}\tabularnewline
+frenchblue & \textcolor{frenchblue}{frenchblue} &
+\colorbox{frenchblue}{\#0072BB}\tabularnewline
+frenchlilac & \textcolor{frenchlilac}{frenchlilac} &
+\colorbox{frenchlilac}{\#86608E}\tabularnewline
+frenchrose & \textcolor{frenchrose}{frenchrose} &
+\colorbox{frenchrose}{\#F64A8A}\tabularnewline
+fuchsia & \textcolor{fuchsia}{fuchsia} &
+\colorbox{fuchsia}{\#FF00FF}\tabularnewline
+fuchsiapink & \textcolor{fuchsiapink}{fuchsiapink} &
+\colorbox{fuchsiapink}{\#FF77FF}\tabularnewline
+fulvous & \textcolor{fulvous}{fulvous} &
+\colorbox{fulvous}{\#E48400}\tabularnewline
+fuzzywuzzy & \textcolor{fuzzywuzzy}{fuzzywuzzy} &
+\colorbox{fuzzywuzzy}{\#CC6666}\tabularnewline
+gainsboro & \textcolor{gainsboro}{gainsboro} &
+\colorbox{gainsboro}{\#DCDCDC}\tabularnewline
+gamboge & \textcolor{gamboge}{gamboge} &
+\colorbox{gamboge}{\#E49B0F}\tabularnewline
+ghostwhite & \textcolor{ghostwhite}{ghostwhite} &
+\colorbox{ghostwhite}{\#F8F8FF}\tabularnewline
+ginger & \textcolor{ginger}{ginger} &
+\colorbox{ginger}{\#B06500}\tabularnewline
+glaucous & \textcolor{glaucous}{glaucous} &
+\colorbox{glaucous}{\#6082B6}\tabularnewline
+goldmetallic & \textcolor{goldmetallic}{goldmetallic} &
+\colorbox{goldmetallic}{\#D4AF37}\tabularnewline
+gold & \textcolor{gold}{gold} & \colorbox{gold}{\#FFD700}\tabularnewline
+goldenbrown & \textcolor{goldenbrown}{goldenbrown} &
+\colorbox{goldenbrown}{\#996515}\tabularnewline
+goldenpoppy & \textcolor{goldenpoppy}{goldenpoppy} &
+\colorbox{goldenpoppy}{\#FCC200}\tabularnewline
+goldenyellow & \textcolor{goldenyellow}{goldenyellow} &
+\colorbox{goldenyellow}{\#FFDF00}\tabularnewline
+goldenrod & \textcolor{goldenrod}{goldenrod} &
+\colorbox{goldenrod}{\#DAA520}\tabularnewline
+grannysmithapple & \textcolor{grannysmithapple}{grannysmithapple} &
+\colorbox{grannysmithapple}{\#A8E4A0}\tabularnewline
+gray & \textcolor{gray}{gray} & \colorbox{gray}{\#808080}\tabularnewline
+gray-asparagus & \textcolor{gray-asparagus}{gray-asparagus} &
+\colorbox{gray-asparagus}{\#465945}\tabularnewline
+green & \textcolor{green}{green} &
+\colorbox{electricgreen}{\#00FF00}\tabularnewline
+green-yellow & \textcolor{green-yellow}{green-yellow} &
+\colorbox{green-yellow}{\#ADFF2F}\tabularnewline
+grullo & \textcolor{grullo}{grullo} &
+\colorbox{grullo}{\#A99A86}\tabularnewline
+guppiegreen & \textcolor{guppiegreen}{guppiegreen} &
+\colorbox{guppiegreen}{\#00FF7F}\tabularnewline
+halayaube & \textcolor{halayaube}{halayaube} &
+\colorbox{halayaube}{\#663854}\tabularnewline
+hanblue & \textcolor{hanblue}{hanblue} &
+\colorbox{hanblue}{\#446CCF}\tabularnewline
+hanpurple & \textcolor{hanpurple}{hanpurple} &
+\colorbox{hanpurple}{\#5218FA}\tabularnewline
+hansayellow & \textcolor{hansayellow}{hansayellow} &
+\colorbox{arylideyellow}{\#E9D66B}\tabularnewline
+harlequin & \textcolor{harlequin}{harlequin} &
+\colorbox{harlequin}{\#3FFF00}\tabularnewline
+harvardcrimson & \textcolor{harvardcrimson}{harvardcrimson} &
+\colorbox{harvardcrimson}{\#C90016}\tabularnewline
+harvestgold & \textcolor{harvestgold}{harvestgold} &
+\colorbox{harvestgold}{\#DA9100}\tabularnewline
+heartgold & \textcolor{heartgold}{heartgold} &
+\colorbox{heartgold}{\#808000}\tabularnewline
+heliotrope & \textcolor{heliotrope}{heliotrope} &
+\colorbox{heliotrope}{\#DF73FF}\tabularnewline
+hollywoodcerise & \textcolor{hollywoodcerise}{hollywoodcerise} &
+\colorbox{fashionfuchsia}{\#F400A1}\tabularnewline
+honeydew & \textcolor{honeydew}{honeydew} &
+\colorbox{honeydew}{\#F0FFF0}\tabularnewline
+hookersgreen & \textcolor{hookersgreen}{hookersgreen} &
+\colorbox{hookersgreen}{\#007000}\tabularnewline
+hotmagenta & \textcolor{hotmagenta}{hotmagenta} &
+\colorbox{hotmagenta}{\#FF1DCE}\tabularnewline
+hotpink & \textcolor{hotpink}{hotpink} &
+\colorbox{hotpink}{\#FF69B4}\tabularnewline
+huntergreen & \textcolor{huntergreen}{huntergreen} &
+\colorbox{huntergreen}{\#355E3B}\tabularnewline
+iceberg & \textcolor{iceberg}{iceberg} &
+\colorbox{iceberg}{\#71A6D2}\tabularnewline
+icterine & \textcolor{icterine}{icterine} &
+\colorbox{icterine}{\#FCF75E}\tabularnewline
+inchworm & \textcolor{inchworm}{inchworm} &
+\colorbox{inchworm}{\#B2EC5D}\tabularnewline
+indiagreen & \textcolor{indiagreen}{indiagreen} &
+\colorbox{indiagreen}{\#138808}\tabularnewline
+indianred & \textcolor{indianred}{indianred} &
+\colorbox{chestnut}{\#CD5C5C}\tabularnewline
+indianyellow & \textcolor{indianyellow}{indianyellow} &
+\colorbox{indianyellow}{\#E3A857}\tabularnewline
+indigodye & \textcolor{indigodye}{indigodye} &
+\colorbox{indigodye}{\#00416A}\tabularnewline
+indigo & \textcolor{indigo}{indigo} &
+\colorbox{indigo}{\#4B0082}\tabularnewline
+internationalkleinblue &
+\textcolor{internationalkleinblue}{internationalkleinblue} &
+\colorbox{internationalkleinblue}{\#002FA7}\tabularnewline
+internationalorange &
+\textcolor{internationalorange}{internationalorange} &
+\colorbox{internationalorange}{\#FF4F00}\tabularnewline
+iris & \textcolor{iris}{iris} & \colorbox{iris}{\#5A4FCF}\tabularnewline
+isabelline & \textcolor{isabelline}{isabelline} &
+\colorbox{isabelline}{\#F4F0EC}\tabularnewline
+islamicgreen & \textcolor{islamicgreen}{islamicgreen} &
+\colorbox{islamicgreen}{\#009000}\tabularnewline
+ivory & \textcolor{ivory}{ivory} &
+\colorbox{ivory}{\#FFFFF0}\tabularnewline
+jade & \textcolor{jade}{jade} & \colorbox{jade}{\#00A86B}\tabularnewline
+jasper & \textcolor{jasper}{jasper} &
+\colorbox{jasper}{\#D73B3E}\tabularnewline
+jazzberryjam & \textcolor{jazzberryjam}{jazzberryjam} &
+\colorbox{jazzberryjam}{\#A50B5E}\tabularnewline
+jonquil & \textcolor{jonquil}{jonquil} &
+\colorbox{jonquil}{\#FADA5E}\tabularnewline
+junebud & \textcolor{junebud}{junebud} &
+\colorbox{junebud}{\#BDDA57}\tabularnewline
+junglegreen & \textcolor{junglegreen}{junglegreen} &
+\colorbox{junglegreen}{\#29AB87}\tabularnewline
+kellygreen & \textcolor{kellygreen}{kellygreen} &
+\colorbox{kellygreen}{\#4CBB17}\tabularnewline
+khaki & \textcolor{khaki}{khaki} &
+\colorbox{khaki}{\#C3B091}\tabularnewline
+lightkhaki & \textcolor{lightkhaki}{lightkhaki} &
+\colorbox{lightkhaki}{\#F0E68C}\tabularnewline
+lasallegreen & \textcolor{lasallegreen}{lasallegreen} &
+\colorbox{lasallegreen}{\#087830}\tabularnewline
+languidlavender & \textcolor{languidlavender}{languidlavender} &
+\colorbox{languidlavender}{\#D6CADD}\tabularnewline
+lapislazuli & \textcolor{lapislazuli}{lapislazuli} &
+\colorbox{lapislazuli}{\#26619C}\tabularnewline
+laserlemon & \textcolor{laserlemon}{laserlemon} &
+\colorbox{laserlemon}{\#FEFE22}\tabularnewline
+lava & \textcolor{lava}{lava} & \colorbox{lava}{\#CF1020}\tabularnewline
+lavender & \textcolor{lavender}{lavender} &
+\colorbox{lavender}{\#B57EDC}\tabularnewline
+lightlavender & \textcolor{lightlavender}{lightlavender} &
+\colorbox{lightlavender}{\#E6E6FA}\tabularnewline
+lavenderblue & \textcolor{lavenderblue}{lavenderblue} &
+\colorbox{lavenderblue}{\#CCCCFF}\tabularnewline
+lavenderblush & \textcolor{lavenderblush}{lavenderblush} &
+\colorbox{lavenderblush}{\#FFF0F5}\tabularnewline
+lavendergray & \textcolor{lavendergray}{lavendergray} &
+\colorbox{lavendergray}{\#C4C3D0}\tabularnewline
+lavenderindigo & \textcolor{lavenderindigo}{lavenderindigo} &
+\colorbox{lavenderindigo}{\#9457EB}\tabularnewline
+lavendermagenta & \textcolor{lavendermagenta}{lavendermagenta} &
+\colorbox{lavendermagenta}{\#EE82EE}\tabularnewline
+lavendermist & \textcolor{lavendermist}{lavendermist} &
+\colorbox{lightlavender}{\#E6E6FA}\tabularnewline
+lavenderpink & \textcolor{lavenderpink}{lavenderpink} &
+\colorbox{lavenderpink}{\#FBAED2}\tabularnewline
+lavenderpurple & \textcolor{lavenderpurple}{lavenderpurple} &
+\colorbox{lavenderpurple}{\#967BB6}\tabularnewline
+lavenderrose & \textcolor{lavenderrose}{lavenderrose} &
+\colorbox{lavenderrose}{\#FBA0E3}\tabularnewline
+lawngreen & \textcolor{lawngreen}{lawngreen} &
+\colorbox{lawngreen}{\#7CFC00}\tabularnewline
+lemon & \textcolor{lemon}{lemon} &
+\colorbox{lemon}{\#FFF700}\tabularnewline
+lemonchiffon & \textcolor{lemonchiffon}{lemonchiffon} &
+\colorbox{lemonchiffon}{\#FFFACD}\tabularnewline
+lightapricot & \textcolor{lightapricot}{lightapricot} &
+\colorbox{lightapricot}{\#FDD5B1}\tabularnewline
+lightblue & \textcolor{lightblue}{lightblue} &
+\colorbox{lightblue}{\#ADD8E6}\tabularnewline
+lightbrown & \textcolor{lightbrown}{lightbrown} &
+\colorbox{lightbrown}{\#B5651D}\tabularnewline
+lightcarminepink & \textcolor{lightcarminepink}{lightcarminepink} &
+\colorbox{lightcarminepink}{\#E66771}\tabularnewline
+lightcoral & \textcolor{lightcoral}{lightcoral} &
+\colorbox{lightcoral}{\#F08080}\tabularnewline
+lightcornflowerblue &
+\textcolor{lightcornflowerblue}{lightcornflowerblue} &
+\colorbox{lightcornflowerblue}{\#93CCEA}\tabularnewline
+lightcyan & \textcolor{lightcyan}{lightcyan} &
+\colorbox{lightcyan}{\#E0FFFF}\tabularnewline
+lightfuchsiapink & \textcolor{lightfuchsiapink}{lightfuchsiapink} &
+\colorbox{lightfuchsiapink}{\#F984EF}\tabularnewline
+lightgoldenrodyellow &
+\textcolor{lightgoldenrodyellow}{lightgoldenrodyellow} &
+\colorbox{lightgoldenrodyellow}{\#FAFAD2}\tabularnewline
+lightgray & \textcolor{lightgray}{lightgray} &
+\colorbox{lightgray}{\#D3D3D3}\tabularnewline
+lightgreen & \textcolor{lightgreen}{lightgreen} &
+\colorbox{lightgreen}{\#90EE90}\tabularnewline
+lightkhaki & \textcolor{lightkhaki}{lightkhaki} &
+\colorbox{lightkhaki}{\#F0E68C}\tabularnewline
+lightmauve & \textcolor{lightmauve}{lightmauve} &
+\colorbox{lightmauve}{\#DCD0FF}\tabularnewline
+lightpastelpurple & \textcolor{lightpastelpurple}{lightpastelpurple} &
+\colorbox{lightpastelpurple}{\#B19CD9}\tabularnewline
+lightpink & \textcolor{lightpink}{lightpink} &
+\colorbox{lightpink}{\#FFB6C1}\tabularnewline
+lightsalmon & \textcolor{lightsalmon}{lightsalmon} &
+\colorbox{lightsalmon}{\#FFA07A}\tabularnewline
+lightsalmonpink & \textcolor{lightsalmonpink}{lightsalmonpink} &
+\colorbox{lightsalmonpink}{\#FF9999}\tabularnewline
+lightseagreen & \textcolor{lightseagreen}{lightseagreen} &
+\colorbox{lightseagreen}{\#20B2AA}\tabularnewline
+lightskyblue & \textcolor{lightskyblue}{lightskyblue} &
+\colorbox{lightskyblue}{\#87CEEB}\tabularnewline
+lightslategray & \textcolor{lightslategray}{lightslategray} &
+\colorbox{lightslategray}{\#778899}\tabularnewline
+lighttaupe & \textcolor{lighttaupe}{lighttaupe} &
+\colorbox{lighttaupe}{\#B38B6D}\tabularnewline
+lightthulianpink & \textcolor{lightthulianpink}{lightthulianpink} &
+\colorbox{lightthulianpink}{\#E68FAC}\tabularnewline
+lightyellow & \textcolor{lightyellow}{lightyellow} &
+\colorbox{lightyellow}{\#FFFFED}\tabularnewline
+lilac & \textcolor{lilac}{lilac} &
+\colorbox{lilac}{\#C8A2C8}\tabularnewline
+lime & \textcolor{lime}{lime} & \colorbox{lime}{\#BFFF00}\tabularnewline
+limegreen & \textcolor{limegreen}{limegreen} &
+\colorbox{limegreen}{\#32CD32}\tabularnewline
+lincolngreen & \textcolor{lincolngreen}{lincolngreen} &
+\colorbox{lincolngreen}{\#195905}\tabularnewline
+linen & \textcolor{linen}{linen} &
+\colorbox{linen}{\#FAF0E6}\tabularnewline
+liver & \textcolor{liver}{liver} &
+\colorbox{liver}{\#534B4F}\tabularnewline
+lust & \textcolor{lust}{lust} & \colorbox{lust}{\#E62020}\tabularnewline
+macaroniandcheese & \textcolor{macaroniandcheese}{macaroniandcheese} &
+\colorbox{macaroniandcheese}{\#FFBD88}\tabularnewline
+magenta & \textcolor{magenta}{magenta} &
+\colorbox{fuchsia}{\#FF00FF}\tabularnewline
+magicmint & \textcolor{magicmint}{magicmint} &
+\colorbox{magicmint}{\#AAF0D1}\tabularnewline
+magnolia & \textcolor{magnolia}{magnolia} &
+\colorbox{magnolia}{\#F8F4FF}\tabularnewline
+mahogany & \textcolor{mahogany}{mahogany} &
+\colorbox{mahogany}{\#C04000}\tabularnewline
+maize & \textcolor{maize}{maize} &
+\colorbox{corn}{\#FBEC5D}\tabularnewline
+majorelleblue & \textcolor{majorelleblue}{majorelleblue} &
+\colorbox{majorelleblue}{\#6050DC}\tabularnewline
+malachite & \textcolor{malachite}{malachite} &
+\colorbox{malachite}{\#0BDA51}\tabularnewline
+manatee & \textcolor{manatee}{manatee} &
+\colorbox{manatee}{\#979AAA}\tabularnewline
+mangotango & \textcolor{mangotango}{mangotango} &
+\colorbox{mangotango}{\#FF8243}\tabularnewline
+maroon & \textcolor{maroon}{maroon} &
+\colorbox{maroon}{\#800000}\tabularnewline
+mauve & \textcolor{mauve}{mauve} &
+\colorbox{mauve}{\#E0B0FF}\tabularnewline
+mauvetaupe & \textcolor{mauvetaupe}{mauvetaupe} &
+\colorbox{mauvetaupe}{\#915F6D}\tabularnewline
+mauvelous & \textcolor{mauvelous}{mauvelous} &
+\colorbox{mauvelous}{\#EF98AA}\tabularnewline
+mayablue & \textcolor{mayablue}{mayablue} &
+\colorbox{mayablue}{\#73C2FB}\tabularnewline
+meatbrown & \textcolor{meatbrown}{meatbrown} &
+\colorbox{meatbrown}{\#E5B73B}\tabularnewline
+mediumaquamarine & \textcolor{mediumaquamarine}{mediumaquamarine} &
+\colorbox{mediumaquamarine}{\#66DDAA}\tabularnewline
+mediumblue & \textcolor{mediumblue}{mediumblue} &
+\colorbox{mediumblue}{\#0000CD}\tabularnewline
+mediumcandyapplered &
+\textcolor{mediumcandyapplered}{mediumcandyapplered} &
+\colorbox{mediumcandyapplered}{\#E2062C}\tabularnewline
+mediumcarmine & \textcolor{mediumcarmine}{mediumcarmine} &
+\colorbox{mediumcarmine}{\#AF4035}\tabularnewline
+mediumchampagne & \textcolor{mediumchampagne}{mediumchampagne} &
+\colorbox{mediumchampagne}{\#F3E5AB}\tabularnewline
+mediumelectricblue & \textcolor{mediumelectricblue}{mediumelectricblue}
+& \colorbox{mediumelectricblue}{\#035096}\tabularnewline
+mediumjunglegreen & \textcolor{mediumjunglegreen}{mediumjunglegreen} &
+\colorbox{mediumjunglegreen}{\#1C352D}\tabularnewline
+mediumlavendermagenta &
+\textcolor{mediumlavendermagenta}{mediumlavendermagenta} &
+\colorbox{mediumlavendermagenta}{\#DDA0DD}\tabularnewline
+mediumorchid & \textcolor{mediumorchid}{mediumorchid} &
+\colorbox{mediumorchid}{\#BA55D3}\tabularnewline
+mediumpersianblue & \textcolor{mediumpersianblue}{mediumpersianblue} &
+\colorbox{mediumpersianblue}{\#0067A5}\tabularnewline
+mediumpurple & \textcolor{mediumpurple}{mediumpurple} &
+\colorbox{mediumpurple}{\#9370DB}\tabularnewline
+mediumred-violet & \textcolor{mediumred-violet}{mediumred-violet} &
+\colorbox{mediumred-violet}{\#BB3385}\tabularnewline
+mediumseagreen & \textcolor{mediumseagreen}{mediumseagreen} &
+\colorbox{mediumseagreen}{\#3CB371}\tabularnewline
+mediumslateblue & \textcolor{mediumslateblue}{mediumslateblue} &
+\colorbox{mediumslateblue}{\#7B68EE}\tabularnewline
+mediumspringbud & \textcolor{mediumspringbud}{mediumspringbud} &
+\colorbox{mediumspringbud}{\#C9DC87}\tabularnewline
+mediumspringgreen & \textcolor{mediumspringgreen}{mediumspringgreen} &
+\colorbox{mediumspringgreen}{\#00FA9A}\tabularnewline
+mediumtaupe & \textcolor{mediumtaupe}{mediumtaupe} &
+\colorbox{mediumtaupe}{\#674C47}\tabularnewline
+mediumtealblue & \textcolor{mediumtealblue}{mediumtealblue} &
+\colorbox{mediumtealblue}{\#0054B4}\tabularnewline
+mediumturquoise & \textcolor{mediumturquoise}{mediumturquoise} &
+\colorbox{mediumturquoise}{\#48D1CC}\tabularnewline
+mediumviolet-red & \textcolor{mediumviolet-red}{mediumviolet-red} &
+\colorbox{mediumviolet-red}{\#C71585}\tabularnewline
+melon & \textcolor{melon}{melon} &
+\colorbox{melon}{\#FDBCB4}\tabularnewline
+midnightblue & \textcolor{midnightblue}{midnightblue} &
+\colorbox{midnightblue}{\#191970}\tabularnewline
+midnightgreen & \textcolor{midnightgreen}{midnightgreen} &
+\colorbox{midnightgreen}{\#004953}\tabularnewline
+mikadoyellow & \textcolor{mikadoyellow}{mikadoyellow} &
+\colorbox{mikadoyellow}{\#FFC40C}\tabularnewline
+mint & \textcolor{mint}{mint} & \colorbox{mint}{\#3EB489}\tabularnewline
+mintcream & \textcolor{mintcream}{mintcream} &
+\colorbox{mintcream}{\#F5FFFA}\tabularnewline
+mintgreen & \textcolor{mintgreen}{mintgreen} &
+\colorbox{mintgreen}{\#98FF98}\tabularnewline
+mistyrose & \textcolor{mistyrose}{mistyrose} &
+\colorbox{mistyrose}{\#FFE4E1}\tabularnewline
+moccasin & \textcolor{moccasin}{moccasin} &
+\colorbox{antiquewhite}{\#FAEBD7}\tabularnewline
+modebeige & \textcolor{modebeige}{modebeige} &
+\colorbox{drab}{\#967117}\tabularnewline
+moonstoneblue & \textcolor{moonstoneblue}{moonstoneblue} &
+\colorbox{moonstoneblue}{\#73A9C2}\tabularnewline
+mordantred19 & \textcolor{mordantred19}{mordantred19} &
+\colorbox{mordantred19}{\#AE0C00}\tabularnewline
+mossgreen & \textcolor{mossgreen}{mossgreen} &
+\colorbox{mossgreen}{\#ADDFAD}\tabularnewline
+mountainmeadow & \textcolor{mountainmeadow}{mountainmeadow} &
+\colorbox{mountainmeadow}{\#30BA8F}\tabularnewline
+mountbattenpink & \textcolor{mountbattenpink}{mountbattenpink} &
+\colorbox{mountbattenpink}{\#997A8D}\tabularnewline
+mulberry & \textcolor{mulberry}{mulberry} &
+\colorbox{mulberry}{\#C54B8C}\tabularnewline
+mustard & \textcolor{mustard}{mustard} &
+\colorbox{mustard}{\#FFDB58}\tabularnewline
+myrtle & \textcolor{myrtle}{myrtle} &
+\colorbox{myrtle}{\#21421E}\tabularnewline
+msugreen & \textcolor{msugreen}{msugreen} &
+\colorbox{msugreen}{\#18453B}\tabularnewline
+nadeshikopink & \textcolor{nadeshikopink}{nadeshikopink} &
+\colorbox{nadeshikopink}{\#F6ADC6}\tabularnewline
+napiergreen & \textcolor{napiergreen}{napiergreen} &
+\colorbox{napiergreen}{\#2A8000}\tabularnewline
+naplesyellow & \textcolor{naplesyellow}{naplesyellow} &
+\colorbox{jonquil}{\#FADA5E}\tabularnewline
+navajowhite & \textcolor{navajowhite}{navajowhite} &
+\colorbox{navajowhite}{\#FFDEAD}\tabularnewline
+navyblue & \textcolor{navyblue}{navyblue} &
+\colorbox{navyblue}{\#000080}\tabularnewline
+neoncarrot & \textcolor{neoncarrot}{neoncarrot} &
+\colorbox{neoncarrot}{\#FFA343}\tabularnewline
+neonfuchsia & \textcolor{neonfuchsia}{neonfuchsia} &
+\colorbox{neonfuchsia}{\#FE59C2}\tabularnewline
+neongreen & \textcolor{neongreen}{neongreen} &
+\colorbox{neongreen}{\#39FF14}\tabularnewline
+non-photoblue & \textcolor{non-photoblue}{non-photoblue} &
+\colorbox{non-photoblue}{\#A4DDED}\tabularnewline
+oceanboatblue & \textcolor{oceanboatblue}{oceanboatblue} &
+\colorbox{oceanboatblue}{\#0077BE}\tabularnewline
+ochre & \textcolor{ochre}{ochre} &
+\colorbox{ochre}{\#CC7722}\tabularnewline
+officegreen & \textcolor{officegreen}{officegreen} &
+\colorbox{officegreen}{\#008000}\tabularnewline
+oldgold & \textcolor{oldgold}{oldgold} &
+\colorbox{oldgold}{\#CFB53B}\tabularnewline
+oldlace & \textcolor{oldlace}{oldlace} &
+\colorbox{oldlace}{\#FDF5E6}\tabularnewline
+oldlavender & \textcolor{oldlavender}{oldlavender} &
+\colorbox{oldlavender}{\#796878}\tabularnewline
+oldmauve & \textcolor{oldmauve}{oldmauve} &
+\colorbox{oldmauve}{\#673147}\tabularnewline
+oldrose & \textcolor{oldrose}{oldrose} &
+\colorbox{oldrose}{\#C08081}\tabularnewline
+olive & \textcolor{olive}{olive} &
+\colorbox{heartgold}{\#808000}\tabularnewline
+olivedrab & \textcolor{olivedrab}{olivedrab} &
+\colorbox{olivedrab}{\#6B8E23}\tabularnewline
+olivedrab7 & \textcolor{olivedrab7}{olivedrab7} &
+\colorbox{olivedrab7}{\#3C341F}\tabularnewline
+olivine & \textcolor{olivine}{olivine} &
+\colorbox{olivine}{\#9AB973}\tabularnewline
+onyx & \textcolor{onyx}{onyx} & \colorbox{onyx}{\#0F0F0F}\tabularnewline
+operamauve & \textcolor{operamauve}{operamauve} &
+\colorbox{operamauve}{\#B784A7}\tabularnewline
+orange & \textcolor{orange}{orange} &
+\colorbox{orange}{\#FF7F00}\tabularnewline
+orangepeel & \textcolor{orangepeel}{orangepeel} &
+\colorbox{orangepeel}{\#FF9F00}\tabularnewline
+orange-red & \textcolor{orange-red}{orange-red} &
+\colorbox{orange-red}{\#FF4500}\tabularnewline
+orchid & \textcolor{orchid}{orchid} &
+\colorbox{orchid}{\#DA70D6}\tabularnewline
+otterbrown & \textcolor{otterbrown}{otterbrown} &
+\colorbox{darkbrown}{\#654321}\tabularnewline
+outerspace & \textcolor{outerspace}{outerspace} &
+\colorbox{outerspace}{\#414A4C}\tabularnewline
+outrageousorange & \textcolor{outrageousorange}{outrageousorange} &
+\colorbox{outrageousorange}{\#FF6E4A}\tabularnewline
+oxfordblue & \textcolor{oxfordblue}{oxfordblue} &
+\colorbox{oxfordblue}{\#002147}\tabularnewline
+oucrimsonred & \textcolor{oucrimsonred}{oucrimsonred} &
+\colorbox{oucrimsonred}{\#990000}\tabularnewline
+pakistangreen & \textcolor{pakistangreen}{pakistangreen} &
+\colorbox{pakistangreen}{\#006600}\tabularnewline
+palatinateblue & \textcolor{palatinateblue}{palatinateblue} &
+\colorbox{palatinateblue}{\#273BE2}\tabularnewline
+palatinatepurple & \textcolor{palatinatepurple}{palatinatepurple} &
+\colorbox{palatinatepurple}{\#682860}\tabularnewline
+paleaqua & \textcolor{paleaqua}{paleaqua} &
+\colorbox{beaublue}{\#BCD4E6}\tabularnewline
+paleblue & \textcolor{paleblue}{paleblue} &
+\colorbox{paleblue}{\#AFEEEE}\tabularnewline
+palebrown & \textcolor{palebrown}{palebrown} &
+\colorbox{palebrown}{\#987654}\tabularnewline
+palecarmine & \textcolor{palecarmine}{palecarmine} &
+\colorbox{mediumcarmine}{\#AF4035}\tabularnewline
+palecerulean & \textcolor{palecerulean}{palecerulean} &
+\colorbox{palecerulean}{\#9BC4E2}\tabularnewline
+palechestnut & \textcolor{palechestnut}{palechestnut} &
+\colorbox{palechestnut}{\#DDADAF}\tabularnewline
+palecopper & \textcolor{palecopper}{palecopper} &
+\colorbox{palecopper}{\#DA8A67}\tabularnewline
+palecornflowerblue & \textcolor{palecornflowerblue}{palecornflowerblue}
+& \colorbox{palecornflowerblue}{\#ABCDEF}\tabularnewline
+palegold & \textcolor{palegold}{palegold} &
+\colorbox{palegold}{\#E6BE8A}\tabularnewline
+palegoldenrod & \textcolor{palegoldenrod}{palegoldenrod} &
+\colorbox{palegoldenrod}{\#EEE8AA}\tabularnewline
+palegreen & \textcolor{palegreen}{palegreen} &
+\colorbox{palegreen}{\#98FB98}\tabularnewline
+palemagenta & \textcolor{palemagenta}{palemagenta} &
+\colorbox{palemagenta}{\#F984E5}\tabularnewline
+palepink & \textcolor{palepink}{palepink} &
+\colorbox{palepink}{\#FADADD}\tabularnewline
+paleplum & \textcolor{paleplum}{paleplum} &
+\colorbox{mediumlavendermagenta}{\#DDA0DD}\tabularnewline
+palered-violet & \textcolor{palered-violet}{palered-violet} &
+\colorbox{palered-violet}{\#DB7093}\tabularnewline
+palerobineggblue & \textcolor{palerobineggblue}{palerobineggblue} &
+\colorbox{palerobineggblue}{\#96DED1}\tabularnewline
+palesilver & \textcolor{palesilver}{palesilver} &
+\colorbox{palesilver}{\#C9C0BB}\tabularnewline
+palespringbud & \textcolor{palespringbud}{palespringbud} &
+\colorbox{palespringbud}{\#ECEBBD}\tabularnewline
+paletaupe & \textcolor{paletaupe}{paletaupe} &
+\colorbox{paletaupe}{\#BC987E}\tabularnewline
+paleviolet-red & \textcolor{paleviolet-red}{paleviolet-red} &
+\colorbox{palered-violet}{\#DB7093}\tabularnewline
+pansypurple & \textcolor{pansypurple}{pansypurple} &
+\colorbox{pansypurple}{\#78184A}\tabularnewline
+papayawhip & \textcolor{papayawhip}{papayawhip} &
+\colorbox{papayawhip}{\#FFEFD5}\tabularnewline
+parisgreen & \textcolor{parisgreen}{parisgreen} &
+\colorbox{emerald}{\#50C878}\tabularnewline
+pastelblue & \textcolor{pastelblue}{pastelblue} &
+\colorbox{pastelblue}{\#AEC6CF}\tabularnewline
+pastelbrown & \textcolor{pastelbrown}{pastelbrown} &
+\colorbox{pastelbrown}{\#836953}\tabularnewline
+pastelgray & \textcolor{pastelgray}{pastelgray} &
+\colorbox{pastelgray}{\#CFCFC4}\tabularnewline
+pastelgreen & \textcolor{pastelgreen}{pastelgreen} &
+\colorbox{pastelgreen}{\#77DD77}\tabularnewline
+pastelmagenta & \textcolor{pastelmagenta}{pastelmagenta} &
+\colorbox{pastelmagenta}{\#F49AC2}\tabularnewline
+pastelorange & \textcolor{pastelorange}{pastelorange} &
+\colorbox{pastelorange}{\#FFB347}\tabularnewline
+pastelpink & \textcolor{pastelpink}{pastelpink} &
+\colorbox{pastelpink}{\#FFD1DC}\tabularnewline
+pastelpurple & \textcolor{pastelpurple}{pastelpurple} &
+\colorbox{pastelpurple}{\#B39EB5}\tabularnewline
+pastelred & \textcolor{pastelred}{pastelred} &
+\colorbox{pastelred}{\#FF6961}\tabularnewline
+pastelviolet & \textcolor{pastelviolet}{pastelviolet} &
+\colorbox{pastelviolet}{\#CB99C9}\tabularnewline
+pastelyellow & \textcolor{pastelyellow}{pastelyellow} &
+\colorbox{pastelyellow}{\#FDFD96}\tabularnewline
+patriarch & \textcolor{patriarch}{patriarch} &
+\colorbox{patriarch}{\#800080}\tabularnewline
+paynesgrey & \textcolor{paynesgrey}{paynesgrey} &
+\colorbox{paynesgrey}{\#40404F}\tabularnewline
+peach & \textcolor{peach}{peach} &
+\colorbox{peach}{\#FFE5B4}\tabularnewline
+peach-orange & \textcolor{peach-orange}{peach-orange} &
+\colorbox{peach-orange}{\#FFCC99}\tabularnewline
+peachpuff & \textcolor{peachpuff}{peachpuff} &
+\colorbox{peachpuff}{\#FFDAB9}\tabularnewline
+peach-yellow & \textcolor{peach-yellow}{peach-yellow} &
+\colorbox{peach-yellow}{\#FADFAD}\tabularnewline
+pear & \textcolor{pear}{pear} & \colorbox{pear}{\#D1E231}\tabularnewline
+pearl & \textcolor{pearl}{pearl} &
+\colorbox{eggshell}{\#F0EAD6}\tabularnewline
+peridot & \textcolor{peridot}{peridot} &
+\colorbox{peridot}{\#E6E200}\tabularnewline
+periwinkle & \textcolor{periwinkle}{periwinkle} &
+\colorbox{lavenderblue}{\#CCCCFF}\tabularnewline
+persianblue & \textcolor{persianblue}{persianblue} &
+\colorbox{persianblue}{\#1C39BB}\tabularnewline
+persiangreen & \textcolor{persiangreen}{persiangreen} &
+\colorbox{persiangreen}{\#00A693}\tabularnewline
+persianindigo & \textcolor{persianindigo}{persianindigo} &
+\colorbox{persianindigo}{\#32127A}\tabularnewline
+persianorange & \textcolor{persianorange}{persianorange} &
+\colorbox{persianorange}{\#D99058}\tabularnewline
+peru & \textcolor{peru}{peru} & \colorbox{peru}{\#CD853F}\tabularnewline
+persianpink & \textcolor{persianpink}{persianpink} &
+\colorbox{persianpink}{\#F77FBE}\tabularnewline
+persianplum & \textcolor{persianplum}{persianplum} &
+\colorbox{persianplum}{\#701C1C}\tabularnewline
+persianred & \textcolor{persianred}{persianred} &
+\colorbox{persianred}{\#CC3333}\tabularnewline
+persianrose & \textcolor{persianrose}{persianrose} &
+\colorbox{persianrose}{\#FE28A2}\tabularnewline
+persimmon & \textcolor{persimmon}{persimmon} &
+\colorbox{persimmon}{\#EC5800}\tabularnewline
+phlox & \textcolor{phlox}{phlox} &
+\colorbox{phlox}{\#DF00FF}\tabularnewline
+phthaloblue & \textcolor{phthaloblue}{phthaloblue} &
+\colorbox{phthaloblue}{\#000F89}\tabularnewline
+phthalogreen & \textcolor{phthalogreen}{phthalogreen} &
+\colorbox{phthalogreen}{\#123524}\tabularnewline
+piggypink & \textcolor{piggypink}{piggypink} &
+\colorbox{piggypink}{\#FDDDE6}\tabularnewline
+pinegreen & \textcolor{pinegreen}{pinegreen} &
+\colorbox{pinegreen}{\#01796F}\tabularnewline
+pink & \textcolor{pink}{pink} & \colorbox{pink}{\#FFC0CB}\tabularnewline
+pink-orange & \textcolor{pink-orange}{pink-orange} &
+\colorbox{atomictangerine}{\#FF9966}\tabularnewline
+pinkpearl & \textcolor{pinkpearl}{pinkpearl} &
+\colorbox{pinkpearl}{\#E7ACCF}\tabularnewline
+pinksherbet & \textcolor{pinksherbet}{pinksherbet} &
+\colorbox{pinksherbet}{\#F78FA7}\tabularnewline
+pistachio & \textcolor{pistachio}{pistachio} &
+\colorbox{pistachio}{\#93C572}\tabularnewline
+platinum & \textcolor{platinum}{platinum} &
+\colorbox{platinum}{\#E5E4E2}\tabularnewline
+plum & \textcolor{plum}{plum} & \colorbox{plum}{\#8E4585}\tabularnewline
+portlandorange & \textcolor{portlandorange}{portlandorange} &
+\colorbox{portlandorange}{\#FF5A36}\tabularnewline
+powderblue & \textcolor{powderblue}{powderblue} &
+\colorbox{powderblue}{\#B0E0E6}\tabularnewline
+princetonorange & \textcolor{princetonorange}{princetonorange} &
+\colorbox{princetonorange}{\#FF8F00}\tabularnewline
+prune & \textcolor{prune}{prune} &
+\colorbox{persianplum}{\#701C1C}\tabularnewline
+prussianblue & \textcolor{prussianblue}{prussianblue} &
+\colorbox{prussianblue}{\#003153}\tabularnewline
+psychedelicpurple & \textcolor{psychedelicpurple}{psychedelicpurple} &
+\colorbox{phlox}{\#DF00FF}\tabularnewline
+puce & \textcolor{puce}{puce} & \colorbox{puce}{\#CC8899}\tabularnewline
+pumpkin & \textcolor{pumpkin}{pumpkin} &
+\colorbox{pumpkin}{\#FF7518}\tabularnewline
+purple & \textcolor{purple}{purple} &
+\colorbox{patriarch}{\#800080}\tabularnewline
+purpleheart & \textcolor{purpleheart}{purpleheart} &
+\colorbox{purpleheart}{\#69359C}\tabularnewline
+purplemountainmajesty &
+\textcolor{purplemountainmajesty}{purplemountainmajesty} &
+\colorbox{purplemountainmajesty}{\#9678B6}\tabularnewline
+purplepizzazz & \textcolor{purplepizzazz}{purplepizzazz} &
+\colorbox{purplepizzazz}{\#FE4EDA}\tabularnewline
+purpletaupe & \textcolor{purpletaupe}{purpletaupe} &
+\colorbox{purpletaupe}{\#50404D}\tabularnewline
+radicalred & \textcolor{radicalred}{radicalred} &
+\colorbox{radicalred}{\#FF355E}\tabularnewline
+raspberry & \textcolor{raspberry}{raspberry} &
+\colorbox{raspberry}{\#E30B5D}\tabularnewline
+raspberryglace & \textcolor{raspberryglace}{raspberryglace} &
+\colorbox{mauvetaupe}{\#915F6D}\tabularnewline
+raspberrypink & \textcolor{raspberrypink}{raspberrypink} &
+\colorbox{raspberrypink}{\#E25098}\tabularnewline
+raspberryrose & \textcolor{raspberryrose}{raspberryrose} &
+\colorbox{raspberryrose}{\#B3446C}\tabularnewline
+rawumber & \textcolor{rawumber}{rawumber} &
+\colorbox{rawumber}{\#826644}\tabularnewline
+razzledazzlerose & \textcolor{razzledazzlerose}{razzledazzlerose} &
+\colorbox{razzledazzlerose}{\#FF33CC}\tabularnewline
+razzmatazz & \textcolor{razzmatazz}{razzmatazz} &
+\colorbox{razzmatazz}{\#E3256B}\tabularnewline
+red & \textcolor{red}{red} & \colorbox{red}{\#FF0000}\tabularnewline
+red-brown & \textcolor{red-brown}{red-brown} &
+\colorbox{red-brown}{\#A52A2A}\tabularnewline
+red-violet & \textcolor{red-violet}{red-violet} &
+\colorbox{mediumviolet-red}{\#C71585}\tabularnewline
+redwood & \textcolor{redwood}{redwood} &
+\colorbox{redwood}{\#AB4E52}\tabularnewline
+regalia & \textcolor{regalia}{regalia} &
+\colorbox{regalia}{\#522D80}\tabularnewline
+richblack & \textcolor{richblack}{richblack} &
+\colorbox{richblack}{\#004040}\tabularnewline
+richbrilliantlavender &
+\textcolor{richbrilliantlavender}{richbrilliantlavender} &
+\colorbox{richbrilliantlavender}{\#F1A7FE}\tabularnewline
+richcarmine & \textcolor{richcarmine}{richcarmine} &
+\colorbox{richcarmine}{\#D70040}\tabularnewline
+richelectricblue & \textcolor{richelectricblue}{richelectricblue} &
+\colorbox{richelectricblue}{\#0892D0}\tabularnewline
+richlavender & \textcolor{richlavender}{richlavender} &
+\colorbox{richlavender}{\#A76BCF}\tabularnewline
+richlilac & \textcolor{richlilac}{richlilac} &
+\colorbox{richlilac}{\#B666D2}\tabularnewline
+richmaroon & \textcolor{richmaroon}{richmaroon} &
+\colorbox{richmaroon}{\#B03060}\tabularnewline
+riflegreen & \textcolor{riflegreen}{riflegreen} &
+\colorbox{riflegreen}{\#414833}\tabularnewline
+robineggblue & \textcolor{robineggblue}{robineggblue} &
+\colorbox{robineggblue}{\#00CCCC}\tabularnewline
+rose & \textcolor{rose}{rose} &
+\colorbox{brightpink}{\#FF007F}\tabularnewline
+rosebonbon & \textcolor{rosebonbon}{rosebonbon} &
+\colorbox{rosebonbon}{\#F9429E}\tabularnewline
+roseebony & \textcolor{roseebony}{roseebony} &
+\colorbox{roseebony}{\#674846}\tabularnewline
+rosegold & \textcolor{rosegold}{rosegold} &
+\colorbox{rosegold}{\#B76E79}\tabularnewline
+rosemadder & \textcolor{rosemadder}{rosemadder} &
+\colorbox{alizarin}{\#E32636}\tabularnewline
+rosepink & \textcolor{rosepink}{rosepink} &
+\colorbox{rosepink}{\#FF66CC}\tabularnewline
+rosequartz & \textcolor{rosequartz}{rosequartz} &
+\colorbox{rosequartz}{\#AA98A9}\tabularnewline
+rosetaupe & \textcolor{rosetaupe}{rosetaupe} &
+\colorbox{rosetaupe}{\#905D5D}\tabularnewline
+rosevale & \textcolor{rosevale}{rosevale} &
+\colorbox{redwood}{\#AB4E52}\tabularnewline
+rosewood & \textcolor{rosewood}{rosewood} &
+\colorbox{rosewood}{\#65000B}\tabularnewline
+rossocorsa & \textcolor{rossocorsa}{rossocorsa} &
+\colorbox{rossocorsa}{\#D40000}\tabularnewline
+rosybrown & \textcolor{rosybrown}{rosybrown} &
+\colorbox{rosybrown}{\#BC8F8F}\tabularnewline
+royalazure & \textcolor{royalazure}{royalazure} &
+\colorbox{royalazure}{\#0038A8}\tabularnewline
+royalblue & \textcolor{royalblue}{royalblue} &
+\colorbox{royalblue}{\#002366}\tabularnewline
+royalfuchsia & \textcolor{royalfuchsia}{royalfuchsia} &
+\colorbox{royalfuchsia}{\#CA2C92}\tabularnewline
+royalpurple & \textcolor{royalpurple}{royalpurple} &
+\colorbox{royalpurple}{\#7851A9}\tabularnewline
+ruby & \textcolor{ruby}{ruby} & \colorbox{ruby}{\#E0115F}\tabularnewline
+ruddy & \textcolor{ruddy}{ruddy} &
+\colorbox{ruddy}{\#FF0028}\tabularnewline
+ruddybrown & \textcolor{ruddybrown}{ruddybrown} &
+\colorbox{ruddybrown}{\#BB6528}\tabularnewline
+ruddypink & \textcolor{ruddypink}{ruddypink} &
+\colorbox{ruddypink}{\#E18E96}\tabularnewline
+rufous & \textcolor{rufous}{rufous} &
+\colorbox{rufous}{\#A81C07}\tabularnewline
+russet & \textcolor{russet}{russet} &
+\colorbox{russet}{\#80461B}\tabularnewline
+rust & \textcolor{rust}{rust} & \colorbox{rust}{\#B7410E}\tabularnewline
+sacramentostategreen &
+\textcolor{sacramentostategreen}{sacramentostategreen} &
+\colorbox{sacramentostategreen}{\#00563F}\tabularnewline
+saddlebrown & \textcolor{saddlebrown}{saddlebrown} &
+\colorbox{saddlebrown}{\#8B4513}\tabularnewline
+safetyorange & \textcolor{safetyorange}{safetyorange} &
+\colorbox{safetyorange}{\#FF6700}\tabularnewline
+saffron & \textcolor{saffron}{saffron} &
+\colorbox{saffron}{\#F4C430}\tabularnewline
+st.patricksblue & \textcolor{st.patricksblue}{st.patricksblue} &
+\colorbox{st.patricksblue}{\#23297A}\tabularnewline
+salmon & \textcolor{salmon}{salmon} &
+\colorbox{salmon}{\#FF8C69}\tabularnewline
+salmonpink & \textcolor{salmonpink}{salmonpink} &
+\colorbox{salmonpink}{\#FF91A4}\tabularnewline
+sand & \textcolor{sand}{sand} &
+\colorbox{darkchampagne}{\#C2B280}\tabularnewline
+sanddune & \textcolor{sanddune}{sanddune} &
+\colorbox{drab}{\#967117}\tabularnewline
+sandstorm & \textcolor{sandstorm}{sandstorm} &
+\colorbox{sandstorm}{\#ECD540}\tabularnewline
+sandybrown & \textcolor{sandybrown}{sandybrown} &
+\colorbox{sandybrown}{\#F4A460}\tabularnewline
+sandytaupe & \textcolor{sandytaupe}{sandytaupe} &
+\colorbox{drab}{\#967117}\tabularnewline
+sangria & \textcolor{sangria}{sangria} &
+\colorbox{sangria}{\#92000A}\tabularnewline
+sapgreen & \textcolor{sapgreen}{sapgreen} &
+\colorbox{sapgreen}{\#507D2A}\tabularnewline
+sapphire & \textcolor{sapphire}{sapphire} &
+\colorbox{sapphire}{\#082567}\tabularnewline
+satinsheengold & \textcolor{satinsheengold}{satinsheengold} &
+\colorbox{satinsheengold}{\#CBA135}\tabularnewline
+scarlet & \textcolor{scarlet}{scarlet} &
+\colorbox{scarlet}{\#FF2000}\tabularnewline
+schoolbusyellow & \textcolor{schoolbusyellow}{schoolbusyellow} &
+\colorbox{schoolbusyellow}{\#FFD800}\tabularnewline
+screamingreen & \textcolor{screamingreen}{screamingreen} &
+\colorbox{screamingreen}{\#76FF7A}\tabularnewline
+seagreen & \textcolor{seagreen}{seagreen} &
+\colorbox{seagreen}{\#2E8B57}\tabularnewline
+sealbrown & \textcolor{sealbrown}{sealbrown} &
+\colorbox{sealbrown}{\#321414}\tabularnewline
+seashell & \textcolor{seashell}{seashell} &
+\colorbox{seashell}{\#FFF5EE}\tabularnewline
+selectiveyellow & \textcolor{selectiveyellow}{selectiveyellow} &
+\colorbox{selectiveyellow}{\#FFBA00}\tabularnewline
+sepia & \textcolor{sepia}{sepia} &
+\colorbox{sepia}{\#704214}\tabularnewline
+shadow & \textcolor{shadow}{shadow} &
+\colorbox{shadow}{\#8A795D}\tabularnewline
+shamrockgreen & \textcolor{shamrockgreen}{shamrockgreen} &
+\colorbox{shamrockgreen}{\#009E60}\tabularnewline
+shockingpink & \textcolor{shockingpink}{shockingpink} &
+\colorbox{shockingpink}{\#FC0FC0}\tabularnewline
+sienna & \textcolor{sienna}{sienna} &
+\colorbox{sienna}{\#882D17}\tabularnewline
+silver & \textcolor{silver}{silver} &
+\colorbox{silver}{\#C0C0C0}\tabularnewline
+sinopia & \textcolor{sinopia}{sinopia} &
+\colorbox{sinopia}{\#CB410B}\tabularnewline
+skobeloff & \textcolor{skobeloff}{skobeloff} &
+\colorbox{skobeloff}{\#007474}\tabularnewline
+skyblue & \textcolor{skyblue}{skyblue} &
+\colorbox{lightskyblue}{\#87CEEB}\tabularnewline
+skymagenta & \textcolor{skymagenta}{skymagenta} &
+\colorbox{skymagenta}{\#CF71AF}\tabularnewline
+slateblue & \textcolor{slateblue}{slateblue} &
+\colorbox{slateblue}{\#6A5ACD}\tabularnewline
+slategray & \textcolor{slategray}{slategray} &
+\colorbox{slategray}{\#708090}\tabularnewline
+smalt & \textcolor{smalt}{smalt} &
+\colorbox{darkpowderblue}{\#003399}\tabularnewline
+smokeytopaz & \textcolor{smokeytopaz}{smokeytopaz} &
+\colorbox{smokeytopaz}{\#933D41}\tabularnewline
+smokyblack & \textcolor{smokyblack}{smokyblack} &
+\colorbox{smokyblack}{\#100C08}\tabularnewline
+snow & \textcolor{snow}{snow} & \colorbox{snow}{\#FFFAFA}\tabularnewline
+spirodiscoball & \textcolor{spirodiscoball}{spirodiscoball} &
+\colorbox{spirodiscoball}{\#0FC0FC}\tabularnewline
+splashedwhite & \textcolor{splashedwhite}{splashedwhite} &
+\colorbox{splashedwhite}{\#FEFDFF}\tabularnewline
+springbud & \textcolor{springbud}{springbud} &
+\colorbox{springbud}{\#A7FC00}\tabularnewline
+springgreen & \textcolor{springgreen}{springgreen} &
+\colorbox{guppiegreen}{\#00FF7F}\tabularnewline
+steelblue & \textcolor{steelblue}{steelblue} &
+\colorbox{steelblue}{\#4682B4}\tabularnewline
+stildegrainyellow & \textcolor{stildegrainyellow}{stildegrainyellow} &
+\colorbox{jonquil}{\#FADA5E}\tabularnewline
+straw & \textcolor{straw}{straw} &
+\colorbox{straw}{\#E4D96F}\tabularnewline
+sunglow & \textcolor{sunglow}{sunglow} &
+\colorbox{sunglow}{\#FFCC33}\tabularnewline
+sunset & \textcolor{sunset}{sunset} &
+\colorbox{deepchampagne}{\#FAD6A5}\tabularnewline
+tan & \textcolor{tan}{tan} & \colorbox{tan}{\#D2B48C}\tabularnewline
+tangelo & \textcolor{tangelo}{tangelo} &
+\colorbox{tangelo}{\#F94D00}\tabularnewline
+tangerine & \textcolor{tangerine}{tangerine} &
+\colorbox{tangerine}{\#F28500}\tabularnewline
+tangerineyellow & \textcolor{tangerineyellow}{tangerineyellow} &
+\colorbox{tangerineyellow}{\#FFCC00}\tabularnewline
+taupe & \textcolor{taupe}{taupe} &
+\colorbox{darklava}{\#483C32}\tabularnewline
+taupegray & \textcolor{taupegray}{taupegray} &
+\colorbox{taupegray}{\#8B8589}\tabularnewline
+teagreen & \textcolor{teagreen}{teagreen} &
+\colorbox{teagreen}{\#D0F0C0}\tabularnewline
+tearoseorange & \textcolor{tearoseorange}{tearoseorange} &
+\colorbox{coralpink}{\#F88379}\tabularnewline
+tearoserose & \textcolor{tearoserose}{tearoserose} &
+\colorbox{babypink}{\#F4C2C2}\tabularnewline
+teal & \textcolor{teal}{teal} & \colorbox{teal}{\#008080}\tabularnewline
+tealblue & \textcolor{tealblue}{tealblue} &
+\colorbox{tealblue}{\#367588}\tabularnewline
+tealgreen & \textcolor{tealgreen}{tealgreen} &
+\colorbox{tealgreen}{\#006D5B}\tabularnewline
+tenne & \textcolor{tenne}{tenne} &
+\colorbox{tenne}{\#CD5700}\tabularnewline
+terracotta & \textcolor{terracotta}{terracotta} &
+\colorbox{terracotta}{\#E2725B}\tabularnewline
+thistle & \textcolor{thistle}{thistle} &
+\colorbox{thistle}{\#D8BFD8}\tabularnewline
+thulianpink & \textcolor{thulianpink}{thulianpink} &
+\colorbox{thulianpink}{\#DE6FA1}\tabularnewline
+ticklemepink & \textcolor{ticklemepink}{ticklemepink} &
+\colorbox{ticklemepink}{\#FC89AC}\tabularnewline
+tiffanyblue & \textcolor{tiffanyblue}{tiffanyblue} &
+\colorbox{tiffanyblue}{\#0ABAB5}\tabularnewline
+tigerseye & \textcolor{tigerseye}{tigerseye} &
+\colorbox{tigerseye}{\#E08D3C}\tabularnewline
+timberwolf & \textcolor{timberwolf}{timberwolf} &
+\colorbox{timberwolf}{\#DBD7D2}\tabularnewline
+titaniumyellow & \textcolor{titaniumyellow}{titaniumyellow} &
+\colorbox{titaniumyellow}{\#EEE600}\tabularnewline
+tomato & \textcolor{tomato}{tomato} &
+\colorbox{tomato}{\#FF6347}\tabularnewline
+toolbox & \textcolor{toolbox}{toolbox} &
+\colorbox{toolbox}{\#746CC0}\tabularnewline
+tractorred & \textcolor{tractorred}{tractorred} &
+\colorbox{tractorred}{\#FD0E35}\tabularnewline
+trolleygrey & \textcolor{trolleygrey}{trolleygrey} &
+\colorbox{gray}{\#808080}\tabularnewline
+tropicalrainforest & \textcolor{tropicalrainforest}{tropicalrainforest}
+& \colorbox{tropicalrainforest}{\#00755E}\tabularnewline
+trueblue & \textcolor{trueblue}{trueblue} &
+\colorbox{trueblue}{\#0073CF}\tabularnewline
+tuftsblue & \textcolor{tuftsblue}{tuftsblue} &
+\colorbox{tuftsblue}{\#417DC1}\tabularnewline
+tumbleweed & \textcolor{tumbleweed}{tumbleweed} &
+\colorbox{tumbleweed}{\#DEAA88}\tabularnewline
+turkishrose & \textcolor{turkishrose}{turkishrose} &
+\colorbox{turkishrose}{\#B57281}\tabularnewline
+turquoise & \textcolor{turquoise}{turquoise} &
+\colorbox{turquoise}{\#30D5C8}\tabularnewline
+turquoiseblue & \textcolor{turquoiseblue}{turquoiseblue} &
+\colorbox{turquoiseblue}{\#00FFEF}\tabularnewline
+turquoisegreen & \textcolor{turquoisegreen}{turquoisegreen} &
+\colorbox{turquoisegreen}{\#A0D6B4}\tabularnewline
+tuscanred & \textcolor{tuscanred}{tuscanred} &
+\colorbox{tuscanred}{\#823535}\tabularnewline
+twilightlavender & \textcolor{twilightlavender}{twilightlavender} &
+\colorbox{twilightlavender}{\#8A496B}\tabularnewline
+tyrianpurple & \textcolor{tyrianpurple}{tyrianpurple} &
+\colorbox{tyrianpurple}{\#66023C}\tabularnewline
+uablue & \textcolor{uablue}{uablue} &
+\colorbox{uablue}{\#0033AA}\tabularnewline
+uared & \textcolor{uared}{uared} &
+\colorbox{uared}{\#D9004C}\tabularnewline
+ube & \textcolor{ube}{ube} & \colorbox{ube}{\#8878C3}\tabularnewline
+uclablue & \textcolor{uclablue}{uclablue} &
+\colorbox{uclablue}{\#536895}\tabularnewline
+uclagold & \textcolor{uclagold}{uclagold} &
+\colorbox{uclagold}{\#FFB300}\tabularnewline
+ufogreen & \textcolor{ufogreen}{ufogreen} &
+\colorbox{ufogreen}{\#3CD070}\tabularnewline
+ultramarine & \textcolor{ultramarine}{ultramarine} &
+\colorbox{ultramarine}{\#120A8F}\tabularnewline
+ultramarineblue & \textcolor{ultramarineblue}{ultramarineblue} &
+\colorbox{ultramarineblue}{\#4166F5}\tabularnewline
+ultrapink & \textcolor{ultrapink}{ultrapink} &
+\colorbox{ultrapink}{\#FF6FFF}\tabularnewline
+umber & \textcolor{umber}{umber} &
+\colorbox{umber}{\#635147}\tabularnewline
+unitednationsblue & \textcolor{unitednationsblue}{unitednationsblue} &
+\colorbox{unitednationsblue}{\#5B92E5}\tabularnewline
+unmellowyellow & \textcolor{unmellowyellow}{unmellowyellow} &
+\colorbox{unmellowyellow}{\#FFFF66}\tabularnewline
+upforestgreen & \textcolor{upforestgreen}{upforestgreen} &
+\colorbox{forestgreen}{\#014421}\tabularnewline
+upmaroon & \textcolor{upmaroon}{upmaroon} &
+\colorbox{upmaroon}{\#7B1113}\tabularnewline
+upsdellred & \textcolor{upsdellred}{upsdellred} &
+\colorbox{upsdellred}{\#AE2029}\tabularnewline
+urobilin & \textcolor{urobilin}{urobilin} &
+\colorbox{urobilin}{\#E1AD21}\tabularnewline
+usccardinal & \textcolor{usccardinal}{usccardinal} &
+\colorbox{oucrimsonred}{\#990000}\tabularnewline
+uscgold & \textcolor{uscgold}{uscgold} &
+\colorbox{tangerineyellow}{\#FFCC00}\tabularnewline
+utahcrimson & \textcolor{utahcrimson}{utahcrimson} &
+\colorbox{utahcrimson}{\#D3003F}\tabularnewline
+vanilla & \textcolor{vanilla}{vanilla} &
+\colorbox{mediumchampagne}{\#F3E5AB}\tabularnewline
+vegasgold & \textcolor{vegasgold}{vegasgold} &
+\colorbox{vegasgold}{\#C5B358}\tabularnewline
+venetianred & \textcolor{venetianred}{venetianred} &
+\colorbox{venetianred}{\#C80815}\tabularnewline
+verdigris & \textcolor{verdigris}{verdigris} &
+\colorbox{verdigris}{\#43B3AE}\tabularnewline
+vermilion & \textcolor{vermilion}{vermilion} &
+\colorbox{cinnabar}{\#E34234}\tabularnewline
+veronica & \textcolor{veronica}{veronica} &
+\colorbox{veronica}{\#A020F0}\tabularnewline
+violet & \textcolor{violet}{violet} &
+\colorbox{electricviolet}{\#8F00FF}\tabularnewline
+viridian & \textcolor{viridian}{viridian} &
+\colorbox{viridian}{\#40826D}\tabularnewline
+vividauburn & \textcolor{vividauburn}{vividauburn} &
+\colorbox{vividauburn}{\#922724}\tabularnewline
+vividburgundy & \textcolor{vividburgundy}{vividburgundy} &
+\colorbox{vividburgundy}{\#9F1D35}\tabularnewline
+vividcerise & \textcolor{vividcerise}{vividcerise} &
+\colorbox{vividcerise}{\#DA1D81}\tabularnewline
+vividtangerine & \textcolor{vividtangerine}{vividtangerine} &
+\colorbox{vividtangerine}{\#FFA089}\tabularnewline
+vividviolet & \textcolor{vividviolet}{vividviolet} &
+\colorbox{vividviolet}{\#9F00FF}\tabularnewline
+warmblack & \textcolor{warmblack}{warmblack} &
+\colorbox{warmblack}{\#004242}\tabularnewline
+wenge & \textcolor{wenge}{wenge} &
+\colorbox{wenge}{\#645452}\tabularnewline
+wheat & \textcolor{wheat}{wheat} &
+\colorbox{wheat}{\#F5DEB3}\tabularnewline
+white & \textcolor{white}{white} &
+\colorbox{white}{\#FFFFFF}\tabularnewline
+whitesmoke & \textcolor{whitesmoke}{whitesmoke} &
+\colorbox{whitesmoke}{\#F5F5F5}\tabularnewline
+wildblueyonder & \textcolor{wildblueyonder}{wildblueyonder} &
+\colorbox{wildblueyonder}{\#A2ADD0}\tabularnewline
+wildstrawberry & \textcolor{wildstrawberry}{wildstrawberry} &
+\colorbox{wildstrawberry}{\#FF43A4}\tabularnewline
+wildwatermelon & \textcolor{wildwatermelon}{wildwatermelon} &
+\colorbox{wildwatermelon}{\#FC6C85}\tabularnewline
+wisteria & \textcolor{wisteria}{wisteria} &
+\colorbox{wisteria}{\#C9A0DC}\tabularnewline
+xanadu & \textcolor{xanadu}{xanadu} &
+\colorbox{xanadu}{\#738678}\tabularnewline
+yaleblue & \textcolor{yaleblue}{yaleblue} &
+\colorbox{yaleblue}{\#0F4D92}\tabularnewline
+yellow & \textcolor{yellow}{yellow} &
+\colorbox{electricyellow}{\#FFFF00}\tabularnewline
+yellow-green & \textcolor{yellow-green}{yellow-green} &
+\colorbox{yellow-green}{\#9ACD32}\tabularnewline
+zaffre & \textcolor{zaffre}{zaffre} &
+\colorbox{zaffre}{\#0014A8}\tabularnewline
+zinnwalditebrown & \textcolor{zinnwalditebrown}{zinnwalditebrown} &
+\colorbox{zinnwalditebrown}{\#2C1608}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{valid-html-colors}{%
+\section{Valid HTML Colors}\label{valid-html-colors}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{possible_colors <-}\StringTok{ }\KeywordTok{valid_colors}\NormalTok{(}\DataTypeTok{method =} \StringTok{"html"}\NormalTok{)}
+
+\NormalTok{possible_colors }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
+    \StringTok{`}\DataTypeTok{Color}\StringTok{`}\NormalTok{ =}
+\StringTok{  }\KeywordTok{color_vctr}\NormalTok{(}
+\NormalTok{    possible_colors}\OperatorTok{$}\StringTok{`}\DataTypeTok{Color Name}\StringTok{`}\NormalTok{,}
+    \DataTypeTok{text_color =}\NormalTok{ possible_colors}\OperatorTok{$}\StringTok{`}\DataTypeTok{Color Name}\StringTok{`}
+\NormalTok{  ),}
+\StringTok{`}\DataTypeTok{Hex Code}\StringTok{`}\NormalTok{ =}
+\StringTok{  }\KeywordTok{color_vctr}\NormalTok{(}
+    \KeywordTok{paste0}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{"}\NormalTok{,possible_colors}\OperatorTok{$}\StringTok{`}\DataTypeTok{Hex Code}\StringTok{`}\NormalTok{),}
+    \DataTypeTok{background =}\NormalTok{ possible_colors}\OperatorTok{$}\StringTok{`}\DataTypeTok{Hex Code}\StringTok{`}
+\NormalTok{  )) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\StringTok{`}\DataTypeTok{Color Name}\StringTok{`}\NormalTok{, Color, }\StringTok{`}\DataTypeTok{Hex Code}\StringTok{`}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{data.frame}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{format}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{escape =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Color.Name & Color & Hex.Code\tabularnewline
+\midrule
+\endhead
+aliceblue & \textcolor{aliceblue}{aliceblue} &
+\colorbox{aliceblue}{\#F0F8FF}\tabularnewline
+antiquewhite & \textcolor{antiquewhite}{antiquewhite} &
+\colorbox{antiquewhite}{\#FAEBD7}\tabularnewline
+aqua & \textcolor{aqua}{aqua} & \colorbox{aqua}{\#00FFFF}\tabularnewline
+aquamarine & \textcolor{aquamarine}{aquamarine} &
+\colorbox{aquamarine}{\#7FFFD4}\tabularnewline
+azure & \textcolor{azure}{azure} &
+\colorbox{aliceblue}{\#F0FFFF}\tabularnewline
+beige & \textcolor{beige}{beige} &
+\colorbox{beige}{\#F5F5DC}\tabularnewline
+bisque & \textcolor{bisque}{bisque} &
+\colorbox{bisque}{\#FFE4C4}\tabularnewline
+black & \textcolor{black}{black} &
+\colorbox{black}{\#000000}\tabularnewline
+blanchedalmond & \textcolor{blanchedalmond}{blanchedalmond} &
+\colorbox{blanchedalmond}{\#FFEBCD}\tabularnewline
+blue & \textcolor{blue}{blue} & \colorbox{ao}{\#0000FF}\tabularnewline
+blueviolet & \textcolor{blue-violet}{blueviolet} &
+\colorbox{blue-violet}{\#8A2BE2}\tabularnewline
+brown & \textcolor{brown}{brown} &
+\colorbox{red-brown}{\#A52A2A}\tabularnewline
+burlywood & \textcolor{burlywood}{burlywood} &
+\colorbox{burlywood}{\#DEB887}\tabularnewline
+cadetblue & \textcolor{cadetblue}{cadetblue} &
+\colorbox{cadetblue}{\#5F9EA0}\tabularnewline
+chartreuse & \textcolor{chartreuse}{chartreuse} &
+\colorbox{lawngreen}{\#7FFF00}\tabularnewline
+chocolate & \textcolor{chocolate}{chocolate} &
+\colorbox{cinnamon}{\#D2691E}\tabularnewline
+coral & \textcolor{coral}{coral} &
+\colorbox{coral}{\#FF7F50}\tabularnewline
+cornflowerblue & \textcolor{cornflowerblue}{cornflowerblue} &
+\colorbox{cornflowerblue}{\#6495ED}\tabularnewline
+cornsilk & \textcolor{cornsilk}{cornsilk} &
+\colorbox{cornsilk}{\#FFF8DC}\tabularnewline
+crimson & \textcolor{crimson}{crimson} &
+\colorbox{crimson}{\#DC143C}\tabularnewline
+cyan & \textcolor{cyan}{cyan} & \colorbox{aqua}{\#00FFFF}\tabularnewline
+darkblue & \textcolor{darkblue}{darkblue} &
+\colorbox{darkblue}{\#00008B}\tabularnewline
+darkcyan & \textcolor{darkcyan}{darkcyan} &
+\colorbox{darkcyan}{\#008B8B}\tabularnewline
+darkgoldenrod & \textcolor{darkgoldenrod}{darkgoldenrod} &
+\colorbox{darkgoldenrod}{\#B8860B}\tabularnewline
+darkgray & \textcolor{darkgray}{darkgray} &
+\colorbox{darkgray}{\#A9A9A9}\tabularnewline
+darkgrey & \textcolor{darkgray}{darkgrey} &
+\colorbox{darkgray}{\#A9A9A9}\tabularnewline
+darkgreen & \textcolor{darkgreen}{darkgreen} &
+\colorbox{pakistangreen}{\#006400}\tabularnewline
+darkkhaki & \textcolor{darkkhaki}{darkkhaki} &
+\colorbox{darkkhaki}{\#BDB76B}\tabularnewline
+darkmagenta & \textcolor{darkmagenta}{darkmagenta} &
+\colorbox{darkmagenta}{\#8B008B}\tabularnewline
+darkolivegreen & \textcolor{darkolivegreen}{darkolivegreen} &
+\colorbox{darkolivegreen}{\#556B2F}\tabularnewline
+darkorange & \textcolor{darkorange}{darkorange} &
+\colorbox{darkorange}{\#FF8C00}\tabularnewline
+darkorchid & \textcolor{darkorchid}{darkorchid} &
+\colorbox{darkorchid}{\#9932CC}\tabularnewline
+darkred & \textcolor{darkred}{darkred} &
+\colorbox{darkred}{\#8B0000}\tabularnewline
+darksalmon & \textcolor{darksalmon}{darksalmon} &
+\colorbox{darksalmon}{\#E9967A}\tabularnewline
+darkseagreen & \textcolor{darkseagreen}{darkseagreen} &
+\colorbox{darkseagreen}{\#8FBC8F}\tabularnewline
+darkslateblue & \textcolor{darkslateblue}{darkslateblue} &
+\colorbox{darkslateblue}{\#483D8B}\tabularnewline
+darkslategray & \textcolor{darkslategray}{darkslategray} &
+\colorbox{darkslategray}{\#2F4F4F}\tabularnewline
+darkslategrey & \textcolor{darkslategray}{darkslategrey} &
+\colorbox{darkslategray}{\#2F4F4F}\tabularnewline
+darkturquoise & \textcolor{darkturquoise}{darkturquoise} &
+\colorbox{darkturquoise}{\#00CED1}\tabularnewline
+darkviolet & \textcolor{darkviolet}{darkviolet} &
+\colorbox{darkviolet}{\#9400D3}\tabularnewline
+deeppink & \textcolor{deeppink}{deeppink} &
+\colorbox{deeppink}{\#FF1493}\tabularnewline
+deepskyblue & \textcolor{deepskyblue}{deepskyblue} &
+\colorbox{capri}{\#00BFFF}\tabularnewline
+dimgray & \textcolor{dimgray}{dimgray} &
+\colorbox{dimgray}{\#696969}\tabularnewline
+dimgrey & \textcolor{dimgray}{dimgrey} &
+\colorbox{dimgray}{\#696969}\tabularnewline
+dodgerblue & \textcolor{dodgerblue}{dodgerblue} &
+\colorbox{dodgerblue}{\#1E90FF}\tabularnewline
+firebrick & \textcolor{firebrick}{firebrick} &
+\colorbox{firebrick}{\#B22222}\tabularnewline
+floralwhite & \textcolor{floralwhite}{floralwhite} &
+\colorbox{floralwhite}{\#FFFAF0}\tabularnewline
+forestgreen & \textcolor{forestgreen}{forestgreen} &
+\colorbox{indiagreen}{\#228B22}\tabularnewline
+fuchsia & \textcolor{fuchsia}{fuchsia} &
+\colorbox{fuchsia}{\#FF00FF}\tabularnewline
+gainsboro & \textcolor{gainsboro}{gainsboro} &
+\colorbox{gainsboro}{\#DCDCDC}\tabularnewline
+ghostwhite & \textcolor{ghostwhite}{ghostwhite} &
+\colorbox{ghostwhite}{\#F8F8FF}\tabularnewline
+gold & \textcolor{gold}{gold} & \colorbox{gold}{\#FFD700}\tabularnewline
+goldenrod & \textcolor{goldenrod}{goldenrod} &
+\colorbox{goldenrod}{\#DAA520}\tabularnewline
+gray & \textcolor{gray}{gray} & \colorbox{gray}{\#808080}\tabularnewline
+grey & \textcolor{gray}{grey} & \colorbox{gray}{\#808080}\tabularnewline
+green & \textcolor{green}{green} &
+\colorbox{officegreen}{\#008000}\tabularnewline
+greenyellow & \textcolor{green-yellow}{greenyellow} &
+\colorbox{green-yellow}{\#ADFF2F}\tabularnewline
+honeydew & \textcolor{honeydew}{honeydew} &
+\colorbox{honeydew}{\#F0FFF0}\tabularnewline
+hotpink & \textcolor{hotpink}{hotpink} &
+\colorbox{hotpink}{\#FF69B4}\tabularnewline
+indianred & \textcolor{indianred}{indianred} &
+\colorbox{chestnut}{\#CD5C5C}\tabularnewline
+indigo & \textcolor{indigo}{indigo} &
+\colorbox{indigo}{\#4B0082}\tabularnewline
+ivory & \textcolor{ivory}{ivory} &
+\colorbox{ivory}{\#FFFFF0}\tabularnewline
+khaki & \textcolor{khaki}{khaki} &
+\colorbox{lightkhaki}{\#F0E68C}\tabularnewline
+lavender & \textcolor{lavender}{lavender} &
+\colorbox{lightlavender}{\#E6E6FA}\tabularnewline
+lavenderblush & \textcolor{lavenderblush}{lavenderblush} &
+\colorbox{lavenderblush}{\#FFF0F5}\tabularnewline
+lawngreen & \textcolor{lawngreen}{lawngreen} &
+\colorbox{lawngreen}{\#7CFC00}\tabularnewline
+lemonchiffon & \textcolor{lemonchiffon}{lemonchiffon} &
+\colorbox{lemonchiffon}{\#FFFACD}\tabularnewline
+lightblue & \textcolor{lightblue}{lightblue} &
+\colorbox{lightblue}{\#ADD8E6}\tabularnewline
+lightcoral & \textcolor{lightcoral}{lightcoral} &
+\colorbox{lightcoral}{\#F08080}\tabularnewline
+lighcyan & \textcolor{lightcyan}{lighcyan} &
+\colorbox{lightcyan}{\#E0FFFF}\tabularnewline
+lightgoldenrodyellow &
+\textcolor{lightgoldenrodyellow}{lightgoldenrodyellow} &
+\colorbox{lightgoldenrodyellow}{\#FAFAD2}\tabularnewline
+lightgray & \textcolor{lightgray}{lightgray} &
+\colorbox{lightgray}{\#D3D3D3}\tabularnewline
+lightgrey & \textcolor{lightgray}{lightgrey} &
+\colorbox{lightgray}{\#D3D3D3}\tabularnewline
+lightgreen & \textcolor{lightgreen}{lightgreen} &
+\colorbox{lightgreen}{\#90EE90}\tabularnewline
+lightpink & \textcolor{lightpink}{lightpink} &
+\colorbox{lightpink}{\#FFB6C1}\tabularnewline
+lightsalmon & \textcolor{lightsalmon}{lightsalmon} &
+\colorbox{lightsalmon}{\#FFA07A}\tabularnewline
+lightseagreen & \textcolor{lightseagreen}{lightseagreen} &
+\colorbox{lightseagreen}{\#20B2AA}\tabularnewline
+lightskyblue & \textcolor{lightskyblue}{lightskyblue} &
+\colorbox{babyblue}{\#87CEFA}\tabularnewline
+lightslategray & \textcolor{lightslategray}{lightslategray} &
+\colorbox{lightslategray}{\#778899}\tabularnewline
+lightslategrey & \textcolor{lightslategray}{lightslategrey} &
+\colorbox{lightslategray}{\#778899}\tabularnewline
+lightsteelblue & \textcolor{pastelblue}{lightsteelblue} &
+\colorbox{pastelblue}{\#B0C4DE}\tabularnewline
+lightyellow & \textcolor{lightyellow}{lightyellow} &
+\colorbox{cornsilk}{\#FFFFE0}\tabularnewline
+lime & \textcolor{lime}{lime} &
+\colorbox{electricgreen}{\#00FF00}\tabularnewline
+limegreen & \textcolor{limegreen}{limegreen} &
+\colorbox{limegreen}{\#32CD32}\tabularnewline
+linen & \textcolor{linen}{linen} &
+\colorbox{linen}{\#FAF0E6}\tabularnewline
+magenta & \textcolor{magenta}{magenta} &
+\colorbox{fuchsia}{\#FF00FF}\tabularnewline
+maroon & \textcolor{maroon}{maroon} &
+\colorbox{maroon}{\#800000}\tabularnewline
+mediumaquamarine & \textcolor{mediumaquamarine}{mediumaquamarine} &
+\colorbox{mediumaquamarine}{\#66CDAA}\tabularnewline
+mediumblue & \textcolor{mediumblue}{mediumblue} &
+\colorbox{mediumblue}{\#0000CD}\tabularnewline
+mediumorchid & \textcolor{mediumorchid}{mediumorchid} &
+\colorbox{mediumorchid}{\#BA55D3}\tabularnewline
+mediumpurple & \textcolor{mediumpurple}{mediumpurple} &
+\colorbox{mediumpurple}{\#9370DB}\tabularnewline
+mediumseagreen & \textcolor{mediumseagreen}{mediumseagreen} &
+\colorbox{mediumseagreen}{\#3CB371}\tabularnewline
+mediumslateblue & \textcolor{mediumslateblue}{mediumslateblue} &
+\colorbox{mediumslateblue}{\#7B68EE}\tabularnewline
+mediumspringgreen & \textcolor{mediumspringgreen}{mediumspringgreen} &
+\colorbox{mediumspringgreen}{\#00FA9A}\tabularnewline
+mediumturquoise & \textcolor{mediumturquoise}{mediumturquoise} &
+\colorbox{mediumturquoise}{\#48D1CC}\tabularnewline
+mediumvioletred & \textcolor{mediumviolet-red}{mediumvioletred} &
+\colorbox{mediumviolet-red}{\#C71585}\tabularnewline
+midnightblue & \textcolor{midnightblue}{midnightblue} &
+\colorbox{midnightblue}{\#191970}\tabularnewline
+mintcream & \textcolor{mintcream}{mintcream} &
+\colorbox{mintcream}{\#F5FFFA}\tabularnewline
+mistyrose & \textcolor{mistyrose}{mistyrose} &
+\colorbox{mistyrose}{\#FFE4E1}\tabularnewline
+moccasin & \textcolor{moccasin}{moccasin} &
+\colorbox{peach}{\#FFE4B5}\tabularnewline
+navajowhite & \textcolor{navajowhite}{navajowhite} &
+\colorbox{navajowhite}{\#FFDEAD}\tabularnewline
+navy & \textcolor{navyblue}{navy} &
+\colorbox{navyblue}{\#000080}\tabularnewline
+oldlace & \textcolor{oldlace}{oldlace} &
+\colorbox{oldlace}{\#FDF5E6}\tabularnewline
+olive & \textcolor{olive}{olive} &
+\colorbox{heartgold}{\#808000}\tabularnewline
+olivedrab & \textcolor{olivedrab}{olivedrab} &
+\colorbox{olivedrab}{\#6B8E23}\tabularnewline
+orange & \textcolor{orange}{orange} &
+\colorbox{chromeyellow}{\#FFA500}\tabularnewline
+orangered & \textcolor{orange-red}{orangered} &
+\colorbox{orange-red}{\#FF4500}\tabularnewline
+orchid & \textcolor{orchid}{orchid} &
+\colorbox{orchid}{\#DA70D6}\tabularnewline
+palegoldenrod & \textcolor{palegoldenrod}{palegoldenrod} &
+\colorbox{palegoldenrod}{\#EEE8AA}\tabularnewline
+palegreen & \textcolor{palegreen}{palegreen} &
+\colorbox{palegreen}{\#98FB98}\tabularnewline
+palerturquoise & \textcolor{paleblue}{palerturquoise} &
+\colorbox{paleblue}{\#AFEEEE}\tabularnewline
+palevioletred & \textcolor{palered-violet}{palevioletred} &
+\colorbox{palered-violet}{\#DB7093}\tabularnewline
+papayawhip & \textcolor{papayawhip}{papayawhip} &
+\colorbox{papayawhip}{\#FFEFD5}\tabularnewline
+peachpuff & \textcolor{peachpuff}{peachpuff} &
+\colorbox{peachpuff}{\#FFDAB9}\tabularnewline
+peru & \textcolor{peru}{peru} & \colorbox{peru}{\#CD853F}\tabularnewline
+pink & \textcolor{pink}{pink} & \colorbox{pink}{\#FFC0CB}\tabularnewline
+plum & \textcolor{plum}{plum} &
+\colorbox{mediumlavendermagenta}{\#DDA0DD}\tabularnewline
+powderblue & \textcolor{powderblue}{powderblue} &
+\colorbox{powderblue}{\#B0E0E6}\tabularnewline
+purple & \textcolor{purple}{purple} &
+\colorbox{patriarch}{\#800080}\tabularnewline
+rebeccapurple & \textcolor{purpleheart}{rebeccapurple} &
+\colorbox{purpleheart}{\#663399}\tabularnewline
+red & \textcolor{red}{red} & \colorbox{red}{\#FF0000}\tabularnewline
+rosybrown & \textcolor{rosybrown}{rosybrown} &
+\colorbox{rosybrown}{\#BC8F8F}\tabularnewline
+royalblue & \textcolor{royalblue}{royalblue} &
+\colorbox{hanblue}{\#4169E1}\tabularnewline
+saddlebrown & \textcolor{saddlebrown}{saddlebrown} &
+\colorbox{saddlebrown}{\#8B4513}\tabularnewline
+salmon & \textcolor{salmon}{salmon} &
+\colorbox{coralpink}{\#FA8072}\tabularnewline
+sandybrown & \textcolor{sandybrown}{sandybrown} &
+\colorbox{sandybrown}{\#F4A460}\tabularnewline
+seagreen & \textcolor{seagreen}{seagreen} &
+\colorbox{seagreen}{\#2E8B57}\tabularnewline
+seashell & \textcolor{seashell}{seashell} &
+\colorbox{seashell}{\#FFF5EE}\tabularnewline
+sienna & \textcolor{sienna}{sienna} &
+\colorbox{mediumcarmine}{\#A0522D}\tabularnewline
+silver & \textcolor{silver}{silver} &
+\colorbox{silver}{\#C0C0C0}\tabularnewline
+skyblue & \textcolor{skyblue}{skyblue} &
+\colorbox{lightskyblue}{\#87CEEB}\tabularnewline
+slateblue & \textcolor{slateblue}{slateblue} &
+\colorbox{slateblue}{\#6A5ACD}\tabularnewline
+slategray & \textcolor{slategray}{slategray} &
+\colorbox{slategray}{\#708090}\tabularnewline
+slategrey & \textcolor{slategray}{slategrey} &
+\colorbox{slategray}{\#708090}\tabularnewline
+snow & \textcolor{snow}{snow} & \colorbox{snow}{\#FFFAFA}\tabularnewline
+springgreen & \textcolor{springgreen}{springgreen} &
+\colorbox{guppiegreen}{\#00FF7F}\tabularnewline
+steelblue & \textcolor{steelblue}{steelblue} &
+\colorbox{steelblue}{\#4682B4}\tabularnewline
+tan & \textcolor{tan}{tan} & \colorbox{tan}{\#D2B48C}\tabularnewline
+teal & \textcolor{teal}{teal} & \colorbox{teal}{\#008080}\tabularnewline
+thistle & \textcolor{thistle}{thistle} &
+\colorbox{thistle}{\#D8BFD8}\tabularnewline
+tomato & \textcolor{tomato}{tomato} &
+\colorbox{tomato}{\#FF6347}\tabularnewline
+turquoise & \textcolor{turquoise}{turquoise} &
+\colorbox{mediumturquoise}{\#40E0D0}\tabularnewline
+violet & \textcolor{violet}{violet} &
+\colorbox{lavendermagenta}{\#EE82EE}\tabularnewline
+wheat & \textcolor{wheat}{wheat} &
+\colorbox{wheat}{\#F5DEB3}\tabularnewline
+white & \textcolor{white}{white} &
+\colorbox{white}{\#FFFFFF}\tabularnewline
+whitesmoke & \textcolor{whitesmoke}{whitesmoke} &
+\colorbox{whitesmoke}{\#F5F5F5}\tabularnewline
+yellow & \textcolor{yellow}{yellow} &
+\colorbox{electricyellow}{\#FFFF00}\tabularnewline
+yellowgreen & \textcolor{yellow-green}{yellowgreen} &
+\colorbox{yellow-green}{\#9ACD32}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{color-scales}{%
+\section{Color Scales}\label{color-scales}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{color_vctr}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{, }\DataTypeTok{text_color =} \KeywordTok{color_scale}\NormalTok{(}\StringTok{"Blues"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\textcolor{ghostwhite}{1} \textcolor{lightlavender}{2}
+\textcolor{beaublue}{3} \textcolor{lightblue}{4}
+\textcolor{carolinablue}{5} \textcolor{bluegray}{6}
+\textcolor{tuftsblue}{7} \textcolor{denim}{8}
+\textcolor{mediumelectricblue}{9} \textcolor{darkmidnightblue}{10}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{color_vctr}\NormalTok{(}\KeywordTok{factor}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{20}\NormalTok{), }\DataTypeTok{text_color =} \KeywordTok{color_scale}\NormalTok{(}\DataTypeTok{palette =} \KeywordTok{colorRamp}\NormalTok{(}\KeywordTok{c}\NormalTok{(}
+  \StringTok{"blue"}\NormalTok{, }\StringTok{"yellow"}\NormalTok{, }\StringTok{"red"}
+\NormalTok{))))}
+\end{Highlighting}
+\end{Shaded}
+
+\textcolor{ao}{1} \textcolor{palatinateblue}{2}
+\textcolor{palatinateblue}{3} \textcolor{uclablue}{4}
+\textcolor{slategray}{5} \textcolor{battleshipgrey}{6}
+\textcolor{asparagus}{7} \textcolor{oldgold}{8} \textcolor{pear}{9}
+\textcolor{aureolin}{10} \textcolor{canaryyellow}{11}
+\textcolor{gold}{12} \textcolor{selectiveyellow}{13}
+\textcolor{orangepeel}{14} \textcolor{darkorange}{15}
+\textcolor{safetyorange}{16} \textcolor{internationalorange}{17}
+\textcolor{coquelicot}{18} \textcolor{scarlet}{19} \textcolor{red}{20}
+
+\end{document}

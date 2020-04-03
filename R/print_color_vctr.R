@@ -34,7 +34,6 @@ format.color_vctr.console <- function(x,...){
       attr(x,".text_color")[idx],
       attr(x,".background")[idx],
       ...)}))
-  class(x) <- c("color_vctr_output","character")
   x
 }
 
@@ -46,11 +45,13 @@ format.color_vctr.html <- function(x,...){
       attr(x,".text_color")[idx],
       attr(x,".background")[idx],
       ...)}))
-  class(x) <- c("color_vctr_output","character")
   x
 }
 
 format.color_vctr.latex <- function(x,...){
+
+  add_colortable_latex_meta()
+
   x <- do.call('c',lapply(seq_along(x),function(idx){
     style2tex(
       .subset(x,idx),
@@ -58,6 +59,17 @@ format.color_vctr.latex <- function(x,...){
       attr(x,".text_color")[idx],
       attr(x,".background")[idx],
       ...)}))
-  class(x) <- c("color_vctr_output","character")
   x
+}
+
+
+add_colortable_latex_meta <- function(){
+  meta <- knitr::knit_meta(clean = FALSE)
+  id <- do.call('c',lapply(meta,`[[`,"name"))
+  extra_lines <- lapply(meta,`[[`,"extra_lines")
+  if( !"xcolor" %in% id | !any(sapply(extra_lines,identical,color_key_latex$code))){
+    invisible(
+      knitr::knit_meta_add(list(rmarkdown::latex_dependency(name = "xcolor", extra_lines = color_key_latex$code)))
+    )
+  }
 }

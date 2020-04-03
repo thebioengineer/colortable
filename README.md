@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# colortable
+# colortable <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
 
@@ -9,6 +9,8 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![R build
 status](https://github.com/thebioengineer/colortable/workflows/R-CMD-check/badge.svg)](https://github.com/thebioengineer/colortable/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/thebioengineer/colortable/branch/master/graph/badge.svg)](https://codecov.io/gh/thebioengineer/colortable?branch=master)
 <!-- badges: end -->
 
 The goal of colortable is to make it easier to color and style your
