@@ -4,3 +4,7 @@
 ^CODE_OF_CONDUCT\.md$
 ^README\.Rmd$
 ^\.github/workflows/R-CMD-check\.yaml$
+^\.travis\.yml$
+^codecov\.yml$
+^\.covrignore$
+^cran-comments\.md$

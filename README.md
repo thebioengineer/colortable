@@ -9,6 +9,10 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![R build
 status](https://github.com/thebioengineer/colortable/workflows/R-CMD-check/badge.svg)](https://github.com/thebioengineer/colortable/actions)
+[![Travis build
+status](https://travis-ci.org/thebioengineer/colortable.svg?branch=master)](https://travis-ci.org/thebioengineer/colortable)
+[![Codecov test
+coverage](https://codecov.io/gh/thebioengineer/colortable/branch/master/graph/badge.svg)](https://codecov.io/gh/thebioengineer/colortable?branch=master)
 <!-- badges: end -->
 
 The goal of colortable is to make it easier to color and style your
