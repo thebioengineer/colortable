@@ -7,7 +7,7 @@
 #' @name Valid
 #' @aliases valid_colors  valid_style
 #' @usage
-#' valid_text_color
+#' valid_colors
 #' valid_style
 #'
 NULL

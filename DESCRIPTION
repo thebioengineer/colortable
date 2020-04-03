@@ -7,10 +7,9 @@ Authors@R:
       person(
         given = "Ellis", 
         family = "Hughes", 
-        email = "ellishughes@live.com", 
+        email = "ellishsquared@gmail.com", 
         role = c("aut", "cre")
       ))
-Maintainer: Ellis Hughes <ellishsquared@gmail.com>
 Description: The goal of colortable is to make it easier to color and style your table elements, and
     view your changes in real time. 
     Current styling technologies make you go to your final printing status before you can see the 
