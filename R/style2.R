@@ -31,7 +31,7 @@ style2console <- function(x, style = NA, text_color = NA, background = NA, ...){
     text_color <- style_wrapper_console(text_color, type = "text")
     text_background <- style_wrapper_console(background, type = "background")
 
-    text_color(text_background(text_style(format(x,...))))
+    text_color(text_background(text_style(x)))
   }
 }
 
@@ -52,7 +52,7 @@ style2html <- function(x, style = NA, text_color = NA, background = NA, ...){
 
     style = paste(c(text_style, text_color, text_background), collapse =
                     "")
-    paste0("<span style='",style,"'>",format(x,...),"</span>")
+    paste0("<span style='",style,"'>",x,"</span>")
   }
 }
 
@@ -66,7 +66,7 @@ style2tex <- function(x, style = NA, text_color = NA, background = NA, ...){
     text_color <- style_wrapper_tex(text_color, type = "text")
     text_background <- style_wrapper_tex(background, type = "background")
 
-    text_background(text_style(text_color(format(x, ...))))
+    text_background(text_style(text_color(x)))
   }
 }
 

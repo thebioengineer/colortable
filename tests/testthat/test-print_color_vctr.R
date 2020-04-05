@@ -156,3 +156,30 @@ test_that("input colors can be functions", {
     "\\colorbox{iceberg}{\\textcolor{iceberg}{1}}"
   )
 })
+
+
+test_that("NA's are appended with grey syling always", {
+  #tiffanyblue is not a named color for console or html
+  c_vctr <-
+    color_vctr(
+      NA,
+      text_color = "blue",
+      background = "green",
+      style = "italic"
+    )
+
+  expect_equivalent(
+    format(c_vctr, method = "console"),
+    "\033[38;5;74m\033[48;5;74m1\033[0m\033[0m"
+  )
+
+  expect_equivalent(
+    format(c_vctr, method = "html"),
+    "<span style='color:#6BAED6;background:#6BAED6;'>1</span>"
+  )
+
+  expect_equivalent(
+    format(c_vctr, method = "latex"),
+    "\\colorbox{iceberg}{\\textcolor{iceberg}{1}}"
+  )
+})

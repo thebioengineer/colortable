@@ -39,7 +39,7 @@ new_color_vctr <- function(vect, text_color = NA, background = NA, style = NA ){
       ".text_color" = text_color,
       ".background" = background,
       ".style" = style,
-      class = "color_vctr"
+      class = c("color_vctr",class(vect))
     )
   )
 }
@@ -65,14 +65,14 @@ new_color_vctr <- function(vect, text_color = NA, background = NA, style = NA ){
 #' @return a color_vctr
 #' @export
 
-color_vctr <- function(x, ..., text_color = NA, background = NA, style = NA){
+color_vctr <- function(x,..., text_color = NA, background = NA, style = NA){
   UseMethod("color_vctr",x)
 }
 
 #' @export
 color_vctr.default <- function(x,...,text_color = NA, background = NA, style = NA) {
   new_color_vctr(
-    c(x, ...),
+    x,
     text_color = text_color,
     background = background,
     style = style

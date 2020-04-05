@@ -21,12 +21,12 @@ test_that("New color vectors can only be based on an atomic vector or another co
 test_that("New color vectors can be built from other color vectors", {
   expect_equal(
     color_vctr(color_vctr(1), color_vctr(2)),
-    color_vctr(1,2)
+    color_vctr(c(1,2))
     )
 
   expect_equal(
-    color_vctr(color_vctr(1,2,3), color_vctr(4)),
-    color_vctr(1,2,3,4)
+    color_vctr(color_vctr(c(1,2,3)), color_vctr(4, text_color = "blue")),
+    color_vctr(c(1,2,3,4), text_color = c(NA,NA,NA, "blue"))
   )
 })
 
@@ -37,11 +37,11 @@ test_that("Text_color provided must be either length 1 or length of input vector
   )
 
   expect_false(
-    inherits(try(color_vctr(1,2,3,4, text_color = "blue")),"try-error")
+    inherits(try(color_vctr(c(1,2,3,4), text_color = "blue")),"try-error")
   )
 
   expect_false(
-    inherits(try(color_vctr(1,2,3,4, text_color = c("blue","yellow","magenta","cyan"))),"try-error")
+    inherits(try(color_vctr(c(1,2,3,4), text_color = c("blue","yellow","magenta","cyan"))),"try-error")
   )
 
   expect_error(
@@ -57,15 +57,15 @@ test_that("Background provided must be either length 1 or length of input vector
   )
 
   expect_false(
-    inherits(try(color_vctr(1,2,3,4, background = "blue")),"try-error")
+    inherits(try(color_vctr(c(1,2,3,4), background = "blue")),"try-error")
   )
 
   expect_false(
-    inherits(try(color_vctr(1,2,3,4, background = c("blue","yellow","magenta","cyan"))),"try-error")
+    inherits(try(color_vctr(c(1,2,3,4), background = c("blue","yellow","magenta","cyan"))),"try-error")
   )
 
   expect_error(
-    color_vctr(1,2,3,4, background = c("blue","yellow","magenta"))
+    color_vctr(c(1,2,3,4), background = c("blue","yellow","magenta"))
   )
 
 })
@@ -77,15 +77,15 @@ test_that("Style provided must be either length 1 or length of input vector",{
   )
 
   expect_false(
-    inherits(try(color_vctr(1,2,3,4, style = "underline")),"try-error")
+    inherits(try(color_vctr(c(1,2,3,4), style = "underline")),"try-error")
   )
 
   expect_false(
-    inherits(try(color_vctr(1,2,3,4, background = c("underline","invert","strikethrough","bold"))),"try-error")
+    inherits(try(color_vctr(c(1,2,3,4), background = c("underline","invert","strikethrough","bold"))),"try-error")
   )
 
   expect_error(
-    color_vctr(1,2,3,4, style = c("underline","invert","strikethrough"))
+    color_vctr(c(1,2,3,4), style = c("underline","invert","strikethrough"))
   )
 
 })

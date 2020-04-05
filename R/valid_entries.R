@@ -7,7 +7,7 @@
 #' @name Valid
 #' @aliases valid_colors  valid_style
 #' @usage
-#' valid_text_color
+#' valid_colors
 #' valid_style
 #'
 NULL
@@ -16,6 +16,7 @@ NULL
 #' @rdname Valid
 #' @export
 valid_colors <- function(method = c("latex","html","console")){
+  method <- match.arg(method,several.ok = TRUE)
   method <- match.arg(method,several.ok = TRUE)
   styles <- do.call(rbind, lapply(method, function(x) {
     styles <-

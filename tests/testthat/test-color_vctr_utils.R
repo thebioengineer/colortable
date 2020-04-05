@@ -116,7 +116,7 @@ test_that("If assignment of a color_vctr is larger then vector being added, it w
 
   expect_warning({
     example_color_vctr[2] <- color_vctr(
-      2,3,
+      c(2,3),
       style = "strikethrough",
       text_color = "magenta"
     )},
