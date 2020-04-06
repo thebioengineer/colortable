@@ -3,11 +3,64 @@ capture_print <- function(x){
 }
 
 test_that("vector printing to console - numeric", {
-  set.seed(12345)
   styled_vect <-
     color_vctr(c(1, 2, 0.05, 20), text_color = c("red", "blue", "green", NA))
   styled_vect_long <-
-    color_vctr(runif(20), text_color = sample(c("red", "blue", "green"), 20, replace = TRUE))
+    color_vctr(
+      c(
+        0.720903896,
+        0.875773193,
+        0.760982328,
+        0.886124566,
+        0.45648096,
+        0.166371785,
+        0.325095387,
+        0.509224336,
+        0.727705254,
+        0.989736938,
+        0.034535435,
+        0.152373490,
+        0.735684952,
+        0.001136587,
+        0.391203335,
+        0.462494654,
+        0.388143982,
+        0.402485142,
+        0.178963585,
+        0.951658754
+      ),
+      text_color = c(
+        "green",
+        "blue"  ,
+        "blue" ,
+        "red"  ,
+        "blue"  ,
+        "green",
+        "red"  ,
+        "blue"  ,
+        "red"  ,
+        "blue",
+        "green",
+        "blue",
+        "blue",
+        "green",
+        "red" ,
+        "red" ,
+        "green",
+        "blue",
+        "red" ,
+        "red"
+      )
+    )
+
+
+c("green", "blue"  ,"blue" ,
+"red"  , "blue"  ,"green",
+"red"  , "blue"  ,"red"  ,
+"blue",  "green", "blue",
+"blue",  "green", "red" ,
+"red" ,  "green", "blue",
+"red" ,  "red")
 
   expect_equal(
     capture_print(styled_vect),
@@ -29,7 +82,61 @@ test_that("vector printing to console - integer", {
   styled_vect <-
     color_vctr(as.integer(c(1, 2, 3, 20)), text_color = c("red", "blue", "green", NA))
   styled_vect_long <-
-    color_vctr(1:50, text_color = sample(c("red", "blue", "green"), 50, replace = TRUE))
+    color_vctr(
+      1:50,
+      text_color =    c(
+        "blue" ,
+        "green",
+        "blue" ,
+        "blue" ,
+        "red"  ,
+        "green",
+        "blue" ,
+        "blue" ,
+        "green",
+        "blue" ,
+        "green",
+        "blue" ,
+        "blue" ,
+        "red"  ,
+        "green",
+        "blue" ,
+        "blue" ,
+        "red"  ,
+        "blue" ,
+        "green",
+        "red"  ,
+        "blue" ,
+        "red"  ,
+        "blue" ,
+        "green",
+        "blue" ,
+        "blue" ,
+        "green",
+        "red"  ,
+        "red"  ,
+        "green",
+        "blue" ,
+        "red"  ,
+        "red"  ,
+        "green",
+        "green",
+        "red"  ,
+        "green",
+        "red"  ,
+        "red"  ,
+        "blue" ,
+        "blue" ,
+        "green",
+        "green",
+        "red"  ,
+        "green",
+        "green",
+        "red"  ,
+        "blue" ,
+        "green"
+      )
+    )
 
   expect_equal(
     capture_print(styled_vect),
@@ -45,11 +152,26 @@ test_that("vector printing to console - integer", {
 })
 
 test_that("vector printing to console - character", {
-  set.seed(12345)
   styled_vect <-
     color_vctr(c("A", "B", "C", "Long Character"), text_color = c("red", "blue", "green", NA))
   styled_vect_long <-
-    color_vctr(rep(c("A", "B", "C", "Long Character"),3), text_color = sample(c("red", "blue", "green"), 12, replace = TRUE))
+    color_vctr(
+      rep(c("A", "B", "C", "Long Character"), 3),
+      text_color =   c(
+        "blue",
+        "green",
+        "blue" ,
+        "blue",
+        "red"  ,
+        "green",
+        "blue",
+        "blue" ,
+        "green",
+        "blue",
+        "green",
+        "blue"
+      )
+    )
 
   expect_equal(
     capture_print(styled_vect),
@@ -69,7 +191,25 @@ test_that("vector printing to console - factor", {
   styled_vect <-
     color_vctr(factor(c("A", "B", "C", "Long Character")), text_color = c("red", "blue", "green", NA))
   styled_vect_long <-
-    color_vctr(factor(rep(c("A", "B", "C", "Long Character"),3)), text_color = sample(c("red", "blue", "green"), 12, replace = TRUE))
+    color_vctr(
+      factor(rep(c(
+        "A", "B", "C", "Long Character"
+      ), 3)),
+      text_color =   c(
+        "blue",
+        "green",
+        "blue",
+        "blue"  ,
+        "red"   ,
+        "green",
+        "blue"  ,
+        "blue"  ,
+        "green",
+        "blue"  ,
+        "green" ,
+        "blue"
+      )
+    )
 
   expect_equal(
     capture_print(styled_vect),
@@ -91,7 +231,35 @@ test_that("vector printing to console - character", {
   styled_vect <-
     color_vctr(c(TRUE, FALSE, TRUE, TRUE), text_color = c("red", "blue", "green", NA))
   styled_vect_long <-
-    color_vctr(rep(c(TRUE, FALSE, TRUE, TRUE),6), text_color = sample(c("red", "blue", "green"), 24, replace = TRUE))
+    color_vctr(
+      rep(c(TRUE, FALSE, TRUE, TRUE), 6),
+      text_color =    c(
+        "blue",
+        "green",
+        "blue" ,
+        "blue",
+        "red"  ,
+        "green",
+        "blue",
+        "blue" ,
+        "green",
+        "blue",
+        "green",
+        "blue" ,
+        "blue",
+        "red"  ,
+        "green",
+        "blue",
+        "blue" ,
+        "red"  ,
+        "blue",
+        "green",
+        "red"  ,
+        "blue",
+        "red"  ,
+        "blue"
+      )
+    )
 
   expect_equal(
     capture_print(styled_vect),
@@ -112,7 +280,32 @@ test_that("vector printing to console - dates", {
                text_color = c("red", "blue", "green", NA))
   styled_vect_long <-
     color_vctr(rep(as.Date(c("1970-01-01","1970-01-02","1970-01-03","1970-01-04")),6),
-               text_color = sample(c("red", "blue", "green"), 24, replace = TRUE))
+               text_color = c(
+                 "blue",
+                 "green",
+                 "blue" ,
+                 "blue",
+                 "red"  ,
+                 "green",
+                 "blue",
+                 "blue" ,
+                 "green",
+                 "blue",
+                 "green",
+                 "blue" ,
+                 "blue",
+                 "red"  ,
+                 "green",
+                 "blue",
+                 "blue" ,
+                 "red"  ,
+                 "blue",
+                 "green",
+                 "red"  ,
+                 "blue",
+                 "red"  ,
+                 "blue"
+               ))
 
   expect_equal(
     capture_print(styled_vect),
