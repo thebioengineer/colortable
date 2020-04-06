@@ -39,7 +39,7 @@ new_color_vctr <- function(vect, text_color = NA, background = NA, style = NA ){
       ".text_color" = text_color,
       ".background" = background,
       ".style" = style,
-      class = "color_vctr"
+      class = c("color_vctr",class(vect))
     )
   )
 }
@@ -65,14 +65,14 @@ new_color_vctr <- function(vect, text_color = NA, background = NA, style = NA ){
 #' @return a color_vctr
 #' @export
 
-color_vctr <- function(x, ..., text_color = NA, background = NA, style = NA){
+color_vctr <- function(x,..., text_color = NA, background = NA, style = NA){
   UseMethod("color_vctr",x)
 }
 
 #' @export
 color_vctr.default <- function(x,...,text_color = NA, background = NA, style = NA) {
   new_color_vctr(
-    c(x, ...),
+    x,
     text_color = text_color,
     background = background,
     style = style
@@ -88,9 +88,9 @@ color_vctr.color_vctr <- function(x,...){
       .subset(z, seq_along(z))
     }))
 
-  text_color <- do.call('c', lapply(coltable_nect_list, attr, ".text_color"))
-  background <- do.call('c', lapply(coltable_nect_list, attr, ".background"))
-  style      <- do.call('c', lapply(coltable_nect_list, attr, ".style"))
+  text_color <- do.call('c', lapply(coltable_nect_list, field, ".text_color"))
+  background <- do.call('c', lapply(coltable_nect_list, field, ".background"))
+  style      <- do.call('c', lapply(coltable_nect_list, field, ".style"))
 
   return(new_color_vctr(
     vect,

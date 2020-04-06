@@ -1,13 +1,23 @@
+# colortable 0.2.1
+
+### Features
+  - Improved vector printing to console
+  - Improved data.frame printing to console
+
+### Testing
+  - Additional printing tests added
+
 # colortable 0.2.0
 
-* Print to many more types of outputs
-    - 255 console color types
-    - 148 named colors in HTML, but any hexcode
-    - 718 colors in pdf
-
-* Add `color_scale()` that can be used to set a color scaling of a color_vctr
-
-* Improved printing in notebooks for inline **still need to use kable to print
+### Features
+  * Print to many more types of outputs
+      - 255 console color types
+      - 148 named colors in HTML, but any hexcode
+      - 718 colors in pdf
+  
+  * Add `color_scale()` that can be used to set a color scaling of a color_vctr
+  
+  * Improved printing in notebooks for inline **still need to use kable to print
 
 # colortable 0.1.1
 

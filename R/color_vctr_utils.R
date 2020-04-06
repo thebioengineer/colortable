@@ -9,12 +9,12 @@ is_color_vctr <- function(x){
 }
 
 #' @export
-`[.color_vctr`<-function(x,i){
+`[.color_vctr` <- function(x, i) {
 
-  value <- unclass(x)[i]
-  style <- attr(x,".style")[i]
-  text_color <- attr(x,".text_color")[i]
-  background <- attr(x,".background")[i]
+  value <- field(x,"vctr")[i]
+  style <- field(x,".style")[i]
+  text_color <- field(x,".text_color")[i]
+  background <- field(x,".background")[i]
 
   as_color_vctr(
     value,
@@ -52,15 +52,15 @@ is_color_vctr <- function(x){
 
 append_colortable_vect <- function(x,i,value){
 
-  vect <- .subset(x,seq_along(x))
-  text_color <- attr(x,".text_color")
-  background <- attr(x,".background")
-  style <- attr(x,".style")
+  vect <- field(x,"vctr")[seq_along(x)]
+  text_color <- field(x,".text_color")
+  background <- field(x,".background")
+  style <- field(x,".style")
 
-  vect[i] <- .subset(value,1)
-  text_color[i] <- attr(value,".text_color")
-  background[i] <- attr(value,".background")
-  style[i] <- attr(value,".style")
+  vect[i] <- field(value,"vctr")[1]
+  text_color[i] <- field(value,".text_color")
+  background[i] <- field(value,".background")
+  style[i] <- field(value,".style")
 
   return(
     new_color_vctr(

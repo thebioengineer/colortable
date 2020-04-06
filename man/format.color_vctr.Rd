@@ -2,17 +2,26 @@
 % Please edit documentation in R/print_color_vctr.R
 \name{format.color_vctr}
 \alias{format.color_vctr}
+\alias{format_console_vctr_print}
 \title{format method for color_vctror}
 \usage{
 \method{format}{color_vctr}(x, ..., method = print_method())
+
+format_console_vctr_print(x, formatted_x, ..., console_width = options()$width)
 }
 \arguments{
-\item{x}{object of colortable cell}
+\item{x}{color_vctr to be prinited}
 
-\item{...}{format options to be passed on}
+\item{...}{additional parameters passed to `format`}
 
 \item{method}{The output type to print to. Defaults to one of: "console","latex","html".}
+
+\item{formatted_x}{formatted color_vctr for printing}
+
+\item{console_width}{define nchar wide to print. Default to detecting width}
 }
 \description{
 format method for color_vctror
+
+format coolor_vctr vector printing to console
 }

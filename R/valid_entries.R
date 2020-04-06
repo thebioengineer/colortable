@@ -17,6 +17,7 @@ NULL
 #' @export
 valid_colors <- function(method = c("latex","html","console")){
   method <- match.arg(method,several.ok = TRUE)
+  method <- match.arg(method,several.ok = TRUE)
   styles <- do.call(rbind, lapply(method, function(x) {
     styles <-
       eval(parse(text = paste0("color_key_", x)))[, c("Name", "hex")]

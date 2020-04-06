@@ -53,21 +53,21 @@ print.data.frame.color_vector <- function (x, ..., digits = NULL, quote = FALSE,
       } else { row.names }
     }
 
-    cat_line(format_colortable(x, max = max, digits = digits))
+    cat_line(format_colortable(x, max = max, digits = digits,...))
 
   }
   invisible(x)
 }
 
 
-format_colortable <- function(x, max = getOption("max.print", 99999L), digits = NULL){
+format_colortable <- function(x, max = getOption("max.print", 99999L), digits = NULL, ...){
 
   n <- nrow(x)
   omit <- (n0 <- max %/% nrow(x)) < nrow(x)
 
   m <- format.data.frame(if (omit)
     x[seq_len(max), , drop = FALSE]
-    else x, digits = digits, na.encode = FALSE)
+    else x, digits = digits, na.encode = FALSE, ...)
 
   col_widths <-
     sapply(1:ncol(x), function(idx, df){

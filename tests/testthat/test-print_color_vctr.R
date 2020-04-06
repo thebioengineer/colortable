@@ -156,3 +156,30 @@ test_that("input colors can be functions", {
     "\\colorbox{iceberg}{\\textcolor{iceberg}{1}}"
   )
 })
+
+
+test_that("NA's are left as NA's", {
+  #tiffanyblue is not a named color for console or html
+  c_vctr <-
+    color_vctr(
+      NA,
+      text_color = "blue",
+      background = "green",
+      style = "italic"
+    )
+
+  expect_equivalent(
+    format(c_vctr, method = "console"),
+    NA
+  )
+
+  expect_equivalent(
+    format(c_vctr, method = "html"),
+    NA
+  )
+
+  expect_equivalent(
+    format(c_vctr, method = "latex"),
+    NA
+  )
+})
