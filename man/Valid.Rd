@@ -6,7 +6,7 @@
 \alias{valid_style}
 \title{Valid Colors/Styling Options for {{Colortable}}}
 \usage{
-valid_text_color
+valid_colors
 valid_style
 
 valid_colors(method = c("latex", "html", "console"))

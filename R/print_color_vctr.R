@@ -91,9 +91,10 @@ format_preserve_na <- function(x, ...) {
 
 #' format coolor_vctr vector printing to console
 #' @rdname format.color_vctr
-#' @importFrom vctrs field
 #' @param x color_vctr to be prinited
 #' @param formatted_x formatted color_vctr for printing
+#' @param ... additional parameters passed to `format`
+#' @param console_width define nchar wide to print. Default to detecting width
 format_console_vctr_print <- function(x,formatted_x,...,console_width = options()$width){
 
   x2 <- field(x,"vctr")
@@ -124,7 +125,8 @@ format_console_vctr_print <- function(x,formatted_x,...,console_width = options(
         paste(c(prefix[i], formatted_x[idx_start:idx_end]), collapse = " ")
     }
   }else{
-    output_vect <- paste0(vec_ptype_abbr(x),"(0)")
+
+    output_vect <- paste0("color_vctr<",class(x2),">(0)")
   }
   if (class(x2) == "factor") {
 

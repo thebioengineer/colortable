@@ -22,7 +22,6 @@ print_method <- function() {
 #' @return specified attribute
 #' @param x color_vctr object
 #' @param i attribute to access
-#' @param idx subset of attributes to return. if missing, assumes all
 field <- function(x, i){
   if (missing(i)) {
     stop("Prove an attribute name or 'vctr'")
