@@ -4,7 +4,7 @@ output:
   pdf_document:
     keep_tex: true
 ---
-```{r setup, messages = FALSE, warning = FALSE}
+```{r setup, messages = FALSE, warning = FALSE, echo = FALSE}
 
 suppressMessages({
   library(tidyverse)
@@ -14,21 +14,34 @@ suppressMessages({
 
 ```
 
+# Color Scales
+
+```{r results = 'asis', echo = FALSE}
+
+color_vctr(1:10, text_color = color_scale("Blues"))
+cat("\n")
+color_vctr(factor(1:20), text_color = color_scale(palette = colorRamp(c(
+  "blue", "yellow", "red"
+))))
+
+```
+
 # Valid PDF Styles
 
-```{r pdf-styles}
+```{r pdf-styles, echo = FALSE}
 
 possible_styles <- valid_style(method = "latex")
 
 data.frame(Styles = possible_styles,
            Example = color_vctr(rep("Lorem Ipsum",length(possible_styles)), style = possible_styles)) %>%
+  format() %>% 
   kable()
 
 ```
 
 # Valid PDF Colors
 
-```{r pdf-colors}
+```{r pdf-colors, echo = FALSE}
 possible_colors <- valid_colors(method = "latex")
 
 possible_colors %>% 
@@ -47,41 +60,5 @@ possible_colors %>%
   data.frame() %>% 
   format() %>% 
   kable(escape = FALSE)
-
-```
-
-# Valid HTML Colors
-
-```{r messages = FALSE, warning = FALSE}
-
-possible_colors <- valid_colors(method = "html")
-
-possible_colors %>% 
-  mutate(
-    `Color` =
-  color_vctr(
-    possible_colors$`Color Name`,
-    text_color = possible_colors$`Color Name`
-  ),
-`Hex Code` =
-  color_vctr(
-    paste0("\\",possible_colors$`Hex Code`),
-    background = possible_colors$`Hex Code`
-  )) %>% 
-  select(`Color Name`, Color, `Hex Code`) %>% 
-  data.frame() %>% 
-  format() %>% 
-  kable(escape = FALSE)
-
-```
-
-# Color Scales
-
-```{r results = 'asis'}
-
-color_vctr(1:10, text_color = color_scale("Blues"))
-color_vctr(factor(1:20), text_color = color_scale(palette = colorRamp(c(
-  "blue", "yellow", "red"
-))))
 
 ```

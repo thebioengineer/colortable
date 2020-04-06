@@ -21,12 +21,17 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/thebioengineer/colortable/branch/master/graph/badge.svg)](https://codecov.io/gh/thebioengineer/colortable?branch=master)
 <!-- badges: end -->
 
-The goal of colortable is to make it easier to color and style your tables.
+The goal of colortable is to make it easier to color and style your table elements, and view your changes in real time.
 
-Current styling technologies such as kableExtra and formattable make you go to your final printing status before you can see the coloring and styling applied.
-This adds overhead and iterating on outputs and sometimes require compiling entire reports to check minute changes. Alternatively, one can hard-code the styling into the table, but this then requires complete changes to data types in the tables. 
+Current styling technologies such as {kableExtra} and {formattable} make you go to your final printing status before you can see the coloring and styling applied.
+This adds overhead and iterating on outputs and sometimes require compiling entire reports to check minute changes.
 
-{{colortable}} solves this conundrum by allowing the user to keep the types of the contents, and applies the style updates on printing.
+Alternatively, a technique that is pretty common is hard-coding the styling to elements into the table using `paste()`. 
+The downside is that this requires complete changes to data types in the tables to characters or generation of fields demarked for the final table printing.
+Checking that the syntax is correct requires compiling.
+
+{colortable} solves this conundrum by allowing the user to keep the types of the contents, and applies the style updates on printing.
+Additionally, styles can be previewed in the console at a low level prior to the report needing to be compiled, saving iteration time.
 
 ## Installation
 
@@ -77,10 +82,10 @@ kable(tbl_anova, escape = FALSE)
 
 ## Output types
 
-In order to simply generate a color_vctr, which is the lowest object type, use the `color_vctr` function. 
+In order to simply generate a color_vctr, use the `color_vctr` function. 
 It can convert any atomic (numeric, integer, complex, character, logical, raw) into a color_vctr where text and background colors, and styles can be set.
 
-To see the available styles and colors, use the `valid_*` family of functions: `valid_text_color()`, `valid_background()`, and `valid_style()`.
+To see the available styles and colors, use the `valid_*` family of functions: `valid_colors()`or `valid_style()`.
 To check whether the styling is a valid type for the output, set the method to be "latex" for pdf outputs, or "html" for html outputs.
 
 Below is a random sampling of output types to the console:
@@ -113,8 +118,8 @@ data.frame(
 
 ## The Nuts and Bolts
 
-{{colortable}} works by making a special S3 class called a `colortable_vect`, and custom print/format functions.
-Currently it only works with tibbles, but there are plans to make it friendly with data.frames.
+{{colortable}} works by making a special S3 class called a `color_vctr`, and custom print/format functions.
+Color and style can be applied to the single record level, so each individual element can be completely different!
 
 
 ## Inspiration
