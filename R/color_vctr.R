@@ -88,9 +88,9 @@ color_vctr.color_vctr <- function(x,...){
       .subset(z, seq_along(z))
     }))
 
-  text_color <- do.call('c', lapply(coltable_nect_list, attr, ".text_color"))
-  background <- do.call('c', lapply(coltable_nect_list, attr, ".background"))
-  style      <- do.call('c', lapply(coltable_nect_list, attr, ".style"))
+  text_color <- do.call('c', lapply(coltable_nect_list, field, ".text_color"))
+  background <- do.call('c', lapply(coltable_nect_list, field, ".background"))
+  style      <- do.call('c', lapply(coltable_nect_list, field, ".style"))
 
   return(new_color_vctr(
     vect,

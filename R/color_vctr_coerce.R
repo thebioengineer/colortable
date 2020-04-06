@@ -9,9 +9,9 @@ as.data.frame.color_vctr <- function (x, row.names = NULL, optional = FALSE, ...
   nm = paste(deparse(substitute(x), width.cutoff = 500L), collapse = " ")
   force(nm)
   nrows <- length(x)
-  text_color <- attr(x,".text_color")
-  background <- attr(x,".background")
-  style <- attr(x,".style")
+  text_color <- field(x,".text_color")
+  background <- field(x,".background")
+  style <- field(x,".style")
 
   x <- list(x)
 
