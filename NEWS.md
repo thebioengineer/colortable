@@ -1,3 +1,5 @@
+# colortable 0.2.1
+
 # colortable 0.2.0
 
 * Print to many more types of outputs
