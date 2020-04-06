@@ -39,6 +39,7 @@ format.color_vctr.console <- function(x,...){
       field(x, ".text_color"),
       field(x, ".background")
     )
+  names(x) <- NULL
   x
 }
 
@@ -50,13 +51,13 @@ format.color_vctr.html <- function(x,...){
       field(x, ".text_color"),
       field(x, ".background")
     )
+  names(x) <- NULL
   x
 }
 
 format.color_vctr.latex <- function(x,...){
 
   add_colortable_latex_meta()
-
   x <-
     style2texV(
       format_preserve_na(field(x, "vctr"), ...),
@@ -64,6 +65,7 @@ format.color_vctr.latex <- function(x,...){
       field(x, ".text_color"),
       field(x, ".background")
     )
+  names(x) <- NULL
   x
 }
 
@@ -100,7 +102,7 @@ format_console_vctr_print <- function(x,formatted_x,...,console_width = options(
     length_x2 <- length(x2)
     length_x2 <- ifelse(length_x2 > 1000, 1000, length_x2)
 
-    if (is.factor(x2)) {
+    if (any(c("factor","Date") %in% class(x2))) {
       format_info <- format.info(as.character(x2), ...)
     } else{
       format_info <- format.info(x2, ...)
