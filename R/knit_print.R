@@ -4,11 +4,23 @@
 #' @importFrom knitr knit_print asis_output
 knit_print.color_vctr <- function(x, inline = FALSE, ...){
   if (inline) {
-    format(x, method = print_method())
+    format(x, ...)
   }else{
     asis_output(knit_vctr_output(x, ...))
   }
 }
+
+#' knit_print method for data.frames
+#' @export
+#' @keywords internal
+#' @importFrom knitr kable knit_print asis_output
+knit_print.data.frame <- function(x, options, ...){
+  df_color_vctr <- as.data.frame(lapply(as.list(x),format,...))
+  rownames(df_color_vctr) <- rownames(x)
+  formatted_table <- paste(kable(df_color_vctr),collapse = "\n")
+  asis_output(formatted_table)
+}
+
 
 #' @importFrom knitr asis_output knit_print
 knit_vctr_output <- function(x, ..., method = print_method(), print_width = options()$width){
@@ -39,19 +51,4 @@ pre_wrap.html <- function(x,...){
   c("<pre>","<code class = \"hljs\">",
     paste("<span>##",x,"</span><br>"),
     "</code>","</pre>")
-}
-
-#' knit_print method for data.frames
-#' @export
-#' @keywords internal
-#' @importFrom knitr kable knit_print asis_output
-knit_print.data.frame <- function(x, options, ...){
-  printing_method <- print_method()
-  if(isTRUE(getOption("rstudio.notebook.executing"))){
-    printing_method = "html"
-  }
-  df_color_vctr <- as.data.frame(lapply(as.list(x),format, method = printing_method))
-  rownames(df_color_vctr) <- rownames(x)
-  formatted_table <- paste(kable(df_color_vctr),collapse = "\n")
-  asis_output(formatted_table)
 }
