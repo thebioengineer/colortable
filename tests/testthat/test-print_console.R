@@ -2,6 +2,15 @@ capture_print <- function(x){
   capture.output(print(x,console_width = 80, method = "console"))
 }
 
+test_that("vector printing to console - empty", {
+  expect_equal(
+    capture_print(color_vctr(character(),text_color = "blue")),
+    "color_vctr<character>(0)"
+  )
+})
+
+
+
 test_that("vector printing to console - numeric", {
   styled_vect <-
     color_vctr(c(1, 2, 0.05, 20), text_color = c("red", "blue", "green", NA))

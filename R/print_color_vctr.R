@@ -23,6 +23,7 @@ format.color_vctr <- function(x, ..., method = print_method()){
   format_method <- switch(method,
          "console" = format.color_vctr.console,
          "latex" = format.color_vctr.latex,
+         "beamer" = format.color_vctr.latex,
          "html" = format.color_vctr.html,
          "gfm" = format.color_vctr.html,
          "docx" = format.color_vctr.docx,
