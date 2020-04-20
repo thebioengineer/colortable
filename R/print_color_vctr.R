@@ -25,6 +25,7 @@ format.color_vctr <- function(x, ..., method = print_method()){
          "latex" = format.color_vctr.latex,
          "html" = format.color_vctr.html,
          "gfm" = format.color_vctr.html,
+         "docx" = format.color_vctr.docx,
          stop("Method for ", print_method()," not implemented yet.")
   )
 
@@ -69,6 +70,17 @@ format.color_vctr.latex <- function(x,...){
   x
 }
 
+format.color_vctr.docx <- function(x,...){
+  x <-
+    style2docxV(
+      format_preserve_na(field(x, "vctr"), ...),
+      field(x, ".style"),
+      field(x, ".text_color"),
+      field(x, ".background")
+    )
+  names(x) <- NULL
+  x
+}
 
 add_colortable_latex_meta <- function(){
   meta <- knitr::knit_meta(clean = FALSE)
