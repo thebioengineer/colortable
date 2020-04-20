@@ -1,3 +1,5 @@
+# colortable (development version)
+
 # colortable 0.2.1
 
 ### Features
