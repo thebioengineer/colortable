@@ -9,8 +9,8 @@ style_wrapper_docx <-
       styling <- tolower(styling)
       switch(
         type,
-        "style" = docx_decoration_styling(unify_colors(styling,type = NULL)),
-        "text"  = docx_text_styling(styling),
+        "style" = docx_decoration_styling(styling),
+        "text"  = docx_text_styling(unify_colors(styling,type = NULL)),
         "background" = docx_background_styling(styling)
       )
     }
@@ -25,7 +25,7 @@ docx_decoration_styling <- function(styling){
     ""
   }else{
     codes <- docx_style_codes[[styling]]
-    paste0("<w: ",codes$code,"/>")
+    paste0("<w:",codes$code,"/>")
   }
 }
 
@@ -58,7 +58,6 @@ docx_background_styling <- function(color){
 as_hex_codes <- function(x) {
   if (grepl("^(#)", x) |
       grepl("^(#)*[0-9A-Fa-f]{6}$", x, perl = TRUE)) {
-    x <- gsub("^#", "", x) # remove initial hex pound
     return(toupper(x))
   } else {
     colors <- valid_colors()
