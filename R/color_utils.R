@@ -36,10 +36,17 @@ unify_colors <- function(x, type = print_method()) {
       grepl("^#[0-9A-Fa-f]{6}$", x, perl = TRUE)) {
     return(toupper(x))
   } else {
-    type <- match.arg(type, c("latex", "html", "console"))
-    method_colors <- valid_colors(type)$`Color Name`
 
-    if (!x %in% method_colors) {
+    if(!is.null(type)){
+      type <- match.arg(type, c("latex", "html", "console"))
+      method_colors <- valid_colors(type)$`Color Name`
+      in_method_colors <-x %in% method_colors
+    }else{
+      in_method_colors = FALSE
+    }
+
+
+    if (!in_method_colors) {
       other_colors <- valid_colors(setdiff(c("latex", "html", "console"), type))
       idx <- which(other_colors$`Color Name` %in% x)
       if (length(idx) > 0) {
