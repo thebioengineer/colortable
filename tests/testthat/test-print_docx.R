@@ -11,10 +11,10 @@ test_that("vector printing to console - numeric", {
 
   expect_equal(
     capture_print(styled_vect),
-    c("`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:highlight w:val=\"darkCyan\"/><w:b/><w:color w:val=\"#FF0000\"/></w:rPr><w:t xml:space=\"preserve\"> 1.00</w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:i/><w:color w:val=\"#0000FF\"/></w:rPr><w:t xml:space=\"preserve\"> 2.00</w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:highlight w:val=\"yellow\"/><w:strike/><w:color w:val=\"#00FF00\"/></w:rPr><w:t xml:space=\"preserve\"> 0.05</w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"></w:rPr><w:t xml:space=\"preserve\">20.00</w:t></w:r>`{=openxml}"  )
+    c("`<w:r><w:rPr><w:highlight w:val=\"darkCyan\"/><w:b/><w:color w:val=\"#FF0000\"/></w:rPr><w:t xml:space=\"preserve\"> 1.00</w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr><w:i/><w:color w:val=\"#0000FF\"/></w:rPr><w:t xml:space=\"preserve\"> 2.00</w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr><w:highlight w:val=\"yellow\"/><w:strike/><w:color w:val=\"#00FF00\"/></w:rPr><w:t xml:space=\"preserve\"> 0.05</w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr></w:rPr><w:t xml:space=\"preserve\">20.00</w:t></w:r>`{=openxml}"  )
   )
 
 })
@@ -28,10 +28,10 @@ test_that("vector printing to console - integer", {
 
   expect_equal(
     capture_print(styled_vect),
-    c("`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:highlight w:val=\"darkCyan\"/><w:b/><w:color w:val=\"#FF0000\"/></w:rPr><w:t xml:space=\"preserve\"> 1</w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:i/><w:color w:val=\"#0000FF\"/></w:rPr><w:t xml:space=\"preserve\"> 2</w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:highlight w:val=\"yellow\"/><w:strike/><w:color w:val=\"#00FF00\"/></w:rPr><w:t xml:space=\"preserve\"> 3</w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"></w:rPr><w:t xml:space=\"preserve\">20</w:t></w:r>`{=openxml}")
+    c("`<w:r><w:rPr><w:highlight w:val=\"darkCyan\"/><w:b/><w:color w:val=\"#FF0000\"/></w:rPr><w:t xml:space=\"preserve\"> 1</w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr><w:i/><w:color w:val=\"#0000FF\"/></w:rPr><w:t xml:space=\"preserve\"> 2</w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr><w:highlight w:val=\"yellow\"/><w:strike/><w:color w:val=\"#00FF00\"/></w:rPr><w:t xml:space=\"preserve\"> 3</w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr></w:rPr><w:t xml:space=\"preserve\">20</w:t></w:r>`{=openxml}")
   )
 })
 
@@ -45,10 +45,10 @@ test_that("vector printing to console - character", {
 
   expect_equal(
     capture_print(styled_vect),
-    c("`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:highlight w:val=\"darkCyan\"/><w:b/><w:color w:val=\"#FF0000\"/></w:rPr><w:t xml:space=\"preserve\">A             </w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:i/><w:color w:val=\"#0000FF\"/></w:rPr><w:t xml:space=\"preserve\">B             </w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:highlight w:val=\"yellow\"/><w:strike/><w:color w:val=\"#00FF00\"/></w:rPr><w:t xml:space=\"preserve\">C             </w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"></w:rPr><w:t xml:space=\"preserve\">Long Character</w:t></w:r>`{=openxml}")
+    c("`<w:r><w:rPr><w:highlight w:val=\"darkCyan\"/><w:b/><w:color w:val=\"#FF0000\"/></w:rPr><w:t xml:space=\"preserve\">A             </w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr><w:i/><w:color w:val=\"#0000FF\"/></w:rPr><w:t xml:space=\"preserve\">B             </w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr><w:highlight w:val=\"yellow\"/><w:strike/><w:color w:val=\"#00FF00\"/></w:rPr><w:t xml:space=\"preserve\">C             </w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr></w:rPr><w:t xml:space=\"preserve\">Long Character</w:t></w:r>`{=openxml}")
   )
 
 })
@@ -62,10 +62,10 @@ test_that("vector printing to console - factor", {
 
   expect_equal(
     capture_print(styled_vect),
-    c("`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:highlight w:val=\"darkCyan\"/><w:b/><w:color w:val=\"#FF0000\"/></w:rPr><w:t xml:space=\"preserve\">A             </w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:i/><w:color w:val=\"#0000FF\"/></w:rPr><w:t xml:space=\"preserve\">B             </w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:highlight w:val=\"yellow\"/><w:strike/><w:color w:val=\"#00FF00\"/></w:rPr><w:t xml:space=\"preserve\">C             </w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"></w:rPr><w:t xml:space=\"preserve\">Long Character</w:t></w:r>`{=openxml}" )
+    c("`<w:r><w:rPr><w:highlight w:val=\"darkCyan\"/><w:b/><w:color w:val=\"#FF0000\"/></w:rPr><w:t xml:space=\"preserve\">A             </w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr><w:i/><w:color w:val=\"#0000FF\"/></w:rPr><w:t xml:space=\"preserve\">B             </w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr><w:highlight w:val=\"yellow\"/><w:strike/><w:color w:val=\"#00FF00\"/></w:rPr><w:t xml:space=\"preserve\">C             </w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr></w:rPr><w:t xml:space=\"preserve\">Long Character</w:t></w:r>`{=openxml}" )
   )
 })
 
@@ -78,10 +78,10 @@ test_that("vector printing to console - character", {
 
   expect_equal(
     capture_print(styled_vect),
-    c("`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:highlight w:val=\"darkCyan\"/><w:b/><w:color w:val=\"#FF0000\"/></w:rPr><w:t xml:space=\"preserve\"> TRUE</w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:i/><w:color w:val=\"#0000FF\"/></w:rPr><w:t xml:space=\"preserve\">FALSE</w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:highlight w:val=\"yellow\"/><w:strike/><w:color w:val=\"#00FF00\"/></w:rPr><w:t xml:space=\"preserve\"> TRUE</w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"></w:rPr><w:t xml:space=\"preserve\"> TRUE</w:t></w:r>`{=openxml}")
+    c("`<w:r><w:rPr><w:highlight w:val=\"darkCyan\"/><w:b/><w:color w:val=\"#FF0000\"/></w:rPr><w:t xml:space=\"preserve\"> TRUE</w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr><w:i/><w:color w:val=\"#0000FF\"/></w:rPr><w:t xml:space=\"preserve\">FALSE</w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr><w:highlight w:val=\"yellow\"/><w:strike/><w:color w:val=\"#00FF00\"/></w:rPr><w:t xml:space=\"preserve\"> TRUE</w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr></w:rPr><w:t xml:space=\"preserve\"> TRUE</w:t></w:r>`{=openxml}")
   )
 })
 
@@ -94,10 +94,10 @@ test_that("vector printing to console - dates", {
 
   expect_equal(
     capture_print(styled_vect),
-    c("`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:highlight w:val=\"darkCyan\"/><w:b/><w:color w:val=\"#FF0000\"/></w:rPr><w:t xml:space=\"preserve\">1970-01-01</w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:i/><w:color w:val=\"#0000FF\"/></w:rPr><w:t xml:space=\"preserve\">1970-01-02</w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"><w:highlight w:val=\"yellow\"/><w:strike/><w:color w:val=\"#00FF00\"/></w:rPr><w:t xml:space=\"preserve\">1970-01-03</w:t></w:r>`{=openxml}",
-      "`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\"></w:rPr><w:t xml:space=\"preserve\">1970-01-04</w:t></w:r>`{=openxml}")
+    c("`<w:r><w:rPr><w:highlight w:val=\"darkCyan\"/><w:b/><w:color w:val=\"#FF0000\"/></w:rPr><w:t xml:space=\"preserve\">1970-01-01</w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr><w:i/><w:color w:val=\"#0000FF\"/></w:rPr><w:t xml:space=\"preserve\">1970-01-02</w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr><w:highlight w:val=\"yellow\"/><w:strike/><w:color w:val=\"#00FF00\"/></w:rPr><w:t xml:space=\"preserve\">1970-01-03</w:t></w:r>`{=openxml}",
+      "`<w:r><w:rPr></w:rPr><w:t xml:space=\"preserve\">1970-01-04</w:t></w:r>`{=openxml}")
   )
 
 })

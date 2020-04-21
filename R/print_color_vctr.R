@@ -71,7 +71,7 @@ format.color_vctr.latex <- function(x,...){
   x
 }
 
-format.color_vctr.docx <- function(x,...){
+format.color_vctr.docx <- function(x,..., wrap = TRUE){
   x <-
     style2docxV(
       format_preserve_na(field(x, "vctr"), ...),
@@ -80,6 +80,9 @@ format.color_vctr.docx <- function(x,...){
       field(x, ".background")
     )
   names(x) <- NULL
+  if(wrap){
+      x <- style_zipper_docx(x)
+  }
   x
 }
 
@@ -108,7 +111,8 @@ format_preserve_na <- function(x, ...) {
 #' @param formatted_x formatted color_vctr for printing
 #' @param ... additional parameters passed to `format`
 #' @param console_width define nchar wide to print. Default to detecting width
-format_console_vctr_print <- function(x,formatted_x,...,console_width = options()$width){
+#' @param space the defined spacer between elements. defaults to " ".
+format_console_vctr_print <- function(x,formatted_x,...,console_width = options()$width, space = " "){
 
   x2 <- field(x,"vctr")
 
@@ -135,7 +139,7 @@ format_console_vctr_print <- function(x,formatted_x,...,console_width = options(
         idx_end <- length(x2)
       }
       output_vect[i] <-
-        paste(c(prefix[i], formatted_x[idx_start:idx_end]), collapse = " ")
+        paste(c(prefix[i], formatted_x[idx_start:idx_end]), collapse = space)
     }
   }else{
 
