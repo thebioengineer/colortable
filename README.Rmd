@@ -9,7 +9,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  warning = FALSE
 )
 ```
 
@@ -55,8 +56,24 @@ It then has 4 arguments;
   - style, a vector is either the style the enture vector to be styled with or each element
   - background, a vector that is either the background color the entire vector to be colored or for each element.
   
-Additionally, there is a helper function, `set_styling()`, that takes a boolean argument as well to where to apply the styling.
+Additionally, there is a few helper functions
+  - `set_styling()` uses a boolean argument to apply the styling
+  - `color_scale()` is to be used for setting colors, accepting a pallette
+  
+*A note, html styling does not apply in a github readme*
 
+```{r}
+library(colortable)
+
+color_vctr(c(1,2,3,4),
+           text_color = c("blue","green", "yellow",NA),
+           style = c("underline","italic",NA,"bold"),
+           background = c(NA,NA,"blue",NA))
+
+color_vctr(LETTERS, text_color = color_scale(colorRamp(c("red","yellow"))))
+color_vctr(LETTERS, text_color = color_scale("Blues"))
+
+```
 
 ## Example
 
@@ -68,9 +85,8 @@ The benefit of {{colortable}} is that the same code can be used across outputs a
 
 
 ```{r example, eval = FALSE}
-  library(tidyverse)
-  library(colortable)
-  library(knitr)
+library(tidyverse)
+library(knitr)
 
 ## Super Great analysis of mtcars!
 
