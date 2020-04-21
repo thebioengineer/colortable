@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# colortable <img src='man/figures/logo.png' align="right" height="139" />
+# colortable <img src='man/figures/logo.png' align="right" height="200" />
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
@@ -21,28 +21,42 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/thebioengineer/colortable/branch/master/graph/badge.svg)](https://codecov.io/gh/thebioengineer/colortable?branch=master)
 <!-- badges: end -->
 
-The goal of colortable is to make it easier to color and style your table elements, and view your changes in real time.
+Seamlessly style and print your vectors across Rmarkdown output types through a single interface.
+colortable enables users to style and color the contents of their vectors, data.frames, and tibbles through the object, and function, `color_vctr()`. 
 
-Current styling technologies such as {kableExtra} and {formattable} make you go to your final printing status before you can see the coloring and styling applied.
-This adds overhead and iterating on outputs and sometimes require compiling entire reports to check minute changes.
+At this point, the supported output types include:
 
-Alternatively, a technique that is pretty common is hard-coding the styling to elements into the table using `paste()`. 
-The downside is that this requires complete changes to data types in the tables to characters or generation of fields demarked for the final table printing.
-Checking that the syntax is correct requires compiling.
+<div style="display:inline-block">
+  <img alt="console" src="inst/media/console_logo.png" style="height:80px"/>
+  <img alt="html" src="inst/media/html_logo.png" style="height:80px"/>
+  <img alt="pdf" src="inst/media/pdf_logo.png" style="height:80px"/>
+  <img alt="Microsoft Word" src="inst/media/microsoft_word_logo.png" style="height:80px"/>
+</div>
 
-{colortable} solves this conundrum by allowing the user to keep the types of the contents, and applies the style updates on printing.
-Additionally, styles can be previewed in the console at a low level prior to the report needing to be compiled, saving iteration time.
 
 ## Installation
 
 <!-- You can install the released version of colortable from [CRAN](https://CRAN.R-project.org) with: -->
 
-Currently {{colortable}} is only available on github, and is very much under development.
+Currently {colortable} is only available on github, and is very much under development.
 
 ``` r
 remotes::install_github("thebioengineer/colortable")
 ## install.packages("colortable") ## Not Available on CRAN
 ```
+
+## Getting Started
+
+{colortable} works by making a special S3 class called a `color_vctr`, and custom print/format functions.
+
+It then has 4 arguments; 
+  - The vector to be styled
+  - text_color, a vector that is either the color the entire vector to be colored or each element
+  - style, a vector is either the style the enture vector to be styled with or each element
+  - background, a vector that is either the background color the entire vector to be colored or for each element.
+  
+Additionally, there is a helper function, `set_styling()`, that takes a boolean argument as well to where to apply the styling.
+
 
 ## Example
 
@@ -116,15 +130,11 @@ data.frame(
 ![examples](inst/media/multiple_output_types.gif)
 
 
-## The Nuts and Bolts
-
-{{colortable}} works by making a special S3 class called a `color_vctr`, and custom print/format functions.
-Color and style can be applied to the single record level, so each individual element can be completely different!
-
-
 ## Inspiration
 This idea was inspired by [`crayon`](https://github.com/r-lib/crayon), and has some elements based on it. I thank all the developers of that project!
+Since then, I have been insprired by ['flextable'](https://github.com/davidgohel/officedown) for word development.
 
+Current styling technologies such as {kableExtra} and {formattable} also inspired the development of this project.
 
 ## COC
 

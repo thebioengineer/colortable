@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# colortable <img src='man/figures/logo.png' align="right" height="139" />
+# colortable <img src='man/figures/logo.png' align="right" height="200" />
 
 <!-- badges: start -->
 
@@ -13,30 +13,47 @@ status](https://github.com/thebioengineer/colortable/workflows/R-CMD-check/badge
 coverage](https://codecov.io/gh/thebioengineer/colortable/branch/master/graph/badge.svg)](https://codecov.io/gh/thebioengineer/colortable?branch=master)
 <!-- badges: end -->
 
-The goal of colortable is to make it easier to color and style your
-tables.
+Seamlessly style and print your vectors across Rmarkdown output types
+through a single interface. colortable enables users to style and color
+the contents of their vectors, data.frames, and tibbles through the
+object, and function, `color_vctr()`.
 
-Current styling technologies such as kableExtra and formattable make you
-go to your final printing status before you can see the coloring and
-styling applied. This adds overhead and iterating on outputs and
-sometimes require compiling entire reports to check minute changes.
-Alternatively, one can hard-code the styling into the table, but this
-then requires complete changes to data types in the tables.
+At this point, the supported output types include:
 
-{{colortable}} solves this conundrum by allowing the user to keep the
-types of the contents, and applies the style updates on printing.
+<div style="display:inline-block">
+
+<img alt="console" src="inst/media/console_logo.png" style="height:80px"/>
+<img alt="html" src="inst/media/html_logo.png" style="height:80px"/>
+<img alt="pdf" src="inst/media/pdf_logo.png" style="height:80px"/>
+<img alt="Microsoft Word" src="inst/media/microsoft_word_logo.png" style="height:80px"/>
+
+</div>
 
 ## Installation
 
 <!-- You can install the released version of colortable from [CRAN](https://CRAN.R-project.org) with: -->
 
-Currently {{colortable}} is only available on github, and is very much
+Currently {colortable} is only available on github, and is very much
 under development.
 
 ``` r
 remotes::install_github("thebioengineer/colortable")
 ## install.packages("colortable") ## Not Available on CRAN
 ```
+
+## Getting Started
+
+{colortable} works by making a special S3 class called a `color_vctr`,
+and custom print/format functions.
+
+It then has 4 arguments; - The vector to be styled - text\_color, a
+vector that is either the color the entire vector to be colored or each
+element - style, a vector is either the style the enture vector to be
+styled with or each element - background, a vector that is either the
+background color the entire vector to be colored or for each element.
+
+Additionally, there is a helper function, `set_styling()`, that takes a
+boolean argument as well to where to apply the styling.
 
 ## Example
 
@@ -76,16 +93,15 @@ kable(tbl_anova, escape = FALSE)
 
 ## Output types
 
-In order to simply generate a color\_vctr, which is the lowest object
-type, use the `color_vctr` function. It can convert any atomic (numeric,
-integer, complex, character, logical, raw) into a color\_vctr where text
-and background colors, and styles can be set.
+In order to simply generate a color\_vctr, use the `color_vctr`
+function. It can convert any atomic (numeric, integer, complex,
+character, logical, raw) into a color\_vctr where text and background
+colors, and styles can be set.
 
 To see the available styles and colors, use the `valid_*` family of
-functions: `valid_text_color()`, `valid_background()`, and
-`valid_style()`. To check whether the styling is a valid type for the
-output, set the method to be “latex” for pdf outputs, or “html” for html
-outputs.
+functions: `valid_colors()`or `valid_style()`. To check whether the
+styling is a valid type for the output, set the method to be “latex” for
+pdf outputs, or “html” for html outputs.
 
 Below is a random sampling of output types to the console:
 
@@ -112,18 +128,16 @@ data.frame(
 
 ![examples](inst/media/multiple_output_types.gif)
 
-## The Nuts and Bolts
-
-{{colortable}} works by making a special S3 class called a
-`colortable_vect`, and custom print/format functions. Currently it only
-works with tibbles, but there are plans to make it friendly with
-data.frames.
-
 ## Inspiration
 
 This idea was inspired by [`crayon`](https://github.com/r-lib/crayon),
 and has some elements based on it. I thank all the developers of that
-project\!
+project\! Since then, I have been insprired by
+[‘flextable’](https://github.com/davidgohel/officedown) for word
+development.
+
+Current styling technologies such as {kableExtra} and {formattable} also
+inspired the development of this project.
 
 ## COC
 
