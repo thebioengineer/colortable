@@ -2,6 +2,7 @@
 #' @title Determine Printing for colortable
 #' @description determines if table is being printed interactively, or in an rmd
 #' @return character vector
+#' @importFrom knitr opts_knit
 #' @export
 print_method <- function() {
 
@@ -12,7 +13,7 @@ print_method <- function() {
   } else if (is_notebook) {
     "html"
   } else{
-    knitr::opts_knit$get('rmarkdown.pandoc.to')
+    knitr::opts_knit$get("rmarkdown.pandoc.to")
   }
 }
 

@@ -16,9 +16,11 @@ style_wrapper_docx <-
     }
   }
 
-style_zipper_docx <- function(x,styling){
-  paste0("`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\">", styling, "</w:rPr><w:t xml:space=\"preserve\">",x,"</w:t></w:r>`{=openxml}")
+style_zipper_docx <- function(x){
+  paste0("`",x,"`{=openxml}")
 }
+
+
 
 docx_decoration_styling <- function(styling){
   if (!styling %in% names(docx_style_codes)) {
@@ -92,21 +94,21 @@ as_docx_highlighter <- function(color){
 
 color_key_docx_highlighter <- tibble::tribble(
   ~Name,     ~hex,  ~code, ~RGB,
-  "yellow","#ffff00","yellow",c(red = 255, blue = 0, green = 255),
-  "lightgreen","#00ff00","green",c(red = 0, blue = 0, green = 255),
-  "cyan","#00ffff","cyan",c(red = 0, blue = 255, green = 255),
-  "pink","#ff00ff","magenta",c(red = 255, blue = 255, green = 0),
-  "blue","#0000ff","blue",c(red = 0, blue = 255, green = 0),
-  "red","#ff0000","red",c(red = 255, blue = 0, green = 0),
-  "darkblue","#000080","darkBlue",c(red = 0, blue = 128, green = 0),
-  "teal","#008080","darkCyan",c(red = 0, blue = 128, green = 128),
-  "green","#008000","darkGreen",c(red = 0, blue = 0, green = 128),
-  "violet","#800080","darkMagenta",c(red = 128, blue = 128, green = 0),
-  "darkred","#800000","darkRed",c(red = 128, blue = 0, green = 0),
-  "darkyellow","#808000","darkYellow",c(red = 128, blue = 0, green = 128),
-  "darkgray","#808080","darkGray",c(red = 128, blue = 128, green = 128),
-  "lightgray","#c0c0c0","lightGray",c(red = 192, blue = 192, green = 192),
-  "black","#000000","black",c(red = 0, blue = 0, green = 0)
+  "yellow","#ffff00","yellow",c(red = 255, green = 255, blue = 0),
+  "lightgreen","#00ff00","green",c(red = 0, green = 255, blue = 0),
+  "cyan","#00ffff","cyan",c(red = 0, green = 255, blue = 255),
+  "pink","#ff00ff","magenta",c(red = 255, green = 0, blue = 255),
+  "blue","#0000ff","blue",c(red = 0, green = 0, blue = 255),
+  "red","#ff0000","red",c(red = 255, green = 0, blue = 0),
+  "darkblue","#000080","darkBlue",c(red = 0, green = 0, blue = 128),
+  "teal","#008080","darkCyan",c(red = 0, green = 128, blue = 128),
+  "green","#008000","darkGreen",c(red = 0, green = 128, blue = 0),
+  "violet","#800080","darkMagenta",c(red = 128, green = 0, blue = 128),
+  "darkred","#800000","darkRed",c(red = 128, green = 0, blue = 0),
+  "darkyellow","#808000","darkYellow",c(red = 128, green = 128, blue = 0),
+  "darkgray","#808080","darkGray",c(red = 128, green = 128, blue = 128),
+  "lightgray","#c0c0c0","lightGray",c(red = 192, green = 192, blue = 192),
+  "black","#000000","black",c(red = 0, green = 0, blue = 0)
 )
 
 

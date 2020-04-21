@@ -80,7 +80,10 @@ style2docx <- function(x, style = NA, text_color = NA, background = NA, ...){
     text_color <- style_wrapper_docx(text_color, type = "text")
     text_background <- style_wrapper_docx(background, type = "background")
 
-    style_zipper_docx(x, paste0(text_background,text_style,text_color))
+    paste0("<w:r><w:rPr>",
+          paste0(text_background,text_style,text_color),
+          "</w:rPr><w:t xml:space=\"preserve\">",x,"</w:t></w:r>"
+          )
   }
 }
 
