@@ -2,7 +2,8 @@
 
 ### Features
   - Initial implementation of word (docx) printing
-
+  - knit_print abilities to color_vctrs
+  
 # colortable 0.2.1
 
 ### Features
