@@ -7,7 +7,13 @@
 \usage{
 \method{format}{color_vctr}(x, ..., method = print_method())
 
-format_console_vctr_print(x, formatted_x, ..., console_width = options()$width)
+format_console_vctr_print(
+  x,
+  formatted_x,
+  ...,
+  console_width = options()$width,
+  space = " "
+)
 }
 \arguments{
 \item{x}{color_vctr to be prinited}
@@ -19,6 +25,8 @@ format_console_vctr_print(x, formatted_x, ..., console_width = options()$width)
 \item{formatted_x}{formatted color_vctr for printing}
 
 \item{console_width}{define nchar wide to print. Default to detecting width}
+
+\item{space}{the defined spacer between elements. defaults to " ".}
 }
 \description{
 format method for color_vctror

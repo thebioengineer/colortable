@@ -16,9 +16,11 @@ style_wrapper_docx <-
     }
   }
 
-style_zipper_docx <- function(x,styling){
-  paste0("`<w:r><w:rPr xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\">", styling, "</w:rPr><w:t xml:space=\"preserve\">",x,"</w:t></w:r>`{=openxml}")
+style_zipper_docx <- function(x){
+  paste0("`",x,"`{=openxml}")
 }
+
+
 
 docx_decoration_styling <- function(styling){
   if (!styling %in% names(docx_style_codes)) {
