@@ -22,10 +22,10 @@ At this point, the supported output types include:
 
 <div style="display:inline-block">
 
-<img alt="console" src="inst/media/console_logo.png" style="height:80px"/>
-<img alt="html" src="inst/media/html_logo.png" style="height:80px"/>
-<img alt="pdf" src="inst/media/pdf_logo.png" style="height:80px"/>
-<img alt="Microsoft Word" src="inst/media/microsoft_word_logo.png" style="height:80px"/>
+<img alt="console" src="inst/media/console_logo.png" height = 80/>
+<img alt="html" src="inst/media/html_logo.png" height = 80/>
+<img alt="pdf" src="inst/media/pdf_logo.png" height = 80/>
+<img alt="Microsoft Word" src="inst/media/microsoft_word_logo.png" height = 80/>
 
 </div>
 
