@@ -27,6 +27,7 @@ format.color_vctr <- function(x, ..., method = print_method()){
          "html" = format.color_vctr.html,
          "gfm" = format.color_vctr.html,
          "docx" = format.color_vctr.docx,
+         "slidy" = format.color_vctr.html,
          stop("Method for ", print_method()," not implemented yet.")
   )
 
@@ -58,8 +59,6 @@ format.color_vctr.html <- function(x,...){
 }
 
 format.color_vctr.latex <- function(x,...){
-
-  add_colortable_latex_meta()
   x <-
     style2texV(
       format_preserve_na(field(x, "vctr"), ...),
@@ -84,17 +83,6 @@ format.color_vctr.docx <- function(x,..., wrap = TRUE){
       x <- style_zipper_docx(x)
   }
   x
-}
-
-add_colortable_latex_meta <- function(){
-  meta <- knitr::knit_meta(clean = FALSE)
-  id <- do.call('c',lapply(meta,`[[`,"name"))
-  extra_lines <- lapply(meta,`[[`,"extra_lines")
-  if( !"xcolor" %in% id | !any(sapply(extra_lines,identical,color_key_latex$code))){
-    invisible(
-      knitr::knit_meta_add(list(rmarkdown::latex_dependency(name = "xcolor", extra_lines = color_key_latex$code)))
-    )
-  }
 }
 
 format_preserve_na <- function(x, ...) {

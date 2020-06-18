@@ -41,7 +41,7 @@ test_that("format appends tex styling based on latex output", {
   )
   expect_equal(
     as.character(tex_output),
-    "\\colorbox{yellow}{\\underline{\\textcolor{blue}{1}}}"
+    "\\colorbox[rgb]{1.0, 1.0, 0.0}{\\underline{\\textcolor[rgb]{0.0, 0.0, 1.0}{1}}}"
   )
 
 })
@@ -104,7 +104,7 @@ test_that("Hex-code coloring works", {
 
   expect_equivalent(
     format(c_vctr, method = "latex"),
-    "\\textcolor{black}{1}"
+    "\\textcolor[rgb]{0.0, 0.0, 0.0}{1}"
   )
 })
 
@@ -127,7 +127,7 @@ test_that("colors not existing within the respective print will be identified ",
 
   expect_equivalent(
     format(c_vctr_latex, method = "latex"),
-    "\\textcolor{blue-violet}{1}"
+    "\\textcolor[rgb]{0.54, 0.17, 0.89}{1}"
   )
 })
 
@@ -153,7 +153,7 @@ test_that("input colors can be functions", {
 
   expect_equivalent(
     format(c_vctr, method = "latex"),
-    "\\colorbox{iceberg}{\\textcolor{iceberg}{1}}"
+    "\\colorbox[rgb]{0.44, 0.65, 0.82}{\\textcolor[rgb]{0.44, 0.65, 0.82}{1}}"
   )
 })
 

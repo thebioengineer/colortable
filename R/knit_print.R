@@ -53,6 +53,7 @@ pre_wrap <- function(x, ..., method = print_method()){
     "html" = pre_wrap.html,
     "gfm" = pre_wrap.html,
     "docx" = pre_wrap.docx,
+    "slidy" = pre_wrap.html,
     c
   )
   pre_wrap_method(x, ...)
@@ -65,8 +66,8 @@ pre_wrap.latex <- function(x,...){
 }
 
 pre_wrap.html <- function(x,...){
-  c("<pre>","<code class = \"hljs\">",
-    paste("<span>##",x,"</span><br>"),
+  c("<pre>","<code class = \"r hljs\">",
+    paste("<div class='remark-code-line'><span>##",x,"</span></div>"),
     "</code>","</pre>")
 }
 

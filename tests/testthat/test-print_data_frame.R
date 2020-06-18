@@ -8,6 +8,11 @@ sample_df <- data.frame(
   c_vctr = color_vctr(c("A","B","C","D"), text_color = "blue")
 )
 
+sample_df2 <- data.frame(
+  x = 1:4,
+  c_vctr = color_vctr(8:11, text_color = "blue")
+)
+
 test_that("console data.frame printing is formatted properly", {
   expect_equal(
     capture_print(sample_df, method = "console"),
@@ -18,6 +23,17 @@ test_that("console data.frame printing is formatted properly", {
       "4 4      \033[38;5;12mD\033[0m"
     )
   )
+
+  expect_equal(
+    capture_print(sample_df2, method = "console"),
+    c("  x c_vctr",
+      "1 1     \033[38;5;12m 8\033[0m",
+      "2 2     \033[38;5;12m 9\033[0m",
+      "3 3     \033[38;5;12m10\033[0m",
+      "4 4     \033[38;5;12m11\033[0m"
+    )
+  )
+
 })
 
 test_that("html data.frame printing is formatted properly", {
@@ -36,10 +52,10 @@ test_that("latex data.frame printing is formatted properly", {
   expect_equal(
     capture_print(sample_df, method = "latex"),
     c("  x c_vctr",
-      "1 1      \\textcolor{blue}{A}",
-      "2 2      \\textcolor{blue}{B}",
-      "3 3      \\textcolor{blue}{C}",
-      "4 4      \\textcolor{blue}{D}"
+      "1 1      \\textcolor[rgb]{0.0, 0.0, 1.0}{A}",
+      "2 2      \\textcolor[rgb]{0.0, 0.0, 1.0}{B}",
+      "3 3      \\textcolor[rgb]{0.0, 0.0, 1.0}{C}",
+      "4 4      \\textcolor[rgb]{0.0, 0.0, 1.0}{D}"
     )
   )
 })

@@ -69,15 +69,17 @@ format_colortable <- function(x, max = getOption("max.print", 99999L), digits = 
     x[seq_len(max), , drop = FALSE]
     else x, digits = digits, na.encode = FALSE, ...)
 
-  col_widths <-
-    sapply(1:ncol(x), function(idx, df){
-      max(c(
-        sapply(lapply(df[[idx]],get_format_info),`[`,1),
-        format.info(colnames(df)[[idx]])[1])
-      ) + 1
+  calc_col_widths <-
+    lapply(1:ncol(x), function(idx, df){
+      c(
+        col = get_format_info(df[[idx]]),
+        name = format.info(colnames(df)[[idx]])[1]
+      )
     },if (omit)
       x[seq_len(max), , drop = FALSE]
     else x)
+
+  col_widths <- sapply(calc_col_widths, function(widths){ max(widths) +1})
 
   rownames_width <- format.info(rownames(x))
 
@@ -92,7 +94,7 @@ format_colortable <- function(x, max = getOption("max.print", 99999L), digits = 
     row_out <- pad(row_names[row], rownames_width)
 
     content_pad <-
-      col_widths - sapply(lapply(x[row, , drop=TRUE], get_format_info), `[`, 1)
+      col_widths - sapply(calc_col_widths, `[`, 1)
 
     content <-
       to_pad(format(m[row, , drop = TRUE]), content_pad)
@@ -134,9 +136,9 @@ to_pad <- function(x, padding = 0) {
 }
 
 get_format_info <- function(x){
-  if (is.factor(x) & !is.na(x)){
+  if (is.factor(x) & !any(is.na(x))){
     format.info(as.character(x))
-  }else if (is.na(x)) {
+  }else if (all(is.na(x))) {
     2
   }else {
     format.info(x)

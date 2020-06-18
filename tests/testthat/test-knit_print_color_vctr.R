@@ -10,8 +10,8 @@ test_that("knit_print works to html", {
   expect_s3_class(knit_print_output, "knit_asis")
   expect_equivalent(
     as.character(knit_print_output),
-    c("<pre>","<code class = \"hljs\">",
-      "<span>## [1] <span style='text-decoration:underline;color:blue;'>1</span> <span style='text-decoration:underline;color:blue;'>2</span> <span style='text-decoration:underline;color:blue;'>3</span> </span><br>",
+    c("<pre>","<code class = \"r hljs\">",
+      "<div class='remark-code-line'><span>## [1] <span style='text-decoration:underline;color:blue;'>1</span> <span style='text-decoration:underline;color:blue;'>2</span> <span style='text-decoration:underline;color:blue;'>3</span> </span></div>",
       "</code>","</pre>")
   )
   expect_equivalent(class(knit_print_output_inline), "character")
@@ -33,16 +33,16 @@ test_that("knit_print works to tex", {
   expect_equivalent(
     as.character(knit_print_output),
     c("\\begin{Verbatim}[commandchars=\\\\\\{\\}]\n",
-      "## [1] \\underline{\\textcolor{blue}{1}} \\underline{\\textcolor{blue}{2}} \\underline{\\textcolor{blue}{3}}\n",
+      "## [1] \\underline{\\textcolor[rgb]{0.0, 0.0, 1.0}{1}} \\underline{\\textcolor[rgb]{0.0, 0.0, 1.0}{2}} \\underline{\\textcolor[rgb]{0.0, 0.0, 1.0}{3}}\n",
       "\\end{Verbatim}\n")
   )
 
   expect_equivalent(class(knit_print_output_inline), "character")
   expect_equivalent(
     as.character(knit_print_output_inline),
-    c("\\underline{\\textcolor{blue}{1}}",
-      "\\underline{\\textcolor{blue}{2}}",
-      "\\underline{\\textcolor{blue}{3}}")
+    c("\\underline{\\textcolor[rgb]{0.0, 0.0, 1.0}{1}}",
+      "\\underline{\\textcolor[rgb]{0.0, 0.0, 1.0}{2}}",
+      "\\underline{\\textcolor[rgb]{0.0, 0.0, 1.0}{3}}")
   )
 
 

@@ -1,6 +1,11 @@
 .onLoad <- function(libname, pkgname) {
   options("colortable.precidence" = "left")
   options("colortable.color_approx.method" = "euclidian")
+
+  if (knitr::is_latex_output()) {
+    rmarkdown::latex_dependency("xcolor")#, extra_lines = color_key_latex$code)
+  }
+
 }
 
 
@@ -17,3 +22,5 @@ set_color_vctr_precedence <- function(precedence = c("left","right","blended","m
   precedence <- match.arg(precedence)
   options("colortable.precidence" = precedence)
 }
+
+

@@ -5,9 +5,7 @@
 #' @importFrom knitr opts_knit
 #' @export
 print_method <- function() {
-
   is_notebook <- isTRUE(getOption("rstudio.notebook.executing"))
-
   if (interactive() & !is_notebook) {
     "console"
   } else if (is_notebook) {
@@ -16,6 +14,8 @@ print_method <- function() {
     knitr::opts_knit$get("rmarkdown.pandoc.to")
   }
 }
+
+
 
 
 #' @title Access Attributes consistent with vctrs
