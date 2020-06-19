@@ -63,7 +63,7 @@ print.data.frame.color_vector <- function (x, ..., digits = NULL, quote = FALSE,
 format_colortable <- function(x, max = getOption("max.print", 99999L), digits = NULL, ...){
 
   n <- nrow(x)
-  omit <- (n0 <- max %/% nrow(x)) < nrow(x)
+  omit <- (n0 <- n %/% max) > 0
 
   m <- format.data.frame(if (omit)
     x[seq_len(max), , drop = FALSE]
@@ -79,7 +79,10 @@ format_colortable <- function(x, max = getOption("max.print", 99999L), digits = 
       x[seq_len(max), , drop = FALSE]
     else x)
 
+
+
   col_widths <- sapply(calc_col_widths, function(widths){ max(widths) +1})
+  content_col_widths <- sapply(calc_col_widths, `[`, 1)
 
   rownames_width <- format.info(rownames(x))
 
@@ -89,12 +92,15 @@ format_colortable <- function(x, max = getOption("max.print", 99999L), digits = 
       pad(colnames(x), col_widths)),
       collapse = "")
 
+  col_type_num <- sapply(x, is.numeric)
+
   body <- sapply(1:nrow(m),function(row, m, x, row_names, col_widths){
 
     row_out <- pad(row_names[row], rownames_width)
 
     content_pad <-
-      col_widths - sapply(calc_col_widths, `[`, 1)
+      (col_widths - content_col_widths) +
+      ((content_col_widths - sapply(lapply(x[row, , drop = TRUE], get_format_info),`[`,1)) * !col_type_num)
 
     content <-
       to_pad(format(m[row, , drop = TRUE]), content_pad)
@@ -106,8 +112,8 @@ format_colortable <- function(x, max = getOption("max.print", 99999L), digits = 
     body <- c(
       body,
       paste0(
-        c(" [ reached 'max' / getOption(\"max.print\") -- omitted",
-          n - n0, "rows ]"), collapse="")
+        c(" [ reached 'max' / getOption(\"max.print\") -- omitted ",
+          n - n0, " rows ]"), collapse="")
     )
   }
 
@@ -126,7 +132,9 @@ pad <- function(x, padding = 0) {
 
 to_pad <- function(x, padding = 0) {
   sapply(seq_along(x), function(idx, x, padding) {
+
     paste0(c(rep(" ", if (length(padding) == 1)
+
       padding
       else
         padding[idx]),

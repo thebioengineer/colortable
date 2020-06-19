@@ -31,6 +31,7 @@ At this point, the supported output types include:
   <img alt="html" src="inst/media/html_logo.png" style="height:80px"/>
   <img alt="pdf" src="inst/media/pdf_logo.png" style="height:80px"/>
   <img alt="Microsoft Word" src="inst/media/microsoft_word_logo.png" style="height:80px"/>
+  <img alt="Beamer Presentations" src="inst/media/beamer_pres.png" height = 80/>
 </div>
 
 

@@ -46,7 +46,7 @@ valid_html_codes <- function(color) {
   valid <- FALSE
   if (grepl("^#", color) & grepl("^#[0-9A-F]{6}$", color, perl = TRUE)) {
     valid <- TRUE
-  } else if (color %in% color_key_html) {
+  } else if (color %in% color_key_html$Name) {
     valid <- TRUE
   } else{
     valid <- FALSE

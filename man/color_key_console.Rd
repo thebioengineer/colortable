@@ -4,7 +4,9 @@
 \name{color_key_console}
 \alias{color_key_console}
 \title{return the tibble of color keys}
-\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 256 rows and 4 columns.}
+\format{
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 256 rows and 4 columns.
+}
 \usage{
 color_key_console
 }

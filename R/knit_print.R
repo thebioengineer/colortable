@@ -28,7 +28,8 @@ knit_vctr_output <- function(x, ..., method = print_method(), print_width = opti
     docx = knit_vctr_output.docx,
     knit_vctr_output.default
   )
-  knit_vctr_output_fun(x, ..., method = method, print_width = print_width)
+  return_val <- knit_vctr_output_fun(x, ..., method = method, print_width = print_width)
+  return(return_val)
 }
 
 knit_vctr_output.default <- function(x, ..., method = print_method(), print_width = options()$width){
@@ -59,14 +60,13 @@ pre_wrap <- function(x, ..., method = print_method()){
   pre_wrap_method(x, ...)
 }
 
-pre_wrap.latex <- function(x,...){
-  c("\\begin{Verbatim}[commandchars=\\\\\\{\\}]\n",
-    paste0("## ",x,"\n"),
-    "\\end{Verbatim}\n")
+pre_wrap.latex <- function(x, ...) {
+  gsub(" ","\\ ",(paste0("\\texttt{\\#\\# ", x,"}\\newline\n")),fixed = TRUE)
 }
 
+
 pre_wrap.html <- function(x,...){
-  c("<pre>","<code class = \"r hljs\">",
+  c("<pre>","<code class = \"hljs\">",
     paste("<div class='remark-code-line'><span>##",x,"</span></div>"),
     "</code>","</pre>")
 }
