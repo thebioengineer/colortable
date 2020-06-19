@@ -3,11 +3,10 @@ title: "Colortable"
 author: "Ellis Hughes"
 date: "2/16/2020"
 output:
-  word_document: default
-  html_document:
-    df_print: paged
-  pdf_document:
-    keep_tex: yes
+  powerpoint_presentation: default
+  ioslides_presentation: default
+  slidy_presentation: default
+  beamer_presentation: default
 ---
 
 ## {{colortable}}
@@ -20,7 +19,7 @@ library(tidyverse)
 library(knitr)
 ```
 
-```{r, results = 'asis'}
+```{r}
 
 cell_sample  <- color_vctr(24, text_color = "red", background = "blue")
 cell_sample2 <- color_vctr(42, background = "yellow")
@@ -31,7 +30,13 @@ cell_sample
 cell_sample2
 cell_sample3
 cell_sample4
+```
 
+---
+
+### Vectors
+
+```{r}
 vect_sample <- color_vctr(cell_sample, cell_sample2, cell_sample3, cell_sample4)
 vect_sample
 
@@ -42,7 +47,13 @@ vect_sample2[6:7] <- c(21,23)
 vect_sample2[10:12] <- color_vctr(cell_sample, cell_sample2, cell_sample3)
 
 vect_sample2
+```
 
+---
+
+### Data.frames~
+
+```{r}
 data.frame(idx = 1:5, z = vect_sample[1:5])
 
 color_tibble <- tibble(idx = 1:5, z = vect_sample[1:5]) 
@@ -53,6 +64,7 @@ color_tibble %>%
   kable(escape = FALSE)
 
 ```
+---
 
 ## Use Cases
 
@@ -83,6 +95,10 @@ df_anova$Pr..F. <- ifelse(
 kable(df_anova)
 
 ```
+
+---
+
+## Use Cases
 
 {{colortable}} can resolve this and make your code much easier to understand, and you can add additional styling just as easily.
 There is also the added benefit that even though we have styling on the cells, the underlying object type still exists and can be modified and edited as needed. 

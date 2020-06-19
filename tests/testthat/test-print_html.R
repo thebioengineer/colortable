@@ -17,7 +17,7 @@ test_that("vector printing to console - numeric", {
   expect_equal(
     capture_print(styled_vect),
     c("<span style='color:red;'> 1.00</span>",  "<span style='color:blue;'> 2.00</span>",
-    "<span style='color:lime;'> 0.05</span>", "<span style=''>20.00</span>")
+    "<span style='color:green;'> 0.05</span>", "<span style=''>20.00</span>")
   )
 
 })
@@ -29,7 +29,7 @@ test_that("vector printing to console - integer", {
   expect_equal(
     capture_print(styled_vect),
     c("<span style='color:red;'> 1</span>",  "<span style='color:blue;'> 2</span>",
-      "<span style='color:lime;'> 3</span>", "<span style=''>20</span>")
+      "<span style='color:green;'> 3</span>", "<span style=''>20</span>")
   )
 })
 
@@ -41,7 +41,7 @@ test_that("vector printing to console - character", {
   expect_equal(
     capture_print(styled_vect),
     c("<span style='color:red;'>A             </span>",  "<span style='color:blue;'>B             </span>",
-      "<span style='color:lime;'>C             </span>", "<span style=''>Long Character</span>")
+      "<span style='color:green;'>C             </span>", "<span style=''>Long Character</span>")
   )
 
 })
@@ -53,7 +53,7 @@ test_that("vector printing to console - factor", {
   expect_equal(
     capture_print(styled_vect),
     c("<span style='color:red;'>A             </span>",  "<span style='color:blue;'>B             </span>",
-      "<span style='color:lime;'>C             </span>", "<span style=''>Long Character</span>")
+      "<span style='color:green;'>C             </span>", "<span style=''>Long Character</span>")
   )
 })
 
@@ -64,7 +64,7 @@ test_that("vector printing to console - character", {
   expect_equal(
     capture_print(styled_vect),
     c("<span style='color:red;'> TRUE</span>",  "<span style='color:blue;'>FALSE</span>",
-      "<span style='color:lime;'> TRUE</span>", "<span style=''> TRUE</span>")
+      "<span style='color:green;'> TRUE</span>", "<span style=''> TRUE</span>")
   )
 })
 
@@ -76,7 +76,7 @@ test_that("vector printing to console - dates", {
   expect_equal(
     capture_print(styled_vect),
     c("<span style='color:red;'>1970-01-01</span>",  "<span style='color:blue;'>1970-01-02</span>",
-      "<span style='color:lime;'>1970-01-03</span>", "<span style=''>1970-01-04</span>")
+      "<span style='color:green;'>1970-01-03</span>", "<span style=''>1970-01-04</span>")
   )
 
 })

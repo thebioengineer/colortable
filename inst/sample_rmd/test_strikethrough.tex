@@ -1,0 +1,367 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Colortable},
+  pdfauthor={Ellis Hughes},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{ulem}
+
+\title{Colortable}
+\author{Ellis Hughes}
+\date{2/16/2020}
+
+\begin{document}
+\maketitle
+
+\hypertarget{colortable}{%
+\subsection{\{\{colortable\}\}}\label{colortable}}
+
+Examples of \{\{colortable\}\} in action!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(colortable)}
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(knitr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cell_sample  <-}\StringTok{ }\KeywordTok{color_vctr}\NormalTok{(}\DecValTok{24}\NormalTok{, }\DataTypeTok{text_color =} \StringTok{"red"}\NormalTok{, }\DataTypeTok{background =} \StringTok{"blue"}\NormalTok{)}
+\NormalTok{cell_sample2 <-}\StringTok{ }\KeywordTok{color_vctr}\NormalTok{(}\DecValTok{42}\NormalTok{, }\DataTypeTok{background =} \StringTok{"yellow"}\NormalTok{)}
+\NormalTok{cell_sample3 <-}\StringTok{ }\KeywordTok{color_vctr}\NormalTok{(}\DecValTok{68}\NormalTok{, }\DataTypeTok{text_color =} \StringTok{"magenta"}\NormalTok{, }\DataTypeTok{style =} \StringTok{"strikethrough"}\NormalTok{)}
+\NormalTok{cell_sample4 <-}\StringTok{ }\KeywordTok{color_vctr}\NormalTok{(}\DecValTok{70}\NormalTok{, }\DataTypeTok{text_color =} \StringTok{"green"}\NormalTok{)}
+
+\NormalTok{cell_sample}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{\#\#\ [1]\ \colorbox[rgb]{0.0,0.0,1.0}{\textcolor[rgb]{1.0,0.0,0.0}{24}}}\newline
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cell_sample2}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{\#\#\ [1]\ \colorbox[rgb]{1.0,1.0,0.0}{42}}\newline
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cell_sample3}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{\#\#\ [1]\ \sout{\textcolor[rgb]{1.0,0.0,1.0}{68}}}\newline
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cell_sample4}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{\#\#\ [1]\ \textcolor[rgb]{0.0,1.0,0.0}{70}}\newline
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vect_sample <-}\StringTok{ }\KeywordTok{color_vctr}\NormalTok{(cell_sample, cell_sample2, cell_sample3, cell_sample4)}
+\NormalTok{vect_sample}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{\#\#\ [1]\ \colorbox[rgb]{0.0,0.0,1.0}{\textcolor[rgb]{1.0,0.0,0.0}{24}}\ \colorbox[rgb]{1.0,1.0,0.0}{42}\ \sout{\textcolor[rgb]{1.0,0.0,1.0}{68}}\ \textcolor[rgb]{0.0,1.0,0.0}{70}}\newline
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vect_sample2 <-}\StringTok{ }\NormalTok{vect_sample}
+\NormalTok{vect_sample2[}\DecValTok{5}\NormalTok{] <-}\StringTok{ }\DecValTok{422}
+\NormalTok{vect_sample2[}\DecValTok{20}\NormalTok{] <-}\StringTok{ }\KeywordTok{color_vctr}\NormalTok{(}\DecValTok{98119}\NormalTok{, }\DataTypeTok{text_color =} \StringTok{"yellow"}\NormalTok{, }\DataTypeTok{background =} \StringTok{"blue"}\NormalTok{, }\DataTypeTok{style =} \StringTok{"underline"}\NormalTok{)}
+\NormalTok{vect_sample2[}\DecValTok{6}\OperatorTok{:}\DecValTok{7}\NormalTok{] <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{21}\NormalTok{,}\DecValTok{23}\NormalTok{)}
+\NormalTok{vect_sample2[}\DecValTok{10}\OperatorTok{:}\DecValTok{12}\NormalTok{] <-}\StringTok{ }\KeywordTok{color_vctr}\NormalTok{(cell_sample, cell_sample2, cell_sample3)}
+
+\NormalTok{vect_sample2}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{\#\#\ \ [1]\ \colorbox[rgb]{0.0,0.0,1.0}{\textcolor[rgb]{1.0,0.0,0.0}{\ \ \ 24}}\ \colorbox[rgb]{1.0,1.0,0.0}{\ \ \ 42}\ \sout{\textcolor[rgb]{1.0,0.0,1.0}{\ \ \ 68}}\ \textcolor[rgb]{0.0,1.0,0.0}{\ \ \ 70}\ \ \ 422\ \ \ \ 21\ \ \ \ 23\ NA\ NA\ \colorbox[rgb]{0.0,0.0,1.0}{\textcolor[rgb]{1.0,0.0,0.0}{\ \ \ 24}}\ \colorbox[rgb]{1.0,1.0,0.0}{\ \ \ 42}\ \sout{\textcolor[rgb]{1.0,0.0,1.0}{\ \ \ 68}}}\newline
+\texttt{\#\#\ [13]\ NA\ NA\ NA\ NA\ NA\ NA\ NA\ \colorbox[rgb]{0.0,0.0,1.0}{\underline{\textcolor[rgb]{1.0,1.0,0.0}{98119}}}}\newline
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{idx =} \DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DataTypeTok{z =}\NormalTok{ vect_sample[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+idx & z\tabularnewline
+\midrule
+\endhead
+1 &
+\colorbox[rgb]{0.0,0.0,1.0}{\textcolor[rgb]{1.0,0.0,0.0}{24}}\tabularnewline
+2 & \colorbox[rgb]{1.0,1.0,0.0}{42}\tabularnewline
+3 & \sout{\textcolor[rgb]{1.0,0.0,1.0}{68}}\tabularnewline
+4 & \textcolor[rgb]{0.0,1.0,0.0}{70}\tabularnewline
+5 & NA\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{color_tibble <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{idx =} \DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DataTypeTok{z =}\NormalTok{ vect_sample[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{]) }
+
+\NormalTok{color_tibble}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+idx & z\tabularnewline
+\midrule
+\endhead
+1 &
+\colorbox[rgb]{0.0,0.0,1.0}{\textcolor[rgb]{1.0,0.0,0.0}{24}}\tabularnewline
+2 & \colorbox[rgb]{1.0,1.0,0.0}{42}\tabularnewline
+3 & \sout{\textcolor[rgb]{1.0,0.0,1.0}{68}}\tabularnewline
+4 & \textcolor[rgb]{0.0,1.0,0.0}{70}\tabularnewline
+5 & NA\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{color_tibble }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{kable}\NormalTok{(}\DataTypeTok{escape =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}rr@{}}
+\toprule
+idx & z\tabularnewline
+\midrule
+\endhead
+1 &
+\colorbox[rgb]{0.0,0.0,1.0}{\textcolor[rgb]{1.0,0.0,0.0}{24}}\tabularnewline
+2 & \colorbox[rgb]{1.0,1.0,0.0}{42}\tabularnewline
+3 & \sout{\textcolor[rgb]{1.0,0.0,1.0}{68}}\tabularnewline
+4 & \textcolor[rgb]{0.0,1.0,0.0}{70}\tabularnewline
+5 & NA\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{use-cases}{%
+\subsection{Use Cases}\label{use-cases}}
+
+The ability to update coloring within the table allows for visualizing
+the results before printing and rendering.
+
+One use case could be trying to print out p-values and drawing attention
+to the significant pvalues.
+
+Normally, the course of action would be to manually add either the latex
+or html required to tag the outputs. This requires both knowing how to
+tag the significant pvalues with the correct latex/html code and also
+hard codes those results into your code.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{## Super Great analysis of mtcars!}
+
+\NormalTok{lm_fit <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{., mtcars)}
+
+\NormalTok{a_lm_fit <-}\StringTok{ }\KeywordTok{anova}\NormalTok{(lm_fit)}
+
+\NormalTok{df_anova <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(a_lm_fit)}
+
+\CommentTok{# if the output is pdf}
+\NormalTok{df_anova}\OperatorTok{$}\NormalTok{Pr..F. <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(}
+\NormalTok{  df_anova}\OperatorTok{$}\NormalTok{Pr..F. }\OperatorTok{<}\StringTok{ }\FloatTok{.05}\NormalTok{,}
+  \KeywordTok{paste0}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{textcolor\{green\}\{"}\NormalTok{,df_anova}\OperatorTok{$}\NormalTok{Pr..F.,}\StringTok{"\}"}\NormalTok{),}
+\NormalTok{  df_anova}\OperatorTok{$}\NormalTok{Pr..F.}
+\NormalTok{)}
+
+\KeywordTok{kable}\NormalTok{(df_anova)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrrrrl@{}}
+\toprule
+& Df & Sum.Sq & Mean.Sq & F.value & Pr..F.\tabularnewline
+\midrule
+\endhead
+cyl & 1 & 817.7129524 & 817.7129524 & 116.4245456 &
+\textcolor{green}{5.03444973840481e-10}\tabularnewline
+disp & 1 & 37.5939529 & 37.5939529 & 5.3525615 &
+\textcolor{green}{0.0309108258078556}\tabularnewline
+hp & 1 & 9.3709293 & 9.3709293 & 1.3342166 &
+0.261031043915007\tabularnewline
+drat & 1 & 16.4674349 & 16.4674349 & 2.3446047 &
+0.140643762276576\tabularnewline
+wt & 1 & 77.4757948 & 77.4757948 & 11.0308687 &
+\textcolor{green}{0.00324449159445386}\tabularnewline
+qsec & 1 & 3.9493082 & 3.9493082 & 0.5622956 &
+0.461655702242183\tabularnewline
+vs & 1 & 0.1297687 & 0.1297687 & 0.0184762 &
+0.893173302477966\tabularnewline
+am & 1 & 14.4742372 & 14.4742372 & 2.0608167 &
+0.165857678951404\tabularnewline
+gear & 1 & 0.9717105 & 0.9717105 & 0.1383504 &
+0.71365333783354\tabularnewline
+carb & 1 & 0.4066688 & 0.4066688 & 0.0579008 &
+0.812178712952693\tabularnewline
+Residuals & 21 & 147.4944300 & 7.0235443 & NA & NA\tabularnewline
+\bottomrule
+\end{longtable}
+
+\{\{colortable\}\} can resolve this and make your code much easier to
+understand, and you can add additional styling just as easily. There is
+also the added benefit that even though we have styling on the cells,
+the underlying object type still exists and can be modified and edited
+as needed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tbl_anova <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(a_lm_fit)}
+
+\NormalTok{tbl_anova}\OperatorTok{$}\NormalTok{Pr..F. <-}\StringTok{ }
+\StringTok{  }\KeywordTok{set_styling}\NormalTok{(tbl_anova}\OperatorTok{$}\NormalTok{Pr..F. , tbl_anova}\OperatorTok{$}\NormalTok{Pr..F.  }\OperatorTok{<}\StringTok{ }\FloatTok{0.05}\NormalTok{, }\DataTypeTok{text_color =} \StringTok{"green"}\NormalTok{, }\DataTypeTok{style =} \StringTok{"underline"}\NormalTok{)}
+
+\NormalTok{tbl_anova}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}llllll@{}}
+\toprule
+& Df & Sum.Sq & Mean.Sq & F.value & Pr..F.\tabularnewline
+\midrule
+\endhead
+cyl & 1 & 817.7129524 & 817.7129524 & 116.42454564 &
+\underline{\textcolor[rgb]{0.0,1.0,0.0}{5.034450e-10}}\tabularnewline
+disp & 1 & 37.5939529 & 37.5939529 & 5.35256153 &
+\underline{\textcolor[rgb]{0.0,1.0,0.0}{3.091083e-02}}\tabularnewline
+hp & 1 & 9.3709293 & 9.3709293 & 1.33421658 &
+2.610310e-01\tabularnewline
+drat & 1 & 16.4674349 & 16.4674349 & 2.34460470 &
+1.406438e-01\tabularnewline
+wt & 1 & 77.4757948 & 77.4757948 & 11.03086869 &
+\underline{\textcolor[rgb]{0.0,1.0,0.0}{3.244492e-03}}\tabularnewline
+qsec & 1 & 3.9493082 & 3.9493082 & 0.56229561 &
+4.616557e-01\tabularnewline
+vs & 1 & 0.1297687 & 0.1297687 & 0.01847624 &
+8.931733e-01\tabularnewline
+am & 1 & 14.4742372 & 14.4742372 & 2.06081667 &
+1.658577e-01\tabularnewline
+gear & 1 & 0.9717105 & 0.9717105 & 0.13835045 &
+7.136533e-01\tabularnewline
+carb & 1 & 0.4066688 & 0.4066688 & 0.05790079 &
+8.121787e-01\tabularnewline
+Residuals & 21 & 147.4944300 & 7.0235443 & NA & NA\tabularnewline
+\bottomrule
+\end{longtable}
+
+\end{document}

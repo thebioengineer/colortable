@@ -42,23 +42,20 @@ data.frame(Styles = possible_styles,
 # Valid PDF Colors
 
 ```{r pdf-colors, echo = FALSE}
-possible_colors <- valid_colors(method = "latex")
+possible_colors <- data.frame(valid_colors(method = "latex"))
 
-possible_colors %>% 
-  mutate(
-    `Color` =
+possible_colors$`Color` <-
   color_vctr(
-    possible_colors$`Color Name`,
-    text_color = possible_colors$`Color Name`
-  ),
-`Hex Code` =
+    possible_colors$`Color.Name`,
+    text_color = possible_colors$`Color.Name`
+  )
+
+possible_colors$`Hex.Code` =
   color_vctr(
-    paste0("\\",possible_colors$`Hex Code`),
-    background = possible_colors$`Hex Code`
-  )) %>% 
-  select(`Color Name`, Color, `Hex Code`) %>% 
-  data.frame() %>% 
-  format() %>% 
-  kable(escape = FALSE)
+    possible_colors$`Hex.Code`,
+    background = possible_colors$`Hex.Code`
+  )
+
+possible_colors
 
 ```
