@@ -20,13 +20,13 @@ test_that("New color vectors can only be based on an atomic vector or another co
 
 test_that("New color vectors can be built from other color vectors", {
   expect_equal(
-    color_vctr(color_vctr(1), color_vctr(2)),
+    vctrs::vec_c(color_vctr(1), color_vctr(2)),
     color_vctr(c(1,2))
-    )
+  )
 
   expect_equal(
-    color_vctr(color_vctr(c(1,2,3)), color_vctr(4, text_color = "blue")),
-    color_vctr(c(1,2,3,4), text_color = c(NA,NA,NA, "blue"))
+    vctrs::vec_c(color_vctr(c(1,2,3)), color_vctr(4)),
+    color_vctr(c(1,2,3,4))
   )
 })
 
