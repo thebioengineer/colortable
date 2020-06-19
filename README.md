@@ -22,10 +22,10 @@ At this point, the supported output types include:
 
 <div style="display:inline-block">
 
-<img alt="console" src="inst/media/console_logo.png" style="height:80px"/>
-<img alt="html" src="inst/media/html_logo.png" style="height:80px"/>
-<img alt="pdf" src="inst/media/pdf_logo.png" style="height:80px"/>
-<img alt="Microsoft Word" src="inst/media/microsoft_word_logo.png" style="height:80px"/>
+<img alt="console" src="inst/media/console_logo.png" height = 80/>
+<img alt="html" src="inst/media/html_logo.png" height = 80/>
+<img alt="pdf" src="inst/media/pdf_logo.png" height = 80/>
+<img alt="Microsoft Word" src="inst/media/microsoft_word_logo.png" height = 80/>
 <img alt="Beamer Presentations" src="inst/media/beamer_pres.png" height = 80/>
 
 </div>
@@ -53,8 +53,39 @@ element - style, a vector is either the style the enture vector to be
 styled with or each element - background, a vector that is either the
 background color the entire vector to be colored or for each element.
 
-Additionally, there is a helper function, `set_styling()`, that takes a
-boolean argument as well to where to apply the styling.
+Additionally, there is a few helper functions - `set_styling()` uses a
+boolean argument to apply the styling - `color_scale()` is to be used
+for setting colors, accepting a pallette
+
+*A note, html styling does not apply in a github readme*
+
+``` r
+library(colortable)
+#> Registered S3 methods overwritten by 'colortable':
+#>   method                from     
+#>   knit_print.data.frame rmarkdown
+#>   print.data.frame      base
+
+color_vctr(c(1,2,3,4),
+           text_color = c("blue","green", "yellow",NA),
+           style = c("underline","italic",NA,"bold"),
+           background = c(NA,NA,"blue",NA))
+```
+
+<pre><code class = "hljs"><span>## [1] <span style='text-decoration:underline;color:blue;'>1</span> <span style='font-style:italic;color:lime;'>2</span> <span style='color:yellow;background:blue;'>3</span> <span style='font-weight:bold;'>4</span> </span><br></code></pre>
+
+``` r
+
+color_vctr(LETTERS, text_color = color_scale(colorRamp(c("red","yellow"))))
+```
+
+<pre><code class = "hljs"><span>## [1] <span style='color:#FF0000;'>A</span> <span style='color:#FF0A00;'>B</span> <span style='color:#FF1400;'>C</span> <span style='color:#FF1F00;'>D</span> <span style='color:#FF2900;'>E</span> <span style='color:#FF3300;'>F</span> <span style='color:#FF3D00;'>G</span> <span style='color:#FF4700;'>H</span> <span style='color:#FF5200;'>I</span> <span style='color:#FF5C00;'>J</span> <span style='color:#FF6600;'>K</span> <span style='color:#FF7000;'>L</span> <span style='color:#FF7A00;'>M</span> <span style='color:#FF8500;'>N</span> <span style='color:#FF8F00;'>O</span> <span style='color:#FF9900;'>P</span> <span style='color:#FFA300;'>Q</span> <span style='color:#FFAD00;'>R</span> <span style='color:#FFB800;'>S</span> <span style='color:#FFC200;'>T</span> <span style='color:#FFCC00;'>U</span> <span style='color:#FFD600;'>V</span> <span style='color:#FFE000;'>W</span> <span style='color:#FFEB00;'>X</span> <span style='color:#FFF500;'>Y</span> <span style='color:#FFFF00;'>Z</span> </span><br></code></pre>
+
+``` r
+color_vctr(LETTERS, text_color = color_scale("Blues"))
+```
+
+<pre><code class = "hljs"><span>## [1] <span style='color:#F7FBFF;'>A</span> <span style='color:#EFF6FC;'>B</span> <span style='color:#E7F1FA;'>C</span> <span style='color:#DFECF7;'>D</span> <span style='color:#D7E6F5;'>E</span> <span style='color:#D0E1F2;'>F</span> <span style='color:#C8DCF0;'>G</span> <span style='color:#BDD7EC;'>H</span> <span style='color:#B0D1E7;'>I</span> <span style='color:#A3CCE3;'>J</span> <span style='color:#94C4DF;'>K</span> <span style='color:#85BBDB;'>L</span> <span style='color:#74B2D8;'>M</span> <span style='color:#65A9D3;'>N</span> <span style='color:#59A0CE;'>O</span> <span style='color:#4B98C9;'>P</span> <span style='color:#3F8EC4;'>Q</span> <span style='color:#3583BF;'>R</span> <span style='color:#2B79B9;'>S</span> <span style='color:#206EB3;'>T</span> <span style='color:#1964AB;'>U</span> <span style='color:#115AA3;'>V</span> <span style='color:#08509A;'>W</span> <span style='color:#09458A;'>X</span> <span style='color:#093A7A;'>Y</span> <span style='color:#08306B;'>Z</span> </span><br></code></pre>
 
 ## Example
 
@@ -67,9 +98,8 @@ The benefit of {{colortable}} is that the same code can be used across
 outputs and even in the console\!
 
 ``` r
-  library(tidyverse)
-  library(colortable)
-  library(knitr)
+library(tidyverse)
+library(knitr)
 
 ## Super Great analysis of mtcars!
 

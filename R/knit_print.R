@@ -28,8 +28,7 @@ knit_vctr_output <- function(x, ..., method = print_method(), print_width = opti
     docx = knit_vctr_output.docx,
     knit_vctr_output.default
   )
-  return_val <- knit_vctr_output_fun(x, ..., method = method, print_width = print_width)
-  return(return_val)
+  knit_vctr_output_fun(x, ..., method = method, print_width = print_width)
 }
 
 knit_vctr_output.default <- function(x, ..., method = print_method(), print_width = options()$width){
