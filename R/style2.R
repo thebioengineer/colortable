@@ -1,5 +1,8 @@
-#' Append Coloring or Styling
+#' @title Append Coloring or Styling
 #'
+#' @noRd
+#'
+#' @description
 #' Based on inputs, determines correct strings to append to the input to style
 #' for any type of output (console, html, pdf, ...)
 #'
@@ -58,13 +61,13 @@ style2html <- function(x, style = NA, text_color = NA, background = NA, ...){
 
 style2htmlV <- Vectorize(style2html,vectorize.args = c("x","style","text_color","background"),SIMPLIFY = TRUE)
 
-style2tex <- function(x, style = NA, text_color = NA, background = NA, ...){
+style2tex <- function(x, style = NA, text_color = NA, background = NA, ..., method = print_method()){
   if (is.na(x)) {
     return(NA)
   }else{
-    text_style <- style_wrapper_tex(style, type = "style")
-    text_color <- style_wrapper_tex(text_color, type = "text")
-    text_background <- style_wrapper_tex(background, type = "background")
+    text_style <- style_wrapper_tex(style, type = "style", method)
+    text_color <- style_wrapper_tex(text_color, type = "text", method)
+    text_background <- style_wrapper_tex(background, type = "background", method)
 
     text_background(text_style(text_color(x)))
   }

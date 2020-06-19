@@ -27,13 +27,14 @@ format.color_vctr <- function(x, ..., method = print_method()){
          "html" = format.color_vctr.html,
          "gfm" = format.color_vctr.html,
          "docx" = format.color_vctr.docx,
+         "slidy" = format.color_vctr.html,
          stop("Method for ", print_method()," not implemented yet.")
   )
 
-  format_method(x, ...)
+  format_method(x, ..., method = method)
 }
 
-format.color_vctr.console <- function(x,...){
+format.color_vctr.console <- function(x,..., method = print_method()){
   x <-
     style2consoleV(
       format_preserve_na(field(x, "vctr"), ...),
@@ -45,7 +46,7 @@ format.color_vctr.console <- function(x,...){
   x
 }
 
-format.color_vctr.html <- function(x,...){
+format.color_vctr.html <- function(x,..., method = print_method()){
   x <-
     style2htmlV(
       format_preserve_na(field(x, "vctr"), ...),
@@ -57,21 +58,20 @@ format.color_vctr.html <- function(x,...){
   x
 }
 
-format.color_vctr.latex <- function(x,...){
-
-  add_colortable_latex_meta()
+format.color_vctr.latex <- function(x,..., escape = TRUE, method = print_method()){
   x <-
     style2texV(
-      format_preserve_na(field(x, "vctr"), ...),
+      format_preserve_na(field(x, "vctr"), ..., escape = escape),
       field(x, ".style"),
       field(x, ".text_color"),
-      field(x, ".background")
+      field(x, ".background"),
+      method = method
     )
   names(x) <- NULL
   x
 }
 
-format.color_vctr.docx <- function(x,..., wrap = TRUE){
+format.color_vctr.docx <- function(x,..., wrap = TRUE, method = print_method()){
   x <-
     style2docxV(
       format_preserve_na(field(x, "vctr"), ...),
@@ -86,21 +86,13 @@ format.color_vctr.docx <- function(x,..., wrap = TRUE){
   x
 }
 
-add_colortable_latex_meta <- function(){
-  meta <- knitr::knit_meta(clean = FALSE)
-  id <- do.call('c',lapply(meta,`[[`,"name"))
-  extra_lines <- lapply(meta,`[[`,"extra_lines")
-  if( !"xcolor" %in% id | !any(sapply(extra_lines,identical,color_key_latex$code))){
-    invisible(
-      knitr::knit_meta_add(list(rmarkdown::latex_dependency(name = "xcolor", extra_lines = color_key_latex$code)))
-    )
-  }
-}
-
-format_preserve_na <- function(x, ...) {
+format_preserve_na <- function(x, ..., escape = FALSE) {
   f_x <- format(x, ...)
   if (anyNA(x)) {
     f_x[is.na(x)] <- NA
+  }
+  if(escape){
+    f_x <- escape_chars(f_x)
   }
   f_x
 }
@@ -182,3 +174,23 @@ format_console_vctr_print <- function(x,formatted_x,...,console_width = options(
 
   output_vect
 }
+
+#' Protect control characters in a string for use in a latex table or caption
+#'
+#' escape takes a vector of chracter values, and puts "\\" in front of them to make them
+#' allowable in the latex table output
+#'
+#' @param x character vector of test containing values that need to be latex escaped
+#'
+#' @return character Vector of transformed values for table output
+#
+#' @examples
+#' value_example <- c("testvalue", "test_value", "ampersand&")
+#' escape_chars(value_example)
+#' escape_chars("String_Entry %")
+#'
+#' @export
+escape_chars<-function(x){
+  gsub("([&%$#_{}~^\\])","\\\\\\1",x)
+}
+
