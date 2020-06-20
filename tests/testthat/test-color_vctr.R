@@ -1,8 +1,8 @@
 test_that("New color vectors by default have no styling", {
   new_vect <- color_vctr(1)
-  expect_equal(field(new_vect,".text_color"), NA)
-  expect_equal(field(new_vect,".background"), NA)
-  expect_equal(field(new_vect,".style"), NA)
+  expect_equal(field(new_vect,".text_color"), NA_character_)
+  expect_equal(field(new_vect,".background"), NA_character_)
+  expect_equal(field(new_vect,".style"), NA_character_)
 })
 
 test_that("New color vectors can be of any length", {

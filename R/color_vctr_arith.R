@@ -123,9 +123,10 @@ vec_arith.color_vctr.color_vctr.op <- function(op, x, y ) {
 
   res_value <- op(vec_cast(field(x, "vctr"), field(x, "vctr")),
                   vec_cast(field(y, "vctr"), field(y, "vctr")))
+
   res_styling <- merge_styling( x, y)
 
-  new_color_vctr(
+  color_vctr(
     res_value,
     text_color = res_styling[[".text_color"]],
     background = res_styling[[".background"]],
@@ -164,6 +165,7 @@ merge_styling.dir <- function(x,y){
   },idx)
 
   names(styling) <- setdiff(fields(x),"vctr")
+
   styling
 }
 

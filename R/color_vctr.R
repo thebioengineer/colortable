@@ -44,15 +44,15 @@ new_color_vctr <- function(vect = double(), text_color = NA_character_, backgrou
 #' @importFrom vctrs vec_assert
 vec_assert_style <- function(x, size){
   arg <- match.call()$x
+  ptype <-
   if (all(is.na(x))) {
     ptype <- logical()
-  }else{
-    ptype <- character()
+    x <- rep(NA_character_, times = length(x))
   }
   if(length(x) == 1){
     x <- rep(x, size)
   }
-  vec_assert(x,ptype = ptype, size = size, arg = arg)
+  vec_assert(x,ptype = character(), size = size, arg = arg)
   return(x)
 }
 
