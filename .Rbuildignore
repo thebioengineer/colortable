@@ -8,3 +8,4 @@
 ^codecov\.yml$
 ^\.covrignore$
 ^cran-comments\.md$
+^\.github
