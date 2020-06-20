@@ -16,6 +16,11 @@
 #' @exportClass color_vctr
 #' @import vctrs
 #' @importFrom vctrs vec_assert new_rcrd
+#' @examples
+#'
+#' color_vctr(1:5, text_color = "blue", background = "yellow", style = "bold")
+#' color_vctr(LETTERS, text_color = color_scale("Blues"), background = "darkgrey", style = "italic")
+
 new_color_vctr <- function(vect = double(), text_color = NA_character_, background = NA_character_, style = NA_character_){
 
   # assert vect is an atomic
@@ -80,7 +85,6 @@ atomic <- function(x){
 #' the first argument.
 #'
 #' @param x data source determining method dispatch
-#' @param ... additional elements to generate the color_vctr
 #' @param text_color A vector of length 1 or same length as vect. Details the
 #'     color the text should be. Valid values can be found from the
 #'     `valid_text_color()` function.NA means no text color.
@@ -136,21 +140,19 @@ vec_ptype_full.color_vctr <- function(x, ...) {
 methods::setOldClass(c("color_vctr", "vctrs_vctr"))
 
 
-#' @export vec_proxy_equal.color_vctr
 #' @export
 #' @method vec_proxy_equal color_vctr
 #' @importFrom vctrs field vec_proxy_equal
 vec_proxy_equal.color_vctr <- function(x){
   field(x,"vctr")
 }
-#' @export vec_proxy_compare.color_vctr
 #' @export
 #' @method vec_proxy_compare color_vctr
 #' @importFrom vctrs field vec_proxy_compare
 vec_proxy_compare.color_vctr <- function(x, ...) {
   field(x,"vctr")
 }
-#' @export vec_math.color_vctr
+
 #' @export
 #' @method vec_math color_vctr
 #' @importFrom vctrs field vec_math
@@ -159,7 +161,6 @@ vec_math.color_vctr <- function(.fn, .x, ...) {
 }
 
 #' Arithmatic
-#' @export vec_arith.color_vctr
 #' @export
 #' @method vec_arith color_vctr
 #' @importFrom vctrs field vec_arith
@@ -172,7 +173,6 @@ vec_arith.color_vctr.default <- function(op, x, y, ...) {
 }
 
 
-#' @export vec_arith.color_vctr.MISSING
 #' @export
 #' @method vec_arith.color_vctr MISSING
 #' @importFrom vctrs field

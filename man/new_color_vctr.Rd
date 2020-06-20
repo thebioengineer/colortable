@@ -4,7 +4,12 @@
 \alias{new_color_vctr}
 \title{Create a color_vctr from source data}
 \usage{
-new_color_vctr(vect = double(), text_color = NA, background = NA, style = NA)
+new_color_vctr(
+  vect = double(),
+  text_color = NA_character_,
+  background = NA_character_,
+  style = NA_character_
+)
 }
 \arguments{
 \item{vect}{The input vector to convert to a color_vctr. Must be an atomic.}

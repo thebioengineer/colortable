@@ -20,8 +20,6 @@ background color of the text. Valid values can be found from the
 \item{style}{A vector of length 1 or same length as vect. Details the
 style of the text Valid values can be found from the
 `valid_style()` function. NA means no styling.}
-
-\item{...}{additional elements to generate the color_vctr}
 }
 \value{
 a color_vctr

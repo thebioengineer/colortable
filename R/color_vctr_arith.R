@@ -1,6 +1,3 @@
-
-
-#' @export vec_math.color_vctr
 #' @export
 #' @method vec_math color_vctr
 #' @importFrom vctrs field vec_math
@@ -10,8 +7,8 @@ vec_math.color_vctr <- function(.fn, .x, ...) {
 
 
 #' Arithmatic
-#' @export vec_arith.color_vctr
 #' @export
+#' @inheritParams vctrs::vec_arith
 #' @method vec_arith color_vctr
 #' @importFrom vctrs field vec_arith
 vec_arith.color_vctr <- function(op, x, y, ...) {
@@ -22,7 +19,6 @@ vec_arith.color_vctr.default <- function(op, x, y, ...) {
   stop_incompatible_op(op, x, y)
 }
 
-#' @export vec_arith.color_vctr.color_vctr
 #' @export
 #' @method vec_arith.color_vctr color_vctr
 #' @importFrom vctrs field
@@ -34,15 +30,6 @@ vec_arith.color_vctr.color_vctr <- function(op, x, y, ...) {
   }
 }
 
-# S3method(vec_arith,Date)
-# S3method(vec_arith,POSIXct)
-# S3method(vec_arith,default)
-# S3method(vec_arith,difftime)
-# S3method(vec_arith,factor)
-# S3method(vec_arith,logical)
-# DONE S3method(vec_arith,numeric)
-
-#' @export vec_arith.color_vctr.numeric
 #' @export
 #' @method vec_arith.color_vctr numeric
 #' @importFrom vctrs field
@@ -54,7 +41,6 @@ vec_arith.color_vctr.numeric <- function(op, x, y, ...) {
   }
 }
 
-#' @export vec_arith.numeric.color_vctr
 #' @export
 #' @method vec_arith.numeric color_vctr
 #' @importFrom vctrs field vec_arith.numeric
@@ -67,7 +53,6 @@ vec_arith.numeric.color_vctr <- function(op, x, y, ...) {
 }
 
 
-#' @export vec_arith.color_vctr.logical
 #' @export
 #' @method vec_arith.color_vctr logical
 #' @importFrom vctrs field
@@ -79,7 +64,6 @@ vec_arith.color_vctr.logical <- function(op, x, y, ...) {
   }
 }
 
-#' @export vec_arith.logical.color_vctr
 #' @export
 #' @method vec_arith.logical color_vctr
 #' @importFrom vctrs field vec_arith.logical
@@ -91,7 +75,6 @@ vec_arith.logical.color_vctr <- function(op, x, y, ...) {
   }
 }
 
-#' @export vec_arith.color_vctr.MISSING
 #' @export
 #' @method vec_arith.color_vctr MISSING
 #' @importFrom vctrs field
@@ -116,7 +99,7 @@ vec_arith.color_vctr.MISSING <- function(op, x, y, ...) {
 }
 
 
-
+#' @importFrom methods getFunction
 vec_arith.color_vctr.color_vctr.op <- function(op, x, y ) {
 
   op <- getFunction(as.character(op))
