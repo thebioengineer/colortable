@@ -45,13 +45,7 @@ print.data.frame.color_vector <- function (x, ..., digits = NULL, quote = FALSE,
       stop("invalid 'max' / getOption(\"max.print\"): ",
            max)
 
-    omit <- (n0 <- max%/%length(x)) < n
-
-    if (!isTRUE(row.names)){
-      dimnames(m)[[1L]] <- if (isFALSE(row.names)) {
-        rep.int("", if (omit){ n0 } else { n })
-      } else { row.names }
-    }
+    omit <- (n0 <- max%/%nrow(x)) < n
 
     cat_line(format_colortable(x, max = max, digits = digits,...))
 
@@ -92,7 +86,12 @@ format_colortable <- function(x, max = getOption("max.print", 99999L), digits = 
       pad(colnames(x), col_widths)),
       collapse = "")
 
-  col_type_num <- sapply(x, is.numeric)
+  col_type_num <- sapply(x, function(z){
+    if(is_color_vctr(z)){
+      z <- field(z, "vctr")
+    }
+    is.numeric(z)
+  })
 
   body <- sapply(1:nrow(m),function(row, m, x, row_names, col_widths){
 
@@ -144,6 +143,9 @@ to_pad <- function(x, padding = 0) {
 }
 
 get_format_info <- function(x){
+  if(is_color_vctr(x)){
+    x <- field(x,"vctr")
+  }
   if (is.factor(x) & !any(is.na(x))){
     format.info(as.character(x))
   }else if (all(is.na(x))) {

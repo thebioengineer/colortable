@@ -8,3 +8,9 @@
 is_color_vctr <- function(x){
   inherits(x,"color_vctr")
 }
+
+
+#' @method levels color_vctr
+levels.color_vctr = function(x, ..., method = print_method()){
+  format(x, method = print_method())
+}

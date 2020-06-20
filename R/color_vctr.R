@@ -15,7 +15,8 @@
 #'
 #' @exportClass color_vctr
 #' @import vctrs
-new_color_vctr <- function(vect = double(), text_color = NA, background = NA, style = NA){
+#' @importFrom vctrs vec_assert new_rcrd
+new_color_vctr <- function(vect = double(), text_color = NA_character_, background = NA_character_, style = NA_character_){
 
   # assert vect is an atomic
   vec_assert(vect, atomic(vect))
@@ -63,8 +64,9 @@ atomic <- function(x){
                   "double",
                   "complex",
                   "character",
-                  "raw")) {
-    return(eval(str2expression(paste0(type,"()"))))
+                  "raw",
+                  "Date")) {
+    return(x[0])
   }else if (type %in% "factor"){
     vctrs::new_factor(levels = levels(x))
   }else{
@@ -122,6 +124,12 @@ is_color_vctr <- function(x){
 #' @importFrom vctrs vec_ptype_abbr
 vec_ptype_abbr.color_vctr <- function(x, ...) {
   paste0("c_vctr<",color_vctr_class(x),">")
+}
+
+#' @export
+#' @importFrom vctrs vec_ptype_full
+vec_ptype_full.color_vctr <- function(x, ...) {
+  paste0("color_vctr<",color_vctr_class(x),">")
 }
 
 #' @importFrom methods setOldClass
