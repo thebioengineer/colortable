@@ -28,3 +28,21 @@ a color_vctr
 This is the generic method method dispatches color_vctr generation based on
 the first argument.
 }
+\examples{
+num_vec <-
+  color_vctr(1:5,
+             text_color = "blue",
+             background = "yellow",
+             style = "bold")
+char_vec <-
+  color_vctr(
+    LETTERS,
+    text_color = color_scale("Blues"),
+    background = "darkgrey",
+    style = "italic"
+  )
+if(interactive()){
+  num_vec
+  char_Vec
+}
+}

@@ -12,15 +12,9 @@
 #' @param style A vector of length 1 or same length as vect. Details the
 #'     style of the text Valid values can be found from the
 #'     `valid_style()` function. NA means no styling.
-#'
-#' @exportClass color_vctr
 #' @import vctrs
 #' @importFrom vctrs vec_assert new_rcrd
-#' @examples
-#'
-#' color_vctr(1:5, text_color = "blue", background = "yellow", style = "bold")
-#' color_vctr(LETTERS, text_color = color_scale("Blues"), background = "darkgrey", style = "italic")
-
+#' @noRd
 new_color_vctr <- function(vect = double(), text_color = NA_character_, background = NA_character_, style = NA_character_){
 
   # assert vect is an atomic
@@ -45,6 +39,11 @@ new_color_vctr <- function(vect = double(), text_color = NA_character_, backgrou
     class = "color_vctr"
   )
 }
+
+# for compatibility with the S4 system
+methods::setOldClass(c("color_vctr", "vctrs_vctr"))
+methods::setOldClass(c("color_vctr", "vctrs_rcrd"))
+
 
 #' @importFrom vctrs vec_assert
 vec_assert_style <- function(x, size){
@@ -97,6 +96,23 @@ atomic <- function(x){
 #'
 #' @return a color_vctr
 #' @export
+#' @examples
+#' num_vec <-
+#'   color_vctr(1:5,
+#'              text_color = "blue",
+#'              background = "yellow",
+#'              style = "bold")
+#' char_vec <-
+#'   color_vctr(
+#'     LETTERS,
+#'     text_color = color_scale("Blues"),
+#'     background = "darkgrey",
+#'     style = "italic"
+#'   )
+#' if(interactive()){
+#'   num_vec
+#'   char_Vec
+#' }
 
 color_vctr <- function(x = double(), text_color = NA, background = NA, style = NA) {
   new_color_vctr(x, text_color, background, style)
