@@ -53,26 +53,12 @@ pre_wrap <- function(x, ..., method = print_method()){
     "html" = pre_wrap.html,
     "gfm" = pre_wrap.html,
     "docx" = pre_wrap.docx,
-<<<<<<< HEAD
-=======
     "slidy" = pre_wrap.html,
->>>>>>> master
     c
   )
   pre_wrap_method(x, ...)
 }
 
-<<<<<<< HEAD
-pre_wrap.latex <- function(x,...){
-  c("\\begin{Verbatim}[commandchars=\\\\\\{\\}]\n",
-    paste0("## ",x,"\n"),
-    "\\end{Verbatim}\n")
-}
-
-pre_wrap.html <- function(x,...){
-  c("<pre>","<code class = \"hljs\">",
-    paste("<span>##",x,"</span><br>"),
-=======
 pre_wrap.latex <- function(x, ...) {
   gsub(" ","\\ ",(paste0("\\texttt{\\#\\# ", x,"}\\newline\n")),fixed = TRUE)
 }
@@ -81,7 +67,6 @@ pre_wrap.latex <- function(x, ...) {
 pre_wrap.html <- function(x,...){
   c("<pre>","<code class = \"hljs\">",
     paste("<div class='remark-code-line'><span>##",x,"</span></div>"),
->>>>>>> master
     "</code>","</pre>")
 }
 

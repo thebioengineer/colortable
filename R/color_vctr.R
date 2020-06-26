@@ -12,38 +12,72 @@
 #' @param style A vector of length 1 or same length as vect. Details the
 #'     style of the text Valid values can be found from the
 #'     `valid_style()` function. NA means no styling.
-#'
-#' @exportClass color_vctr
-new_color_vctr <- function(vect, text_color = NA, background = NA, style = NA ){
+#' @import vctrs
+#' @importFrom vctrs vec_assert new_rcrd
+#' @noRd
+new_color_vctr <- function(vect = character(), text_color = NA_character_, background = NA_character_, style = NA_character_){
 
-  stopifnot(is.atomic(vect))
-  stopifnot(length(text_color) == 1 | length(text_color) == length(vect))
-  stopifnot(length(background) == 1 | length(background) == length(vect))
-  stopifnot(length(style) == 1 | length(style) == length(vect))
+  # # assert vect is an atomic
+  vec_assert(vect, atomic(vect))
 
   if (is.function(text_color))
     text_color <- text_color(vect)
   if (is.function(background))
     background <- background(vect)
 
-  if (length(text_color) == 1)
-    text_color <- rep(text_color, length(vect))
-  if (length(background) == 1)
-    background <- rep(background, length(vect))
-  if (length(style) == 1)
-    style <- rep(style, length(vect))
+  text_color <- vec_assert_style(text_color, size = length(vect))
+  background <- vec_assert_style(background, size = length(vect))
+  style      <- vec_assert_style(style     , size = length(vect))
 
-  return(
-    structure(
-      vect,
-      ".text_color" = text_color,
-      ".background" = background,
-      ".style" = style,
-      class = c("color_vctr",class(vect))
-    )
+  new_rcrd(
+    list(
+      vctr = vect,
+      .text_color = text_color,
+      .background = background,
+      .style = style
+    ),
+    class = "color_vctr"
   )
 }
 
+# for compatibility with the S4 system
+methods::setOldClass(c("color_vctr", "vctrs_vctr"))
+methods::setOldClass(c("color_vctr", "vctrs_rcrd"))
+
+
+#' @importFrom vctrs vec_assert
+vec_assert_style <- function(x, size){
+  arg <- match.call()$x
+  ptype <-
+  if (all(is.na(x))) {
+    ptype <- logical()
+    x <- rep(NA_character_, times = length(x))
+  }
+  if(length(x) == 1){
+    x <- rep(x, size)
+  }
+  vec_assert(x,ptype = character(), size = size, arg = arg)
+  return(x)
+}
+
+atomic <- function(x){
+  type <- class(x[1])
+  if (any(type %in% c("logical",
+                  "integer",
+                  "numeric",
+                  "double",
+                  "complex",
+                  "character",
+                  "raw",
+                  "Date",
+                  "vctr",
+                  "ordered",
+                  "factor"))) {
+    return(x[0])
+  }else{
+    character()
+  }
+}
 
 #' Create a color_vctr
 #'
@@ -51,7 +85,6 @@ new_color_vctr <- function(vect, text_color = NA, background = NA, style = NA ){
 #' the first argument.
 #'
 #' @param x data source determining method dispatch
-#' @param ... additional elements to generate the color_vctr
 #' @param text_color A vector of length 1 or same length as vect. Details the
 #'     color the text should be. Valid values can be found from the
 #'     `valid_text_color()` function.NA means no text color.
@@ -64,38 +97,106 @@ new_color_vctr <- function(vect, text_color = NA, background = NA, style = NA ){
 #'
 #' @return a color_vctr
 #' @export
+#' @examples
+#' num_vec <-
+#'   color_vctr(1:5,
+#'              text_color = "blue",
+#'              background = "yellow",
+#'              style = "bold")
+#' char_vec <-
+#'   color_vctr(
+#'     LETTERS,
+#'     text_color = color_scale("Blues"),
+#'     background = "darkgrey",
+#'     style = "italic"
+#'   )
+#' if(interactive()){
+#'   num_vec
+#'   char_Vec
+#' }
 
-color_vctr <- function(x,..., text_color = NA, background = NA, style = NA){
-  UseMethod("color_vctr",x)
+color_vctr <- function(x = double(), text_color = NA, background = NA, style = NA) {
+  new_color_vctr(x, text_color, background, style)
+}
+
+#' @importFrom vctrs field vec_ptype_abbr
+color_vctr_class <- function(x) vec_ptype_abbr(field(x,"vctr"))
+
+
+#' Is the object a color_vctr?
+#'
+#' Detect if object is a colortable vector
+#'
+#' @param x object to be checked if is a color_vctr
+#' @export
+is_color_vctr <- function(x){
+  inherits(x,"color_vctr")
+}
+
+
+#####
+
+# vctrs black magic lives here...not sure whats going on
+# following https://vctrs.r-lib.org/articles/s3-vector.html
+
+####
+
+#' @export
+#' @importFrom vctrs vec_ptype_abbr
+vec_ptype_abbr.color_vctr <- function(x, ...) {
+  paste0("c_vctr<",color_vctr_class(x),">")
 }
 
 #' @export
-color_vctr.default <- function(x,...,text_color = NA, background = NA, style = NA) {
-  new_color_vctr(
-    x,
-    text_color = text_color,
-    background = background,
-    style = style
-    )
+#' @importFrom vctrs vec_ptype_full
+vec_ptype_full.color_vctr <- function(x, ...) {
+  paste0("color_vctr<",color_vctr_class(x),">")
+}
+
+#' @importFrom methods setOldClass
+methods::setOldClass(c("color_vctr", "vctrs_vctr"))
+
+
+#' @export
+#' @method vec_proxy_equal color_vctr
+#' @importFrom vctrs field vec_proxy_equal
+vec_proxy_equal.color_vctr <- function(x){
+  field(x,"vctr")
+}
+#' @export
+#' @method vec_proxy_compare color_vctr
+#' @importFrom vctrs field vec_proxy_compare
+vec_proxy_compare.color_vctr <- function(x, ...) {
+  field(x,"vctr")
 }
 
 #' @export
-color_vctr.color_vctr <- function(x,...){
+#' @method vec_math color_vctr
+#' @importFrom vctrs field vec_math
+vec_math.color_vctr <- function(.fn, .x, ...) {
+  vec_math_base(.fn, field(.x,"vctr"), ...)
+}
 
-  coltable_nect_list <- list(x,...)
+#' Arithmatic
+#' @export
+#' @method vec_arith color_vctr
+#' @importFrom vctrs field vec_arith
+vec_arith.color_vctr <- function(op, x, y, ...) {
+  UseMethod("vec_arith.color_vctr", y)
+}
+#' @importFrom vctrs stop_incompatible_op
+vec_arith.color_vctr.default <- function(op, x, y, ...) {
+  stop_incompatible_op(op, x, y)
+}
 
-  vect <- do.call('c', lapply(coltable_nect_list, function(z) {
-      .subset(z, seq_along(z))
-    }))
 
-  text_color <- do.call('c', lapply(coltable_nect_list, field, ".text_color"))
-  background <- do.call('c', lapply(coltable_nect_list, field, ".background"))
-  style      <- do.call('c', lapply(coltable_nect_list, field, ".style"))
-
-  return(new_color_vctr(
-    vect,
-    text_color = text_color,
-    background = background,
-    style = style
-  ))
+#' @export
+#' @method vec_arith.color_vctr MISSING
+#' @importFrom vctrs field
+vec_arith.color_vctr.MISSING <- function(op, x, y, ...) {
+  switch(op,
+         `-` = new_color_vctr(field(x,"vctr") * -1, field(x,".text_color"), field(x,".background"), field(x,".style")),
+         `+` = x,
+         stop_incompatible_op(op, x, y)
+  )
 }

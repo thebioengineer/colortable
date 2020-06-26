@@ -21,24 +21,6 @@ test_that("Subsetting the vector results in a smaller color_vctr", {
 
 })
 
-test_that("Subsetting outside the range of the vector results NA's", {
-  example_color_vctr <- color_vctr(
-    1,
-    style = "underline",
-    text_color = "blue"
-  )
-
-  subset_color_vctr <- example_color_vctr[1:3]
-
-  expect_equal(
-    subset_color_vctr,
-    color_vctr(
-      c(1,NA,NA),
-      style = c("underline", NA, NA),
-      text_color = c("blue", NA, NA)
-    )
-  )
-})
 
 test_that("Assignment of a color_vctr preserves the styling", {
   example_color_vctr <- color_vctr(

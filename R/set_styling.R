@@ -49,7 +49,7 @@ set_styling.color_vctr <- function(x, idx = rep(TRUE, length(x)), text_color = N
   }
 
   # if is numeric, no duplicates
-  x[idx] <- color_vctr(unclass(x)[idx], text_color = text_color, background = background, style = style)
+  x[idx] <- color_vctr(field(x,"vctr")[idx], text_color = text_color, background = background, style = style)
 
   return(x)
 }
