@@ -15,9 +15,9 @@
 #' @import vctrs
 #' @importFrom vctrs vec_assert new_rcrd
 #' @noRd
-new_color_vctr <- function(vect = double(), text_color = NA_character_, background = NA_character_, style = NA_character_){
+new_color_vctr <- function(vect = character(), text_color = NA_character_, background = NA_character_, style = NA_character_){
 
-  # assert vect is an atomic
+  # # assert vect is an atomic
   vec_assert(vect, atomic(vect))
 
   if (is.function(text_color))
@@ -62,17 +62,18 @@ vec_assert_style <- function(x, size){
 
 atomic <- function(x){
   type <- class(x[1])
-  if (type %in% c("logical",
+  if (any(type %in% c("logical",
                   "integer",
                   "numeric",
                   "double",
                   "complex",
                   "character",
                   "raw",
-                  "Date")) {
+                  "Date",
+                  "vctr",
+                  "ordered",
+                  "factor"))) {
     return(x[0])
-  }else if (type %in% "factor"){
-    vctrs::new_factor(levels = levels(x))
   }else{
     character()
   }

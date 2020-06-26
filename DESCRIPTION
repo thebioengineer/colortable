@@ -36,7 +36,8 @@ Imports:
     methods
 Suggests: 
     testthat (>= 2.1.0),
-    covr
+    covr,
+    tidyr
 URL: https://github.com/thebioengineer/colortable
 BugReports: https://github.com/thebioengineer/colortable/issues
 Depends: 
