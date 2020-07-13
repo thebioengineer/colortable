@@ -15,7 +15,6 @@ suppressMessages({
   library(tidyverse)
   library(colortable)
   library(knitr) ## need the dev version of knitr (yihui/knitr)
-  library(kableExtra)
 })
 
 color_vctr(1:10, text_color = color_scale("Blues"))
@@ -33,7 +32,8 @@ possible_styles <- valid_style(method = "html")
 tibble(
   Styles = possible_styles,
   Example = color_vctr(rep("Lorem Ipsum", length(possible_styles)), style = possible_styles)
-  )
+  ) %>% 
+  kable()
 
 ```
 
@@ -49,7 +49,7 @@ valid_colors(method = "html") %>%
     `Hex Code` = color_vctr(`Hex Code`,
                             background = `Hex Code`)
     
-  ) %>%
+  ) %>% 
   kable()
 
 ```

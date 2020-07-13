@@ -11,10 +11,9 @@ knit_print.color_vctr <- function(x, inline = FALSE, ...){
 }
 
 #' knit_print method for data.frames
-#' @export
 #' @keywords internal
 #' @importFrom knitr kable knit_print asis_output
-knit_print.data.frame <- function(x, options, ...){
+knit_print.data.frame_shim <- function(x, options, ...){
   df_color_vctr <- as.data.frame(lapply(as.list(x),format,...))
   rownames(df_color_vctr) <- rownames(x)
   formatted_table <- paste(kable(df_color_vctr),collapse = "\n")
