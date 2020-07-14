@@ -30,6 +30,14 @@ sample_df5 <- data.frame(
   z = "123456789"
 )
 
+sample_df6 <- data.frame(
+  x = 1:4,
+  chars = color_vctr(
+    factor(c("AA","AAAA","ABBBAB","kebab")),
+    text_color = "blue"),
+  NA_col = NA
+)
+
 test_that("console data.frame printing is formatted properly", {
   expect_equal(
     capture_print(sample_df, method = "console"),
@@ -61,6 +69,15 @@ test_that("console data.frame printing is formatted properly", {
     )
   )
 
+  expect_equal(
+    capture_print(sample_df6, method = "console"),
+    c("  x  chars NA_col",
+      "1 1     \033[38;5;12mAA\033[0m     NA",
+      "2 2   \033[38;5;12mAAAA\033[0m     NA",
+      "3 3 \033[38;5;12mABBBAB\033[0m     NA",
+      "4 4  \033[38;5;12mkebab\033[0m     NA"
+    )
+  )
 })
 
 test_that("console data.frame printing is longer than max truncates", {
@@ -179,3 +196,24 @@ test_that("wide data.frames printing preserves truncation", {
       " [ reached 'max' / getOption(\"max.print\") -- omitted 2 rows ]"
     ))
 })
+
+
+test_that("data.frames with no rows don't throw errors",{
+
+  expect_equal(
+    capture_print(data.frame(x = color_vctr()), method = "console"),
+    c("[1] x",
+      "<0 rows> (or 0-length row.names)")
+  )
+
+})
+
+test_that("data.frames with no color_vectors print using the base method",{
+
+  expect_equal(
+    capture_print(data.frame(x = 1), method = "console"),
+    capture.output(base::print(data.frame(x = 1)))
+  )
+
+})
+
