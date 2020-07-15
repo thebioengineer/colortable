@@ -112,7 +112,7 @@ format_console_vctr_print <- function(x,formatted_x,...,console_width = options(
     length_x2 <- length(x2)
     length_x2 <- ifelse(length_x2 > 1000, 1000, length_x2)
 
-    if (any(c("factor","Date") %in% class(x2))) {
+    if (any(c("factor","Date","POSIXlt") %in% class(x2))) {
       format_info <- format.info(as.character(x2), ...)
     } else{
       format_info <- format.info(x2, ...)
@@ -137,7 +137,7 @@ format_console_vctr_print <- function(x,formatted_x,...,console_width = options(
 
     output_vect <- paste0("color_vctr<",class(x2),">(0)")
   }
-  if (class(x2) == "factor") {
+  if (inherits(x2,"factor")) {
 
     maxl <-  TRUE
 
