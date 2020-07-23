@@ -1,4 +1,4 @@
-# colortable (development version)
+# colortable 0.3.0
 
 ### Features
   - Initial implementation of word (docx) printing
