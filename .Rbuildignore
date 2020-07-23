@@ -9,3 +9,4 @@
 ^\.covrignore$
 ^cran-comments\.md$
 ^\.github
+^\.github$
