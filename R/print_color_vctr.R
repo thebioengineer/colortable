@@ -97,9 +97,9 @@ format_preserve_na <- function(x, ..., escape = FALSE) {
   f_x
 }
 
-#' format coolor_vctr vector printing to console
+#' format color_vctr vector printing to console
 #' @rdname format.color_vctr
-#' @param x color_vctr to be prinited
+#' @param x color_vctr to be printed
 #' @param formatted_x formatted color_vctr for printing
 #' @param ... additional parameters passed to `format`
 #' @param console_width define nchar wide to print. Default to detecting width
@@ -112,13 +112,13 @@ format_console_vctr_print <- function(x,formatted_x,...,console_width = options(
     length_x2 <- length(x2)
     length_x2 <- ifelse(length_x2 > 1000, 1000, length_x2)
 
-    if (any(c("factor","Date") %in% class(x2))) {
+    if (any(c("factor","Date","POSIXlt") %in% class(x2))) {
       format_info <- format.info(as.character(x2), ...)
     } else{
       format_info <- format.info(x2, ...)
     }
     n_per_row <-
-      floor((console_width - 5) / (format_info[1] + ifelse(is.factor(x2),0, 1)))
+      max(floor((console_width - 5) / (format_info[1] + ifelse(is.factor(x2),0, 1))),1)
     n_row <- ceiling(length_x2 / n_per_row)
 
     output_vect <- vector("character", length = n_row)
@@ -137,7 +137,7 @@ format_console_vctr_print <- function(x,formatted_x,...,console_width = options(
 
     output_vect <- paste0("color_vctr<",class(x2),">(0)")
   }
-  if (class(x2) == "factor") {
+  if (inherits(x2,"factor")) {
 
     maxl <-  TRUE
 
@@ -146,7 +146,7 @@ format_console_vctr_print <- function(x,formatted_x,...,console_width = options(
     colsep <- " "
     T0 <- "Levels:"
     maxl <- {
-      width <- options()$width - (nchar(T0, "w") + 3L + 1L + 3L)
+      width <- console_width - (nchar(T0, "w") + 3L + 1L + 3L)
       lenl <- cumsum(nchar(lev, "w") + nchar(colsep, "w"))
       if (n <= 1L || lenl[n] <= width)
         n
@@ -162,7 +162,7 @@ format_console_vctr_print <- function(x,formatted_x,...,console_width = options(
     }
 
     factor_levels <- if(drop){
-      c(lev[1L:max(1, maxl - 1)],"...", ifelse(maxl > 1,lev[n],NULL))
+      c(lev[1L:max(1, maxl - 1)],"...", ifelse(maxl > 1,lev[n],""))
     }else{
       lev
     }

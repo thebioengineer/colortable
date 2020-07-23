@@ -1,5 +1,5 @@
-capture_print <- function(x){
-  capture.output(print(x,console_width = 80, method = "console"))
+capture_print <- function(x, console_width = 80, ...){
+  capture.output(print(x,console_width = console_width, method = "console", ...))
 }
 
 test_that("vector printing to console - empty", {
@@ -233,6 +233,23 @@ test_that("vector printing to console - factor", {
       "[11] \033[38;5;10mC             \033[0m \033[38;5;12mLong Character\033[0m",
       "Levels: A B C Long Character")
   )
+
+  expect_equal(
+    capture_print(styled_vect_long),
+    c(" [1] \033[38;5;12mA             \033[0m \033[38;5;10mB             \033[0m \033[38;5;12mC             \033[0m \033[38;5;12mLong Character\033[0m \033[38;5;9mA             \033[0m",
+      " [6] \033[38;5;10mB             \033[0m \033[38;5;12mC             \033[0m \033[38;5;12mLong Character\033[0m \033[38;5;10mA             \033[0m \033[38;5;12mB             \033[0m",
+      "[11] \033[38;5;10mC             \033[0m \033[38;5;12mLong Character\033[0m",
+      "Levels: A B C Long Character")
+  )
+
+  expect_equal(
+    capture_print(styled_vect, console_width = 10),
+    c("[1] \033[38;5;9mA             \033[0m",
+    "[2] \033[38;5;12mB             \033[0m",
+    "[3] \033[38;5;10mC             \033[0m",
+    "[4] Long Character",
+    "4  Levels: A ... ")
+  )
 })
 
 test_that("vector printing to console - character", {
@@ -329,5 +346,4 @@ test_that("vector printing to console - dates", {
       "[19] \033[38;5;12m1970-01-03\033[0m \033[38;5;10m1970-01-04\033[0m \033[38;5;9m1970-01-01\033[0m \033[38;5;12m1970-01-02\033[0m \033[38;5;9m1970-01-03\033[0m \033[38;5;12m1970-01-04\033[0m"  )
   )
 })
-
 

@@ -72,7 +72,10 @@ atomic <- function(x){
                   "Date",
                   "vctr",
                   "ordered",
-                  "factor"))) {
+                  "factor",
+                  "difftime",
+                  "POSIXct",
+                  "POSIXlt"))) {
     return(x[0])
   }else{
     character()

@@ -9,6 +9,13 @@ test_that("vector printing to docx - empty", {
   )
 })
 
+test_that("vector printing to docx - NA", {
+  expect_equal(
+    capture_print(color_vctr(NA,text_color = "blue")),
+    "`NA`{=openxml}"
+  )
+})
+
 test_that("vector printing to docx - numeric", {
   styled_vect <-
     color_vctr(c(1, 2, 0.05, 20),
