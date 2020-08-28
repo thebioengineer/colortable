@@ -16,7 +16,7 @@ format_console_vctr_print(
 )
 }
 \arguments{
-\item{x}{color_vctr to be prinited}
+\item{x}{color_vctr to be printed}
 
 \item{...}{additional parameters passed to `format`}
 
@@ -31,5 +31,5 @@ format_console_vctr_print(
 \description{
 format method for color_vctror
 
-format coolor_vctr vector printing to console
+format color_vctr vector printing to console
 }

@@ -11,8 +11,7 @@
 #' @param row.names logical (or character vector), indicating whether (or what) row names should be printed.
 #' @param max numeric or NULL, specifying the maximal number of entries to be printed. By default, when NULL, getOption("max.print") used.
 #'
-#' @export
-print.data.frame <- function(x, ..., digits = NULL, quote = FALSE, right = TRUE,
+print.data.frame_shim <- function(x, ..., digits = NULL, quote = FALSE, right = TRUE,
                              row.names = TRUE, max = NULL) {
   contains_color_vctr <- any(sapply(as.list(x),is_color_vctr))
   if (contains_color_vctr) {
@@ -45,13 +44,7 @@ print.data.frame.color_vector <- function (x, ..., digits = NULL, quote = FALSE,
       stop("invalid 'max' / getOption(\"max.print\"): ",
            max)
 
-    omit <- (n0 <- max%/%length(x)) < n
-
-    if (!isTRUE(row.names)){
-      dimnames(m)[[1L]] <- if (isFALSE(row.names)) {
-        rep.int("", if (omit){ n0 } else { n })
-      } else { row.names }
-    }
+    omit <- (n0 <- max%/%nrow(x)) < n
 
     cat_line(format_colortable(x, max = max, digits = digits,...))
 
@@ -60,7 +53,7 @@ print.data.frame.color_vector <- function (x, ..., digits = NULL, quote = FALSE,
 }
 
 
-format_colortable <- function(x, max = getOption("max.print", 99999L), digits = NULL, ...){
+format_colortable <- function(x, max = getOption("max.print", 99999L), digits = NULL, ..., width = options()$width){
 
   n <- nrow(x)
   omit <- (n0 <- n %/% max) > 0
@@ -79,34 +72,81 @@ format_colortable <- function(x, max = getOption("max.print", 99999L), digits = 
       x[seq_len(max), , drop = FALSE]
     else x)
 
-
-
   col_widths <- sapply(calc_col_widths, function(widths){ max(widths) +1})
   content_col_widths <- sapply(calc_col_widths, `[`, 1)
 
   rownames_width <- format.info(rownames(x))
 
-  header <-
-    paste0(c(
-      pad("", rownames_width),
-      pad(colnames(x), col_widths)),
-      collapse = "")
+  col_type_num <- sapply(x, function(z){
+    if(is_color_vctr(z)){
+      z <- field(z, "vctr")
+    }
+    is.numeric(z)
+  })
 
-  col_type_num <- sapply(x, is.numeric)
 
-  body <- sapply(1:nrow(m),function(row, m, x, row_names, col_widths){
+  n_df_chunks <- rep(1, ncol(x))
+  chunk_idx <- 1
+  chunk_width <- rownames_width
 
-    row_out <- pad(row_names[row], rownames_width)
+  for( column_i in 1:ncol(x) ){
+    this_col_width <- col_widths[column_i]
 
-    content_pad <-
-      (col_widths - content_col_widths) +
-      ((content_col_widths - sapply(lapply(x[row, , drop = TRUE], get_format_info),`[`,1)) * !col_type_num)
+    if( (chunk_width + this_col_width) < width){
+      n_df_chunks[column_i] <- chunk_idx
+      chunk_width <- chunk_width + this_col_width
 
-    content <-
-      to_pad(format(m[row, , drop = TRUE]), content_pad)
+    } else if ( this_col_width > (width - rownames_width) ){
+      n_df_chunks[column_i] <- chunk_idx + 1
+      chunk_idx <- chunk_idx + 2
+      chunk_width <- rownames_width
+    } else {
+      chunk_idx <- chunk_idx + 1
+      n_df_chunks[column_i] <- chunk_idx
+      chunk_width <- rownames_width + this_col_width
+    }
+  }
 
-    paste0(c(row_out, content), collapse = "")
-  },m, x, rownames(x), col_widths)
+  n_df_chunks <- split(1:ncol(x),n_df_chunks)
+
+  body <-
+    do.call('c', lapply(n_df_chunks, function(df_chunk_cols) {
+      header <-
+        paste0(c(pad("", rownames_width),
+                 pad(colnames(x)[df_chunk_cols], col_widths[df_chunk_cols])),
+               collapse = "")
+
+      body <-
+        sapply(1:nrow(m), function(row,
+                                   m,
+                                   x,
+                                   row_names,
+                                   col_widths,
+                                   content_col_widths,
+                                   col_type_num) {
+          row_out <- pad(row_names[row], rownames_width)
+
+          content_pad <-
+            (col_widths - content_col_widths) +
+            ((content_col_widths - sapply(lapply(
+              x[row, , drop = TRUE], get_format_info
+            ), `[`, 1)) * !col_type_num)
+
+          content <-
+            to_pad(format(m[row, , drop = TRUE]), content_pad)
+
+          paste0(c(row_out, content), collapse = "")
+
+        },
+        m[, df_chunk_cols, drop = FALSE],
+        x[, df_chunk_cols, drop = FALSE],
+        rownames(x),
+        col_widths[df_chunk_cols],
+        content_col_widths[df_chunk_cols],
+        col_type_num[df_chunk_cols])
+
+      c(header, body)
+    }))
 
   if(omit){
     body <- c(
@@ -117,8 +157,7 @@ format_colortable <- function(x, max = getOption("max.print", 99999L), digits = 
     )
   }
 
-  c(header, body)
-
+  body
 }
 
 pad <- function(x, padding = 0) {
@@ -144,6 +183,9 @@ to_pad <- function(x, padding = 0) {
 }
 
 get_format_info <- function(x){
+  if(is_color_vctr(x)){
+    x <- field(x,"vctr")
+  }
   if (is.factor(x) & !any(is.na(x))){
     format.info(as.character(x))
   }else if (all(is.na(x))) {

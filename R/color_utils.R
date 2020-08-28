@@ -1,4 +1,16 @@
-
+#' Merge semantics for colortable vector arithmetic
+#'
+#' Set how tables with different styling should merge,
+#' by deferring to left styling when it exists, right styling,
+#' or attempt to blend them together.
+#'
+#' @param precedence one of three options: left, right or blended
+#'
+#' @export
+set_color_vctr_precedence <- function(precedence = c("left","right","blended","mixed")){
+  precedence <- match.arg(precedence)
+  options("colortable.precidence" = precedence)
+}
 
 # Based on https://stackoverflow.com/questions/1847092/given-an-rgb-value-what-would-be-the-best-way-to-find-the-closest-match-in-the-dhttps://stackoverflow.com/questions/1847092/given-an-rgb-value-what-would-be-the-best-way-to-find-the-closest-match-in-the-d
 which_closest_color <- function(to_match, rgb_vect){

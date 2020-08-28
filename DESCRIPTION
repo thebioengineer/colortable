@@ -1,7 +1,7 @@
 Package: colortable
 Type: Package
 Title: Provide Color and Styling to Table Elements
-Version: 0.2.1.9000
+Version: 0.3.0
 Authors@R: 
     c(
       person(
@@ -25,16 +25,19 @@ Description: The goal of colortable is to make it easier to color and style your
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Imports: 
     knitr (>= 1.28),
     rmarkdown (>= 2.1),
     cli (>= 2.0.2),
     scales (>= 1.0.0),
-    tibble (>= 2.1.3)
+    tibble (>= 2.1.3),
+    vctrs,
+    methods
 Suggests: 
     testthat (>= 2.1.0),
-    covr
+    covr,
+    tidyr
 URL: https://github.com/thebioengineer/colortable
 BugReports: https://github.com/thebioengineer/colortable/issues
 Depends: 

@@ -4,12 +4,10 @@
 \alias{color_vctr}
 \title{Create a color_vctr}
 \usage{
-color_vctr(x, ..., text_color = NA, background = NA, style = NA)
+color_vctr(x = double(), text_color = NA, background = NA, style = NA)
 }
 \arguments{
 \item{x}{data source determining method dispatch}
-
-\item{...}{additional elements to generate the color_vctr}
 
 \item{text_color}{A vector of length 1 or same length as vect. Details the
 color the text should be. Valid values can be found from the
@@ -29,4 +27,22 @@ a color_vctr
 \description{
 This is the generic method method dispatches color_vctr generation based on
 the first argument.
+}
+\examples{
+num_vec <-
+  color_vctr(1:5,
+             text_color = "blue",
+             background = "yellow",
+             style = "bold")
+char_vec <-
+  color_vctr(
+    LETTERS,
+    text_color = color_scale("Blues"),
+    background = "darkgrey",
+    style = "italic"
+  )
+if(interactive()){
+  num_vec
+  char_Vec
+}
 }
