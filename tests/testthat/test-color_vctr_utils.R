@@ -23,17 +23,20 @@ test_that("Subsetting the vector results in a smaller color_vctr", {
 
 
 test_that("Assignment of a color_vctr preserves the styling", {
+
   example_color_vctr <- color_vctr(
     1,
     style = "underline",
     text_color = "blue"
   )
 
-  example_color_vctr[2] <- color_vctr(
+  example_color_vctr <- vec_c(
+    example_color_vctr,
+    color_vctr(
     2,
     style = "strikethrough",
     text_color = "magenta"
-  )
+  ))
 
   expect_equal(
     example_color_vctr,
@@ -52,11 +55,13 @@ test_that("Assignment of a color_vctr fills with NA when necessary", {
     text_color = "blue"
   )
 
-  example_color_vctr[4] <- color_vctr(
-    2,
-    style = "strikethrough",
-    text_color = "magenta"
-  )
+  example_color_vctr <- vec_c(
+    example_color_vctr,
+    color_vctr(
+    c(NA, NA, 2),
+    style = c(NA, NA,"strikethrough"),
+    text_color = c(NA, NA,"magenta")
+  ))
 
   expect_equal(
     example_color_vctr,
@@ -75,7 +80,9 @@ test_that("Assignment of a color_vctr can be with matching atomics as well", {
     text_color = "blue"
   )
 
-  example_color_vctr[2] <- 2
+  example_color_vctr <-vec_c(
+    example_color_vctr, 2
+  )
 
   expect_equal(
     example_color_vctr,
@@ -91,25 +98,17 @@ test_that("Assignment of a color_vctr can be with matching atomics as well", {
 
 test_that("If assignment of a color_vctr is larger then vector being added, it will use a subset of the input data", {
   example_color_vctr <- color_vctr(
-    1,
+    c(1,NA),
     style = "underline",
     text_color = "blue"
   )
 
-  expect_warning({
+  expect_error(
     example_color_vctr[2] <- color_vctr(
       c(2,3),
       style = "strikethrough",
       text_color = "magenta"
-    )},
-    "number of items to replace is not a multiple of replacement length")
+    ),
+    class = "vctrs_error_incompatible_size")
 
-  expect_equal(
-    example_color_vctr,
-    color_vctr(
-      c(1,2),
-      style = c("underline", "strikethrough"),
-      text_color = c("blue", "magenta")
-    )
-  )
 })
