@@ -112,3 +112,4 @@ test_that("If assignment of a color_vctr is larger then vector being added, it w
     class = "vctrs_error_incompatible_size")
 
 })
+
