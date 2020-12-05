@@ -2,9 +2,24 @@
 % Please edit documentation in R/as_color_vctr.R
 \name{as_color_vctr}
 \alias{as_color_vctr}
+\alias{as_color_vctr.default}
+\alias{as_color_vctr.numeric}
+\alias{as_color_vctr.color_vctr}
+\alias{as_color_vctr.character}
+\alias{as_color_vctr.logical}
 \title{Coerce object to a color_vctr}
 \usage{
 as_color_vctr(x, text_color = NA, background = NA, style = NA)
+
+\method{as_color_vctr}{default}(x, text_color = NA, background = NA, style = NA)
+
+\method{as_color_vctr}{numeric}(x, text_color = NA, background = NA, style = NA)
+
+\method{as_color_vctr}{color_vctr}(x, text_color = NA, background = NA, style = NA)
+
+\method{as_color_vctr}{character}(x, text_color = NA, background = NA, style = NA)
+
+\method{as_color_vctr}{logical}(x, text_color = NA, background = NA, style = NA)
 }
 \arguments{
 \item{x}{object to coerce}
@@ -22,5 +37,5 @@ style of the text Valid values can be found from the
 `valid_style()` function. NA means no styling.}
 }
 \description{
-Coersion function for generation of a color_vctr from an existing vector
+Coercion function for generation of a color_vctr from an existing vector
 }
